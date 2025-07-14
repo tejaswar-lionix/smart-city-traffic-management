@@ -1,0 +1,5 @@
+from django.apps import AppConfig
+class EnforcementConfig(AppConfig):
+    default_auto_field='django.db.models.BigAutoField'
+    name='apps.enforcement'
+    verbose_name='Speed, ANPR, violations, fines, appeals'
