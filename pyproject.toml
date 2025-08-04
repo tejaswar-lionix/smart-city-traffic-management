@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "smart-city-traffic-management"
+version = "1.0.0"
+description = "Smart City Traffic Management Platform — adaptive signals, congestion, transit, emissions"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "Proprietary"}
+dependencies = ["Django==4.2.11","djangorestframework==3.14.0","celery==5.3.4","redis==5.0.1","psycopg2-binary==2.9.9","django-cors-headers==4.3.0","requests==2.31.0","python-multipart==0.0.9"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=apps --cov-report=term"
+
+[tool.ruff]
+line-length = 100
