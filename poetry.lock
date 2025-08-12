@@ -1,0 +1,4 @@
+# poetry lock placeholder
+[[package]]
+name = "smart-city"
+version = "1.0.0"
