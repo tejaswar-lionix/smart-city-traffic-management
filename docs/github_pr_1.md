@@ -1,7 +1,7 @@
 # PR 1
 
 Feature: feature/github-pr-1
-Domain: public_transit
+Domain: incidents
 
 Description: Implements distinct logic for feature/github-pr-1 — handler 1 with domain-specific formula.
 
@@ -11,4 +11,4 @@ Changes:
 - Fixed edge case for feature/github-pr-1
 
 Author: Teju
-Date: 2025-09-04T08:00:37
+Date: 2025-09-02T16:00:32
