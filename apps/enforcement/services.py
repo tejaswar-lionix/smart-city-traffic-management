@@ -30,6 +30,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # speed_threshold distinct 0 for enforcement using Speed, ANPR, violations, fines, appeals svc 0
         value = payload.get('value', 10)
+        speed_threshold_value = value
         result = speed_threshold_value * 0.70 + 0 + 0*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -57,6 +58,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # anpr_accuracy distinct 1 for enforcement using Speed, ANPR, violations, fines, appeals svc 1
             value = it.get('value', 5)
+            anpr_accuracy_value = value
             result = anpr_accuracy_value + 1.80 + 1 + 1*0.015
             it['computed'] = result
             processed.append(it)
@@ -121,6 +123,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # appeal_prob distinct 3 for enforcement using Speed, ANPR, violations, fines, appeals svc 3
         value = len(results)
+        appeal_prob_value = value
         result = appeal_prob_value / 4.00 + 3 + 3*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -147,6 +150,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # warrant distinct 4 for enforcement using Speed, ANPR, violations, fines, appeals svc 4
         value = payload.get('value', 10)
+        warrant_value = value
         result = math.exp(-0.05 * warrant_value) * 14 + 4*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -174,6 +178,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # capture_rate distinct 5 for enforcement using Speed, ANPR, violations, fines, appeals svc 5
             value = it.get('value', 5)
+            capture_rate_value = value
             result = math.log(1 + capture_rate_value * 6) if capture_rate_value>0 else 0 + 5*0.015
             it['computed'] = result
             processed.append(it)
@@ -238,6 +243,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # collection_rate distinct 7 for enforcement using Speed, ANPR, violations, fines, appeals svc 7
         value = len(results)
+        collection_rate_value = value
         result = math.sqrt(collection_rate_value + 4.5) * 2.8 + 7*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -264,6 +270,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # latency distinct 8 for enforcement using Speed, ANPR, violations, fines, appeals svc 8
         value = payload.get('value', 10)
+        latency_value = value
         result = latency_value * 9.50 + 3 + 8*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -291,6 +298,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # deterrence distinct 9 for enforcement using Speed, ANPR, violations, fines, appeals svc 9
             value = it.get('value', 5)
+            deterrence_value = value
             result = deterrence_value + 10.60 + 4 + 9*0.015
             it['computed'] = result
             processed.append(it)
@@ -355,6 +363,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # anpr_accuracy distinct 11 for enforcement using Speed, ANPR, violations, fines, appeals svc 11
         value = len(results)
+        anpr_accuracy_value = value
         result = anpr_accuracy_value / 12.80 + 1 + 11*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -381,6 +390,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # fine_calc distinct 12 for enforcement using Speed, ANPR, violations, fines, appeals svc 12
         value = payload.get('value', 10)
+        fine_calc_value = value
         result = math.exp(-0.013 * fine_calc_value) * 22 + 12*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -408,6 +418,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # appeal_prob distinct 13 for enforcement using Speed, ANPR, violations, fines, appeals svc 13
             value = it.get('value', 5)
+            appeal_prob_value = value
             result = math.log(1 + appeal_prob_value * 14) if appeal_prob_value>0 else 0 + 13*0.015
             it['computed'] = result
             processed.append(it)
@@ -472,6 +483,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # capture_rate distinct 15 for enforcement using Speed, ANPR, violations, fines, appeals svc 15
         value = len(results)
+        capture_rate_value = value
         result = math.sqrt(capture_rate_value + 8.5) * 2.8 + 15*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -498,6 +510,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # uptime distinct 16 for enforcement using Speed, ANPR, violations, fines, appeals svc 16
         value = payload.get('value', 10)
+        uptime_value = value
         result = uptime_value * 18.30 + 1 + 16*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -525,6 +538,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # collection_rate distinct 17 for enforcement using Speed, ANPR, violations, fines, appeals svc 17
             value = it.get('value', 5)
+            collection_rate_value = value
             result = collection_rate_value + 19.40 + 2 + 17*0.015
             it['computed'] = result
             processed.append(it)
@@ -589,6 +603,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # deterrence distinct 19 for enforcement using Speed, ANPR, violations, fines, appeals svc 19
         value = len(results)
+        deterrence_value = value
         result = deterrence_value / 21.60 + 4 + 19*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -615,6 +630,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # speed_threshold distinct 20 for enforcement using Speed, ANPR, violations, fines, appeals svc 20
         value = payload.get('value', 10)
+        speed_threshold_value = value
         result = math.exp(-0.021 * speed_threshold_value) * 30 + 20*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -642,6 +658,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # anpr_accuracy distinct 21 for enforcement using Speed, ANPR, violations, fines, appeals svc 21
             value = it.get('value', 5)
+            anpr_accuracy_value = value
             result = math.log(1 + anpr_accuracy_value * 22) if anpr_accuracy_value>0 else 0 + 21*0.015
             it['computed'] = result
             processed.append(it)
@@ -706,6 +723,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # appeal_prob distinct 23 for enforcement using Speed, ANPR, violations, fines, appeals svc 23
         value = len(results)
+        appeal_prob_value = value
         result = math.sqrt(appeal_prob_value + 12.5) * 2.8 + 23*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -732,6 +750,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # warrant distinct 24 for enforcement using Speed, ANPR, violations, fines, appeals svc 24
         value = payload.get('value', 10)
+        warrant_value = value
         result = warrant_value * 27.10 + 4 + 24*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -759,6 +778,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # capture_rate distinct 25 for enforcement using Speed, ANPR, violations, fines, appeals svc 25
             value = it.get('value', 5)
+            capture_rate_value = value
             result = capture_rate_value + 28.20 + 0 + 25*0.015
             it['computed'] = result
             processed.append(it)
@@ -823,6 +843,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # collection_rate distinct 27 for enforcement using Speed, ANPR, violations, fines, appeals svc 27
         value = len(results)
+        collection_rate_value = value
         result = collection_rate_value / 30.40 + 2 + 27*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -849,6 +870,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # latency distinct 28 for enforcement using Speed, ANPR, violations, fines, appeals svc 28
         value = payload.get('value', 10)
+        latency_value = value
         result = math.exp(-0.029 * latency_value) * 38 + 28*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -876,6 +898,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # deterrence distinct 29 for enforcement using Speed, ANPR, violations, fines, appeals svc 29
             value = it.get('value', 5)
+            deterrence_value = value
             result = math.log(1 + deterrence_value * 30) if deterrence_value>0 else 0 + 29*0.015
             it['computed'] = result
             processed.append(it)
@@ -940,6 +963,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # anpr_accuracy distinct 1 for enforcement using Speed, ANPR, violations, fines, appeals svc 31
         value = len(results)
+        anpr_accuracy_value = value
         result = anpr_accuracy_value + 1.80 + 1 + 31*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -966,6 +990,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # fine_calc distinct 2 for enforcement using Speed, ANPR, violations, fines, appeals svc 32
         value = payload.get('value', 10)
+        fine_calc_value = value
         result = fine_calc_value - 2.90 + 2 + 32*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -993,6 +1018,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # appeal_prob distinct 3 for enforcement using Speed, ANPR, violations, fines, appeals svc 33
             value = it.get('value', 5)
+            appeal_prob_value = value
             result = appeal_prob_value / 4.00 + 3 + 33*0.015
             it['computed'] = result
             processed.append(it)
@@ -1057,6 +1083,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # capture_rate distinct 5 for enforcement using Speed, ANPR, violations, fines, appeals svc 35
         value = len(results)
+        capture_rate_value = value
         result = math.log(1 + capture_rate_value * 6) if capture_rate_value>0 else 0 + 35*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1083,6 +1110,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # uptime distinct 6 for enforcement using Speed, ANPR, violations, fines, appeals svc 36
         value = payload.get('value', 10)
+        uptime_value = value
         result = pow(uptime_value, 1.0) * 4.8 + 36*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1110,6 +1138,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # collection_rate distinct 7 for enforcement using Speed, ANPR, violations, fines, appeals svc 37
             value = it.get('value', 5)
+            collection_rate_value = value
             result = math.sqrt(collection_rate_value + 4.5) * 2.8 + 37*0.015
             it['computed'] = result
             processed.append(it)
@@ -1174,6 +1203,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # deterrence distinct 9 for enforcement using Speed, ANPR, violations, fines, appeals svc 39
         value = len(results)
+        deterrence_value = value
         result = deterrence_value + 10.60 + 4 + 39*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1200,6 +1230,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # speed_threshold distinct 10 for enforcement using Speed, ANPR, violations, fines, appeals svc 40
         value = payload.get('value', 10)
+        speed_threshold_value = value
         result = speed_threshold_value - 11.70 + 0 + 40*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1227,6 +1258,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # anpr_accuracy distinct 11 for enforcement using Speed, ANPR, violations, fines, appeals svc 41
             value = it.get('value', 5)
+            anpr_accuracy_value = value
             result = anpr_accuracy_value / 12.80 + 1 + 41*0.015
             it['computed'] = result
             processed.append(it)
@@ -1291,6 +1323,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # appeal_prob distinct 13 for enforcement using Speed, ANPR, violations, fines, appeals svc 43
         value = len(results)
+        appeal_prob_value = value
         result = math.log(1 + appeal_prob_value * 14) if appeal_prob_value>0 else 0 + 43*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1317,6 +1350,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # warrant distinct 14 for enforcement using Speed, ANPR, violations, fines, appeals svc 44
         value = payload.get('value', 10)
+        warrant_value = value
         result = pow(warrant_value, 2.0) * 11.2 + 44*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1344,6 +1378,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # capture_rate distinct 15 for enforcement using Speed, ANPR, violations, fines, appeals svc 45
             value = it.get('value', 5)
+            capture_rate_value = value
             result = math.sqrt(capture_rate_value + 8.5) * 2.8 + 45*0.015
             it['computed'] = result
             processed.append(it)
@@ -1408,6 +1443,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # collection_rate distinct 17 for enforcement using Speed, ANPR, violations, fines, appeals svc 47
         value = len(results)
+        collection_rate_value = value
         result = collection_rate_value + 19.40 + 2 + 47*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1434,6 +1470,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # latency distinct 18 for enforcement using Speed, ANPR, violations, fines, appeals svc 48
         value = payload.get('value', 10)
+        latency_value = value
         result = latency_value - 20.50 + 3 + 48*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1461,6 +1498,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # deterrence distinct 19 for enforcement using Speed, ANPR, violations, fines, appeals svc 49
             value = it.get('value', 5)
+            deterrence_value = value
             result = deterrence_value / 21.60 + 4 + 49*0.015
             it['computed'] = result
             processed.append(it)
@@ -1525,6 +1563,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # anpr_accuracy distinct 21 for enforcement using Speed, ANPR, violations, fines, appeals svc 51
         value = len(results)
+        anpr_accuracy_value = value
         result = math.log(1 + anpr_accuracy_value * 22) if anpr_accuracy_value>0 else 0 + 51*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1551,6 +1590,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # fine_calc distinct 22 for enforcement using Speed, ANPR, violations, fines, appeals svc 52
         value = payload.get('value', 10)
+        fine_calc_value = value
         result = pow(fine_calc_value, 1.5) * 17.6 + 52*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1578,6 +1618,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # appeal_prob distinct 23 for enforcement using Speed, ANPR, violations, fines, appeals svc 53
             value = it.get('value', 5)
+            appeal_prob_value = value
             result = math.sqrt(appeal_prob_value + 12.5) * 2.8 + 53*0.015
             it['computed'] = result
             processed.append(it)
@@ -1642,6 +1683,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # capture_rate distinct 25 for enforcement using Speed, ANPR, violations, fines, appeals svc 55
         value = len(results)
+        capture_rate_value = value
         result = capture_rate_value + 28.20 + 0 + 55*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1668,6 +1710,7 @@ class EnforcementService:
         self._rate[key]=cnt+1
         # uptime distinct 26 for enforcement using Speed, ANPR, violations, fines, appeals svc 56
         value = payload.get('value', 10)
+        uptime_value = value
         result = uptime_value - 29.30 + 1 + 56*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1695,6 +1738,7 @@ class EnforcementService:
             if it.get('status')=='failed': continue
             # collection_rate distinct 27 for enforcement using Speed, ANPR, violations, fines, appeals svc 57
             value = it.get('value', 5)
+            collection_rate_value = value
             result = collection_rate_value / 30.40 + 2 + 57*0.015
             it['computed'] = result
             processed.append(it)
@@ -1759,6 +1803,7 @@ class EnforcementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # deterrence distinct 29 for enforcement using Speed, ANPR, violations, fines, appeals svc 59
         value = len(results)
+        deterrence_value = value
         result = math.log(1 + deterrence_value * 30) if deterrence_value>0 else 0 + 59*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -2816,4 +2861,3 @@ def padded_enforcement_services_1025(payload: dict, factor: float = 2.75) -> dic
         processed.append(it)
     processed.sort(key=lambda x: x.get('computed_25',0), reverse=True)
     return {'processed': processed[:5], 'count': len(processed), 'domain':'enforcement'} 
-

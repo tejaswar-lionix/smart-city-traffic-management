@@ -23,6 +23,7 @@ class TransitRoute:
     status: str = 'active'
 
     def headway_adherence_0_pub_0_transitroute_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        headway_adherence_value = value
         """headway_adherence distinct 0 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 0 for TransitRoute — implements result = headway_adherence_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for public_transit::TransitRoute::headway_adherence_0_pub_0_transitroute_0
@@ -37,13 +38,14 @@ class TransitRoute:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'headway_adherence_0_pub_0_transitroute_0', 'result': result, 'domain': 'public_transit'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def delay_prop_6_pub_6_transitroute_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        delay_prop_value = value
         """delay_prop distinct 6 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 6 for TransitRoute — implements result = pow(delay_prop_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for public_transit::TransitRoute::delay_prop_6_pub_6_transitroute_6
@@ -55,13 +57,14 @@ class TransitRoute:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dwell_12_pub_12_transitroute_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dwell_value = value
         """dwell distinct 12 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 12 for TransitRoute — implements result = math.exp(-0.013 * dwell_value) * 22 + 12*0.01"""
         try:
             # Distinct logic for public_transit::TransitRoute::dwell_12_pub_12_transitroute_12
@@ -73,13 +76,14 @@ class TransitRoute:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def transfer_wait_18_pub_18_transitroute_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        transfer_wait_value = value
         """transfer_wait distinct 18 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 18 for TransitRoute — implements result = transfer_wait_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for public_transit::TransitRoute::transfer_wait_18_pub_18_transitroute_18
@@ -94,13 +98,14 @@ class TransitRoute:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bunching_24_pub_24_transitroute_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bunching_value = value
         """bunching distinct 24 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 24 for TransitRoute — implements result = bunching_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for public_transit::TransitRoute::bunching_24_pub_24_transitroute_24
@@ -112,16 +117,18 @@ class TransitRoute:
                 else:
                     break
             # bunching distinct 24 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 24
+            bunching_value = value
             result = bunching_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def headway_adherence_0_pub_30_transitroute_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        headway_adherence_value = value
         """headway_adherence distinct 0 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 30 for TransitRoute — implements result = headway_adherence_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for public_transit::TransitRoute::headway_adherence_0_pub_30_transitroute_30
@@ -136,13 +143,14 @@ class TransitRoute:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'headway_adherence_0_pub_30_transitroute_30', 'result': result, 'domain': 'public_transit'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def delay_prop_6_pub_36_transitroute_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        delay_prop_value = value
         """delay_prop distinct 6 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 36 for TransitRoute — implements result = pow(delay_prop_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for public_transit::TransitRoute::delay_prop_6_pub_36_transitroute_36
@@ -154,13 +162,14 @@ class TransitRoute:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dwell_12_pub_42_transitroute_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dwell_value = value
         """dwell distinct 12 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 42 for TransitRoute — implements result = math.exp(-0.013 * dwell_value) * 22 + 42*0.01"""
         try:
             # Distinct logic for public_transit::TransitRoute::dwell_12_pub_42_transitroute_42
@@ -172,13 +181,14 @@ class TransitRoute:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def transfer_wait_18_pub_48_transitroute_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        transfer_wait_value = value
         """transfer_wait distinct 18 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 48 for TransitRoute — implements result = transfer_wait_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for public_transit::TransitRoute::transfer_wait_18_pub_48_transitroute_48
@@ -193,13 +203,14 @@ class TransitRoute:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bunching_24_pub_54_transitroute_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bunching_value = value
         """bunching distinct 24 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 54 for TransitRoute — implements result = bunching_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for public_transit::TransitRoute::bunching_24_pub_54_transitroute_54
@@ -211,13 +222,14 @@ class TransitRoute:
                 else:
                     break
             # bunching distinct 24 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 54
+            bunching_value = value
             result = bunching_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_transitroute(self) -> bool:
@@ -243,6 +255,7 @@ class Trip:
     status: str = 'active'
 
     def schedule_adherence_1_pub_1_trip_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        schedule_adherence_value = value
         """schedule_adherence distinct 1 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 1 for Trip — implements result = schedule_adherence_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for public_transit::Trip::schedule_adherence_1_pub_1_trip_1
@@ -254,13 +267,14 @@ class Trip:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def running_time_7_pub_7_trip_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        running_time_value = value
         """running_time distinct 7 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 7 for Trip — implements result = math.sqrt(running_time_value + 4.5) * 2.8 + 7*0.01"""
         try:
             # Distinct logic for public_transit::Trip::running_time_7_pub_7_trip_7
@@ -272,13 +286,14 @@ class Trip:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def load_factor_13_pub_13_trip_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        load_factor_value = value
         """load_factor distinct 13 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 13 for Trip — implements result = math.log(1 + load_factor_value * 14) if load_factor"""
         try:
             # Distinct logic for public_transit::Trip::load_factor_13_pub_13_trip_13
@@ -293,13 +308,14 @@ class Trip:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def directness_19_pub_19_trip_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        directness_value = value
         """directness distinct 19 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 19 for Trip — implements result = directness_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for public_transit::Trip::directness_19_pub_19_trip_19
@@ -311,16 +327,18 @@ class Trip:
                 else:
                     break
             # directness distinct 19 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 19
+            directness_value = value
             result = directness_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tsp_warrant_25_pub_25_trip_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tsp_warrant_value = value
         """tsp_warrant distinct 25 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 25 for Trip — implements result = tsp_warrant_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for public_transit::Trip::tsp_warrant_25_pub_25_trip_25
@@ -335,13 +353,14 @@ class Trip:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'tsp_warrant_25_pub_25_trip_25', 'result': result, 'domain': 'public_transit'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def schedule_adherence_1_pub_31_trip_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        schedule_adherence_value = value
         """schedule_adherence distinct 1 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 31 for Trip — implements result = schedule_adherence_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for public_transit::Trip::schedule_adherence_1_pub_31_trip_31
@@ -353,13 +372,14 @@ class Trip:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def running_time_7_pub_37_trip_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        running_time_value = value
         """running_time distinct 7 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 37 for Trip — implements result = math.sqrt(running_time_value + 4.5) * 2.8 + 37*0.01"""
         try:
             # Distinct logic for public_transit::Trip::running_time_7_pub_37_trip_37
@@ -371,13 +391,14 @@ class Trip:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def load_factor_13_pub_43_trip_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        load_factor_value = value
         """load_factor distinct 13 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 43 for Trip — implements result = math.log(1 + load_factor_value * 14) if load_factor"""
         try:
             # Distinct logic for public_transit::Trip::load_factor_13_pub_43_trip_43
@@ -392,13 +413,14 @@ class Trip:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def directness_19_pub_49_trip_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        directness_value = value
         """directness distinct 19 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 49 for Trip — implements result = directness_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for public_transit::Trip::directness_19_pub_49_trip_49
@@ -410,16 +432,18 @@ class Trip:
                 else:
                     break
             # directness distinct 19 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 49
+            directness_value = value
             result = directness_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tsp_warrant_25_pub_55_trip_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tsp_warrant_value = value
         """tsp_warrant distinct 25 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 55 for Trip — implements result = tsp_warrant_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for public_transit::Trip::tsp_warrant_25_pub_55_trip_55
@@ -434,10 +458,10 @@ class Trip:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'tsp_warrant_25_pub_55_trip_55', 'result': result, 'domain': 'public_transit'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_trip(self) -> bool:
@@ -463,6 +487,7 @@ class StopTime:
     status: str = 'active'
 
     def dwell_2_pub_2_stoptime_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dwell_value = value
         """dwell distinct 2 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 2 for StopTime — implements result = dwell_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for public_transit::StopTime::dwell_2_pub_2_stoptime_2
@@ -474,13 +499,14 @@ class StopTime:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def transfer_wait_8_pub_8_stoptime_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        transfer_wait_value = value
         """transfer_wait distinct 8 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 8 for StopTime — implements result = transfer_wait_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for public_transit::StopTime::transfer_wait_8_pub_8_stoptime_8
@@ -495,13 +521,14 @@ class StopTime:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bunching_14_pub_14_stoptime_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bunching_value = value
         """bunching distinct 14 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 14 for StopTime — implements result = pow(bunching_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for public_transit::StopTime::bunching_14_pub_14_stoptime_14
@@ -516,13 +543,14 @@ class StopTime:
             result = pow(bunching_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def headway_adherence_20_pub_20_stoptime_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        headway_adherence_value = value
         """headway_adherence distinct 20 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 20 for StopTime — implements result = math.exp(-0.021 * headway_adherence_value) * 30 + 2"""
         try:
             # Distinct logic for public_transit::StopTime::headway_adherence_20_pub_20_stoptime_20
@@ -537,13 +565,14 @@ class StopTime:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'headway_adherence_20_pub_20_stoptime_20', 'result': result, 'domain': 'public_transit'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def delay_prop_26_pub_26_stoptime_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        delay_prop_value = value
         """delay_prop distinct 26 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 26 for StopTime — implements result = delay_prop_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for public_transit::StopTime::delay_prop_26_pub_26_stoptime_26
@@ -555,13 +584,14 @@ class StopTime:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dwell_2_pub_32_stoptime_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dwell_value = value
         """dwell distinct 2 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 32 for StopTime — implements result = dwell_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for public_transit::StopTime::dwell_2_pub_32_stoptime_32
@@ -573,13 +603,14 @@ class StopTime:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def transfer_wait_8_pub_38_stoptime_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        transfer_wait_value = value
         """transfer_wait distinct 8 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 38 for StopTime — implements result = transfer_wait_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for public_transit::StopTime::transfer_wait_8_pub_38_stoptime_38
@@ -594,13 +625,14 @@ class StopTime:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bunching_14_pub_44_stoptime_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bunching_value = value
         """bunching distinct 14 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 44 for StopTime — implements result = pow(bunching_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for public_transit::StopTime::bunching_14_pub_44_stoptime_44
@@ -615,13 +647,14 @@ class StopTime:
             result = pow(bunching_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def headway_adherence_20_pub_50_stoptime_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        headway_adherence_value = value
         """headway_adherence distinct 20 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 50 for StopTime — implements result = math.exp(-0.021 * headway_adherence_value) * 30 + 5"""
         try:
             # Distinct logic for public_transit::StopTime::headway_adherence_20_pub_50_stoptime_50
@@ -636,13 +669,14 @@ class StopTime:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'headway_adherence_20_pub_50_stoptime_50', 'result': result, 'domain': 'public_transit'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def delay_prop_26_pub_56_stoptime_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        delay_prop_value = value
         """delay_prop distinct 26 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 56 for StopTime — implements result = delay_prop_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for public_transit::StopTime::delay_prop_26_pub_56_stoptime_56
@@ -654,10 +688,10 @@ class StopTime:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_stoptime(self) -> bool:
@@ -683,6 +717,7 @@ class VehiclePosition:
     status: str = 'active'
 
     def load_factor_3_pub_3_vehicleposition_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        load_factor_value = value
         """load_factor distinct 3 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 3 for VehiclePosition — implements result = load_factor_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for public_transit::VehiclePosition::load_factor_3_pub_3_vehicleposition_3
@@ -697,13 +732,14 @@ class VehiclePosition:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def directness_9_pub_9_vehicleposition_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        directness_value = value
         """directness distinct 9 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 9 for VehiclePosition — implements result = directness_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for public_transit::VehiclePosition::directness_9_pub_9_vehicleposition_9
@@ -715,16 +751,18 @@ class VehiclePosition:
                 else:
                     break
             # directness distinct 9 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 9
+            directness_value = value
             result = directness_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tsp_warrant_15_pub_15_vehicleposition_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tsp_warrant_value = value
         """tsp_warrant distinct 15 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 15 for VehiclePosition — implements result = math.sqrt(tsp_warrant_value + 8.5) * 2.8 + 15*0.01"""
         try:
             # Distinct logic for public_transit::VehiclePosition::tsp_warrant_15_pub_15_vehicleposition_15
@@ -739,13 +777,14 @@ class VehiclePosition:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'tsp_warrant_15_pub_15_vehicleposition_15', 'result': result, 'domain': 'public_transit'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def schedule_adherence_21_pub_21_vehicleposition_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        schedule_adherence_value = value
         """schedule_adherence distinct 21 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 21 for VehiclePosition — implements result = math.log(1 + schedule_adherence_value * 22) if sche"""
         try:
             # Distinct logic for public_transit::VehiclePosition::schedule_adherence_21_pub_21_vehicleposition_21
@@ -757,13 +796,14 @@ class VehiclePosition:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def running_time_27_pub_27_vehicleposition_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        running_time_value = value
         """running_time distinct 27 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 27 for VehiclePosition — implements result = running_time_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for public_transit::VehiclePosition::running_time_27_pub_27_vehicleposition_27
@@ -775,13 +815,14 @@ class VehiclePosition:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def load_factor_3_pub_33_vehicleposition_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        load_factor_value = value
         """load_factor distinct 3 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 33 for VehiclePosition — implements result = load_factor_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for public_transit::VehiclePosition::load_factor_3_pub_33_vehicleposition_33
@@ -796,13 +837,14 @@ class VehiclePosition:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def directness_9_pub_39_vehicleposition_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        directness_value = value
         """directness distinct 9 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 39 for VehiclePosition — implements result = directness_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for public_transit::VehiclePosition::directness_9_pub_39_vehicleposition_39
@@ -814,16 +856,18 @@ class VehiclePosition:
                 else:
                     break
             # directness distinct 9 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 39
+            directness_value = value
             result = directness_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tsp_warrant_15_pub_45_vehicleposition_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tsp_warrant_value = value
         """tsp_warrant distinct 15 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 45 for VehiclePosition — implements result = math.sqrt(tsp_warrant_value + 8.5) * 2.8 + 45*0.01"""
         try:
             # Distinct logic for public_transit::VehiclePosition::tsp_warrant_15_pub_45_vehicleposition_45
@@ -838,13 +882,14 @@ class VehiclePosition:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'tsp_warrant_15_pub_45_vehicleposition_45', 'result': result, 'domain': 'public_transit'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def schedule_adherence_21_pub_51_vehicleposition_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        schedule_adherence_value = value
         """schedule_adherence distinct 21 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 51 for VehiclePosition — implements result = math.log(1 + schedule_adherence_value * 22) if sche"""
         try:
             # Distinct logic for public_transit::VehiclePosition::schedule_adherence_21_pub_51_vehicleposition_51
@@ -856,13 +901,14 @@ class VehiclePosition:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def running_time_27_pub_57_vehicleposition_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        running_time_value = value
         """running_time distinct 27 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 57 for VehiclePosition — implements result = running_time_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for public_transit::VehiclePosition::running_time_27_pub_57_vehicleposition_57
@@ -874,10 +920,10 @@ class VehiclePosition:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_vehicleposition(self) -> bool:
@@ -902,6 +948,7 @@ class HeadwayRecord:
     status: str = 'active'
 
     def bunching_4_pub_4_headwayrecord_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bunching_value = value
         """bunching distinct 4 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 4 for HeadwayRecord — implements result = math.exp(-0.05 * bunching_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for public_transit::HeadwayRecord::bunching_4_pub_4_headwayrecord_4
@@ -913,16 +960,18 @@ class HeadwayRecord:
                 else:
                     break
             # bunching distinct 4 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 4
+            bunching_value = value
             result = math.exp(-0.05 * bunching_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def headway_adherence_10_pub_10_headwayrecord_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        headway_adherence_value = value
         """headway_adherence distinct 10 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 10 for HeadwayRecord — implements result = headway_adherence_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for public_transit::HeadwayRecord::headway_adherence_10_pub_10_headwayrecord_10
@@ -937,13 +986,14 @@ class HeadwayRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'headway_adherence_10_pub_10_headwayrecord_10', 'result': result, 'domain': 'public_transit'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def delay_prop_16_pub_16_headwayrecord_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        delay_prop_value = value
         """delay_prop distinct 16 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 16 for HeadwayRecord — implements result = delay_prop_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for public_transit::HeadwayRecord::delay_prop_16_pub_16_headwayrecord_16
@@ -955,13 +1005,14 @@ class HeadwayRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dwell_22_pub_22_headwayrecord_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dwell_value = value
         """dwell distinct 22 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 22 for HeadwayRecord — implements result = pow(dwell_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for public_transit::HeadwayRecord::dwell_22_pub_22_headwayrecord_22
@@ -973,13 +1024,14 @@ class HeadwayRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def transfer_wait_28_pub_28_headwayrecord_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        transfer_wait_value = value
         """transfer_wait distinct 28 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 28 for HeadwayRecord — implements result = math.exp(-0.029 * transfer_wait_value) * 38 + 28*0."""
         try:
             # Distinct logic for public_transit::HeadwayRecord::transfer_wait_28_pub_28_headwayrecord_28
@@ -994,13 +1046,14 @@ class HeadwayRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bunching_4_pub_34_headwayrecord_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bunching_value = value
         """bunching distinct 4 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 34 for HeadwayRecord — implements result = math.exp(-0.05 * bunching_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for public_transit::HeadwayRecord::bunching_4_pub_34_headwayrecord_34
@@ -1012,16 +1065,18 @@ class HeadwayRecord:
                 else:
                     break
             # bunching distinct 4 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 34
+            bunching_value = value
             result = math.exp(-0.05 * bunching_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def headway_adherence_10_pub_40_headwayrecord_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        headway_adherence_value = value
         """headway_adherence distinct 10 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 40 for HeadwayRecord — implements result = headway_adherence_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for public_transit::HeadwayRecord::headway_adherence_10_pub_40_headwayrecord_40
@@ -1036,13 +1091,14 @@ class HeadwayRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'headway_adherence_10_pub_40_headwayrecord_40', 'result': result, 'domain': 'public_transit'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def delay_prop_16_pub_46_headwayrecord_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        delay_prop_value = value
         """delay_prop distinct 16 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 46 for HeadwayRecord — implements result = delay_prop_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for public_transit::HeadwayRecord::delay_prop_16_pub_46_headwayrecord_46
@@ -1054,13 +1110,14 @@ class HeadwayRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dwell_22_pub_52_headwayrecord_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dwell_value = value
         """dwell distinct 22 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 52 for HeadwayRecord — implements result = pow(dwell_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for public_transit::HeadwayRecord::dwell_22_pub_52_headwayrecord_52
@@ -1072,13 +1129,14 @@ class HeadwayRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def transfer_wait_28_pub_58_headwayrecord_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        transfer_wait_value = value
         """transfer_wait distinct 28 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 58 for HeadwayRecord — implements result = math.exp(-0.029 * transfer_wait_value) * 38 + 58*0."""
         try:
             # Distinct logic for public_transit::HeadwayRecord::transfer_wait_28_pub_58_headwayrecord_58
@@ -1093,10 +1151,10 @@ class HeadwayRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_headwayrecord(self) -> bool:
@@ -1122,6 +1180,7 @@ class DwellRecord:
     status: str = 'active'
 
     def tsp_warrant_5_pub_5_dwellrecord_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tsp_warrant_value = value
         """tsp_warrant distinct 5 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 5 for DwellRecord — implements result = math.log(1 + tsp_warrant_value * 6) if tsp_warrant_"""
         try:
             # Distinct logic for public_transit::DwellRecord::tsp_warrant_5_pub_5_dwellrecord_5
@@ -1136,13 +1195,14 @@ class DwellRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'tsp_warrant_5_pub_5_dwellrecord_5', 'result': result, 'domain': 'public_transit'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def schedule_adherence_11_pub_11_dwellrecord_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        schedule_adherence_value = value
         """schedule_adherence distinct 11 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 11 for DwellRecord — implements result = schedule_adherence_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for public_transit::DwellRecord::schedule_adherence_11_pub_11_dwellrecord_11
@@ -1154,13 +1214,14 @@ class DwellRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def running_time_17_pub_17_dwellrecord_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        running_time_value = value
         """running_time distinct 17 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 17 for DwellRecord — implements result = running_time_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for public_transit::DwellRecord::running_time_17_pub_17_dwellrecord_17
@@ -1172,13 +1233,14 @@ class DwellRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def load_factor_23_pub_23_dwellrecord_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        load_factor_value = value
         """load_factor distinct 23 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 23 for DwellRecord — implements result = math.sqrt(load_factor_value + 12.5) * 2.8 + 23*0.01"""
         try:
             # Distinct logic for public_transit::DwellRecord::load_factor_23_pub_23_dwellrecord_23
@@ -1193,13 +1255,14 @@ class DwellRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def directness_29_pub_29_dwellrecord_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        directness_value = value
         """directness distinct 29 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 29 for DwellRecord — implements result = math.log(1 + directness_value * 30) if directness_v"""
         try:
             # Distinct logic for public_transit::DwellRecord::directness_29_pub_29_dwellrecord_29
@@ -1214,13 +1277,14 @@ class DwellRecord:
             result = math.log(1 + directness_value * 30) if directness_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tsp_warrant_5_pub_35_dwellrecord_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tsp_warrant_value = value
         """tsp_warrant distinct 5 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 35 for DwellRecord — implements result = math.log(1 + tsp_warrant_value * 6) if tsp_warrant_"""
         try:
             # Distinct logic for public_transit::DwellRecord::tsp_warrant_5_pub_35_dwellrecord_35
@@ -1235,13 +1299,14 @@ class DwellRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'tsp_warrant_5_pub_35_dwellrecord_35', 'result': result, 'domain': 'public_transit'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def schedule_adherence_11_pub_41_dwellrecord_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        schedule_adherence_value = value
         """schedule_adherence distinct 11 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 41 for DwellRecord — implements result = schedule_adherence_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for public_transit::DwellRecord::schedule_adherence_11_pub_41_dwellrecord_41
@@ -1253,13 +1318,14 @@ class DwellRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def running_time_17_pub_47_dwellrecord_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        running_time_value = value
         """running_time distinct 17 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 47 for DwellRecord — implements result = running_time_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for public_transit::DwellRecord::running_time_17_pub_47_dwellrecord_47
@@ -1271,13 +1337,14 @@ class DwellRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def load_factor_23_pub_53_dwellrecord_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        load_factor_value = value
         """load_factor distinct 23 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 53 for DwellRecord — implements result = math.sqrt(load_factor_value + 12.5) * 2.8 + 53*0.01"""
         try:
             # Distinct logic for public_transit::DwellRecord::load_factor_23_pub_53_dwellrecord_53
@@ -1292,13 +1359,14 @@ class DwellRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def directness_29_pub_59_dwellrecord_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        directness_value = value
         """directness distinct 29 for public_transit using Buses, GTFS, headway adherence, dwell, TSP extra 59 for DwellRecord — implements result = math.log(1 + directness_value * 30) if directness_v"""
         try:
             # Distinct logic for public_transit::DwellRecord::directness_29_pub_59_dwellrecord_59
@@ -1313,10 +1381,10 @@ class DwellRecord:
             result = math.log(1 + directness_value * 30) if directness_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_dwellrecord(self) -> bool:
@@ -2755,4 +2823,3 @@ def padded_public_transit_models_1027(payload: dict, factor: float = 2.89) -> di
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'public_transit','idx':1027}
-

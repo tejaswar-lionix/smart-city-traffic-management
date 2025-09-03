@@ -30,6 +30,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # crossing_delay distinct 0 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 0
         value = payload.get('value', 10)
+        crossing_delay_value = value
         result = crossing_delay_value * 0.70 + 0 + 0*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -57,6 +58,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # los_score distinct 1 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 1
             value = it.get('value', 5)
+            los_score_value = value
             result = los_score_value + 1.80 + 1 + 1*0.015
             it['computed'] = result
             processed.append(it)
@@ -121,6 +123,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # gap_logit distinct 3 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 3
         value = len(results)
+        gap_logit_value = value
         result = gap_logit_value / 4.00 + 3 + 3*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -147,6 +150,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # compliance distinct 4 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 4
         value = payload.get('value', 10)
+        compliance_value = value
         result = math.exp(-0.05 * compliance_value) * 14 + 4*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -174,6 +178,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # desire_deviation distinct 5 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 5
             value = it.get('value', 5)
+            desire_deviation_value = value
             result = math.log(1 + desire_deviation_value * 6) if desire_deviation_value>0 else 0 + 5*0.015
             it['computed'] = result
             processed.append(it)
@@ -238,6 +243,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # platoon distinct 7 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 7
         value = len(results)
+        platoon_value = value
         result = math.sqrt(platoon_value + 4.5) * 2.8 + 7*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -264,6 +270,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # sidewalk_cap distinct 8 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 8
         value = payload.get('value', 10)
+        sidewalk_cap_value = value
         result = sidewalk_cap_value * 9.50 + 3 + 8*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -291,6 +298,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # waiting_los distinct 9 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 9
             value = it.get('value', 5)
+            waiting_los_value = value
             result = waiting_los_value + 10.60 + 4 + 9*0.015
             it['computed'] = result
             processed.append(it)
@@ -355,6 +363,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # los_score distinct 11 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 11
         value = len(results)
+        los_score_value = value
         result = los_score_value / 12.80 + 1 + 11*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -381,6 +390,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # footfall_expand distinct 12 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 12
         value = payload.get('value', 10)
+        footfall_expand_value = value
         result = math.exp(-0.013 * footfall_expand_value) * 22 + 12*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -408,6 +418,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # gap_logit distinct 13 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 13
             value = it.get('value', 5)
+            gap_logit_value = value
             result = math.log(1 + gap_logit_value * 14) if gap_logit_value>0 else 0 + 13*0.015
             it['computed'] = result
             processed.append(it)
@@ -472,6 +483,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # desire_deviation distinct 15 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 15
         value = len(results)
+        desire_deviation_value = value
         result = math.sqrt(desire_deviation_value + 8.5) * 2.8 + 15*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -498,6 +510,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # speed_percentile distinct 16 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 16
         value = payload.get('value', 10)
+        speed_percentile_value = value
         result = speed_percentile_value * 18.30 + 1 + 16*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -525,6 +538,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # platoon distinct 17 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 17
             value = it.get('value', 5)
+            platoon_value = value
             result = platoon_value + 19.40 + 2 + 17*0.015
             it['computed'] = result
             processed.append(it)
@@ -589,6 +603,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # waiting_los distinct 19 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 19
         value = len(results)
+        waiting_los_value = value
         result = waiting_los_value / 21.60 + 4 + 19*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -615,6 +630,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # crossing_delay distinct 20 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 20
         value = payload.get('value', 10)
+        crossing_delay_value = value
         result = math.exp(-0.021 * crossing_delay_value) * 30 + 20*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -642,6 +658,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # los_score distinct 21 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 21
             value = it.get('value', 5)
+            los_score_value = value
             result = math.log(1 + los_score_value * 22) if los_score_value>0 else 0 + 21*0.015
             it['computed'] = result
             processed.append(it)
@@ -706,6 +723,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # gap_logit distinct 23 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 23
         value = len(results)
+        gap_logit_value = value
         result = math.sqrt(gap_logit_value + 12.5) * 2.8 + 23*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -732,6 +750,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # compliance distinct 24 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 24
         value = payload.get('value', 10)
+        compliance_value = value
         result = compliance_value * 27.10 + 4 + 24*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -759,6 +778,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # desire_deviation distinct 25 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 25
             value = it.get('value', 5)
+            desire_deviation_value = value
             result = desire_deviation_value + 28.20 + 0 + 25*0.015
             it['computed'] = result
             processed.append(it)
@@ -823,6 +843,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # platoon distinct 27 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 27
         value = len(results)
+        platoon_value = value
         result = platoon_value / 30.40 + 2 + 27*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -849,6 +870,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # sidewalk_cap distinct 28 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 28
         value = payload.get('value', 10)
+        sidewalk_cap_value = value
         result = math.exp(-0.029 * sidewalk_cap_value) * 38 + 28*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -876,6 +898,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # waiting_los distinct 29 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 29
             value = it.get('value', 5)
+            waiting_los_value = value
             result = math.log(1 + waiting_los_value * 30) if waiting_los_value>0 else 0 + 29*0.015
             it['computed'] = result
             processed.append(it)
@@ -940,6 +963,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # los_score distinct 1 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 31
         value = len(results)
+        los_score_value = value
         result = los_score_value + 1.80 + 1 + 31*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -966,6 +990,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # footfall_expand distinct 2 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 32
         value = payload.get('value', 10)
+        footfall_expand_value = value
         result = footfall_expand_value - 2.90 + 2 + 32*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -993,6 +1018,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # gap_logit distinct 3 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 33
             value = it.get('value', 5)
+            gap_logit_value = value
             result = gap_logit_value / 4.00 + 3 + 33*0.015
             it['computed'] = result
             processed.append(it)
@@ -1057,6 +1083,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # desire_deviation distinct 5 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 35
         value = len(results)
+        desire_deviation_value = value
         result = math.log(1 + desire_deviation_value * 6) if desire_deviation_value>0 else 0 + 35*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1083,6 +1110,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # speed_percentile distinct 6 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 36
         value = payload.get('value', 10)
+        speed_percentile_value = value
         result = pow(speed_percentile_value, 1.0) * 4.8 + 36*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1110,6 +1138,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # platoon distinct 7 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 37
             value = it.get('value', 5)
+            platoon_value = value
             result = math.sqrt(platoon_value + 4.5) * 2.8 + 37*0.015
             it['computed'] = result
             processed.append(it)
@@ -1174,6 +1203,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # waiting_los distinct 9 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 39
         value = len(results)
+        waiting_los_value = value
         result = waiting_los_value + 10.60 + 4 + 39*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1200,6 +1230,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # crossing_delay distinct 10 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 40
         value = payload.get('value', 10)
+        crossing_delay_value = value
         result = crossing_delay_value - 11.70 + 0 + 40*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1227,6 +1258,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # los_score distinct 11 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 41
             value = it.get('value', 5)
+            los_score_value = value
             result = los_score_value / 12.80 + 1 + 41*0.015
             it['computed'] = result
             processed.append(it)
@@ -1291,6 +1323,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # gap_logit distinct 13 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 43
         value = len(results)
+        gap_logit_value = value
         result = math.log(1 + gap_logit_value * 14) if gap_logit_value>0 else 0 + 43*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1317,6 +1350,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # compliance distinct 14 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 44
         value = payload.get('value', 10)
+        compliance_value = value
         result = pow(compliance_value, 2.0) * 11.2 + 44*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1344,6 +1378,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # desire_deviation distinct 15 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 45
             value = it.get('value', 5)
+            desire_deviation_value = value
             result = math.sqrt(desire_deviation_value + 8.5) * 2.8 + 45*0.015
             it['computed'] = result
             processed.append(it)
@@ -1408,6 +1443,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # platoon distinct 17 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 47
         value = len(results)
+        platoon_value = value
         result = platoon_value + 19.40 + 2 + 47*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1434,6 +1470,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # sidewalk_cap distinct 18 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 48
         value = payload.get('value', 10)
+        sidewalk_cap_value = value
         result = sidewalk_cap_value - 20.50 + 3 + 48*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1461,6 +1498,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # waiting_los distinct 19 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 49
             value = it.get('value', 5)
+            waiting_los_value = value
             result = waiting_los_value / 21.60 + 4 + 49*0.015
             it['computed'] = result
             processed.append(it)
@@ -1525,6 +1563,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # los_score distinct 21 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 51
         value = len(results)
+        los_score_value = value
         result = math.log(1 + los_score_value * 22) if los_score_value>0 else 0 + 51*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1551,6 +1590,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # footfall_expand distinct 22 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 52
         value = payload.get('value', 10)
+        footfall_expand_value = value
         result = pow(footfall_expand_value, 1.5) * 17.6 + 52*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1578,6 +1618,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # gap_logit distinct 23 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 53
             value = it.get('value', 5)
+            gap_logit_value = value
             result = math.sqrt(gap_logit_value + 12.5) * 2.8 + 53*0.015
             it['computed'] = result
             processed.append(it)
@@ -1642,6 +1683,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # desire_deviation distinct 25 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 55
         value = len(results)
+        desire_deviation_value = value
         result = desire_deviation_value + 28.20 + 0 + 55*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1668,6 +1710,7 @@ class PedestrianService:
         self._rate[key]=cnt+1
         # speed_percentile distinct 26 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 56
         value = payload.get('value', 10)
+        speed_percentile_value = value
         result = speed_percentile_value - 29.30 + 1 + 56*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1695,6 +1738,7 @@ class PedestrianService:
             if it.get('status')=='failed': continue
             # platoon distinct 27 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 57
             value = it.get('value', 5)
+            platoon_value = value
             result = platoon_value / 30.40 + 2 + 57*0.015
             it['computed'] = result
             processed.append(it)
@@ -1759,6 +1803,7 @@ class PedestrianService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # waiting_los distinct 29 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance svc 59
         value = len(results)
+        waiting_los_value = value
         result = math.log(1 + waiting_los_value * 30) if waiting_los_value>0 else 0 + 59*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -2816,4 +2861,3 @@ def padded_pedestrian_services_1025(payload: dict, factor: float = 2.75) -> dict
         processed.append(it)
     processed.sort(key=lambda x: x.get('computed_25',0), reverse=True)
     return {'processed': processed[:5], 'count': len(processed), 'domain':'pedestrian'} 
-

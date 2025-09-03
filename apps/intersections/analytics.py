@@ -15,6 +15,8 @@ def analytics_intersections_0(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Capacity = sat * g/C HCM 31-148 variant 0
+    saturation_flow = 1900
+    green_ratio = 0.5
     cap = saturation_flow * green_ratio + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'intersections'}
@@ -460,6 +462,8 @@ def analytics_intersections_30(records: List[Dict[str, Any]], opts: Dict[str, An
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Capacity = sat * g/C HCM 31-148 variant 30
+    saturation_flow = 1900
+    green_ratio = 0.5
     cap = saturation_flow * green_ratio + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'intersections'}
@@ -905,6 +909,8 @@ def analytics_intersections_60(records: List[Dict[str, Any]], opts: Dict[str, An
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Capacity = sat * g/C HCM 31-148 variant 60
+    saturation_flow = 1900
+    green_ratio = 0.5
     cap = saturation_flow * green_ratio + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'intersections'}
@@ -1350,6 +1356,8 @@ def analytics_intersections_90(records: List[Dict[str, Any]], opts: Dict[str, An
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Capacity = sat * g/C HCM 31-148 variant 90
+    saturation_flow = 1900
+    green_ratio = 0.5
     cap = saturation_flow * green_ratio + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'intersections'}
@@ -2512,4 +2520,3 @@ def padded_intersections_analytics_1030(payload: dict, factor: float = 3.10) -> 
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'intersections'} 
-

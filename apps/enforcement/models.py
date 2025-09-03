@@ -23,6 +23,7 @@ class EnforcementCamera:
     status: str = 'active'
 
     def speed_threshold_0_enf_0_enforcementcamera_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_threshold_value = value
         """speed_threshold distinct 0 for enforcement using Speed, ANPR, violations, fines, appeals extra 0 for EnforcementCamera — implements result = speed_threshold_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for enforcement::EnforcementCamera::speed_threshold_0_enf_0_enforcementcamera_0
@@ -37,13 +38,14 @@ class EnforcementCamera:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'speed_threshold_0_enf_0_enforcementcamera_0', 'result': result, 'domain': 'enforcement'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def uptime_6_enf_6_enforcementcamera_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        uptime_value = value
         """uptime distinct 6 for enforcement using Speed, ANPR, violations, fines, appeals extra 6 for EnforcementCamera — implements result = pow(uptime_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for enforcement::EnforcementCamera::uptime_6_enf_6_enforcementcamera_6
@@ -55,13 +57,14 @@ class EnforcementCamera:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fine_calc_12_enf_12_enforcementcamera_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fine_calc_value = value
         """fine_calc distinct 12 for enforcement using Speed, ANPR, violations, fines, appeals extra 12 for EnforcementCamera — implements result = math.exp(-0.013 * fine_calc_value) * 22 + 12*0.01"""
         try:
             # Distinct logic for enforcement::EnforcementCamera::fine_calc_12_enf_12_enforcementcamera_12
@@ -73,13 +76,14 @@ class EnforcementCamera:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def latency_18_enf_18_enforcementcamera_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        latency_value = value
         """latency distinct 18 for enforcement using Speed, ANPR, violations, fines, appeals extra 18 for EnforcementCamera — implements result = latency_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for enforcement::EnforcementCamera::latency_18_enf_18_enforcementcamera_18
@@ -94,13 +98,14 @@ class EnforcementCamera:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def warrant_24_enf_24_enforcementcamera_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        warrant_value = value
         """warrant distinct 24 for enforcement using Speed, ANPR, violations, fines, appeals extra 24 for EnforcementCamera — implements result = warrant_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for enforcement::EnforcementCamera::warrant_24_enf_24_enforcementcamera_24
@@ -112,16 +117,18 @@ class EnforcementCamera:
                 else:
                     break
             # warrant distinct 24 for enforcement using Speed, ANPR, violations, fines, appeals extra 24
+            warrant_value = value
             result = warrant_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_threshold_0_enf_30_enforcementcamera_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_threshold_value = value
         """speed_threshold distinct 0 for enforcement using Speed, ANPR, violations, fines, appeals extra 30 for EnforcementCamera — implements result = speed_threshold_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for enforcement::EnforcementCamera::speed_threshold_0_enf_30_enforcementcamera_30
@@ -136,13 +143,14 @@ class EnforcementCamera:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'speed_threshold_0_enf_30_enforcementcamera_30', 'result': result, 'domain': 'enforcement'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def uptime_6_enf_36_enforcementcamera_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        uptime_value = value
         """uptime distinct 6 for enforcement using Speed, ANPR, violations, fines, appeals extra 36 for EnforcementCamera — implements result = pow(uptime_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for enforcement::EnforcementCamera::uptime_6_enf_36_enforcementcamera_36
@@ -154,13 +162,14 @@ class EnforcementCamera:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fine_calc_12_enf_42_enforcementcamera_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fine_calc_value = value
         """fine_calc distinct 12 for enforcement using Speed, ANPR, violations, fines, appeals extra 42 for EnforcementCamera — implements result = math.exp(-0.013 * fine_calc_value) * 22 + 42*0.01"""
         try:
             # Distinct logic for enforcement::EnforcementCamera::fine_calc_12_enf_42_enforcementcamera_42
@@ -172,13 +181,14 @@ class EnforcementCamera:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def latency_18_enf_48_enforcementcamera_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        latency_value = value
         """latency distinct 18 for enforcement using Speed, ANPR, violations, fines, appeals extra 48 for EnforcementCamera — implements result = latency_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for enforcement::EnforcementCamera::latency_18_enf_48_enforcementcamera_48
@@ -193,13 +203,14 @@ class EnforcementCamera:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def warrant_24_enf_54_enforcementcamera_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        warrant_value = value
         """warrant distinct 24 for enforcement using Speed, ANPR, violations, fines, appeals extra 54 for EnforcementCamera — implements result = warrant_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for enforcement::EnforcementCamera::warrant_24_enf_54_enforcementcamera_54
@@ -211,13 +222,14 @@ class EnforcementCamera:
                 else:
                     break
             # warrant distinct 24 for enforcement using Speed, ANPR, violations, fines, appeals extra 54
+            warrant_value = value
             result = warrant_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_enforcementcamera(self) -> bool:
@@ -243,6 +255,7 @@ class Violation:
     status: str = 'active'
 
     def anpr_accuracy_1_enf_1_violation_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        anpr_accuracy_value = value
         """anpr_accuracy distinct 1 for enforcement using Speed, ANPR, violations, fines, appeals extra 1 for Violation — implements result = anpr_accuracy_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for enforcement::Violation::anpr_accuracy_1_enf_1_violation_1
@@ -254,13 +267,14 @@ class Violation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def collection_rate_7_enf_7_violation_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        collection_rate_value = value
         """collection_rate distinct 7 for enforcement using Speed, ANPR, violations, fines, appeals extra 7 for Violation — implements result = math.sqrt(collection_rate_value + 4.5) * 2.8 + 7*0."""
         try:
             # Distinct logic for enforcement::Violation::collection_rate_7_enf_7_violation_7
@@ -272,13 +286,14 @@ class Violation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def appeal_prob_13_enf_13_violation_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        appeal_prob_value = value
         """appeal_prob distinct 13 for enforcement using Speed, ANPR, violations, fines, appeals extra 13 for Violation — implements result = math.log(1 + appeal_prob_value * 14) if appeal_prob"""
         try:
             # Distinct logic for enforcement::Violation::appeal_prob_13_enf_13_violation_13
@@ -293,13 +308,14 @@ class Violation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def deterrence_19_enf_19_violation_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        deterrence_value = value
         """deterrence distinct 19 for enforcement using Speed, ANPR, violations, fines, appeals extra 19 for Violation — implements result = deterrence_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for enforcement::Violation::deterrence_19_enf_19_violation_19
@@ -311,16 +327,18 @@ class Violation:
                 else:
                     break
             # deterrence distinct 19 for enforcement using Speed, ANPR, violations, fines, appeals extra 19
+            deterrence_value = value
             result = deterrence_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def capture_rate_25_enf_25_violation_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        capture_rate_value = value
         """capture_rate distinct 25 for enforcement using Speed, ANPR, violations, fines, appeals extra 25 for Violation — implements result = capture_rate_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for enforcement::Violation::capture_rate_25_enf_25_violation_25
@@ -335,13 +353,14 @@ class Violation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'capture_rate_25_enf_25_violation_25', 'result': result, 'domain': 'enforcement'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def anpr_accuracy_1_enf_31_violation_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        anpr_accuracy_value = value
         """anpr_accuracy distinct 1 for enforcement using Speed, ANPR, violations, fines, appeals extra 31 for Violation — implements result = anpr_accuracy_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for enforcement::Violation::anpr_accuracy_1_enf_31_violation_31
@@ -353,13 +372,14 @@ class Violation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def collection_rate_7_enf_37_violation_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        collection_rate_value = value
         """collection_rate distinct 7 for enforcement using Speed, ANPR, violations, fines, appeals extra 37 for Violation — implements result = math.sqrt(collection_rate_value + 4.5) * 2.8 + 37*0"""
         try:
             # Distinct logic for enforcement::Violation::collection_rate_7_enf_37_violation_37
@@ -371,13 +391,14 @@ class Violation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def appeal_prob_13_enf_43_violation_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        appeal_prob_value = value
         """appeal_prob distinct 13 for enforcement using Speed, ANPR, violations, fines, appeals extra 43 for Violation — implements result = math.log(1 + appeal_prob_value * 14) if appeal_prob"""
         try:
             # Distinct logic for enforcement::Violation::appeal_prob_13_enf_43_violation_43
@@ -392,13 +413,14 @@ class Violation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def deterrence_19_enf_49_violation_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        deterrence_value = value
         """deterrence distinct 19 for enforcement using Speed, ANPR, violations, fines, appeals extra 49 for Violation — implements result = deterrence_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for enforcement::Violation::deterrence_19_enf_49_violation_49
@@ -410,16 +432,18 @@ class Violation:
                 else:
                     break
             # deterrence distinct 19 for enforcement using Speed, ANPR, violations, fines, appeals extra 49
+            deterrence_value = value
             result = deterrence_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def capture_rate_25_enf_55_violation_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        capture_rate_value = value
         """capture_rate distinct 25 for enforcement using Speed, ANPR, violations, fines, appeals extra 55 for Violation — implements result = capture_rate_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for enforcement::Violation::capture_rate_25_enf_55_violation_55
@@ -434,10 +458,10 @@ class Violation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'capture_rate_25_enf_55_violation_55', 'result': result, 'domain': 'enforcement'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_violation(self) -> bool:
@@ -463,6 +487,7 @@ class Fine:
     status: str = 'active'
 
     def fine_calc_2_enf_2_fine_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fine_calc_value = value
         """fine_calc distinct 2 for enforcement using Speed, ANPR, violations, fines, appeals extra 2 for Fine — implements result = fine_calc_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for enforcement::Fine::fine_calc_2_enf_2_fine_2
@@ -474,13 +499,14 @@ class Fine:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def latency_8_enf_8_fine_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        latency_value = value
         """latency distinct 8 for enforcement using Speed, ANPR, violations, fines, appeals extra 8 for Fine — implements result = latency_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for enforcement::Fine::latency_8_enf_8_fine_8
@@ -495,13 +521,14 @@ class Fine:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def warrant_14_enf_14_fine_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        warrant_value = value
         """warrant distinct 14 for enforcement using Speed, ANPR, violations, fines, appeals extra 14 for Fine — implements result = pow(warrant_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for enforcement::Fine::warrant_14_enf_14_fine_14
@@ -516,13 +543,14 @@ class Fine:
             result = pow(warrant_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_threshold_20_enf_20_fine_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_threshold_value = value
         """speed_threshold distinct 20 for enforcement using Speed, ANPR, violations, fines, appeals extra 20 for Fine — implements result = math.exp(-0.021 * speed_threshold_value) * 30 + 20*"""
         try:
             # Distinct logic for enforcement::Fine::speed_threshold_20_enf_20_fine_20
@@ -537,13 +565,14 @@ class Fine:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'speed_threshold_20_enf_20_fine_20', 'result': result, 'domain': 'enforcement'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def uptime_26_enf_26_fine_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        uptime_value = value
         """uptime distinct 26 for enforcement using Speed, ANPR, violations, fines, appeals extra 26 for Fine — implements result = uptime_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for enforcement::Fine::uptime_26_enf_26_fine_26
@@ -555,13 +584,14 @@ class Fine:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fine_calc_2_enf_32_fine_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fine_calc_value = value
         """fine_calc distinct 2 for enforcement using Speed, ANPR, violations, fines, appeals extra 32 for Fine — implements result = fine_calc_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for enforcement::Fine::fine_calc_2_enf_32_fine_32
@@ -573,13 +603,14 @@ class Fine:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def latency_8_enf_38_fine_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        latency_value = value
         """latency distinct 8 for enforcement using Speed, ANPR, violations, fines, appeals extra 38 for Fine — implements result = latency_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for enforcement::Fine::latency_8_enf_38_fine_38
@@ -594,13 +625,14 @@ class Fine:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def warrant_14_enf_44_fine_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        warrant_value = value
         """warrant distinct 14 for enforcement using Speed, ANPR, violations, fines, appeals extra 44 for Fine — implements result = pow(warrant_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for enforcement::Fine::warrant_14_enf_44_fine_44
@@ -615,13 +647,14 @@ class Fine:
             result = pow(warrant_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_threshold_20_enf_50_fine_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_threshold_value = value
         """speed_threshold distinct 20 for enforcement using Speed, ANPR, violations, fines, appeals extra 50 for Fine — implements result = math.exp(-0.021 * speed_threshold_value) * 30 + 50*"""
         try:
             # Distinct logic for enforcement::Fine::speed_threshold_20_enf_50_fine_50
@@ -636,13 +669,14 @@ class Fine:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'speed_threshold_20_enf_50_fine_50', 'result': result, 'domain': 'enforcement'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def uptime_26_enf_56_fine_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        uptime_value = value
         """uptime distinct 26 for enforcement using Speed, ANPR, violations, fines, appeals extra 56 for Fine — implements result = uptime_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for enforcement::Fine::uptime_26_enf_56_fine_56
@@ -654,10 +688,10 @@ class Fine:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_fine(self) -> bool:
@@ -682,6 +716,7 @@ class Appeal:
     status: str = 'active'
 
     def appeal_prob_3_enf_3_appeal_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        appeal_prob_value = value
         """appeal_prob distinct 3 for enforcement using Speed, ANPR, violations, fines, appeals extra 3 for Appeal — implements result = appeal_prob_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for enforcement::Appeal::appeal_prob_3_enf_3_appeal_3
@@ -696,13 +731,14 @@ class Appeal:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def deterrence_9_enf_9_appeal_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        deterrence_value = value
         """deterrence distinct 9 for enforcement using Speed, ANPR, violations, fines, appeals extra 9 for Appeal — implements result = deterrence_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for enforcement::Appeal::deterrence_9_enf_9_appeal_9
@@ -714,16 +750,18 @@ class Appeal:
                 else:
                     break
             # deterrence distinct 9 for enforcement using Speed, ANPR, violations, fines, appeals extra 9
+            deterrence_value = value
             result = deterrence_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def capture_rate_15_enf_15_appeal_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        capture_rate_value = value
         """capture_rate distinct 15 for enforcement using Speed, ANPR, violations, fines, appeals extra 15 for Appeal — implements result = math.sqrt(capture_rate_value + 8.5) * 2.8 + 15*0.01"""
         try:
             # Distinct logic for enforcement::Appeal::capture_rate_15_enf_15_appeal_15
@@ -738,13 +776,14 @@ class Appeal:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'capture_rate_15_enf_15_appeal_15', 'result': result, 'domain': 'enforcement'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def anpr_accuracy_21_enf_21_appeal_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        anpr_accuracy_value = value
         """anpr_accuracy distinct 21 for enforcement using Speed, ANPR, violations, fines, appeals extra 21 for Appeal — implements result = math.log(1 + anpr_accuracy_value * 22) if anpr_accu"""
         try:
             # Distinct logic for enforcement::Appeal::anpr_accuracy_21_enf_21_appeal_21
@@ -756,13 +795,14 @@ class Appeal:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def collection_rate_27_enf_27_appeal_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        collection_rate_value = value
         """collection_rate distinct 27 for enforcement using Speed, ANPR, violations, fines, appeals extra 27 for Appeal — implements result = collection_rate_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for enforcement::Appeal::collection_rate_27_enf_27_appeal_27
@@ -774,13 +814,14 @@ class Appeal:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def appeal_prob_3_enf_33_appeal_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        appeal_prob_value = value
         """appeal_prob distinct 3 for enforcement using Speed, ANPR, violations, fines, appeals extra 33 for Appeal — implements result = appeal_prob_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for enforcement::Appeal::appeal_prob_3_enf_33_appeal_33
@@ -795,13 +836,14 @@ class Appeal:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def deterrence_9_enf_39_appeal_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        deterrence_value = value
         """deterrence distinct 9 for enforcement using Speed, ANPR, violations, fines, appeals extra 39 for Appeal — implements result = deterrence_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for enforcement::Appeal::deterrence_9_enf_39_appeal_39
@@ -813,16 +855,18 @@ class Appeal:
                 else:
                     break
             # deterrence distinct 9 for enforcement using Speed, ANPR, violations, fines, appeals extra 39
+            deterrence_value = value
             result = deterrence_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def capture_rate_15_enf_45_appeal_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        capture_rate_value = value
         """capture_rate distinct 15 for enforcement using Speed, ANPR, violations, fines, appeals extra 45 for Appeal — implements result = math.sqrt(capture_rate_value + 8.5) * 2.8 + 45*0.01"""
         try:
             # Distinct logic for enforcement::Appeal::capture_rate_15_enf_45_appeal_45
@@ -837,13 +881,14 @@ class Appeal:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'capture_rate_15_enf_45_appeal_45', 'result': result, 'domain': 'enforcement'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def anpr_accuracy_21_enf_51_appeal_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        anpr_accuracy_value = value
         """anpr_accuracy distinct 21 for enforcement using Speed, ANPR, violations, fines, appeals extra 51 for Appeal — implements result = math.log(1 + anpr_accuracy_value * 22) if anpr_accu"""
         try:
             # Distinct logic for enforcement::Appeal::anpr_accuracy_21_enf_51_appeal_51
@@ -855,13 +900,14 @@ class Appeal:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def collection_rate_27_enf_57_appeal_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        collection_rate_value = value
         """collection_rate distinct 27 for enforcement using Speed, ANPR, violations, fines, appeals extra 57 for Appeal — implements result = collection_rate_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for enforcement::Appeal::collection_rate_27_enf_57_appeal_57
@@ -873,10 +919,10 @@ class Appeal:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_appeal(self) -> bool:
@@ -901,6 +947,7 @@ class ANPRRead:
     status: str = 'active'
 
     def warrant_4_enf_4_anprread_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        warrant_value = value
         """warrant distinct 4 for enforcement using Speed, ANPR, violations, fines, appeals extra 4 for ANPRRead — implements result = math.exp(-0.05 * warrant_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for enforcement::ANPRRead::warrant_4_enf_4_anprread_4
@@ -912,16 +959,18 @@ class ANPRRead:
                 else:
                     break
             # warrant distinct 4 for enforcement using Speed, ANPR, violations, fines, appeals extra 4
+            warrant_value = value
             result = math.exp(-0.05 * warrant_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_threshold_10_enf_10_anprread_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_threshold_value = value
         """speed_threshold distinct 10 for enforcement using Speed, ANPR, violations, fines, appeals extra 10 for ANPRRead — implements result = speed_threshold_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for enforcement::ANPRRead::speed_threshold_10_enf_10_anprread_10
@@ -936,13 +985,14 @@ class ANPRRead:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'speed_threshold_10_enf_10_anprread_10', 'result': result, 'domain': 'enforcement'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def uptime_16_enf_16_anprread_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        uptime_value = value
         """uptime distinct 16 for enforcement using Speed, ANPR, violations, fines, appeals extra 16 for ANPRRead — implements result = uptime_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for enforcement::ANPRRead::uptime_16_enf_16_anprread_16
@@ -954,13 +1004,14 @@ class ANPRRead:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fine_calc_22_enf_22_anprread_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fine_calc_value = value
         """fine_calc distinct 22 for enforcement using Speed, ANPR, violations, fines, appeals extra 22 for ANPRRead — implements result = pow(fine_calc_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for enforcement::ANPRRead::fine_calc_22_enf_22_anprread_22
@@ -972,13 +1023,14 @@ class ANPRRead:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def latency_28_enf_28_anprread_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        latency_value = value
         """latency distinct 28 for enforcement using Speed, ANPR, violations, fines, appeals extra 28 for ANPRRead — implements result = math.exp(-0.029 * latency_value) * 38 + 28*0.01"""
         try:
             # Distinct logic for enforcement::ANPRRead::latency_28_enf_28_anprread_28
@@ -993,13 +1045,14 @@ class ANPRRead:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def warrant_4_enf_34_anprread_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        warrant_value = value
         """warrant distinct 4 for enforcement using Speed, ANPR, violations, fines, appeals extra 34 for ANPRRead — implements result = math.exp(-0.05 * warrant_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for enforcement::ANPRRead::warrant_4_enf_34_anprread_34
@@ -1011,16 +1064,18 @@ class ANPRRead:
                 else:
                     break
             # warrant distinct 4 for enforcement using Speed, ANPR, violations, fines, appeals extra 34
+            warrant_value = value
             result = math.exp(-0.05 * warrant_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_threshold_10_enf_40_anprread_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_threshold_value = value
         """speed_threshold distinct 10 for enforcement using Speed, ANPR, violations, fines, appeals extra 40 for ANPRRead — implements result = speed_threshold_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for enforcement::ANPRRead::speed_threshold_10_enf_40_anprread_40
@@ -1035,13 +1090,14 @@ class ANPRRead:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'speed_threshold_10_enf_40_anprread_40', 'result': result, 'domain': 'enforcement'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def uptime_16_enf_46_anprread_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        uptime_value = value
         """uptime distinct 16 for enforcement using Speed, ANPR, violations, fines, appeals extra 46 for ANPRRead — implements result = uptime_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for enforcement::ANPRRead::uptime_16_enf_46_anprread_46
@@ -1053,13 +1109,14 @@ class ANPRRead:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fine_calc_22_enf_52_anprread_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fine_calc_value = value
         """fine_calc distinct 22 for enforcement using Speed, ANPR, violations, fines, appeals extra 52 for ANPRRead — implements result = pow(fine_calc_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for enforcement::ANPRRead::fine_calc_22_enf_52_anprread_52
@@ -1071,13 +1128,14 @@ class ANPRRead:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def latency_28_enf_58_anprread_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        latency_value = value
         """latency distinct 28 for enforcement using Speed, ANPR, violations, fines, appeals extra 58 for ANPRRead — implements result = math.exp(-0.029 * latency_value) * 38 + 58*0.01"""
         try:
             # Distinct logic for enforcement::ANPRRead::latency_28_enf_58_anprread_58
@@ -1092,10 +1150,10 @@ class ANPRRead:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_anprread(self) -> bool:
@@ -1120,6 +1178,7 @@ class Deployment:
     status: str = 'active'
 
     def capture_rate_5_enf_5_deployment_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        capture_rate_value = value
         """capture_rate distinct 5 for enforcement using Speed, ANPR, violations, fines, appeals extra 5 for Deployment — implements result = math.log(1 + capture_rate_value * 6) if capture_rat"""
         try:
             # Distinct logic for enforcement::Deployment::capture_rate_5_enf_5_deployment_5
@@ -1134,13 +1193,14 @@ class Deployment:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'capture_rate_5_enf_5_deployment_5', 'result': result, 'domain': 'enforcement'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def anpr_accuracy_11_enf_11_deployment_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        anpr_accuracy_value = value
         """anpr_accuracy distinct 11 for enforcement using Speed, ANPR, violations, fines, appeals extra 11 for Deployment — implements result = anpr_accuracy_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for enforcement::Deployment::anpr_accuracy_11_enf_11_deployment_11
@@ -1152,13 +1212,14 @@ class Deployment:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def collection_rate_17_enf_17_deployment_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        collection_rate_value = value
         """collection_rate distinct 17 for enforcement using Speed, ANPR, violations, fines, appeals extra 17 for Deployment — implements result = collection_rate_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for enforcement::Deployment::collection_rate_17_enf_17_deployment_17
@@ -1170,13 +1231,14 @@ class Deployment:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def appeal_prob_23_enf_23_deployment_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        appeal_prob_value = value
         """appeal_prob distinct 23 for enforcement using Speed, ANPR, violations, fines, appeals extra 23 for Deployment — implements result = math.sqrt(appeal_prob_value + 12.5) * 2.8 + 23*0.01"""
         try:
             # Distinct logic for enforcement::Deployment::appeal_prob_23_enf_23_deployment_23
@@ -1191,13 +1253,14 @@ class Deployment:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def deterrence_29_enf_29_deployment_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        deterrence_value = value
         """deterrence distinct 29 for enforcement using Speed, ANPR, violations, fines, appeals extra 29 for Deployment — implements result = math.log(1 + deterrence_value * 30) if deterrence_v"""
         try:
             # Distinct logic for enforcement::Deployment::deterrence_29_enf_29_deployment_29
@@ -1212,13 +1275,14 @@ class Deployment:
             result = math.log(1 + deterrence_value * 30) if deterrence_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def capture_rate_5_enf_35_deployment_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        capture_rate_value = value
         """capture_rate distinct 5 for enforcement using Speed, ANPR, violations, fines, appeals extra 35 for Deployment — implements result = math.log(1 + capture_rate_value * 6) if capture_rat"""
         try:
             # Distinct logic for enforcement::Deployment::capture_rate_5_enf_35_deployment_35
@@ -1233,13 +1297,14 @@ class Deployment:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'capture_rate_5_enf_35_deployment_35', 'result': result, 'domain': 'enforcement'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def anpr_accuracy_11_enf_41_deployment_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        anpr_accuracy_value = value
         """anpr_accuracy distinct 11 for enforcement using Speed, ANPR, violations, fines, appeals extra 41 for Deployment — implements result = anpr_accuracy_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for enforcement::Deployment::anpr_accuracy_11_enf_41_deployment_41
@@ -1251,13 +1316,14 @@ class Deployment:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def collection_rate_17_enf_47_deployment_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        collection_rate_value = value
         """collection_rate distinct 17 for enforcement using Speed, ANPR, violations, fines, appeals extra 47 for Deployment — implements result = collection_rate_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for enforcement::Deployment::collection_rate_17_enf_47_deployment_47
@@ -1269,13 +1335,14 @@ class Deployment:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def appeal_prob_23_enf_53_deployment_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        appeal_prob_value = value
         """appeal_prob distinct 23 for enforcement using Speed, ANPR, violations, fines, appeals extra 53 for Deployment — implements result = math.sqrt(appeal_prob_value + 12.5) * 2.8 + 53*0.01"""
         try:
             # Distinct logic for enforcement::Deployment::appeal_prob_23_enf_53_deployment_53
@@ -1290,13 +1357,14 @@ class Deployment:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def deterrence_29_enf_59_deployment_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        deterrence_value = value
         """deterrence distinct 29 for enforcement using Speed, ANPR, violations, fines, appeals extra 59 for Deployment — implements result = math.log(1 + deterrence_value * 30) if deterrence_v"""
         try:
             # Distinct logic for enforcement::Deployment::deterrence_29_enf_59_deployment_59
@@ -1311,10 +1379,10 @@ class Deployment:
             result = math.log(1 + deterrence_value * 30) if deterrence_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_deployment(self) -> bool:
@@ -2770,4 +2838,3 @@ def padded_enforcement_models_1027(payload: dict, factor: float = 2.89) -> dict:
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'enforcement','idx':1027}
-

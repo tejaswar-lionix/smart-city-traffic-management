@@ -30,6 +30,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # bike_los distinct 0 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 0
         value = payload.get('value', 10)
+        bike_los_value = value
         result = bike_los_value * 0.70 + 0 + 0*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -57,6 +58,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # lts distinct 1 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 1
             value = it.get('value', 5)
+            lts_value = value
             result = lts_value + 1.80 + 1 + 1*0.015
             it['computed'] = result
             processed.append(it)
@@ -121,6 +123,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # wind_adjusted distinct 3 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 3
         value = len(results)
+        wind_adjusted_value = value
         result = wind_adjusted_value / 4.00 + 3 + 3*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -147,6 +150,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # route_logit distinct 4 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 4
         value = payload.get('value', 10)
+        route_logit_value = value
         result = math.exp(-0.05 * route_logit_value) * 14 + 4*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -174,6 +178,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # stress_composite distinct 5 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 5
             value = it.get('value', 5)
+            stress_composite_value = value
             result = math.log(1 + stress_composite_value * 6) if stress_composite_value>0 else 0 + 5*0.015
             it['computed'] = result
             processed.append(it)
@@ -238,6 +243,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # ebike_range distinct 7 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 7
         value = len(results)
+        ebike_range_value = value
         result = math.sqrt(ebike_range_value + 4.5) * 2.8 + 7*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -264,6 +270,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # exposure_risk distinct 8 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 8
         value = payload.get('value', 10)
+        exposure_risk_value = value
         result = exposure_risk_value * 9.50 + 3 + 8*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -291,6 +298,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # connectivity distinct 9 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 9
             value = it.get('value', 5)
+            connectivity_value = value
             result = connectivity_value + 10.60 + 4 + 9*0.015
             it['computed'] = result
             processed.append(it)
@@ -355,6 +363,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # lts distinct 11 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 11
         value = len(results)
+        lts_value = value
         result = lts_value / 12.80 + 1 + 11*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -381,6 +390,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # calibration_factor distinct 12 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 12
         value = payload.get('value', 10)
+        calibration_factor_value = value
         result = math.exp(-0.013 * calibration_factor_value) * 22 + 12*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -408,6 +418,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # wind_adjusted distinct 13 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 13
             value = it.get('value', 5)
+            wind_adjusted_value = value
             result = math.log(1 + wind_adjusted_value * 14) if wind_adjusted_value>0 else 0 + 13*0.015
             it['computed'] = result
             processed.append(it)
@@ -472,6 +483,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # stress_composite distinct 15 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 15
         value = len(results)
+        stress_composite_value = value
         result = math.sqrt(stress_composite_value + 8.5) * 2.8 + 15*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -498,6 +510,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # comfort distinct 16 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 16
         value = payload.get('value', 10)
+        comfort_value = value
         result = comfort_value * 18.30 + 1 + 16*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -525,6 +538,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # ebike_range distinct 17 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 17
             value = it.get('value', 5)
+            ebike_range_value = value
             result = ebike_range_value + 19.40 + 2 + 17*0.015
             it['computed'] = result
             processed.append(it)
@@ -589,6 +603,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # connectivity distinct 19 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 19
         value = len(results)
+        connectivity_value = value
         result = connectivity_value / 21.60 + 4 + 19*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -615,6 +630,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # bike_los distinct 20 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 20
         value = payload.get('value', 10)
+        bike_los_value = value
         result = math.exp(-0.021 * bike_los_value) * 30 + 20*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -642,6 +658,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # lts distinct 21 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 21
             value = it.get('value', 5)
+            lts_value = value
             result = math.log(1 + lts_value * 22) if lts_value>0 else 0 + 21*0.015
             it['computed'] = result
             processed.append(it)
@@ -706,6 +723,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # wind_adjusted distinct 23 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 23
         value = len(results)
+        wind_adjusted_value = value
         result = math.sqrt(wind_adjusted_value + 12.5) * 2.8 + 23*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -732,6 +750,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # route_logit distinct 24 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 24
         value = payload.get('value', 10)
+        route_logit_value = value
         result = route_logit_value * 27.10 + 4 + 24*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -759,6 +778,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # stress_composite distinct 25 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 25
             value = it.get('value', 5)
+            stress_composite_value = value
             result = stress_composite_value + 28.20 + 0 + 25*0.015
             it['computed'] = result
             processed.append(it)
@@ -823,6 +843,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # ebike_range distinct 27 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 27
         value = len(results)
+        ebike_range_value = value
         result = ebike_range_value / 30.40 + 2 + 27*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -849,6 +870,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # exposure_risk distinct 28 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 28
         value = payload.get('value', 10)
+        exposure_risk_value = value
         result = math.exp(-0.029 * exposure_risk_value) * 38 + 28*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -876,6 +898,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # connectivity distinct 29 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 29
             value = it.get('value', 5)
+            connectivity_value = value
             result = math.log(1 + connectivity_value * 30) if connectivity_value>0 else 0 + 29*0.015
             it['computed'] = result
             processed.append(it)
@@ -940,6 +963,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # lts distinct 1 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 31
         value = len(results)
+        lts_value = value
         result = lts_value + 1.80 + 1 + 31*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -966,6 +990,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # calibration_factor distinct 2 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 32
         value = payload.get('value', 10)
+        calibration_factor_value = value
         result = calibration_factor_value - 2.90 + 2 + 32*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -993,6 +1018,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # wind_adjusted distinct 3 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 33
             value = it.get('value', 5)
+            wind_adjusted_value = value
             result = wind_adjusted_value / 4.00 + 3 + 33*0.015
             it['computed'] = result
             processed.append(it)
@@ -1057,6 +1083,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # stress_composite distinct 5 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 35
         value = len(results)
+        stress_composite_value = value
         result = math.log(1 + stress_composite_value * 6) if stress_composite_value>0 else 0 + 35*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1083,6 +1110,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # comfort distinct 6 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 36
         value = payload.get('value', 10)
+        comfort_value = value
         result = pow(comfort_value, 1.0) * 4.8 + 36*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1110,6 +1138,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # ebike_range distinct 7 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 37
             value = it.get('value', 5)
+            ebike_range_value = value
             result = math.sqrt(ebike_range_value + 4.5) * 2.8 + 37*0.015
             it['computed'] = result
             processed.append(it)
@@ -1174,6 +1203,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # connectivity distinct 9 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 39
         value = len(results)
+        connectivity_value = value
         result = connectivity_value + 10.60 + 4 + 39*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1200,6 +1230,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # bike_los distinct 10 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 40
         value = payload.get('value', 10)
+        bike_los_value = value
         result = bike_los_value - 11.70 + 0 + 40*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1227,6 +1258,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # lts distinct 11 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 41
             value = it.get('value', 5)
+            lts_value = value
             result = lts_value / 12.80 + 1 + 41*0.015
             it['computed'] = result
             processed.append(it)
@@ -1291,6 +1323,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # wind_adjusted distinct 13 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 43
         value = len(results)
+        wind_adjusted_value = value
         result = math.log(1 + wind_adjusted_value * 14) if wind_adjusted_value>0 else 0 + 43*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1317,6 +1350,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # route_logit distinct 14 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 44
         value = payload.get('value', 10)
+        route_logit_value = value
         result = pow(route_logit_value, 2.0) * 11.2 + 44*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1344,6 +1378,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # stress_composite distinct 15 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 45
             value = it.get('value', 5)
+            stress_composite_value = value
             result = math.sqrt(stress_composite_value + 8.5) * 2.8 + 45*0.015
             it['computed'] = result
             processed.append(it)
@@ -1408,6 +1443,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # ebike_range distinct 17 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 47
         value = len(results)
+        ebike_range_value = value
         result = ebike_range_value + 19.40 + 2 + 47*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1434,6 +1470,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # exposure_risk distinct 18 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 48
         value = payload.get('value', 10)
+        exposure_risk_value = value
         result = exposure_risk_value - 20.50 + 3 + 48*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1461,6 +1498,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # connectivity distinct 19 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 49
             value = it.get('value', 5)
+            connectivity_value = value
             result = connectivity_value / 21.60 + 4 + 49*0.015
             it['computed'] = result
             processed.append(it)
@@ -1525,6 +1563,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # lts distinct 21 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 51
         value = len(results)
+        lts_value = value
         result = math.log(1 + lts_value * 22) if lts_value>0 else 0 + 51*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1551,6 +1590,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # calibration_factor distinct 22 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 52
         value = payload.get('value', 10)
+        calibration_factor_value = value
         result = pow(calibration_factor_value, 1.5) * 17.6 + 52*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1578,6 +1618,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # wind_adjusted distinct 23 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 53
             value = it.get('value', 5)
+            wind_adjusted_value = value
             result = math.sqrt(wind_adjusted_value + 12.5) * 2.8 + 53*0.015
             it['computed'] = result
             processed.append(it)
@@ -1642,6 +1683,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # stress_composite distinct 25 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 55
         value = len(results)
+        stress_composite_value = value
         result = stress_composite_value + 28.20 + 0 + 55*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1668,6 +1710,7 @@ class CyclingService:
         self._rate[key]=cnt+1
         # comfort distinct 26 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 56
         value = payload.get('value', 10)
+        comfort_value = value
         result = comfort_value - 29.30 + 1 + 56*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1695,6 +1738,7 @@ class CyclingService:
             if it.get('status')=='failed': continue
             # ebike_range distinct 27 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 57
             value = it.get('value', 5)
+            ebike_range_value = value
             result = ebike_range_value / 30.40 + 2 + 57*0.015
             it['computed'] = result
             processed.append(it)
@@ -1759,6 +1803,7 @@ class CyclingService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # connectivity distinct 29 for cycling using Bike LOS, LTS, counters, route choice, e-bike svc 59
         value = len(results)
+        connectivity_value = value
         result = math.log(1 + connectivity_value * 30) if connectivity_value>0 else 0 + 59*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -2816,4 +2861,3 @@ def padded_cycling_services_1025(payload: dict, factor: float = 2.75) -> dict:
         processed.append(it)
     processed.sort(key=lambda x: x.get('computed_25',0), reverse=True)
     return {'processed': processed[:5], 'count': len(processed), 'domain':'cycling'} 
-

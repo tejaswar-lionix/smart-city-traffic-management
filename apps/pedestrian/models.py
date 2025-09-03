@@ -24,6 +24,7 @@ class Crossing:
     status: str = 'active'
 
     def crossing_delay_0_ped_0_crossing_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        crossing_delay_value = value
         """crossing_delay distinct 0 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 0 for Crossing — implements result = crossing_delay_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for pedestrian::Crossing::crossing_delay_0_ped_0_crossing_0
@@ -38,13 +39,14 @@ class Crossing:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'crossing_delay_0_ped_0_crossing_0', 'result': result, 'domain': 'pedestrian'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_percentile_6_ped_6_crossing_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_percentile_value = value
         """speed_percentile distinct 6 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 6 for Crossing — implements result = pow(speed_percentile_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for pedestrian::Crossing::speed_percentile_6_ped_6_crossing_6
@@ -56,13 +58,14 @@ class Crossing:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def footfall_expand_12_ped_12_crossing_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        footfall_expand_value = value
         """footfall_expand distinct 12 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 12 for Crossing — implements result = math.exp(-0.013 * footfall_expand_value) * 22 + 12*"""
         try:
             # Distinct logic for pedestrian::Crossing::footfall_expand_12_ped_12_crossing_12
@@ -74,13 +77,14 @@ class Crossing:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sidewalk_cap_18_ped_18_crossing_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        sidewalk_cap_value = value
         """sidewalk_cap distinct 18 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 18 for Crossing — implements result = sidewalk_cap_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for pedestrian::Crossing::sidewalk_cap_18_ped_18_crossing_18
@@ -95,13 +99,14 @@ class Crossing:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def compliance_24_ped_24_crossing_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        compliance_value = value
         """compliance distinct 24 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 24 for Crossing — implements result = compliance_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for pedestrian::Crossing::compliance_24_ped_24_crossing_24
@@ -113,16 +118,18 @@ class Crossing:
                 else:
                     break
             # compliance distinct 24 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 24
+            compliance_value = value
             result = compliance_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def crossing_delay_0_ped_30_crossing_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        crossing_delay_value = value
         """crossing_delay distinct 0 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 30 for Crossing — implements result = crossing_delay_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for pedestrian::Crossing::crossing_delay_0_ped_30_crossing_30
@@ -137,13 +144,14 @@ class Crossing:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'crossing_delay_0_ped_30_crossing_30', 'result': result, 'domain': 'pedestrian'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_percentile_6_ped_36_crossing_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_percentile_value = value
         """speed_percentile distinct 6 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 36 for Crossing — implements result = pow(speed_percentile_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for pedestrian::Crossing::speed_percentile_6_ped_36_crossing_36
@@ -155,13 +163,14 @@ class Crossing:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def footfall_expand_12_ped_42_crossing_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        footfall_expand_value = value
         """footfall_expand distinct 12 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 42 for Crossing — implements result = math.exp(-0.013 * footfall_expand_value) * 22 + 42*"""
         try:
             # Distinct logic for pedestrian::Crossing::footfall_expand_12_ped_42_crossing_42
@@ -173,13 +182,14 @@ class Crossing:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sidewalk_cap_18_ped_48_crossing_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        sidewalk_cap_value = value
         """sidewalk_cap distinct 18 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 48 for Crossing — implements result = sidewalk_cap_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for pedestrian::Crossing::sidewalk_cap_18_ped_48_crossing_48
@@ -194,13 +204,14 @@ class Crossing:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def compliance_24_ped_54_crossing_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        compliance_value = value
         """compliance distinct 24 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 54 for Crossing — implements result = compliance_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for pedestrian::Crossing::compliance_24_ped_54_crossing_54
@@ -212,13 +223,14 @@ class Crossing:
                 else:
                     break
             # compliance distinct 24 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 54
+            compliance_value = value
             result = compliance_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_crossing(self) -> bool:
@@ -243,6 +255,7 @@ class PedCount:
     status: str = 'active'
 
     def los_score_1_ped_1_pedcount_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        los_score_value = value
         """los_score distinct 1 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 1 for PedCount — implements result = los_score_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for pedestrian::PedCount::los_score_1_ped_1_pedcount_1
@@ -254,13 +267,14 @@ class PedCount:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def platoon_7_ped_7_pedcount_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        platoon_value = value
         """platoon distinct 7 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 7 for PedCount — implements result = math.sqrt(platoon_value + 4.5) * 2.8 + 7*0.01"""
         try:
             # Distinct logic for pedestrian::PedCount::platoon_7_ped_7_pedcount_7
@@ -272,13 +286,14 @@ class PedCount:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gap_logit_13_ped_13_pedcount_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gap_logit_value = value
         """gap_logit distinct 13 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 13 for PedCount — implements result = math.log(1 + gap_logit_value * 14) if gap_logit_val"""
         try:
             # Distinct logic for pedestrian::PedCount::gap_logit_13_ped_13_pedcount_13
@@ -293,13 +308,14 @@ class PedCount:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def waiting_los_19_ped_19_pedcount_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        waiting_los_value = value
         """waiting_los distinct 19 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 19 for PedCount — implements result = waiting_los_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for pedestrian::PedCount::waiting_los_19_ped_19_pedcount_19
@@ -311,16 +327,18 @@ class PedCount:
                 else:
                     break
             # waiting_los distinct 19 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 19
+            waiting_los_value = value
             result = waiting_los_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def desire_deviation_25_ped_25_pedcount_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        desire_deviation_value = value
         """desire_deviation distinct 25 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 25 for PedCount — implements result = desire_deviation_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for pedestrian::PedCount::desire_deviation_25_ped_25_pedcount_25
@@ -335,13 +353,14 @@ class PedCount:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'desire_deviation_25_ped_25_pedcount_25', 'result': result, 'domain': 'pedestrian'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def los_score_1_ped_31_pedcount_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        los_score_value = value
         """los_score distinct 1 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 31 for PedCount — implements result = los_score_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for pedestrian::PedCount::los_score_1_ped_31_pedcount_31
@@ -353,13 +372,14 @@ class PedCount:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def platoon_7_ped_37_pedcount_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        platoon_value = value
         """platoon distinct 7 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 37 for PedCount — implements result = math.sqrt(platoon_value + 4.5) * 2.8 + 37*0.01"""
         try:
             # Distinct logic for pedestrian::PedCount::platoon_7_ped_37_pedcount_37
@@ -371,13 +391,14 @@ class PedCount:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gap_logit_13_ped_43_pedcount_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gap_logit_value = value
         """gap_logit distinct 13 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 43 for PedCount — implements result = math.log(1 + gap_logit_value * 14) if gap_logit_val"""
         try:
             # Distinct logic for pedestrian::PedCount::gap_logit_13_ped_43_pedcount_43
@@ -392,13 +413,14 @@ class PedCount:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def waiting_los_19_ped_49_pedcount_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        waiting_los_value = value
         """waiting_los distinct 19 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 49 for PedCount — implements result = waiting_los_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for pedestrian::PedCount::waiting_los_19_ped_49_pedcount_49
@@ -410,16 +432,18 @@ class PedCount:
                 else:
                     break
             # waiting_los distinct 19 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 49
+            waiting_los_value = value
             result = waiting_los_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def desire_deviation_25_ped_55_pedcount_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        desire_deviation_value = value
         """desire_deviation distinct 25 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 55 for PedCount — implements result = desire_deviation_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for pedestrian::PedCount::desire_deviation_25_ped_55_pedcount_55
@@ -434,10 +458,10 @@ class PedCount:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'desire_deviation_25_ped_55_pedcount_55', 'result': result, 'domain': 'pedestrian'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_pedcount(self) -> bool:
@@ -462,6 +486,7 @@ class DesireLine:
     status: str = 'active'
 
     def footfall_expand_2_ped_2_desireline_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        footfall_expand_value = value
         """footfall_expand distinct 2 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 2 for DesireLine — implements result = footfall_expand_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for pedestrian::DesireLine::footfall_expand_2_ped_2_desireline_2
@@ -473,13 +498,14 @@ class DesireLine:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sidewalk_cap_8_ped_8_desireline_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        sidewalk_cap_value = value
         """sidewalk_cap distinct 8 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 8 for DesireLine — implements result = sidewalk_cap_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for pedestrian::DesireLine::sidewalk_cap_8_ped_8_desireline_8
@@ -494,13 +520,14 @@ class DesireLine:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def compliance_14_ped_14_desireline_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        compliance_value = value
         """compliance distinct 14 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 14 for DesireLine — implements result = pow(compliance_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for pedestrian::DesireLine::compliance_14_ped_14_desireline_14
@@ -515,13 +542,14 @@ class DesireLine:
             result = pow(compliance_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def crossing_delay_20_ped_20_desireline_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        crossing_delay_value = value
         """crossing_delay distinct 20 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 20 for DesireLine — implements result = math.exp(-0.021 * crossing_delay_value) * 30 + 20*0"""
         try:
             # Distinct logic for pedestrian::DesireLine::crossing_delay_20_ped_20_desireline_20
@@ -536,13 +564,14 @@ class DesireLine:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'crossing_delay_20_ped_20_desireline_20', 'result': result, 'domain': 'pedestrian'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_percentile_26_ped_26_desireline_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_percentile_value = value
         """speed_percentile distinct 26 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 26 for DesireLine — implements result = speed_percentile_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for pedestrian::DesireLine::speed_percentile_26_ped_26_desireline_26
@@ -554,13 +583,14 @@ class DesireLine:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def footfall_expand_2_ped_32_desireline_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        footfall_expand_value = value
         """footfall_expand distinct 2 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 32 for DesireLine — implements result = footfall_expand_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for pedestrian::DesireLine::footfall_expand_2_ped_32_desireline_32
@@ -572,13 +602,14 @@ class DesireLine:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sidewalk_cap_8_ped_38_desireline_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        sidewalk_cap_value = value
         """sidewalk_cap distinct 8 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 38 for DesireLine — implements result = sidewalk_cap_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for pedestrian::DesireLine::sidewalk_cap_8_ped_38_desireline_38
@@ -593,13 +624,14 @@ class DesireLine:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def compliance_14_ped_44_desireline_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        compliance_value = value
         """compliance distinct 14 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 44 for DesireLine — implements result = pow(compliance_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for pedestrian::DesireLine::compliance_14_ped_44_desireline_44
@@ -614,13 +646,14 @@ class DesireLine:
             result = pow(compliance_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def crossing_delay_20_ped_50_desireline_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        crossing_delay_value = value
         """crossing_delay distinct 20 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 50 for DesireLine — implements result = math.exp(-0.021 * crossing_delay_value) * 30 + 50*0"""
         try:
             # Distinct logic for pedestrian::DesireLine::crossing_delay_20_ped_50_desireline_50
@@ -635,13 +668,14 @@ class DesireLine:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'crossing_delay_20_ped_50_desireline_50', 'result': result, 'domain': 'pedestrian'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_percentile_26_ped_56_desireline_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_percentile_value = value
         """speed_percentile distinct 26 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 56 for DesireLine — implements result = speed_percentile_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for pedestrian::DesireLine::speed_percentile_26_ped_56_desireline_56
@@ -653,10 +687,10 @@ class DesireLine:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_desireline(self) -> bool:
@@ -681,6 +715,7 @@ class GapRecord:
     status: str = 'active'
 
     def gap_logit_3_ped_3_gaprecord_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gap_logit_value = value
         """gap_logit distinct 3 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 3 for GapRecord — implements result = gap_logit_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for pedestrian::GapRecord::gap_logit_3_ped_3_gaprecord_3
@@ -695,13 +730,14 @@ class GapRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def waiting_los_9_ped_9_gaprecord_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        waiting_los_value = value
         """waiting_los distinct 9 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 9 for GapRecord — implements result = waiting_los_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for pedestrian::GapRecord::waiting_los_9_ped_9_gaprecord_9
@@ -713,16 +749,18 @@ class GapRecord:
                 else:
                     break
             # waiting_los distinct 9 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 9
+            waiting_los_value = value
             result = waiting_los_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def desire_deviation_15_ped_15_gaprecord_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        desire_deviation_value = value
         """desire_deviation distinct 15 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 15 for GapRecord — implements result = math.sqrt(desire_deviation_value + 8.5) * 2.8 + 15*"""
         try:
             # Distinct logic for pedestrian::GapRecord::desire_deviation_15_ped_15_gaprecord_15
@@ -737,13 +775,14 @@ class GapRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'desire_deviation_15_ped_15_gaprecord_15', 'result': result, 'domain': 'pedestrian'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def los_score_21_ped_21_gaprecord_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        los_score_value = value
         """los_score distinct 21 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 21 for GapRecord — implements result = math.log(1 + los_score_value * 22) if los_score_val"""
         try:
             # Distinct logic for pedestrian::GapRecord::los_score_21_ped_21_gaprecord_21
@@ -755,13 +794,14 @@ class GapRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def platoon_27_ped_27_gaprecord_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        platoon_value = value
         """platoon distinct 27 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 27 for GapRecord — implements result = platoon_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for pedestrian::GapRecord::platoon_27_ped_27_gaprecord_27
@@ -773,13 +813,14 @@ class GapRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gap_logit_3_ped_33_gaprecord_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gap_logit_value = value
         """gap_logit distinct 3 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 33 for GapRecord — implements result = gap_logit_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for pedestrian::GapRecord::gap_logit_3_ped_33_gaprecord_33
@@ -794,13 +835,14 @@ class GapRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def waiting_los_9_ped_39_gaprecord_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        waiting_los_value = value
         """waiting_los distinct 9 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 39 for GapRecord — implements result = waiting_los_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for pedestrian::GapRecord::waiting_los_9_ped_39_gaprecord_39
@@ -812,16 +854,18 @@ class GapRecord:
                 else:
                     break
             # waiting_los distinct 9 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 39
+            waiting_los_value = value
             result = waiting_los_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def desire_deviation_15_ped_45_gaprecord_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        desire_deviation_value = value
         """desire_deviation distinct 15 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 45 for GapRecord — implements result = math.sqrt(desire_deviation_value + 8.5) * 2.8 + 45*"""
         try:
             # Distinct logic for pedestrian::GapRecord::desire_deviation_15_ped_45_gaprecord_45
@@ -836,13 +880,14 @@ class GapRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'desire_deviation_15_ped_45_gaprecord_45', 'result': result, 'domain': 'pedestrian'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def los_score_21_ped_51_gaprecord_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        los_score_value = value
         """los_score distinct 21 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 51 for GapRecord — implements result = math.log(1 + los_score_value * 22) if los_score_val"""
         try:
             # Distinct logic for pedestrian::GapRecord::los_score_21_ped_51_gaprecord_51
@@ -854,13 +899,14 @@ class GapRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def platoon_27_ped_57_gaprecord_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        platoon_value = value
         """platoon distinct 27 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 57 for GapRecord — implements result = platoon_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for pedestrian::GapRecord::platoon_27_ped_57_gaprecord_57
@@ -872,10 +918,10 @@ class GapRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_gaprecord(self) -> bool:
@@ -900,6 +946,7 @@ class PedLOS:
     status: str = 'active'
 
     def compliance_4_ped_4_pedlos_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        compliance_value = value
         """compliance distinct 4 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 4 for PedLOS — implements result = math.exp(-0.05 * compliance_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for pedestrian::PedLOS::compliance_4_ped_4_pedlos_4
@@ -911,16 +958,18 @@ class PedLOS:
                 else:
                     break
             # compliance distinct 4 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 4
+            compliance_value = value
             result = math.exp(-0.05 * compliance_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def crossing_delay_10_ped_10_pedlos_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        crossing_delay_value = value
         """crossing_delay distinct 10 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 10 for PedLOS — implements result = crossing_delay_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for pedestrian::PedLOS::crossing_delay_10_ped_10_pedlos_10
@@ -935,13 +984,14 @@ class PedLOS:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'crossing_delay_10_ped_10_pedlos_10', 'result': result, 'domain': 'pedestrian'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_percentile_16_ped_16_pedlos_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_percentile_value = value
         """speed_percentile distinct 16 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 16 for PedLOS — implements result = speed_percentile_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for pedestrian::PedLOS::speed_percentile_16_ped_16_pedlos_16
@@ -953,13 +1003,14 @@ class PedLOS:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def footfall_expand_22_ped_22_pedlos_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        footfall_expand_value = value
         """footfall_expand distinct 22 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 22 for PedLOS — implements result = pow(footfall_expand_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for pedestrian::PedLOS::footfall_expand_22_ped_22_pedlos_22
@@ -971,13 +1022,14 @@ class PedLOS:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sidewalk_cap_28_ped_28_pedlos_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        sidewalk_cap_value = value
         """sidewalk_cap distinct 28 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 28 for PedLOS — implements result = math.exp(-0.029 * sidewalk_cap_value) * 38 + 28*0.0"""
         try:
             # Distinct logic for pedestrian::PedLOS::sidewalk_cap_28_ped_28_pedlos_28
@@ -992,13 +1044,14 @@ class PedLOS:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def compliance_4_ped_34_pedlos_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        compliance_value = value
         """compliance distinct 4 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 34 for PedLOS — implements result = math.exp(-0.05 * compliance_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for pedestrian::PedLOS::compliance_4_ped_34_pedlos_34
@@ -1010,16 +1063,18 @@ class PedLOS:
                 else:
                     break
             # compliance distinct 4 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 34
+            compliance_value = value
             result = math.exp(-0.05 * compliance_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def crossing_delay_10_ped_40_pedlos_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        crossing_delay_value = value
         """crossing_delay distinct 10 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 40 for PedLOS — implements result = crossing_delay_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for pedestrian::PedLOS::crossing_delay_10_ped_40_pedlos_40
@@ -1034,13 +1089,14 @@ class PedLOS:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'crossing_delay_10_ped_40_pedlos_40', 'result': result, 'domain': 'pedestrian'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_percentile_16_ped_46_pedlos_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_percentile_value = value
         """speed_percentile distinct 16 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 46 for PedLOS — implements result = speed_percentile_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for pedestrian::PedLOS::speed_percentile_16_ped_46_pedlos_46
@@ -1052,13 +1108,14 @@ class PedLOS:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def footfall_expand_22_ped_52_pedlos_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        footfall_expand_value = value
         """footfall_expand distinct 22 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 52 for PedLOS — implements result = pow(footfall_expand_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for pedestrian::PedLOS::footfall_expand_22_ped_52_pedlos_52
@@ -1070,13 +1127,14 @@ class PedLOS:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sidewalk_cap_28_ped_58_pedlos_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        sidewalk_cap_value = value
         """sidewalk_cap distinct 28 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 58 for PedLOS — implements result = math.exp(-0.029 * sidewalk_cap_value) * 38 + 58*0.0"""
         try:
             # Distinct logic for pedestrian::PedLOS::sidewalk_cap_28_ped_58_pedlos_58
@@ -1091,10 +1149,10 @@ class PedLOS:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_pedlos(self) -> bool:
@@ -1119,6 +1177,7 @@ class ComplianceRecord:
     status: str = 'active'
 
     def desire_deviation_5_ped_5_compliancerecord_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        desire_deviation_value = value
         """desire_deviation distinct 5 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 5 for ComplianceRecord — implements result = math.log(1 + desire_deviation_value * 6) if desire_"""
         try:
             # Distinct logic for pedestrian::ComplianceRecord::desire_deviation_5_ped_5_compliancerecord_5
@@ -1133,13 +1192,14 @@ class ComplianceRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'desire_deviation_5_ped_5_compliancerecord_5', 'result': result, 'domain': 'pedestrian'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def los_score_11_ped_11_compliancerecord_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        los_score_value = value
         """los_score distinct 11 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 11 for ComplianceRecord — implements result = los_score_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for pedestrian::ComplianceRecord::los_score_11_ped_11_compliancerecord_11
@@ -1151,13 +1211,14 @@ class ComplianceRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def platoon_17_ped_17_compliancerecord_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        platoon_value = value
         """platoon distinct 17 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 17 for ComplianceRecord — implements result = platoon_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for pedestrian::ComplianceRecord::platoon_17_ped_17_compliancerecord_17
@@ -1169,13 +1230,14 @@ class ComplianceRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gap_logit_23_ped_23_compliancerecord_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gap_logit_value = value
         """gap_logit distinct 23 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 23 for ComplianceRecord — implements result = math.sqrt(gap_logit_value + 12.5) * 2.8 + 23*0.01"""
         try:
             # Distinct logic for pedestrian::ComplianceRecord::gap_logit_23_ped_23_compliancerecord_23
@@ -1190,13 +1252,14 @@ class ComplianceRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def waiting_los_29_ped_29_compliancerecord_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        waiting_los_value = value
         """waiting_los distinct 29 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 29 for ComplianceRecord — implements result = math.log(1 + waiting_los_value * 30) if waiting_los"""
         try:
             # Distinct logic for pedestrian::ComplianceRecord::waiting_los_29_ped_29_compliancerecord_29
@@ -1211,13 +1274,14 @@ class ComplianceRecord:
             result = math.log(1 + waiting_los_value * 30) if waiting_los_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def desire_deviation_5_ped_35_compliancerecord_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        desire_deviation_value = value
         """desire_deviation distinct 5 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 35 for ComplianceRecord — implements result = math.log(1 + desire_deviation_value * 6) if desire_"""
         try:
             # Distinct logic for pedestrian::ComplianceRecord::desire_deviation_5_ped_35_compliancerecord_35
@@ -1232,13 +1296,14 @@ class ComplianceRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'desire_deviation_5_ped_35_compliancerecord_35', 'result': result, 'domain': 'pedestrian'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def los_score_11_ped_41_compliancerecord_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        los_score_value = value
         """los_score distinct 11 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 41 for ComplianceRecord — implements result = los_score_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for pedestrian::ComplianceRecord::los_score_11_ped_41_compliancerecord_41
@@ -1250,13 +1315,14 @@ class ComplianceRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def platoon_17_ped_47_compliancerecord_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        platoon_value = value
         """platoon distinct 17 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 47 for ComplianceRecord — implements result = platoon_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for pedestrian::ComplianceRecord::platoon_17_ped_47_compliancerecord_47
@@ -1268,13 +1334,14 @@ class ComplianceRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gap_logit_23_ped_53_compliancerecord_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gap_logit_value = value
         """gap_logit distinct 23 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 53 for ComplianceRecord — implements result = math.sqrt(gap_logit_value + 12.5) * 2.8 + 53*0.01"""
         try:
             # Distinct logic for pedestrian::ComplianceRecord::gap_logit_23_ped_53_compliancerecord_53
@@ -1289,13 +1356,14 @@ class ComplianceRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def waiting_los_29_ped_59_compliancerecord_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        waiting_los_value = value
         """waiting_los distinct 29 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance extra 59 for ComplianceRecord — implements result = math.log(1 + waiting_los_value * 30) if waiting_los"""
         try:
             # Distinct logic for pedestrian::ComplianceRecord::waiting_los_29_ped_59_compliancerecord_59
@@ -1310,10 +1378,10 @@ class ComplianceRecord:
             result = math.log(1 + waiting_los_value * 30) if waiting_los_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_compliancerecord(self) -> bool:
@@ -2769,4 +2837,3 @@ def padded_pedestrian_models_1027(payload: dict, factor: float = 2.89) -> dict:
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'pedestrian','idx':1027}
-

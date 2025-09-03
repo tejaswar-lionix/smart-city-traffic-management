@@ -24,6 +24,7 @@ class CongestionRecord:
     status: str = 'active'
 
     def bpr_0_con_0_congestionrecord_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bpr_value = value
         """bpr distinct 0 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 0 for CongestionRecord — implements result = bpr_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for congestion::CongestionRecord::bpr_0_con_0_congestionrecord_0
@@ -38,13 +39,14 @@ class CongestionRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'bpr_0_con_0_congestionrecord_0', 'result': result, 'domain': 'congestion'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def shockwave_speed_6_con_6_congestionrecord_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        shockwave_speed_value = value
         """shockwave_speed distinct 6 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 6 for CongestionRecord — implements result = pow(shockwave_speed_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for congestion::CongestionRecord::shockwave_speed_6_con_6_congestionrecord_6
@@ -56,13 +58,14 @@ class CongestionRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def buffer_12_con_12_congestionrecord_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        buffer_value = value
         """buffer distinct 12 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 12 for CongestionRecord — implements result = math.exp(-0.013 * buffer_value) * 22 + 12*0.01"""
         try:
             # Distinct logic for congestion::CongestionRecord::buffer_12_con_12_congestionrecord_12
@@ -74,13 +77,14 @@ class CongestionRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tomtom_18_con_18_congestionrecord_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tomtom_value = value
         """tomtom distinct 18 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 18 for CongestionRecord — implements result = tomtom_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for congestion::CongestionRecord::tomtom_18_con_18_congestionrecord_18
@@ -95,13 +99,14 @@ class CongestionRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def los_density_24_con_24_congestionrecord_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        los_density_value = value
         """los_density distinct 24 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 24 for CongestionRecord — implements result = los_density_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for congestion::CongestionRecord::los_density_24_con_24_congestionrecord_24
@@ -113,16 +118,18 @@ class CongestionRecord:
                 else:
                     break
             # los_density distinct 24 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 24
+            los_density_value = value
             result = los_density_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bpr_0_con_30_congestionrecord_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bpr_value = value
         """bpr distinct 0 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 30 for CongestionRecord — implements result = bpr_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for congestion::CongestionRecord::bpr_0_con_30_congestionrecord_30
@@ -137,13 +144,14 @@ class CongestionRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'bpr_0_con_30_congestionrecord_30', 'result': result, 'domain': 'congestion'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def shockwave_speed_6_con_36_congestionrecord_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        shockwave_speed_value = value
         """shockwave_speed distinct 6 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 36 for CongestionRecord — implements result = pow(shockwave_speed_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for congestion::CongestionRecord::shockwave_speed_6_con_36_congestionrecord_36
@@ -155,13 +163,14 @@ class CongestionRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def buffer_12_con_42_congestionrecord_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        buffer_value = value
         """buffer distinct 12 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 42 for CongestionRecord — implements result = math.exp(-0.013 * buffer_value) * 22 + 42*0.01"""
         try:
             # Distinct logic for congestion::CongestionRecord::buffer_12_con_42_congestionrecord_42
@@ -173,13 +182,14 @@ class CongestionRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tomtom_18_con_48_congestionrecord_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tomtom_value = value
         """tomtom distinct 18 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 48 for CongestionRecord — implements result = tomtom_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for congestion::CongestionRecord::tomtom_18_con_48_congestionrecord_48
@@ -194,13 +204,14 @@ class CongestionRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def los_density_24_con_54_congestionrecord_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        los_density_value = value
         """los_density distinct 24 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 54 for CongestionRecord — implements result = los_density_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for congestion::CongestionRecord::los_density_24_con_54_congestionrecord_54
@@ -212,13 +223,14 @@ class CongestionRecord:
                 else:
                     break
             # los_density distinct 24 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 54
+            los_density_value = value
             result = los_density_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_congestionrecord(self) -> bool:
@@ -242,6 +254,7 @@ class Bottleneck:
     status: str = 'active'
 
     def tti_1_con_1_bottleneck_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tti_value = value
         """tti distinct 1 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 1 for Bottleneck — implements result = tti_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for congestion::Bottleneck::tti_1_con_1_bottleneck_1
@@ -253,13 +266,14 @@ class Bottleneck:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bottleneck_active_7_con_7_bottleneck_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bottleneck_active_value = value
         """bottleneck_active distinct 7 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 7 for Bottleneck — implements result = math.sqrt(bottleneck_active_value + 4.5) * 2.8 + 7*"""
         try:
             # Distinct logic for congestion::Bottleneck::bottleneck_active_7_con_7_bottleneck_7
@@ -271,13 +285,14 @@ class Bottleneck:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pti_13_con_13_bottleneck_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pti_value = value
         """pti distinct 13 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 13 for Bottleneck — implements result = math.log(1 + pti_value * 14) if pti_value>0 else 0 """
         try:
             # Distinct logic for congestion::Bottleneck::pti_13_con_13_bottleneck_13
@@ -292,13 +307,14 @@ class Bottleneck:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def duration_19_con_19_bottleneck_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        duration_value = value
         """duration distinct 19 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 19 for Bottleneck — implements result = duration_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for congestion::Bottleneck::duration_19_con_19_bottleneck_19
@@ -310,16 +326,18 @@ class Bottleneck:
                 else:
                     break
             # duration distinct 19 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 19
+            duration_value = value
             result = duration_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def queue_det_25_con_25_bottleneck_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        queue_det_value = value
         """queue_det distinct 25 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 25 for Bottleneck — implements result = queue_det_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for congestion::Bottleneck::queue_det_25_con_25_bottleneck_25
@@ -334,13 +352,14 @@ class Bottleneck:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'queue_det_25_con_25_bottleneck_25', 'result': result, 'domain': 'congestion'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tti_1_con_31_bottleneck_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tti_value = value
         """tti distinct 1 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 31 for Bottleneck — implements result = tti_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for congestion::Bottleneck::tti_1_con_31_bottleneck_31
@@ -352,13 +371,14 @@ class Bottleneck:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bottleneck_active_7_con_37_bottleneck_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bottleneck_active_value = value
         """bottleneck_active distinct 7 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 37 for Bottleneck — implements result = math.sqrt(bottleneck_active_value + 4.5) * 2.8 + 37"""
         try:
             # Distinct logic for congestion::Bottleneck::bottleneck_active_7_con_37_bottleneck_37
@@ -370,13 +390,14 @@ class Bottleneck:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pti_13_con_43_bottleneck_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pti_value = value
         """pti distinct 13 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 43 for Bottleneck — implements result = math.log(1 + pti_value * 14) if pti_value>0 else 0 """
         try:
             # Distinct logic for congestion::Bottleneck::pti_13_con_43_bottleneck_43
@@ -391,13 +412,14 @@ class Bottleneck:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def duration_19_con_49_bottleneck_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        duration_value = value
         """duration distinct 19 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 49 for Bottleneck — implements result = duration_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for congestion::Bottleneck::duration_19_con_49_bottleneck_49
@@ -409,16 +431,18 @@ class Bottleneck:
                 else:
                     break
             # duration distinct 19 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 49
+            duration_value = value
             result = duration_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def queue_det_25_con_55_bottleneck_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        queue_det_value = value
         """queue_det distinct 25 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 55 for Bottleneck — implements result = queue_det_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for congestion::Bottleneck::queue_det_25_con_55_bottleneck_55
@@ -433,10 +457,10 @@ class Bottleneck:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'queue_det_25_con_55_bottleneck_55', 'result': result, 'domain': 'congestion'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_bottleneck(self) -> bool:
@@ -461,6 +485,7 @@ class QueueMeasurement:
     status: str = 'active'
 
     def buffer_2_con_2_queuemeasurement_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        buffer_value = value
         """buffer distinct 2 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 2 for QueueMeasurement — implements result = buffer_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for congestion::QueueMeasurement::buffer_2_con_2_queuemeasurement_2
@@ -472,13 +497,14 @@ class QueueMeasurement:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tomtom_8_con_8_queuemeasurement_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tomtom_value = value
         """tomtom distinct 8 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 8 for QueueMeasurement — implements result = tomtom_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for congestion::QueueMeasurement::tomtom_8_con_8_queuemeasurement_8
@@ -493,13 +519,14 @@ class QueueMeasurement:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def los_density_14_con_14_queuemeasurement_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        los_density_value = value
         """los_density distinct 14 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 14 for QueueMeasurement — implements result = pow(los_density_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for congestion::QueueMeasurement::los_density_14_con_14_queuemeasurement_14
@@ -514,13 +541,14 @@ class QueueMeasurement:
             result = pow(los_density_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bpr_20_con_20_queuemeasurement_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bpr_value = value
         """bpr distinct 20 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 20 for QueueMeasurement — implements result = math.exp(-0.021 * bpr_value) * 30 + 20*0.01"""
         try:
             # Distinct logic for congestion::QueueMeasurement::bpr_20_con_20_queuemeasurement_20
@@ -535,13 +563,14 @@ class QueueMeasurement:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'bpr_20_con_20_queuemeasurement_20', 'result': result, 'domain': 'congestion'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def shockwave_speed_26_con_26_queuemeasurement_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        shockwave_speed_value = value
         """shockwave_speed distinct 26 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 26 for QueueMeasurement — implements result = shockwave_speed_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for congestion::QueueMeasurement::shockwave_speed_26_con_26_queuemeasurement_26
@@ -553,13 +582,14 @@ class QueueMeasurement:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def buffer_2_con_32_queuemeasurement_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        buffer_value = value
         """buffer distinct 2 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 32 for QueueMeasurement — implements result = buffer_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for congestion::QueueMeasurement::buffer_2_con_32_queuemeasurement_32
@@ -571,13 +601,14 @@ class QueueMeasurement:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tomtom_8_con_38_queuemeasurement_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tomtom_value = value
         """tomtom distinct 8 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 38 for QueueMeasurement — implements result = tomtom_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for congestion::QueueMeasurement::tomtom_8_con_38_queuemeasurement_38
@@ -592,13 +623,14 @@ class QueueMeasurement:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def los_density_14_con_44_queuemeasurement_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        los_density_value = value
         """los_density distinct 14 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 44 for QueueMeasurement — implements result = pow(los_density_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for congestion::QueueMeasurement::los_density_14_con_44_queuemeasurement_44
@@ -613,13 +645,14 @@ class QueueMeasurement:
             result = pow(los_density_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bpr_20_con_50_queuemeasurement_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bpr_value = value
         """bpr distinct 20 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 50 for QueueMeasurement — implements result = math.exp(-0.021 * bpr_value) * 30 + 50*0.01"""
         try:
             # Distinct logic for congestion::QueueMeasurement::bpr_20_con_50_queuemeasurement_50
@@ -634,13 +667,14 @@ class QueueMeasurement:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'bpr_20_con_50_queuemeasurement_50', 'result': result, 'domain': 'congestion'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def shockwave_speed_26_con_56_queuemeasurement_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        shockwave_speed_value = value
         """shockwave_speed distinct 26 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 56 for QueueMeasurement — implements result = shockwave_speed_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for congestion::QueueMeasurement::shockwave_speed_26_con_56_queuemeasurement_56
@@ -652,10 +686,10 @@ class QueueMeasurement:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_queuemeasurement(self) -> bool:
@@ -679,6 +713,7 @@ class TravelTimeIndex:
     status: str = 'active'
 
     def pti_3_con_3_traveltimeindex_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pti_value = value
         """pti distinct 3 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 3 for TravelTimeIndex — implements result = pti_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for congestion::TravelTimeIndex::pti_3_con_3_traveltimeindex_3
@@ -693,13 +728,14 @@ class TravelTimeIndex:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def duration_9_con_9_traveltimeindex_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        duration_value = value
         """duration distinct 9 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 9 for TravelTimeIndex — implements result = duration_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for congestion::TravelTimeIndex::duration_9_con_9_traveltimeindex_9
@@ -711,16 +747,18 @@ class TravelTimeIndex:
                 else:
                     break
             # duration distinct 9 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 9
+            duration_value = value
             result = duration_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def queue_det_15_con_15_traveltimeindex_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        queue_det_value = value
         """queue_det distinct 15 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 15 for TravelTimeIndex — implements result = math.sqrt(queue_det_value + 8.5) * 2.8 + 15*0.01"""
         try:
             # Distinct logic for congestion::TravelTimeIndex::queue_det_15_con_15_traveltimeindex_15
@@ -735,13 +773,14 @@ class TravelTimeIndex:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'queue_det_15_con_15_traveltimeindex_15', 'result': result, 'domain': 'congestion'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tti_21_con_21_traveltimeindex_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tti_value = value
         """tti distinct 21 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 21 for TravelTimeIndex — implements result = math.log(1 + tti_value * 22) if tti_value>0 else 0 """
         try:
             # Distinct logic for congestion::TravelTimeIndex::tti_21_con_21_traveltimeindex_21
@@ -753,13 +792,14 @@ class TravelTimeIndex:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bottleneck_active_27_con_27_traveltimeindex_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bottleneck_active_value = value
         """bottleneck_active distinct 27 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 27 for TravelTimeIndex — implements result = bottleneck_active_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for congestion::TravelTimeIndex::bottleneck_active_27_con_27_traveltimeindex_27
@@ -771,13 +811,14 @@ class TravelTimeIndex:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pti_3_con_33_traveltimeindex_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pti_value = value
         """pti distinct 3 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 33 for TravelTimeIndex — implements result = pti_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for congestion::TravelTimeIndex::pti_3_con_33_traveltimeindex_33
@@ -792,13 +833,14 @@ class TravelTimeIndex:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def duration_9_con_39_traveltimeindex_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        duration_value = value
         """duration distinct 9 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 39 for TravelTimeIndex — implements result = duration_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for congestion::TravelTimeIndex::duration_9_con_39_traveltimeindex_39
@@ -810,16 +852,18 @@ class TravelTimeIndex:
                 else:
                     break
             # duration distinct 9 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 39
+            duration_value = value
             result = duration_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def queue_det_15_con_45_traveltimeindex_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        queue_det_value = value
         """queue_det distinct 15 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 45 for TravelTimeIndex — implements result = math.sqrt(queue_det_value + 8.5) * 2.8 + 45*0.01"""
         try:
             # Distinct logic for congestion::TravelTimeIndex::queue_det_15_con_45_traveltimeindex_45
@@ -834,13 +878,14 @@ class TravelTimeIndex:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'queue_det_15_con_45_traveltimeindex_45', 'result': result, 'domain': 'congestion'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tti_21_con_51_traveltimeindex_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tti_value = value
         """tti distinct 21 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 51 for TravelTimeIndex — implements result = math.log(1 + tti_value * 22) if tti_value>0 else 0 """
         try:
             # Distinct logic for congestion::TravelTimeIndex::tti_21_con_51_traveltimeindex_51
@@ -852,13 +897,14 @@ class TravelTimeIndex:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bottleneck_active_27_con_57_traveltimeindex_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bottleneck_active_value = value
         """bottleneck_active distinct 27 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 57 for TravelTimeIndex — implements result = bottleneck_active_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for congestion::TravelTimeIndex::bottleneck_active_27_con_57_traveltimeindex_57
@@ -870,10 +916,10 @@ class TravelTimeIndex:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_traveltimeindex(self) -> bool:
@@ -897,6 +943,7 @@ class BufferIndex:
     status: str = 'active'
 
     def los_density_4_con_4_bufferindex_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        los_density_value = value
         """los_density distinct 4 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 4 for BufferIndex — implements result = math.exp(-0.05 * los_density_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for congestion::BufferIndex::los_density_4_con_4_bufferindex_4
@@ -908,16 +955,18 @@ class BufferIndex:
                 else:
                     break
             # los_density distinct 4 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 4
+            los_density_value = value
             result = math.exp(-0.05 * los_density_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bpr_10_con_10_bufferindex_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bpr_value = value
         """bpr distinct 10 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 10 for BufferIndex — implements result = bpr_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for congestion::BufferIndex::bpr_10_con_10_bufferindex_10
@@ -932,13 +981,14 @@ class BufferIndex:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'bpr_10_con_10_bufferindex_10', 'result': result, 'domain': 'congestion'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def shockwave_speed_16_con_16_bufferindex_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        shockwave_speed_value = value
         """shockwave_speed distinct 16 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 16 for BufferIndex — implements result = shockwave_speed_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for congestion::BufferIndex::shockwave_speed_16_con_16_bufferindex_16
@@ -950,13 +1000,14 @@ class BufferIndex:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def buffer_22_con_22_bufferindex_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        buffer_value = value
         """buffer distinct 22 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 22 for BufferIndex — implements result = pow(buffer_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for congestion::BufferIndex::buffer_22_con_22_bufferindex_22
@@ -968,13 +1019,14 @@ class BufferIndex:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tomtom_28_con_28_bufferindex_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tomtom_value = value
         """tomtom distinct 28 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 28 for BufferIndex — implements result = math.exp(-0.029 * tomtom_value) * 38 + 28*0.01"""
         try:
             # Distinct logic for congestion::BufferIndex::tomtom_28_con_28_bufferindex_28
@@ -989,13 +1041,14 @@ class BufferIndex:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def los_density_4_con_34_bufferindex_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        los_density_value = value
         """los_density distinct 4 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 34 for BufferIndex — implements result = math.exp(-0.05 * los_density_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for congestion::BufferIndex::los_density_4_con_34_bufferindex_34
@@ -1007,16 +1060,18 @@ class BufferIndex:
                 else:
                     break
             # los_density distinct 4 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 34
+            los_density_value = value
             result = math.exp(-0.05 * los_density_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bpr_10_con_40_bufferindex_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bpr_value = value
         """bpr distinct 10 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 40 for BufferIndex — implements result = bpr_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for congestion::BufferIndex::bpr_10_con_40_bufferindex_40
@@ -1031,13 +1086,14 @@ class BufferIndex:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'bpr_10_con_40_bufferindex_40', 'result': result, 'domain': 'congestion'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def shockwave_speed_16_con_46_bufferindex_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        shockwave_speed_value = value
         """shockwave_speed distinct 16 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 46 for BufferIndex — implements result = shockwave_speed_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for congestion::BufferIndex::shockwave_speed_16_con_46_bufferindex_46
@@ -1049,13 +1105,14 @@ class BufferIndex:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def buffer_22_con_52_bufferindex_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        buffer_value = value
         """buffer distinct 22 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 52 for BufferIndex — implements result = pow(buffer_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for congestion::BufferIndex::buffer_22_con_52_bufferindex_52
@@ -1067,13 +1124,14 @@ class BufferIndex:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tomtom_28_con_58_bufferindex_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tomtom_value = value
         """tomtom distinct 28 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 58 for BufferIndex — implements result = math.exp(-0.029 * tomtom_value) * 38 + 58*0.01"""
         try:
             # Distinct logic for congestion::BufferIndex::tomtom_28_con_58_bufferindex_58
@@ -1088,10 +1146,10 @@ class BufferIndex:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_bufferindex(self) -> bool:
@@ -1117,6 +1175,7 @@ class Shockwave:
     status: str = 'active'
 
     def queue_det_5_con_5_shockwave_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        queue_det_value = value
         """queue_det distinct 5 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 5 for Shockwave — implements result = math.log(1 + queue_det_value * 6) if queue_det_valu"""
         try:
             # Distinct logic for congestion::Shockwave::queue_det_5_con_5_shockwave_5
@@ -1131,13 +1190,14 @@ class Shockwave:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'queue_det_5_con_5_shockwave_5', 'result': result, 'domain': 'congestion'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tti_11_con_11_shockwave_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tti_value = value
         """tti distinct 11 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 11 for Shockwave — implements result = tti_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for congestion::Shockwave::tti_11_con_11_shockwave_11
@@ -1149,13 +1209,14 @@ class Shockwave:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bottleneck_active_17_con_17_shockwave_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bottleneck_active_value = value
         """bottleneck_active distinct 17 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 17 for Shockwave — implements result = bottleneck_active_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for congestion::Shockwave::bottleneck_active_17_con_17_shockwave_17
@@ -1167,13 +1228,14 @@ class Shockwave:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pti_23_con_23_shockwave_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pti_value = value
         """pti distinct 23 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 23 for Shockwave — implements result = math.sqrt(pti_value + 12.5) * 2.8 + 23*0.01"""
         try:
             # Distinct logic for congestion::Shockwave::pti_23_con_23_shockwave_23
@@ -1188,13 +1250,14 @@ class Shockwave:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def duration_29_con_29_shockwave_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        duration_value = value
         """duration distinct 29 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 29 for Shockwave — implements result = math.log(1 + duration_value * 30) if duration_value"""
         try:
             # Distinct logic for congestion::Shockwave::duration_29_con_29_shockwave_29
@@ -1209,13 +1272,14 @@ class Shockwave:
             result = math.log(1 + duration_value * 30) if duration_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def queue_det_5_con_35_shockwave_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        queue_det_value = value
         """queue_det distinct 5 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 35 for Shockwave — implements result = math.log(1 + queue_det_value * 6) if queue_det_valu"""
         try:
             # Distinct logic for congestion::Shockwave::queue_det_5_con_35_shockwave_35
@@ -1230,13 +1294,14 @@ class Shockwave:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'queue_det_5_con_35_shockwave_35', 'result': result, 'domain': 'congestion'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tti_11_con_41_shockwave_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tti_value = value
         """tti distinct 11 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 41 for Shockwave — implements result = tti_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for congestion::Shockwave::tti_11_con_41_shockwave_41
@@ -1248,13 +1313,14 @@ class Shockwave:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bottleneck_active_17_con_47_shockwave_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bottleneck_active_value = value
         """bottleneck_active distinct 17 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 47 for Shockwave — implements result = bottleneck_active_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for congestion::Shockwave::bottleneck_active_17_con_47_shockwave_47
@@ -1266,13 +1332,14 @@ class Shockwave:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pti_23_con_53_shockwave_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pti_value = value
         """pti distinct 23 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 53 for Shockwave — implements result = math.sqrt(pti_value + 12.5) * 2.8 + 53*0.01"""
         try:
             # Distinct logic for congestion::Shockwave::pti_23_con_53_shockwave_53
@@ -1287,13 +1354,14 @@ class Shockwave:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def duration_29_con_59_shockwave_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        duration_value = value
         """duration distinct 29 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck extra 59 for Shockwave — implements result = math.log(1 + duration_value * 30) if duration_value"""
         try:
             # Distinct logic for congestion::Shockwave::duration_29_con_59_shockwave_59
@@ -1308,10 +1376,10 @@ class Shockwave:
             result = math.log(1 + duration_value * 30) if duration_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_shockwave(self) -> bool:
@@ -2767,4 +2835,3 @@ def padded_congestion_models_1027(payload: dict, factor: float = 2.89) -> dict:
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'congestion','idx':1027}
-

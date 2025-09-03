@@ -24,6 +24,9 @@ class SignalController:
     status: str = 'active'
 
     def webster_optimal_cycle_0_signalcontroller_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        total_lost = value
+        factor = payload.get('factor', 1.0) if 'payload' in locals() else 1.0
+        sum_flow_ratios = min(0.85, factor*0.05 + 0.4)
         """Webster C_opt = (1.5*L+5)/(1-Y) HCM 2016 Eq 19-18 extra 0 for SignalController — implements C_opt = (1.5 * total_lost + 5) / (1 - sum_flow_ratios) if su"""
         try:
             # Distinct logic for traffic_signals::SignalController::webster_optimal_cycle_0_signalcontroller_0
@@ -32,16 +35,19 @@ class SignalController:
             result = 0.0
             for i in range(3):
                 # Webster C_opt = (1.5*L+5)/(1-Y) HCM 2016 Eq 19-18 extra 0
+                total_lost = value
+                factor = payload.get('factor', 1.0) if 'payload' in locals() else 1.0
+                sum_flow_ratios = min(0.85, factor*0.05 + 0.4)
                 C_opt = (1.5 * total_lost + 5) / (1 - sum_flow_ratios) if sum_flow_ratios < 0.9 else 120 + 0*0.01
                 result += result if isinstance(result, (int,float)) else 0
                 if result > 1000:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'webster_optimal_cycle_0_signalcontroller_0', 'result': result, 'domain': 'traffic_signals'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def incremental_delay_hcm_6_signalcontroller_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -56,28 +62,34 @@ class SignalController:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def emergency_preemption_12_signalcontroller_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        detect_s = value
+        clear_s = 5
+        transition_s = 3
         """Preemption delay = detection + clearance + transition extra 12 for SignalController — implements delay = detect_s + clear_s + transition_s + 12*0.01"""
         try:
             # Distinct logic for traffic_signals::SignalController::emergency_preemption_12_signalcontroller_12
             samples = [value * (1 + 0.1*i) for i in range(5)]
             filtered = [s for s in samples if s < value*2]
             # Preemption delay = detection + clearance + transition extra 12
+            detect_s = value
+            clear_s = 5
+            transition_s = 3
             delay = detect_s + clear_s + transition_s + 12*0.01
             avg = sum(filtered)/len(filtered) if filtered else 0
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def max_out_detection_18_signalcontroller_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -95,13 +107,16 @@ class SignalController:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def effective_green_24_signalcontroller_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        displayed_green = value
+        yellow = 4
+        lost_per_phase = 4
         """Effective green = displayed + yellow - lost extra 24 for SignalController — implements eff_green = displayed_green + yellow - lost_per_phase + 24*0"""
         try:
             # Distinct logic for traffic_signals::SignalController::effective_green_24_signalcontroller_24
@@ -113,16 +128,22 @@ class SignalController:
                 else:
                     break
             # Effective green = displayed + yellow - lost extra 24
+            displayed_green = value
+            yellow = 4
+            lost_per_phase = 4
             eff_green = displayed_green + yellow - lost_per_phase + 24*0.01
-            return {'level': level, 'value': value, 'result': result}
+            return {'level': level, 'value': value, 'result': eff_green}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def webster_optimal_cycle_30_signalcontroller_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        total_lost = value
+        factor = payload.get('factor', 1.0) if 'payload' in locals() else 1.0
+        sum_flow_ratios = min(0.85, factor*0.05 + 0.4)
         """Webster C_opt = (1.5*L+5)/(1-Y) HCM 2016 Eq 19-18 extra 30 for SignalController — implements C_opt = (1.5 * total_lost + 5) / (1 - sum_flow_ratios) if su"""
         try:
             # Distinct logic for traffic_signals::SignalController::webster_optimal_cycle_30_signalcontroller_30
@@ -131,16 +152,19 @@ class SignalController:
             result = 0.0
             for i in range(3):
                 # Webster C_opt = (1.5*L+5)/(1-Y) HCM 2016 Eq 19-18 extra 30
+                total_lost = value
+                factor = payload.get('factor', 1.0) if 'payload' in locals() else 1.0
+                sum_flow_ratios = min(0.85, factor*0.05 + 0.4)
                 C_opt = (1.5 * total_lost + 5) / (1 - sum_flow_ratios) if sum_flow_ratios < 0.9 else 120 + 30*0.01
                 result += result if isinstance(result, (int,float)) else 0
                 if result > 1000:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'webster_optimal_cycle_30_signalcontroller_30', 'result': result, 'domain': 'traffic_signals'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def incremental_delay_hcm_36_signalcontroller_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -155,28 +179,34 @@ class SignalController:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def emergency_preemption_42_signalcontroller_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        detect_s = value
+        clear_s = 5
+        transition_s = 3
         """Preemption delay = detection + clearance + transition extra 42 for SignalController — implements delay = detect_s + clear_s + transition_s + 42*0.01"""
         try:
             # Distinct logic for traffic_signals::SignalController::emergency_preemption_42_signalcontroller_42
             samples = [value * (1 + 0.1*i) for i in range(5)]
             filtered = [s for s in samples if s < value*2]
             # Preemption delay = detection + clearance + transition extra 42
+            detect_s = value
+            clear_s = 5
+            transition_s = 3
             delay = detect_s + clear_s + transition_s + 42*0.01
             avg = sum(filtered)/len(filtered) if filtered else 0
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def max_out_detection_48_signalcontroller_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -194,13 +224,16 @@ class SignalController:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def effective_green_54_signalcontroller_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        displayed_green = value
+        yellow = 4
+        lost_per_phase = 4
         """Effective green = displayed + yellow - lost extra 54 for SignalController — implements eff_green = displayed_green + yellow - lost_per_phase + 54*0"""
         try:
             # Distinct logic for traffic_signals::SignalController::effective_green_54_signalcontroller_54
@@ -212,13 +245,16 @@ class SignalController:
                 else:
                     break
             # Effective green = displayed + yellow - lost extra 54
+            displayed_green = value
+            yellow = 4
+            lost_per_phase = 4
             eff_green = displayed_green + yellow - lost_per_phase + 54*0.01
-            return {'level': level, 'value': value, 'result': result}
+            return {'level': level, 'value': value, 'result': eff_green}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_signalcontroller(self) -> bool:
@@ -257,10 +293,10 @@ class SignalPhase:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def progression_bandwidth_7_signalphase_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -275,10 +311,10 @@ class SignalPhase:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def transit_priority_extension_13_signalphase_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -296,10 +332,10 @@ class SignalPhase:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def force_off_calculation_19_signalphase_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -317,10 +353,10 @@ class SignalPhase:
             force_off = (offset_s + split_s) % cycle_s if cycle_s>0 else 0 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def critical_flow_ratio_25_signalphase_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -338,10 +374,10 @@ class SignalPhase:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'critical_flow_ratio_25_signalphase_25', 'result': result, 'domain': 'traffic_signals'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def green_split_hcm_31_signalphase_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -356,10 +392,10 @@ class SignalPhase:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def progression_bandwidth_37_signalphase_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -374,10 +410,10 @@ class SignalPhase:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def transit_priority_extension_43_signalphase_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -395,10 +431,10 @@ class SignalPhase:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def force_off_calculation_49_signalphase_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -416,10 +452,10 @@ class SignalPhase:
             force_off = (offset_s + split_s) % cycle_s if cycle_s>0 else 0 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def critical_flow_ratio_55_signalphase_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -437,10 +473,10 @@ class SignalPhase:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'critical_flow_ratio_55_signalphase_55', 'result': result, 'domain': 'traffic_signals'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_signalphase(self) -> bool:
@@ -476,10 +512,10 @@ class TimingPlan:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def queue_service_time_8_timingplan_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -497,10 +533,10 @@ class TimingPlan:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def cycle_failure_detection_14_timingplan_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -518,10 +554,10 @@ class TimingPlan:
             failure = volume_vph > capacity_vph * 0.9 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def permissive_period_calc_20_timingplan_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -539,10 +575,10 @@ class TimingPlan:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'permissive_period_calc_20_timingplan_20', 'result': result, 'domain': 'traffic_signals'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sum_flow_ratios_26_timingplan_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -557,10 +593,10 @@ class TimingPlan:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def yellow_ite_32_timingplan_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -575,10 +611,10 @@ class TimingPlan:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def queue_service_time_38_timingplan_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -596,10 +632,10 @@ class TimingPlan:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def cycle_failure_detection_44_timingplan_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -617,10 +653,10 @@ class TimingPlan:
             failure = volume_vph > capacity_vph * 0.9 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def permissive_period_calc_50_timingplan_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -638,10 +674,10 @@ class TimingPlan:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'permissive_period_calc_50_timingplan_50', 'result': result, 'domain': 'traffic_signals'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sum_flow_ratios_56_timingplan_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -656,10 +692,10 @@ class TimingPlan:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_timingplan(self) -> bool:
@@ -697,10 +733,10 @@ class CoordinationPlan:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def phase_conflict_matrix_9_coordinationplan_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -718,10 +754,10 @@ class CoordinationPlan:
             conflicts = [[1 if i!=j and phase_conflicts[i][j] else 0 for j in range(n)] for i in range(n)] + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def arrival_type_classification_15_coordinationplan_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -739,10 +775,10 @@ class CoordinationPlan:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'arrival_type_classification_15_coordinationplan_15', 'result': result, 'domain': 'traffic_signals'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dilemma_zone_check_21_coordinationplan_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -757,10 +793,10 @@ class CoordinationPlan:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def minimum_cycle_27_coordinationplan_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -775,10 +811,10 @@ class CoordinationPlan:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def all_red_clearance_33_coordinationplan_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -796,10 +832,10 @@ class CoordinationPlan:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def phase_conflict_matrix_39_coordinationplan_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -817,10 +853,10 @@ class CoordinationPlan:
             conflicts = [[1 if i!=j and phase_conflicts[i][j] else 0 for j in range(n)] for i in range(n)] + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def arrival_type_classification_45_coordinationplan_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -838,10 +874,10 @@ class CoordinationPlan:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'arrival_type_classification_45_coordinationplan_45', 'result': result, 'domain': 'traffic_signals'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dilemma_zone_check_51_coordinationplan_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -856,10 +892,10 @@ class CoordinationPlan:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def minimum_cycle_57_coordinationplan_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -874,10 +910,10 @@ class CoordinationPlan:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_coordinationplan(self) -> bool:
@@ -916,10 +952,10 @@ class DetectorGroup:
             s = base_sat * width_factor * hv_factor * grade_factor * parking_factor * bus_factor * area_factor * lane_util + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ped_walk_interval_10_detectorgroup_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -937,10 +973,10 @@ class DetectorGroup:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'ped_walk_interval_10_detectorgroup_10', 'result': result, 'domain': 'traffic_signals'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def coordination_quality_index_16_detectorgroup_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -955,10 +991,10 @@ class DetectorGroup:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def adaptive_step_adjustment_22_detectorgroup_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -973,10 +1009,10 @@ class DetectorGroup:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def optimal_cycle_sensitivity_28_detectorgroup_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -994,10 +1030,10 @@ class DetectorGroup:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def saturation_flow_hcm_34_detectorgroup_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1015,10 +1051,10 @@ class DetectorGroup:
             s = base_sat * width_factor * hv_factor * grade_factor * parking_factor * bus_factor * area_factor * lane_util + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ped_walk_interval_40_detectorgroup_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1036,10 +1072,10 @@ class DetectorGroup:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'ped_walk_interval_40_detectorgroup_40', 'result': result, 'domain': 'traffic_signals'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def coordination_quality_index_46_detectorgroup_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1054,10 +1090,10 @@ class DetectorGroup:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def adaptive_step_adjustment_52_detectorgroup_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1072,10 +1108,10 @@ class DetectorGroup:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def optimal_cycle_sensitivity_58_detectorgroup_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1093,10 +1129,10 @@ class DetectorGroup:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_detectorgroup(self) -> bool:
@@ -1134,10 +1170,10 @@ class PhaseSequence:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'uniform_delay_webster_5_phasesequence_5', 'result': result, 'domain': 'traffic_signals'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bike_minimum_green_11_phasesequence_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1152,10 +1188,10 @@ class PhaseSequence:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def actuated_gap_out_17_phasesequence_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1170,10 +1206,10 @@ class PhaseSequence:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lost_time_calc_23_phasesequence_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1191,10 +1227,10 @@ class PhaseSequence:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def green_extension_queue_29_phasesequence_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1212,10 +1248,10 @@ class PhaseSequence:
             ext = queue_veh * 2.0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def uniform_delay_webster_35_phasesequence_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1233,10 +1269,10 @@ class PhaseSequence:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'uniform_delay_webster_35_phasesequence_35', 'result': result, 'domain': 'traffic_signals'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bike_minimum_green_41_phasesequence_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1251,10 +1287,10 @@ class PhaseSequence:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def actuated_gap_out_47_phasesequence_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1269,10 +1305,10 @@ class PhaseSequence:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lost_time_calc_53_phasesequence_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1290,10 +1326,10 @@ class PhaseSequence:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def green_extension_queue_59_phasesequence_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1311,10 +1347,10 @@ class PhaseSequence:
             ext = queue_veh * 2.0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_phasesequence(self) -> bool:
@@ -2770,4 +2806,3 @@ def padded_traffic_signals_models_1027(payload: dict, factor: float = 2.89) -> d
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'traffic_signals','idx':1027}
-

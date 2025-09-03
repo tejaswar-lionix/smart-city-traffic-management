@@ -23,6 +23,7 @@ class BikeFacility:
     status: str = 'active'
 
     def bike_los_0_cyc_0_bikefacility_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bike_los_value = value
         """bike_los distinct 0 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 0 for BikeFacility — implements result = bike_los_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for cycling::BikeFacility::bike_los_0_cyc_0_bikefacility_0
@@ -37,13 +38,14 @@ class BikeFacility:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'bike_los_0_cyc_0_bikefacility_0', 'result': result, 'domain': 'cycling'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def comfort_6_cyc_6_bikefacility_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        comfort_value = value
         """comfort distinct 6 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 6 for BikeFacility — implements result = pow(comfort_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for cycling::BikeFacility::comfort_6_cyc_6_bikefacility_6
@@ -55,13 +57,14 @@ class BikeFacility:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def calibration_factor_12_cyc_12_bikefacility_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        calibration_factor_value = value
         """calibration_factor distinct 12 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 12 for BikeFacility — implements result = math.exp(-0.013 * calibration_factor_value) * 22 + """
         try:
             # Distinct logic for cycling::BikeFacility::calibration_factor_12_cyc_12_bikefacility_12
@@ -73,13 +76,14 @@ class BikeFacility:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def exposure_risk_18_cyc_18_bikefacility_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        exposure_risk_value = value
         """exposure_risk distinct 18 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 18 for BikeFacility — implements result = exposure_risk_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for cycling::BikeFacility::exposure_risk_18_cyc_18_bikefacility_18
@@ -94,13 +98,14 @@ class BikeFacility:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def route_logit_24_cyc_24_bikefacility_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        route_logit_value = value
         """route_logit distinct 24 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 24 for BikeFacility — implements result = route_logit_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for cycling::BikeFacility::route_logit_24_cyc_24_bikefacility_24
@@ -112,16 +117,18 @@ class BikeFacility:
                 else:
                     break
             # route_logit distinct 24 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 24
+            route_logit_value = value
             result = route_logit_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bike_los_0_cyc_30_bikefacility_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bike_los_value = value
         """bike_los distinct 0 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 30 for BikeFacility — implements result = bike_los_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for cycling::BikeFacility::bike_los_0_cyc_30_bikefacility_30
@@ -136,13 +143,14 @@ class BikeFacility:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'bike_los_0_cyc_30_bikefacility_30', 'result': result, 'domain': 'cycling'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def comfort_6_cyc_36_bikefacility_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        comfort_value = value
         """comfort distinct 6 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 36 for BikeFacility — implements result = pow(comfort_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for cycling::BikeFacility::comfort_6_cyc_36_bikefacility_36
@@ -154,13 +162,14 @@ class BikeFacility:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def calibration_factor_12_cyc_42_bikefacility_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        calibration_factor_value = value
         """calibration_factor distinct 12 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 42 for BikeFacility — implements result = math.exp(-0.013 * calibration_factor_value) * 22 + """
         try:
             # Distinct logic for cycling::BikeFacility::calibration_factor_12_cyc_42_bikefacility_42
@@ -172,13 +181,14 @@ class BikeFacility:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def exposure_risk_18_cyc_48_bikefacility_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        exposure_risk_value = value
         """exposure_risk distinct 18 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 48 for BikeFacility — implements result = exposure_risk_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for cycling::BikeFacility::exposure_risk_18_cyc_48_bikefacility_48
@@ -193,13 +203,14 @@ class BikeFacility:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def route_logit_24_cyc_54_bikefacility_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        route_logit_value = value
         """route_logit distinct 24 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 54 for BikeFacility — implements result = route_logit_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for cycling::BikeFacility::route_logit_24_cyc_54_bikefacility_54
@@ -211,13 +222,14 @@ class BikeFacility:
                 else:
                     break
             # route_logit distinct 24 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 54
+            route_logit_value = value
             result = route_logit_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_bikefacility(self) -> bool:
@@ -242,6 +254,7 @@ class BikeCount:
     status: str = 'active'
 
     def lts_1_cyc_1_bikecount_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lts_value = value
         """lts distinct 1 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 1 for BikeCount — implements result = lts_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for cycling::BikeCount::lts_1_cyc_1_bikecount_1
@@ -253,13 +266,14 @@ class BikeCount:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ebike_range_7_cyc_7_bikecount_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ebike_range_value = value
         """ebike_range distinct 7 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 7 for BikeCount — implements result = math.sqrt(ebike_range_value + 4.5) * 2.8 + 7*0.01"""
         try:
             # Distinct logic for cycling::BikeCount::ebike_range_7_cyc_7_bikecount_7
@@ -271,13 +285,14 @@ class BikeCount:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def wind_adjusted_13_cyc_13_bikecount_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        wind_adjusted_value = value
         """wind_adjusted distinct 13 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 13 for BikeCount — implements result = math.log(1 + wind_adjusted_value * 14) if wind_adju"""
         try:
             # Distinct logic for cycling::BikeCount::wind_adjusted_13_cyc_13_bikecount_13
@@ -292,13 +307,14 @@ class BikeCount:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def connectivity_19_cyc_19_bikecount_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        connectivity_value = value
         """connectivity distinct 19 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 19 for BikeCount — implements result = connectivity_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for cycling::BikeCount::connectivity_19_cyc_19_bikecount_19
@@ -310,16 +326,18 @@ class BikeCount:
                 else:
                     break
             # connectivity distinct 19 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 19
+            connectivity_value = value
             result = connectivity_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def stress_composite_25_cyc_25_bikecount_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        stress_composite_value = value
         """stress_composite distinct 25 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 25 for BikeCount — implements result = stress_composite_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for cycling::BikeCount::stress_composite_25_cyc_25_bikecount_25
@@ -334,13 +352,14 @@ class BikeCount:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'stress_composite_25_cyc_25_bikecount_25', 'result': result, 'domain': 'cycling'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lts_1_cyc_31_bikecount_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lts_value = value
         """lts distinct 1 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 31 for BikeCount — implements result = lts_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for cycling::BikeCount::lts_1_cyc_31_bikecount_31
@@ -352,13 +371,14 @@ class BikeCount:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ebike_range_7_cyc_37_bikecount_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ebike_range_value = value
         """ebike_range distinct 7 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 37 for BikeCount — implements result = math.sqrt(ebike_range_value + 4.5) * 2.8 + 37*0.01"""
         try:
             # Distinct logic for cycling::BikeCount::ebike_range_7_cyc_37_bikecount_37
@@ -370,13 +390,14 @@ class BikeCount:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def wind_adjusted_13_cyc_43_bikecount_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        wind_adjusted_value = value
         """wind_adjusted distinct 13 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 43 for BikeCount — implements result = math.log(1 + wind_adjusted_value * 14) if wind_adju"""
         try:
             # Distinct logic for cycling::BikeCount::wind_adjusted_13_cyc_43_bikecount_43
@@ -391,13 +412,14 @@ class BikeCount:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def connectivity_19_cyc_49_bikecount_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        connectivity_value = value
         """connectivity distinct 19 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 49 for BikeCount — implements result = connectivity_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for cycling::BikeCount::connectivity_19_cyc_49_bikecount_49
@@ -409,16 +431,18 @@ class BikeCount:
                 else:
                     break
             # connectivity distinct 19 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 49
+            connectivity_value = value
             result = connectivity_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def stress_composite_25_cyc_55_bikecount_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        stress_composite_value = value
         """stress_composite distinct 25 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 55 for BikeCount — implements result = stress_composite_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for cycling::BikeCount::stress_composite_25_cyc_55_bikecount_55
@@ -433,10 +457,10 @@ class BikeCount:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'stress_composite_25_cyc_55_bikecount_55', 'result': result, 'domain': 'cycling'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_bikecount(self) -> bool:
@@ -461,6 +485,7 @@ class StressSegment:
     status: str = 'active'
 
     def calibration_factor_2_cyc_2_stresssegment_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        calibration_factor_value = value
         """calibration_factor distinct 2 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 2 for StressSegment — implements result = calibration_factor_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for cycling::StressSegment::calibration_factor_2_cyc_2_stresssegment_2
@@ -472,13 +497,14 @@ class StressSegment:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def exposure_risk_8_cyc_8_stresssegment_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        exposure_risk_value = value
         """exposure_risk distinct 8 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 8 for StressSegment — implements result = exposure_risk_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for cycling::StressSegment::exposure_risk_8_cyc_8_stresssegment_8
@@ -493,13 +519,14 @@ class StressSegment:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def route_logit_14_cyc_14_stresssegment_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        route_logit_value = value
         """route_logit distinct 14 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 14 for StressSegment — implements result = pow(route_logit_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for cycling::StressSegment::route_logit_14_cyc_14_stresssegment_14
@@ -514,13 +541,14 @@ class StressSegment:
             result = pow(route_logit_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bike_los_20_cyc_20_stresssegment_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bike_los_value = value
         """bike_los distinct 20 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 20 for StressSegment — implements result = math.exp(-0.021 * bike_los_value) * 30 + 20*0.01"""
         try:
             # Distinct logic for cycling::StressSegment::bike_los_20_cyc_20_stresssegment_20
@@ -535,13 +563,14 @@ class StressSegment:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'bike_los_20_cyc_20_stresssegment_20', 'result': result, 'domain': 'cycling'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def comfort_26_cyc_26_stresssegment_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        comfort_value = value
         """comfort distinct 26 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 26 for StressSegment — implements result = comfort_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for cycling::StressSegment::comfort_26_cyc_26_stresssegment_26
@@ -553,13 +582,14 @@ class StressSegment:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def calibration_factor_2_cyc_32_stresssegment_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        calibration_factor_value = value
         """calibration_factor distinct 2 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 32 for StressSegment — implements result = calibration_factor_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for cycling::StressSegment::calibration_factor_2_cyc_32_stresssegment_32
@@ -571,13 +601,14 @@ class StressSegment:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def exposure_risk_8_cyc_38_stresssegment_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        exposure_risk_value = value
         """exposure_risk distinct 8 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 38 for StressSegment — implements result = exposure_risk_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for cycling::StressSegment::exposure_risk_8_cyc_38_stresssegment_38
@@ -592,13 +623,14 @@ class StressSegment:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def route_logit_14_cyc_44_stresssegment_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        route_logit_value = value
         """route_logit distinct 14 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 44 for StressSegment — implements result = pow(route_logit_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for cycling::StressSegment::route_logit_14_cyc_44_stresssegment_44
@@ -613,13 +645,14 @@ class StressSegment:
             result = pow(route_logit_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bike_los_20_cyc_50_stresssegment_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bike_los_value = value
         """bike_los distinct 20 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 50 for StressSegment — implements result = math.exp(-0.021 * bike_los_value) * 30 + 50*0.01"""
         try:
             # Distinct logic for cycling::StressSegment::bike_los_20_cyc_50_stresssegment_50
@@ -634,13 +667,14 @@ class StressSegment:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'bike_los_20_cyc_50_stresssegment_50', 'result': result, 'domain': 'cycling'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def comfort_26_cyc_56_stresssegment_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        comfort_value = value
         """comfort distinct 26 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 56 for StressSegment — implements result = comfort_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for cycling::StressSegment::comfort_26_cyc_56_stresssegment_56
@@ -652,10 +686,10 @@ class StressSegment:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_stresssegment(self) -> bool:
@@ -680,6 +714,7 @@ class RouteChoice:
     status: str = 'active'
 
     def wind_adjusted_3_cyc_3_routechoice_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        wind_adjusted_value = value
         """wind_adjusted distinct 3 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 3 for RouteChoice — implements result = wind_adjusted_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for cycling::RouteChoice::wind_adjusted_3_cyc_3_routechoice_3
@@ -694,13 +729,14 @@ class RouteChoice:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def connectivity_9_cyc_9_routechoice_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        connectivity_value = value
         """connectivity distinct 9 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 9 for RouteChoice — implements result = connectivity_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for cycling::RouteChoice::connectivity_9_cyc_9_routechoice_9
@@ -712,16 +748,18 @@ class RouteChoice:
                 else:
                     break
             # connectivity distinct 9 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 9
+            connectivity_value = value
             result = connectivity_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def stress_composite_15_cyc_15_routechoice_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        stress_composite_value = value
         """stress_composite distinct 15 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 15 for RouteChoice — implements result = math.sqrt(stress_composite_value + 8.5) * 2.8 + 15*"""
         try:
             # Distinct logic for cycling::RouteChoice::stress_composite_15_cyc_15_routechoice_15
@@ -736,13 +774,14 @@ class RouteChoice:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'stress_composite_15_cyc_15_routechoice_15', 'result': result, 'domain': 'cycling'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lts_21_cyc_21_routechoice_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lts_value = value
         """lts distinct 21 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 21 for RouteChoice — implements result = math.log(1 + lts_value * 22) if lts_value>0 else 0 """
         try:
             # Distinct logic for cycling::RouteChoice::lts_21_cyc_21_routechoice_21
@@ -754,13 +793,14 @@ class RouteChoice:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ebike_range_27_cyc_27_routechoice_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ebike_range_value = value
         """ebike_range distinct 27 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 27 for RouteChoice — implements result = ebike_range_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for cycling::RouteChoice::ebike_range_27_cyc_27_routechoice_27
@@ -772,13 +812,14 @@ class RouteChoice:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def wind_adjusted_3_cyc_33_routechoice_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        wind_adjusted_value = value
         """wind_adjusted distinct 3 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 33 for RouteChoice — implements result = wind_adjusted_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for cycling::RouteChoice::wind_adjusted_3_cyc_33_routechoice_33
@@ -793,13 +834,14 @@ class RouteChoice:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def connectivity_9_cyc_39_routechoice_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        connectivity_value = value
         """connectivity distinct 9 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 39 for RouteChoice — implements result = connectivity_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for cycling::RouteChoice::connectivity_9_cyc_39_routechoice_39
@@ -811,16 +853,18 @@ class RouteChoice:
                 else:
                     break
             # connectivity distinct 9 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 39
+            connectivity_value = value
             result = connectivity_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def stress_composite_15_cyc_45_routechoice_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        stress_composite_value = value
         """stress_composite distinct 15 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 45 for RouteChoice — implements result = math.sqrt(stress_composite_value + 8.5) * 2.8 + 45*"""
         try:
             # Distinct logic for cycling::RouteChoice::stress_composite_15_cyc_45_routechoice_45
@@ -835,13 +879,14 @@ class RouteChoice:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'stress_composite_15_cyc_45_routechoice_45', 'result': result, 'domain': 'cycling'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lts_21_cyc_51_routechoice_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lts_value = value
         """lts distinct 21 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 51 for RouteChoice — implements result = math.log(1 + lts_value * 22) if lts_value>0 else 0 """
         try:
             # Distinct logic for cycling::RouteChoice::lts_21_cyc_51_routechoice_51
@@ -853,13 +898,14 @@ class RouteChoice:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ebike_range_27_cyc_57_routechoice_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ebike_range_value = value
         """ebike_range distinct 27 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 57 for RouteChoice — implements result = ebike_range_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for cycling::RouteChoice::ebike_range_27_cyc_57_routechoice_57
@@ -871,10 +917,10 @@ class RouteChoice:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_routechoice(self) -> bool:
@@ -899,6 +945,7 @@ class CounterCalibration:
     status: str = 'active'
 
     def route_logit_4_cyc_4_countercalibration_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        route_logit_value = value
         """route_logit distinct 4 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 4 for CounterCalibration — implements result = math.exp(-0.05 * route_logit_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for cycling::CounterCalibration::route_logit_4_cyc_4_countercalibration_4
@@ -910,16 +957,18 @@ class CounterCalibration:
                 else:
                     break
             # route_logit distinct 4 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 4
+            route_logit_value = value
             result = math.exp(-0.05 * route_logit_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bike_los_10_cyc_10_countercalibration_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bike_los_value = value
         """bike_los distinct 10 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 10 for CounterCalibration — implements result = bike_los_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for cycling::CounterCalibration::bike_los_10_cyc_10_countercalibration_10
@@ -934,13 +983,14 @@ class CounterCalibration:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'bike_los_10_cyc_10_countercalibration_10', 'result': result, 'domain': 'cycling'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def comfort_16_cyc_16_countercalibration_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        comfort_value = value
         """comfort distinct 16 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 16 for CounterCalibration — implements result = comfort_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for cycling::CounterCalibration::comfort_16_cyc_16_countercalibration_16
@@ -952,13 +1002,14 @@ class CounterCalibration:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def calibration_factor_22_cyc_22_countercalibration_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        calibration_factor_value = value
         """calibration_factor distinct 22 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 22 for CounterCalibration — implements result = pow(calibration_factor_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for cycling::CounterCalibration::calibration_factor_22_cyc_22_countercalibration_22
@@ -970,13 +1021,14 @@ class CounterCalibration:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def exposure_risk_28_cyc_28_countercalibration_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        exposure_risk_value = value
         """exposure_risk distinct 28 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 28 for CounterCalibration — implements result = math.exp(-0.029 * exposure_risk_value) * 38 + 28*0."""
         try:
             # Distinct logic for cycling::CounterCalibration::exposure_risk_28_cyc_28_countercalibration_28
@@ -991,13 +1043,14 @@ class CounterCalibration:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def route_logit_4_cyc_34_countercalibration_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        route_logit_value = value
         """route_logit distinct 4 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 34 for CounterCalibration — implements result = math.exp(-0.05 * route_logit_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for cycling::CounterCalibration::route_logit_4_cyc_34_countercalibration_34
@@ -1009,16 +1062,18 @@ class CounterCalibration:
                 else:
                     break
             # route_logit distinct 4 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 34
+            route_logit_value = value
             result = math.exp(-0.05 * route_logit_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bike_los_10_cyc_40_countercalibration_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bike_los_value = value
         """bike_los distinct 10 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 40 for CounterCalibration — implements result = bike_los_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for cycling::CounterCalibration::bike_los_10_cyc_40_countercalibration_40
@@ -1033,13 +1088,14 @@ class CounterCalibration:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'bike_los_10_cyc_40_countercalibration_40', 'result': result, 'domain': 'cycling'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def comfort_16_cyc_46_countercalibration_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        comfort_value = value
         """comfort distinct 16 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 46 for CounterCalibration — implements result = comfort_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for cycling::CounterCalibration::comfort_16_cyc_46_countercalibration_46
@@ -1051,13 +1107,14 @@ class CounterCalibration:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def calibration_factor_22_cyc_52_countercalibration_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        calibration_factor_value = value
         """calibration_factor distinct 22 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 52 for CounterCalibration — implements result = pow(calibration_factor_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for cycling::CounterCalibration::calibration_factor_22_cyc_52_countercalibration_52
@@ -1069,13 +1126,14 @@ class CounterCalibration:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def exposure_risk_28_cyc_58_countercalibration_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        exposure_risk_value = value
         """exposure_risk distinct 28 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 58 for CounterCalibration — implements result = math.exp(-0.029 * exposure_risk_value) * 38 + 58*0."""
         try:
             # Distinct logic for cycling::CounterCalibration::exposure_risk_28_cyc_58_countercalibration_58
@@ -1090,10 +1148,10 @@ class CounterCalibration:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_countercalibration(self) -> bool:
@@ -1118,6 +1176,7 @@ class EBikeRecord:
     status: str = 'active'
 
     def stress_composite_5_cyc_5_ebikerecord_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        stress_composite_value = value
         """stress_composite distinct 5 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 5 for EBikeRecord — implements result = math.log(1 + stress_composite_value * 6) if stress_"""
         try:
             # Distinct logic for cycling::EBikeRecord::stress_composite_5_cyc_5_ebikerecord_5
@@ -1132,13 +1191,14 @@ class EBikeRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'stress_composite_5_cyc_5_ebikerecord_5', 'result': result, 'domain': 'cycling'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lts_11_cyc_11_ebikerecord_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lts_value = value
         """lts distinct 11 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 11 for EBikeRecord — implements result = lts_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for cycling::EBikeRecord::lts_11_cyc_11_ebikerecord_11
@@ -1150,13 +1210,14 @@ class EBikeRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ebike_range_17_cyc_17_ebikerecord_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ebike_range_value = value
         """ebike_range distinct 17 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 17 for EBikeRecord — implements result = ebike_range_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for cycling::EBikeRecord::ebike_range_17_cyc_17_ebikerecord_17
@@ -1168,13 +1229,14 @@ class EBikeRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def wind_adjusted_23_cyc_23_ebikerecord_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        wind_adjusted_value = value
         """wind_adjusted distinct 23 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 23 for EBikeRecord — implements result = math.sqrt(wind_adjusted_value + 12.5) * 2.8 + 23*0."""
         try:
             # Distinct logic for cycling::EBikeRecord::wind_adjusted_23_cyc_23_ebikerecord_23
@@ -1189,13 +1251,14 @@ class EBikeRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def connectivity_29_cyc_29_ebikerecord_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        connectivity_value = value
         """connectivity distinct 29 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 29 for EBikeRecord — implements result = math.log(1 + connectivity_value * 30) if connectivi"""
         try:
             # Distinct logic for cycling::EBikeRecord::connectivity_29_cyc_29_ebikerecord_29
@@ -1210,13 +1273,14 @@ class EBikeRecord:
             result = math.log(1 + connectivity_value * 30) if connectivity_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def stress_composite_5_cyc_35_ebikerecord_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        stress_composite_value = value
         """stress_composite distinct 5 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 35 for EBikeRecord — implements result = math.log(1 + stress_composite_value * 6) if stress_"""
         try:
             # Distinct logic for cycling::EBikeRecord::stress_composite_5_cyc_35_ebikerecord_35
@@ -1231,13 +1295,14 @@ class EBikeRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'stress_composite_5_cyc_35_ebikerecord_35', 'result': result, 'domain': 'cycling'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lts_11_cyc_41_ebikerecord_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lts_value = value
         """lts distinct 11 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 41 for EBikeRecord — implements result = lts_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for cycling::EBikeRecord::lts_11_cyc_41_ebikerecord_41
@@ -1249,13 +1314,14 @@ class EBikeRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ebike_range_17_cyc_47_ebikerecord_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ebike_range_value = value
         """ebike_range distinct 17 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 47 for EBikeRecord — implements result = ebike_range_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for cycling::EBikeRecord::ebike_range_17_cyc_47_ebikerecord_47
@@ -1267,13 +1333,14 @@ class EBikeRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def wind_adjusted_23_cyc_53_ebikerecord_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        wind_adjusted_value = value
         """wind_adjusted distinct 23 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 53 for EBikeRecord — implements result = math.sqrt(wind_adjusted_value + 12.5) * 2.8 + 53*0."""
         try:
             # Distinct logic for cycling::EBikeRecord::wind_adjusted_23_cyc_53_ebikerecord_53
@@ -1288,13 +1355,14 @@ class EBikeRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def connectivity_29_cyc_59_ebikerecord_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        connectivity_value = value
         """connectivity distinct 29 for cycling using Bike LOS, LTS, counters, route choice, e-bike extra 59 for EBikeRecord — implements result = math.log(1 + connectivity_value * 30) if connectivi"""
         try:
             # Distinct logic for cycling::EBikeRecord::connectivity_29_cyc_59_ebikerecord_59
@@ -1309,10 +1377,10 @@ class EBikeRecord:
             result = math.log(1 + connectivity_value * 30) if connectivity_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_ebikerecord(self) -> bool:
@@ -2768,4 +2836,3 @@ def padded_cycling_models_1027(payload: dict, factor: float = 2.89) -> dict:
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'cycling','idx':1027}
-

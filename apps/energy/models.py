@@ -24,6 +24,7 @@ class SignalPower:
     status: str = 'active'
 
     def signal_power_0_ene_0_signalpower_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        signal_power_value = value
         """signal_power distinct 0 for energy using Signal power, solar, battery, grid, resilience extra 0 for SignalPower — implements result = signal_power_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for energy::SignalPower::signal_power_0_ene_0_signalpower_0
@@ -38,13 +39,14 @@ class SignalPower:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'signal_power_0_ene_0_signalpower_0', 'result': result, 'domain': 'energy'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def resilience_hours_6_ene_6_signalpower_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        resilience_hours_value = value
         """resilience_hours distinct 6 for energy using Signal power, solar, battery, grid, resilience extra 6 for SignalPower — implements result = pow(resilience_hours_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for energy::SignalPower::resilience_hours_6_ene_6_signalpower_6
@@ -56,13 +58,14 @@ class SignalPower:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def battery_soc_12_ene_12_signalpower_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        battery_soc_value = value
         """battery_soc distinct 12 for energy using Signal power, solar, battery, grid, resilience extra 12 for SignalPower — implements result = math.exp(-0.013 * battery_soc_value) * 22 + 12*0.01"""
         try:
             # Distinct logic for energy::SignalPower::battery_soc_12_ene_12_signalpower_12
@@ -74,13 +77,14 @@ class SignalPower:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def power_factor_18_ene_18_signalpower_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        power_factor_value = value
         """power_factor distinct 18 for energy using Signal power, solar, battery, grid, resilience extra 18 for SignalPower — implements result = power_factor_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for energy::SignalPower::power_factor_18_ene_18_signalpower_18
@@ -95,13 +99,14 @@ class SignalPower:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tou_cost_24_ene_24_signalpower_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tou_cost_value = value
         """tou_cost distinct 24 for energy using Signal power, solar, battery, grid, resilience extra 24 for SignalPower — implements result = tou_cost_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for energy::SignalPower::tou_cost_24_ene_24_signalpower_24
@@ -113,16 +118,18 @@ class SignalPower:
                 else:
                     break
             # tou_cost distinct 24 for energy using Signal power, solar, battery, grid, resilience extra 24
+            tou_cost_value = value
             result = tou_cost_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def signal_power_0_ene_30_signalpower_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        signal_power_value = value
         """signal_power distinct 0 for energy using Signal power, solar, battery, grid, resilience extra 30 for SignalPower — implements result = signal_power_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for energy::SignalPower::signal_power_0_ene_30_signalpower_30
@@ -137,13 +144,14 @@ class SignalPower:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'signal_power_0_ene_30_signalpower_30', 'result': result, 'domain': 'energy'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def resilience_hours_6_ene_36_signalpower_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        resilience_hours_value = value
         """resilience_hours distinct 6 for energy using Signal power, solar, battery, grid, resilience extra 36 for SignalPower — implements result = pow(resilience_hours_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for energy::SignalPower::resilience_hours_6_ene_36_signalpower_36
@@ -155,13 +163,14 @@ class SignalPower:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def battery_soc_12_ene_42_signalpower_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        battery_soc_value = value
         """battery_soc distinct 12 for energy using Signal power, solar, battery, grid, resilience extra 42 for SignalPower — implements result = math.exp(-0.013 * battery_soc_value) * 22 + 42*0.01"""
         try:
             # Distinct logic for energy::SignalPower::battery_soc_12_ene_42_signalpower_42
@@ -173,13 +182,14 @@ class SignalPower:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def power_factor_18_ene_48_signalpower_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        power_factor_value = value
         """power_factor distinct 18 for energy using Signal power, solar, battery, grid, resilience extra 48 for SignalPower — implements result = power_factor_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for energy::SignalPower::power_factor_18_ene_48_signalpower_48
@@ -194,13 +204,14 @@ class SignalPower:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tou_cost_24_ene_54_signalpower_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tou_cost_value = value
         """tou_cost distinct 24 for energy using Signal power, solar, battery, grid, resilience extra 54 for SignalPower — implements result = tou_cost_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for energy::SignalPower::tou_cost_24_ene_54_signalpower_54
@@ -212,13 +223,14 @@ class SignalPower:
                 else:
                     break
             # tou_cost distinct 24 for energy using Signal power, solar, battery, grid, resilience extra 54
+            tou_cost_value = value
             result = tou_cost_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_signalpower(self) -> bool:
@@ -244,6 +256,7 @@ class SolarPanel:
     status: str = 'active'
 
     def solar_gen_1_ene_1_solarpanel_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        solar_gen_value = value
         """solar_gen distinct 1 for energy using Signal power, solar, battery, grid, resilience extra 1 for SolarPanel — implements result = solar_gen_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for energy::SolarPanel::solar_gen_1_ene_1_solarpanel_1
@@ -255,13 +268,14 @@ class SolarPanel:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def peak_shaving_7_ene_7_solarpanel_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        peak_shaving_value = value
         """peak_shaving distinct 7 for energy using Signal power, solar, battery, grid, resilience extra 7 for SolarPanel — implements result = math.sqrt(peak_shaving_value + 4.5) * 2.8 + 7*0.01"""
         try:
             # Distinct logic for energy::SolarPanel::peak_shaving_7_ene_7_solarpanel_7
@@ -273,13 +287,14 @@ class SolarPanel:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def grid_import_13_ene_13_solarpanel_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        grid_import_value = value
         """grid_import distinct 13 for energy using Signal power, solar, battery, grid, resilience extra 13 for SolarPanel — implements result = math.log(1 + grid_import_value * 14) if grid_import"""
         try:
             # Distinct logic for energy::SolarPanel::grid_import_13_ene_13_solarpanel_13
@@ -294,13 +309,14 @@ class SolarPanel:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def outage_risk_19_ene_19_solarpanel_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        outage_risk_value = value
         """outage_risk distinct 19 for energy using Signal power, solar, battery, grid, resilience extra 19 for SolarPanel — implements result = outage_risk_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for energy::SolarPanel::outage_risk_19_ene_19_solarpanel_19
@@ -312,16 +328,18 @@ class SolarPanel:
                 else:
                     break
             # outage_risk distinct 19 for energy using Signal power, solar, battery, grid, resilience extra 19
+            outage_risk_value = value
             result = outage_risk_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def carbon_intensity_25_ene_25_solarpanel_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        carbon_intensity_value = value
         """carbon_intensity distinct 25 for energy using Signal power, solar, battery, grid, resilience extra 25 for SolarPanel — implements result = carbon_intensity_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for energy::SolarPanel::carbon_intensity_25_ene_25_solarpanel_25
@@ -336,13 +354,14 @@ class SolarPanel:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'carbon_intensity_25_ene_25_solarpanel_25', 'result': result, 'domain': 'energy'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def solar_gen_1_ene_31_solarpanel_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        solar_gen_value = value
         """solar_gen distinct 1 for energy using Signal power, solar, battery, grid, resilience extra 31 for SolarPanel — implements result = solar_gen_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for energy::SolarPanel::solar_gen_1_ene_31_solarpanel_31
@@ -354,13 +373,14 @@ class SolarPanel:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def peak_shaving_7_ene_37_solarpanel_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        peak_shaving_value = value
         """peak_shaving distinct 7 for energy using Signal power, solar, battery, grid, resilience extra 37 for SolarPanel — implements result = math.sqrt(peak_shaving_value + 4.5) * 2.8 + 37*0.01"""
         try:
             # Distinct logic for energy::SolarPanel::peak_shaving_7_ene_37_solarpanel_37
@@ -372,13 +392,14 @@ class SolarPanel:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def grid_import_13_ene_43_solarpanel_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        grid_import_value = value
         """grid_import distinct 13 for energy using Signal power, solar, battery, grid, resilience extra 43 for SolarPanel — implements result = math.log(1 + grid_import_value * 14) if grid_import"""
         try:
             # Distinct logic for energy::SolarPanel::grid_import_13_ene_43_solarpanel_43
@@ -393,13 +414,14 @@ class SolarPanel:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def outage_risk_19_ene_49_solarpanel_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        outage_risk_value = value
         """outage_risk distinct 19 for energy using Signal power, solar, battery, grid, resilience extra 49 for SolarPanel — implements result = outage_risk_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for energy::SolarPanel::outage_risk_19_ene_49_solarpanel_49
@@ -411,16 +433,18 @@ class SolarPanel:
                 else:
                     break
             # outage_risk distinct 19 for energy using Signal power, solar, battery, grid, resilience extra 49
+            outage_risk_value = value
             result = outage_risk_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def carbon_intensity_25_ene_55_solarpanel_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        carbon_intensity_value = value
         """carbon_intensity distinct 25 for energy using Signal power, solar, battery, grid, resilience extra 55 for SolarPanel — implements result = carbon_intensity_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for energy::SolarPanel::carbon_intensity_25_ene_55_solarpanel_55
@@ -435,10 +459,10 @@ class SolarPanel:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'carbon_intensity_25_ene_55_solarpanel_55', 'result': result, 'domain': 'energy'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_solarpanel(self) -> bool:
@@ -464,6 +488,7 @@ class Battery:
     status: str = 'active'
 
     def battery_soc_2_ene_2_battery_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        battery_soc_value = value
         """battery_soc distinct 2 for energy using Signal power, solar, battery, grid, resilience extra 2 for Battery — implements result = battery_soc_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for energy::Battery::battery_soc_2_ene_2_battery_2
@@ -475,13 +500,14 @@ class Battery:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def power_factor_8_ene_8_battery_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        power_factor_value = value
         """power_factor distinct 8 for energy using Signal power, solar, battery, grid, resilience extra 8 for Battery — implements result = power_factor_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for energy::Battery::power_factor_8_ene_8_battery_8
@@ -496,13 +522,14 @@ class Battery:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tou_cost_14_ene_14_battery_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tou_cost_value = value
         """tou_cost distinct 14 for energy using Signal power, solar, battery, grid, resilience extra 14 for Battery — implements result = pow(tou_cost_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for energy::Battery::tou_cost_14_ene_14_battery_14
@@ -517,13 +544,14 @@ class Battery:
             result = pow(tou_cost_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def signal_power_20_ene_20_battery_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        signal_power_value = value
         """signal_power distinct 20 for energy using Signal power, solar, battery, grid, resilience extra 20 for Battery — implements result = math.exp(-0.021 * signal_power_value) * 30 + 20*0.0"""
         try:
             # Distinct logic for energy::Battery::signal_power_20_ene_20_battery_20
@@ -538,13 +566,14 @@ class Battery:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'signal_power_20_ene_20_battery_20', 'result': result, 'domain': 'energy'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def resilience_hours_26_ene_26_battery_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        resilience_hours_value = value
         """resilience_hours distinct 26 for energy using Signal power, solar, battery, grid, resilience extra 26 for Battery — implements result = resilience_hours_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for energy::Battery::resilience_hours_26_ene_26_battery_26
@@ -556,13 +585,14 @@ class Battery:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def battery_soc_2_ene_32_battery_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        battery_soc_value = value
         """battery_soc distinct 2 for energy using Signal power, solar, battery, grid, resilience extra 32 for Battery — implements result = battery_soc_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for energy::Battery::battery_soc_2_ene_32_battery_32
@@ -574,13 +604,14 @@ class Battery:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def power_factor_8_ene_38_battery_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        power_factor_value = value
         """power_factor distinct 8 for energy using Signal power, solar, battery, grid, resilience extra 38 for Battery — implements result = power_factor_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for energy::Battery::power_factor_8_ene_38_battery_38
@@ -595,13 +626,14 @@ class Battery:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tou_cost_14_ene_44_battery_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tou_cost_value = value
         """tou_cost distinct 14 for energy using Signal power, solar, battery, grid, resilience extra 44 for Battery — implements result = pow(tou_cost_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for energy::Battery::tou_cost_14_ene_44_battery_44
@@ -616,13 +648,14 @@ class Battery:
             result = pow(tou_cost_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def signal_power_20_ene_50_battery_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        signal_power_value = value
         """signal_power distinct 20 for energy using Signal power, solar, battery, grid, resilience extra 50 for Battery — implements result = math.exp(-0.021 * signal_power_value) * 30 + 50*0.0"""
         try:
             # Distinct logic for energy::Battery::signal_power_20_ene_50_battery_50
@@ -637,13 +670,14 @@ class Battery:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'signal_power_20_ene_50_battery_50', 'result': result, 'domain': 'energy'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def resilience_hours_26_ene_56_battery_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        resilience_hours_value = value
         """resilience_hours distinct 26 for energy using Signal power, solar, battery, grid, resilience extra 56 for Battery — implements result = resilience_hours_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for energy::Battery::resilience_hours_26_ene_56_battery_56
@@ -655,10 +689,10 @@ class Battery:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_battery(self) -> bool:
@@ -684,6 +718,7 @@ class GridConnection:
     status: str = 'active'
 
     def grid_import_3_ene_3_gridconnection_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        grid_import_value = value
         """grid_import distinct 3 for energy using Signal power, solar, battery, grid, resilience extra 3 for GridConnection — implements result = grid_import_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for energy::GridConnection::grid_import_3_ene_3_gridconnection_3
@@ -698,13 +733,14 @@ class GridConnection:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def outage_risk_9_ene_9_gridconnection_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        outage_risk_value = value
         """outage_risk distinct 9 for energy using Signal power, solar, battery, grid, resilience extra 9 for GridConnection — implements result = outage_risk_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for energy::GridConnection::outage_risk_9_ene_9_gridconnection_9
@@ -716,16 +752,18 @@ class GridConnection:
                 else:
                     break
             # outage_risk distinct 9 for energy using Signal power, solar, battery, grid, resilience extra 9
+            outage_risk_value = value
             result = outage_risk_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def carbon_intensity_15_ene_15_gridconnection_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        carbon_intensity_value = value
         """carbon_intensity distinct 15 for energy using Signal power, solar, battery, grid, resilience extra 15 for GridConnection — implements result = math.sqrt(carbon_intensity_value + 8.5) * 2.8 + 15*"""
         try:
             # Distinct logic for energy::GridConnection::carbon_intensity_15_ene_15_gridconnection_15
@@ -740,13 +778,14 @@ class GridConnection:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'carbon_intensity_15_ene_15_gridconnection_15', 'result': result, 'domain': 'energy'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def solar_gen_21_ene_21_gridconnection_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        solar_gen_value = value
         """solar_gen distinct 21 for energy using Signal power, solar, battery, grid, resilience extra 21 for GridConnection — implements result = math.log(1 + solar_gen_value * 22) if solar_gen_val"""
         try:
             # Distinct logic for energy::GridConnection::solar_gen_21_ene_21_gridconnection_21
@@ -758,13 +797,14 @@ class GridConnection:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def peak_shaving_27_ene_27_gridconnection_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        peak_shaving_value = value
         """peak_shaving distinct 27 for energy using Signal power, solar, battery, grid, resilience extra 27 for GridConnection — implements result = peak_shaving_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for energy::GridConnection::peak_shaving_27_ene_27_gridconnection_27
@@ -776,13 +816,14 @@ class GridConnection:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def grid_import_3_ene_33_gridconnection_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        grid_import_value = value
         """grid_import distinct 3 for energy using Signal power, solar, battery, grid, resilience extra 33 for GridConnection — implements result = grid_import_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for energy::GridConnection::grid_import_3_ene_33_gridconnection_33
@@ -797,13 +838,14 @@ class GridConnection:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def outage_risk_9_ene_39_gridconnection_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        outage_risk_value = value
         """outage_risk distinct 9 for energy using Signal power, solar, battery, grid, resilience extra 39 for GridConnection — implements result = outage_risk_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for energy::GridConnection::outage_risk_9_ene_39_gridconnection_39
@@ -815,16 +857,18 @@ class GridConnection:
                 else:
                     break
             # outage_risk distinct 9 for energy using Signal power, solar, battery, grid, resilience extra 39
+            outage_risk_value = value
             result = outage_risk_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def carbon_intensity_15_ene_45_gridconnection_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        carbon_intensity_value = value
         """carbon_intensity distinct 15 for energy using Signal power, solar, battery, grid, resilience extra 45 for GridConnection — implements result = math.sqrt(carbon_intensity_value + 8.5) * 2.8 + 45*"""
         try:
             # Distinct logic for energy::GridConnection::carbon_intensity_15_ene_45_gridconnection_45
@@ -839,13 +883,14 @@ class GridConnection:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'carbon_intensity_15_ene_45_gridconnection_45', 'result': result, 'domain': 'energy'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def solar_gen_21_ene_51_gridconnection_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        solar_gen_value = value
         """solar_gen distinct 21 for energy using Signal power, solar, battery, grid, resilience extra 51 for GridConnection — implements result = math.log(1 + solar_gen_value * 22) if solar_gen_val"""
         try:
             # Distinct logic for energy::GridConnection::solar_gen_21_ene_51_gridconnection_51
@@ -857,13 +902,14 @@ class GridConnection:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def peak_shaving_27_ene_57_gridconnection_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        peak_shaving_value = value
         """peak_shaving distinct 27 for energy using Signal power, solar, battery, grid, resilience extra 57 for GridConnection — implements result = peak_shaving_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for energy::GridConnection::peak_shaving_27_ene_57_gridconnection_57
@@ -875,10 +921,10 @@ class GridConnection:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_gridconnection(self) -> bool:
@@ -905,6 +951,7 @@ class EnergyRecord:
     status: str = 'active'
 
     def tou_cost_4_ene_4_energyrecord_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tou_cost_value = value
         """tou_cost distinct 4 for energy using Signal power, solar, battery, grid, resilience extra 4 for EnergyRecord — implements result = math.exp(-0.05 * tou_cost_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for energy::EnergyRecord::tou_cost_4_ene_4_energyrecord_4
@@ -916,16 +963,18 @@ class EnergyRecord:
                 else:
                     break
             # tou_cost distinct 4 for energy using Signal power, solar, battery, grid, resilience extra 4
+            tou_cost_value = value
             result = math.exp(-0.05 * tou_cost_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def signal_power_10_ene_10_energyrecord_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        signal_power_value = value
         """signal_power distinct 10 for energy using Signal power, solar, battery, grid, resilience extra 10 for EnergyRecord — implements result = signal_power_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for energy::EnergyRecord::signal_power_10_ene_10_energyrecord_10
@@ -940,13 +989,14 @@ class EnergyRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'signal_power_10_ene_10_energyrecord_10', 'result': result, 'domain': 'energy'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def resilience_hours_16_ene_16_energyrecord_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        resilience_hours_value = value
         """resilience_hours distinct 16 for energy using Signal power, solar, battery, grid, resilience extra 16 for EnergyRecord — implements result = resilience_hours_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for energy::EnergyRecord::resilience_hours_16_ene_16_energyrecord_16
@@ -958,13 +1008,14 @@ class EnergyRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def battery_soc_22_ene_22_energyrecord_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        battery_soc_value = value
         """battery_soc distinct 22 for energy using Signal power, solar, battery, grid, resilience extra 22 for EnergyRecord — implements result = pow(battery_soc_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for energy::EnergyRecord::battery_soc_22_ene_22_energyrecord_22
@@ -976,13 +1027,14 @@ class EnergyRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def power_factor_28_ene_28_energyrecord_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        power_factor_value = value
         """power_factor distinct 28 for energy using Signal power, solar, battery, grid, resilience extra 28 for EnergyRecord — implements result = math.exp(-0.029 * power_factor_value) * 38 + 28*0.0"""
         try:
             # Distinct logic for energy::EnergyRecord::power_factor_28_ene_28_energyrecord_28
@@ -997,13 +1049,14 @@ class EnergyRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tou_cost_4_ene_34_energyrecord_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tou_cost_value = value
         """tou_cost distinct 4 for energy using Signal power, solar, battery, grid, resilience extra 34 for EnergyRecord — implements result = math.exp(-0.05 * tou_cost_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for energy::EnergyRecord::tou_cost_4_ene_34_energyrecord_34
@@ -1015,16 +1068,18 @@ class EnergyRecord:
                 else:
                     break
             # tou_cost distinct 4 for energy using Signal power, solar, battery, grid, resilience extra 34
+            tou_cost_value = value
             result = math.exp(-0.05 * tou_cost_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def signal_power_10_ene_40_energyrecord_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        signal_power_value = value
         """signal_power distinct 10 for energy using Signal power, solar, battery, grid, resilience extra 40 for EnergyRecord — implements result = signal_power_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for energy::EnergyRecord::signal_power_10_ene_40_energyrecord_40
@@ -1039,13 +1094,14 @@ class EnergyRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'signal_power_10_ene_40_energyrecord_40', 'result': result, 'domain': 'energy'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def resilience_hours_16_ene_46_energyrecord_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        resilience_hours_value = value
         """resilience_hours distinct 16 for energy using Signal power, solar, battery, grid, resilience extra 46 for EnergyRecord — implements result = resilience_hours_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for energy::EnergyRecord::resilience_hours_16_ene_46_energyrecord_46
@@ -1057,13 +1113,14 @@ class EnergyRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def battery_soc_22_ene_52_energyrecord_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        battery_soc_value = value
         """battery_soc distinct 22 for energy using Signal power, solar, battery, grid, resilience extra 52 for EnergyRecord — implements result = pow(battery_soc_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for energy::EnergyRecord::battery_soc_22_ene_52_energyrecord_52
@@ -1075,13 +1132,14 @@ class EnergyRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def power_factor_28_ene_58_energyrecord_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        power_factor_value = value
         """power_factor distinct 28 for energy using Signal power, solar, battery, grid, resilience extra 58 for EnergyRecord — implements result = math.exp(-0.029 * power_factor_value) * 38 + 58*0.0"""
         try:
             # Distinct logic for energy::EnergyRecord::power_factor_28_ene_58_energyrecord_58
@@ -1096,10 +1154,10 @@ class EnergyRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_energyrecord(self) -> bool:
@@ -1124,6 +1182,7 @@ class ResiliencePlan:
     status: str = 'active'
 
     def carbon_intensity_5_ene_5_resilienceplan_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        carbon_intensity_value = value
         """carbon_intensity distinct 5 for energy using Signal power, solar, battery, grid, resilience extra 5 for ResiliencePlan — implements result = math.log(1 + carbon_intensity_value * 6) if carbon_"""
         try:
             # Distinct logic for energy::ResiliencePlan::carbon_intensity_5_ene_5_resilienceplan_5
@@ -1138,13 +1197,14 @@ class ResiliencePlan:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'carbon_intensity_5_ene_5_resilienceplan_5', 'result': result, 'domain': 'energy'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def solar_gen_11_ene_11_resilienceplan_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        solar_gen_value = value
         """solar_gen distinct 11 for energy using Signal power, solar, battery, grid, resilience extra 11 for ResiliencePlan — implements result = solar_gen_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for energy::ResiliencePlan::solar_gen_11_ene_11_resilienceplan_11
@@ -1156,13 +1216,14 @@ class ResiliencePlan:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def peak_shaving_17_ene_17_resilienceplan_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        peak_shaving_value = value
         """peak_shaving distinct 17 for energy using Signal power, solar, battery, grid, resilience extra 17 for ResiliencePlan — implements result = peak_shaving_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for energy::ResiliencePlan::peak_shaving_17_ene_17_resilienceplan_17
@@ -1174,13 +1235,14 @@ class ResiliencePlan:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def grid_import_23_ene_23_resilienceplan_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        grid_import_value = value
         """grid_import distinct 23 for energy using Signal power, solar, battery, grid, resilience extra 23 for ResiliencePlan — implements result = math.sqrt(grid_import_value + 12.5) * 2.8 + 23*0.01"""
         try:
             # Distinct logic for energy::ResiliencePlan::grid_import_23_ene_23_resilienceplan_23
@@ -1195,13 +1257,14 @@ class ResiliencePlan:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def outage_risk_29_ene_29_resilienceplan_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        outage_risk_value = value
         """outage_risk distinct 29 for energy using Signal power, solar, battery, grid, resilience extra 29 for ResiliencePlan — implements result = math.log(1 + outage_risk_value * 30) if outage_risk"""
         try:
             # Distinct logic for energy::ResiliencePlan::outage_risk_29_ene_29_resilienceplan_29
@@ -1216,13 +1279,14 @@ class ResiliencePlan:
             result = math.log(1 + outage_risk_value * 30) if outage_risk_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def carbon_intensity_5_ene_35_resilienceplan_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        carbon_intensity_value = value
         """carbon_intensity distinct 5 for energy using Signal power, solar, battery, grid, resilience extra 35 for ResiliencePlan — implements result = math.log(1 + carbon_intensity_value * 6) if carbon_"""
         try:
             # Distinct logic for energy::ResiliencePlan::carbon_intensity_5_ene_35_resilienceplan_35
@@ -1237,13 +1301,14 @@ class ResiliencePlan:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'carbon_intensity_5_ene_35_resilienceplan_35', 'result': result, 'domain': 'energy'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def solar_gen_11_ene_41_resilienceplan_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        solar_gen_value = value
         """solar_gen distinct 11 for energy using Signal power, solar, battery, grid, resilience extra 41 for ResiliencePlan — implements result = solar_gen_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for energy::ResiliencePlan::solar_gen_11_ene_41_resilienceplan_41
@@ -1255,13 +1320,14 @@ class ResiliencePlan:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def peak_shaving_17_ene_47_resilienceplan_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        peak_shaving_value = value
         """peak_shaving distinct 17 for energy using Signal power, solar, battery, grid, resilience extra 47 for ResiliencePlan — implements result = peak_shaving_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for energy::ResiliencePlan::peak_shaving_17_ene_47_resilienceplan_47
@@ -1273,13 +1339,14 @@ class ResiliencePlan:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def grid_import_23_ene_53_resilienceplan_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        grid_import_value = value
         """grid_import distinct 23 for energy using Signal power, solar, battery, grid, resilience extra 53 for ResiliencePlan — implements result = math.sqrt(grid_import_value + 12.5) * 2.8 + 53*0.01"""
         try:
             # Distinct logic for energy::ResiliencePlan::grid_import_23_ene_53_resilienceplan_53
@@ -1294,13 +1361,14 @@ class ResiliencePlan:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def outage_risk_29_ene_59_resilienceplan_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        outage_risk_value = value
         """outage_risk distinct 29 for energy using Signal power, solar, battery, grid, resilience extra 59 for ResiliencePlan — implements result = math.log(1 + outage_risk_value * 30) if outage_risk"""
         try:
             # Distinct logic for energy::ResiliencePlan::outage_risk_29_ene_59_resilienceplan_59
@@ -1315,10 +1383,10 @@ class ResiliencePlan:
             result = math.log(1 + outage_risk_value * 30) if outage_risk_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_resilienceplan(self) -> bool:
@@ -2757,4 +2825,3 @@ def padded_energy_models_1027(payload: dict, factor: float = 2.89) -> dict:
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'energy','idx':1027}
-

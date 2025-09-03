@@ -30,6 +30,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # signal_power distinct 0 for energy using Signal power, solar, battery, grid, resilience svc 0
         value = payload.get('value', 10)
+        signal_power_value = value
         result = signal_power_value * 0.70 + 0 + 0*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -57,6 +58,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # solar_gen distinct 1 for energy using Signal power, solar, battery, grid, resilience svc 1
             value = it.get('value', 5)
+            solar_gen_value = value
             result = solar_gen_value + 1.80 + 1 + 1*0.015
             it['computed'] = result
             processed.append(it)
@@ -121,6 +123,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # grid_import distinct 3 for energy using Signal power, solar, battery, grid, resilience svc 3
         value = len(results)
+        grid_import_value = value
         result = grid_import_value / 4.00 + 3 + 3*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -147,6 +150,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # tou_cost distinct 4 for energy using Signal power, solar, battery, grid, resilience svc 4
         value = payload.get('value', 10)
+        tou_cost_value = value
         result = math.exp(-0.05 * tou_cost_value) * 14 + 4*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -174,6 +178,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # carbon_intensity distinct 5 for energy using Signal power, solar, battery, grid, resilience svc 5
             value = it.get('value', 5)
+            carbon_intensity_value = value
             result = math.log(1 + carbon_intensity_value * 6) if carbon_intensity_value>0 else 0 + 5*0.015
             it['computed'] = result
             processed.append(it)
@@ -238,6 +243,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # peak_shaving distinct 7 for energy using Signal power, solar, battery, grid, resilience svc 7
         value = len(results)
+        peak_shaving_value = value
         result = math.sqrt(peak_shaving_value + 4.5) * 2.8 + 7*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -264,6 +270,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # power_factor distinct 8 for energy using Signal power, solar, battery, grid, resilience svc 8
         value = payload.get('value', 10)
+        power_factor_value = value
         result = power_factor_value * 9.50 + 3 + 8*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -291,6 +298,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # outage_risk distinct 9 for energy using Signal power, solar, battery, grid, resilience svc 9
             value = it.get('value', 5)
+            outage_risk_value = value
             result = outage_risk_value + 10.60 + 4 + 9*0.015
             it['computed'] = result
             processed.append(it)
@@ -355,6 +363,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # solar_gen distinct 11 for energy using Signal power, solar, battery, grid, resilience svc 11
         value = len(results)
+        solar_gen_value = value
         result = solar_gen_value / 12.80 + 1 + 11*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -381,6 +390,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # battery_soc distinct 12 for energy using Signal power, solar, battery, grid, resilience svc 12
         value = payload.get('value', 10)
+        battery_soc_value = value
         result = math.exp(-0.013 * battery_soc_value) * 22 + 12*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -408,6 +418,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # grid_import distinct 13 for energy using Signal power, solar, battery, grid, resilience svc 13
             value = it.get('value', 5)
+            grid_import_value = value
             result = math.log(1 + grid_import_value * 14) if grid_import_value>0 else 0 + 13*0.015
             it['computed'] = result
             processed.append(it)
@@ -472,6 +483,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # carbon_intensity distinct 15 for energy using Signal power, solar, battery, grid, resilience svc 15
         value = len(results)
+        carbon_intensity_value = value
         result = math.sqrt(carbon_intensity_value + 8.5) * 2.8 + 15*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -498,6 +510,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # resilience_hours distinct 16 for energy using Signal power, solar, battery, grid, resilience svc 16
         value = payload.get('value', 10)
+        resilience_hours_value = value
         result = resilience_hours_value * 18.30 + 1 + 16*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -525,6 +538,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # peak_shaving distinct 17 for energy using Signal power, solar, battery, grid, resilience svc 17
             value = it.get('value', 5)
+            peak_shaving_value = value
             result = peak_shaving_value + 19.40 + 2 + 17*0.015
             it['computed'] = result
             processed.append(it)
@@ -589,6 +603,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # outage_risk distinct 19 for energy using Signal power, solar, battery, grid, resilience svc 19
         value = len(results)
+        outage_risk_value = value
         result = outage_risk_value / 21.60 + 4 + 19*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -615,6 +630,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # signal_power distinct 20 for energy using Signal power, solar, battery, grid, resilience svc 20
         value = payload.get('value', 10)
+        signal_power_value = value
         result = math.exp(-0.021 * signal_power_value) * 30 + 20*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -642,6 +658,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # solar_gen distinct 21 for energy using Signal power, solar, battery, grid, resilience svc 21
             value = it.get('value', 5)
+            solar_gen_value = value
             result = math.log(1 + solar_gen_value * 22) if solar_gen_value>0 else 0 + 21*0.015
             it['computed'] = result
             processed.append(it)
@@ -706,6 +723,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # grid_import distinct 23 for energy using Signal power, solar, battery, grid, resilience svc 23
         value = len(results)
+        grid_import_value = value
         result = math.sqrt(grid_import_value + 12.5) * 2.8 + 23*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -732,6 +750,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # tou_cost distinct 24 for energy using Signal power, solar, battery, grid, resilience svc 24
         value = payload.get('value', 10)
+        tou_cost_value = value
         result = tou_cost_value * 27.10 + 4 + 24*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -759,6 +778,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # carbon_intensity distinct 25 for energy using Signal power, solar, battery, grid, resilience svc 25
             value = it.get('value', 5)
+            carbon_intensity_value = value
             result = carbon_intensity_value + 28.20 + 0 + 25*0.015
             it['computed'] = result
             processed.append(it)
@@ -823,6 +843,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # peak_shaving distinct 27 for energy using Signal power, solar, battery, grid, resilience svc 27
         value = len(results)
+        peak_shaving_value = value
         result = peak_shaving_value / 30.40 + 2 + 27*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -849,6 +870,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # power_factor distinct 28 for energy using Signal power, solar, battery, grid, resilience svc 28
         value = payload.get('value', 10)
+        power_factor_value = value
         result = math.exp(-0.029 * power_factor_value) * 38 + 28*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -876,6 +898,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # outage_risk distinct 29 for energy using Signal power, solar, battery, grid, resilience svc 29
             value = it.get('value', 5)
+            outage_risk_value = value
             result = math.log(1 + outage_risk_value * 30) if outage_risk_value>0 else 0 + 29*0.015
             it['computed'] = result
             processed.append(it)
@@ -940,6 +963,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # solar_gen distinct 1 for energy using Signal power, solar, battery, grid, resilience svc 31
         value = len(results)
+        solar_gen_value = value
         result = solar_gen_value + 1.80 + 1 + 31*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -966,6 +990,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # battery_soc distinct 2 for energy using Signal power, solar, battery, grid, resilience svc 32
         value = payload.get('value', 10)
+        battery_soc_value = value
         result = battery_soc_value - 2.90 + 2 + 32*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -993,6 +1018,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # grid_import distinct 3 for energy using Signal power, solar, battery, grid, resilience svc 33
             value = it.get('value', 5)
+            grid_import_value = value
             result = grid_import_value / 4.00 + 3 + 33*0.015
             it['computed'] = result
             processed.append(it)
@@ -1057,6 +1083,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # carbon_intensity distinct 5 for energy using Signal power, solar, battery, grid, resilience svc 35
         value = len(results)
+        carbon_intensity_value = value
         result = math.log(1 + carbon_intensity_value * 6) if carbon_intensity_value>0 else 0 + 35*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1083,6 +1110,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # resilience_hours distinct 6 for energy using Signal power, solar, battery, grid, resilience svc 36
         value = payload.get('value', 10)
+        resilience_hours_value = value
         result = pow(resilience_hours_value, 1.0) * 4.8 + 36*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1110,6 +1138,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # peak_shaving distinct 7 for energy using Signal power, solar, battery, grid, resilience svc 37
             value = it.get('value', 5)
+            peak_shaving_value = value
             result = math.sqrt(peak_shaving_value + 4.5) * 2.8 + 37*0.015
             it['computed'] = result
             processed.append(it)
@@ -1174,6 +1203,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # outage_risk distinct 9 for energy using Signal power, solar, battery, grid, resilience svc 39
         value = len(results)
+        outage_risk_value = value
         result = outage_risk_value + 10.60 + 4 + 39*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1200,6 +1230,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # signal_power distinct 10 for energy using Signal power, solar, battery, grid, resilience svc 40
         value = payload.get('value', 10)
+        signal_power_value = value
         result = signal_power_value - 11.70 + 0 + 40*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1227,6 +1258,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # solar_gen distinct 11 for energy using Signal power, solar, battery, grid, resilience svc 41
             value = it.get('value', 5)
+            solar_gen_value = value
             result = solar_gen_value / 12.80 + 1 + 41*0.015
             it['computed'] = result
             processed.append(it)
@@ -1291,6 +1323,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # grid_import distinct 13 for energy using Signal power, solar, battery, grid, resilience svc 43
         value = len(results)
+        grid_import_value = value
         result = math.log(1 + grid_import_value * 14) if grid_import_value>0 else 0 + 43*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1317,6 +1350,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # tou_cost distinct 14 for energy using Signal power, solar, battery, grid, resilience svc 44
         value = payload.get('value', 10)
+        tou_cost_value = value
         result = pow(tou_cost_value, 2.0) * 11.2 + 44*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1344,6 +1378,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # carbon_intensity distinct 15 for energy using Signal power, solar, battery, grid, resilience svc 45
             value = it.get('value', 5)
+            carbon_intensity_value = value
             result = math.sqrt(carbon_intensity_value + 8.5) * 2.8 + 45*0.015
             it['computed'] = result
             processed.append(it)
@@ -1408,6 +1443,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # peak_shaving distinct 17 for energy using Signal power, solar, battery, grid, resilience svc 47
         value = len(results)
+        peak_shaving_value = value
         result = peak_shaving_value + 19.40 + 2 + 47*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1434,6 +1470,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # power_factor distinct 18 for energy using Signal power, solar, battery, grid, resilience svc 48
         value = payload.get('value', 10)
+        power_factor_value = value
         result = power_factor_value - 20.50 + 3 + 48*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1461,6 +1498,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # outage_risk distinct 19 for energy using Signal power, solar, battery, grid, resilience svc 49
             value = it.get('value', 5)
+            outage_risk_value = value
             result = outage_risk_value / 21.60 + 4 + 49*0.015
             it['computed'] = result
             processed.append(it)
@@ -1525,6 +1563,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # solar_gen distinct 21 for energy using Signal power, solar, battery, grid, resilience svc 51
         value = len(results)
+        solar_gen_value = value
         result = math.log(1 + solar_gen_value * 22) if solar_gen_value>0 else 0 + 51*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1551,6 +1590,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # battery_soc distinct 22 for energy using Signal power, solar, battery, grid, resilience svc 52
         value = payload.get('value', 10)
+        battery_soc_value = value
         result = pow(battery_soc_value, 1.5) * 17.6 + 52*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1578,6 +1618,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # grid_import distinct 23 for energy using Signal power, solar, battery, grid, resilience svc 53
             value = it.get('value', 5)
+            grid_import_value = value
             result = math.sqrt(grid_import_value + 12.5) * 2.8 + 53*0.015
             it['computed'] = result
             processed.append(it)
@@ -1642,6 +1683,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # carbon_intensity distinct 25 for energy using Signal power, solar, battery, grid, resilience svc 55
         value = len(results)
+        carbon_intensity_value = value
         result = carbon_intensity_value + 28.20 + 0 + 55*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1668,6 +1710,7 @@ class EnergyService:
         self._rate[key]=cnt+1
         # resilience_hours distinct 26 for energy using Signal power, solar, battery, grid, resilience svc 56
         value = payload.get('value', 10)
+        resilience_hours_value = value
         result = resilience_hours_value - 29.30 + 1 + 56*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1695,6 +1738,7 @@ class EnergyService:
             if it.get('status')=='failed': continue
             # peak_shaving distinct 27 for energy using Signal power, solar, battery, grid, resilience svc 57
             value = it.get('value', 5)
+            peak_shaving_value = value
             result = peak_shaving_value / 30.40 + 2 + 57*0.015
             it['computed'] = result
             processed.append(it)
@@ -1759,6 +1803,7 @@ class EnergyService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # outage_risk distinct 29 for energy using Signal power, solar, battery, grid, resilience svc 59
         value = len(results)
+        outage_risk_value = value
         result = math.log(1 + outage_risk_value * 30) if outage_risk_value>0 else 0 + 59*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -2816,4 +2861,3 @@ def padded_energy_services_1025(payload: dict, factor: float = 2.75) -> dict:
         processed.append(it)
     processed.sort(key=lambda x: x.get('computed_25',0), reverse=True)
     return {'processed': processed[:5], 'count': len(processed), 'domain':'energy'} 
-

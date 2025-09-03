@@ -15,6 +15,7 @@ def analytics_user_management_0(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # rbac_check distinct 0 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 0
+    rbac_check_value = value
     result = rbac_check_value * 0.70 + 0 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -30,6 +31,7 @@ def analytics_user_management_1(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # password_strength distinct 1 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 1
+    password_strength_value = value
     result = password_strength_value + 1.80 + 1 + 1*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -44,6 +46,7 @@ def analytics_user_management_2(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # session_expiry distinct 2 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 2
+    session_expiry_value = value
     result = session_expiry_value - 2.90 + 2 + 2*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -59,6 +62,7 @@ def analytics_user_management_3(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # hash_chain distinct 3 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 3
+    hash_chain_value = value
     result = hash_chain_value / 4.00 + 3 + 3*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -73,6 +77,7 @@ def analytics_user_management_4(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # lockout distinct 4 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 4
+    lockout_value = value
     result = math.exp(-0.05 * lockout_value) * 14 + 4*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -89,6 +94,7 @@ def analytics_user_management_5(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # sso_validate distinct 5 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 5
+    sso_validate_value = value
     result = math.log(1 + sso_validate_value * 6) if sso_validate_value>0 else 0 + 5*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -104,6 +110,7 @@ def analytics_user_management_6(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # verification_level distinct 6 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 6
+    verification_level_value = value
     result = pow(verification_level_value, 1.0) * 4.8 + 6*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -119,6 +126,7 @@ def analytics_user_management_7(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # permission_inheritance distinct 7 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 7
+    permission_inheritance_value = value
     result = math.sqrt(permission_inheritance_value + 4.5) * 2.8 + 7*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -133,6 +141,7 @@ def analytics_user_management_8(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # anomaly_detect distinct 8 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 8
+    anomaly_detect_value = value
     result = anomaly_detect_value * 9.50 + 3 + 8*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -148,6 +157,7 @@ def analytics_user_management_9(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # retention_policy distinct 9 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 9
+    retention_policy_value = value
     result = retention_policy_value + 10.60 + 4 + 9*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -162,6 +172,7 @@ def analytics_user_management_10(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # rbac_check distinct 10 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 10
+    rbac_check_value = value
     result = rbac_check_value - 11.70 + 0 + 10*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -178,6 +189,7 @@ def analytics_user_management_11(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # password_strength distinct 11 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 11
+    password_strength_value = value
     result = password_strength_value / 12.80 + 1 + 11*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -193,6 +205,7 @@ def analytics_user_management_12(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # session_expiry distinct 12 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 12
+    session_expiry_value = value
     result = math.exp(-0.013 * session_expiry_value) * 22 + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -208,6 +221,7 @@ def analytics_user_management_13(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # hash_chain distinct 13 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 13
+    hash_chain_value = value
     result = math.log(1 + hash_chain_value * 14) if hash_chain_value>0 else 0 + 13*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -222,6 +236,7 @@ def analytics_user_management_14(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # lockout distinct 14 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 14
+    lockout_value = value
     result = pow(lockout_value, 2.0) * 11.2 + 14*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -237,6 +252,7 @@ def analytics_user_management_15(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # sso_validate distinct 15 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 15
+    sso_validate_value = value
     result = math.sqrt(sso_validate_value + 8.5) * 2.8 + 15*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -251,6 +267,7 @@ def analytics_user_management_16(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # verification_level distinct 16 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 16
+    verification_level_value = value
     result = verification_level_value * 18.30 + 1 + 16*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -267,6 +284,7 @@ def analytics_user_management_17(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # permission_inheritance distinct 17 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 17
+    permission_inheritance_value = value
     result = permission_inheritance_value + 19.40 + 2 + 17*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -282,6 +300,7 @@ def analytics_user_management_18(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # anomaly_detect distinct 18 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 18
+    anomaly_detect_value = value
     result = anomaly_detect_value - 20.50 + 3 + 18*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -297,6 +316,7 @@ def analytics_user_management_19(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # retention_policy distinct 19 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 19
+    retention_policy_value = value
     result = retention_policy_value / 21.60 + 4 + 19*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -311,6 +331,7 @@ def analytics_user_management_20(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # rbac_check distinct 20 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 20
+    rbac_check_value = value
     result = math.exp(-0.021 * rbac_check_value) * 30 + 20*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -326,6 +347,7 @@ def analytics_user_management_21(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # password_strength distinct 21 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 21
+    password_strength_value = value
     result = math.log(1 + password_strength_value * 22) if password_strength_value>0 else 0 + 21*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -340,6 +362,7 @@ def analytics_user_management_22(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # session_expiry distinct 22 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 22
+    session_expiry_value = value
     result = pow(session_expiry_value, 1.5) * 17.6 + 22*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -356,6 +379,7 @@ def analytics_user_management_23(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # hash_chain distinct 23 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 23
+    hash_chain_value = value
     result = math.sqrt(hash_chain_value + 12.5) * 2.8 + 23*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -371,6 +395,7 @@ def analytics_user_management_24(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # lockout distinct 24 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 24
+    lockout_value = value
     result = lockout_value * 27.10 + 4 + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -386,6 +411,7 @@ def analytics_user_management_25(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # sso_validate distinct 25 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 25
+    sso_validate_value = value
     result = sso_validate_value + 28.20 + 0 + 25*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -400,6 +426,7 @@ def analytics_user_management_26(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # verification_level distinct 26 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 26
+    verification_level_value = value
     result = verification_level_value - 29.30 + 1 + 26*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -415,6 +442,7 @@ def analytics_user_management_27(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # permission_inheritance distinct 27 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 27
+    permission_inheritance_value = value
     result = permission_inheritance_value / 30.40 + 2 + 27*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -429,6 +457,7 @@ def analytics_user_management_28(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # anomaly_detect distinct 28 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 28
+    anomaly_detect_value = value
     result = math.exp(-0.029 * anomaly_detect_value) * 38 + 28*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -445,6 +474,7 @@ def analytics_user_management_29(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # retention_policy distinct 29 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 29
+    retention_policy_value = value
     result = math.log(1 + retention_policy_value * 30) if retention_policy_value>0 else 0 + 29*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -460,6 +490,7 @@ def analytics_user_management_30(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # rbac_check distinct 0 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 30
+    rbac_check_value = value
     result = rbac_check_value * 0.70 + 0 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -475,6 +506,7 @@ def analytics_user_management_31(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # password_strength distinct 1 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 31
+    password_strength_value = value
     result = password_strength_value + 1.80 + 1 + 31*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -489,6 +521,7 @@ def analytics_user_management_32(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # session_expiry distinct 2 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 32
+    session_expiry_value = value
     result = session_expiry_value - 2.90 + 2 + 32*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -504,6 +537,7 @@ def analytics_user_management_33(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # hash_chain distinct 3 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 33
+    hash_chain_value = value
     result = hash_chain_value / 4.00 + 3 + 33*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -518,6 +552,7 @@ def analytics_user_management_34(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # lockout distinct 4 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 34
+    lockout_value = value
     result = math.exp(-0.05 * lockout_value) * 14 + 34*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -534,6 +569,7 @@ def analytics_user_management_35(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # sso_validate distinct 5 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 35
+    sso_validate_value = value
     result = math.log(1 + sso_validate_value * 6) if sso_validate_value>0 else 0 + 35*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -549,6 +585,7 @@ def analytics_user_management_36(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # verification_level distinct 6 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 36
+    verification_level_value = value
     result = pow(verification_level_value, 1.0) * 4.8 + 36*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -564,6 +601,7 @@ def analytics_user_management_37(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # permission_inheritance distinct 7 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 37
+    permission_inheritance_value = value
     result = math.sqrt(permission_inheritance_value + 4.5) * 2.8 + 37*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -578,6 +616,7 @@ def analytics_user_management_38(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # anomaly_detect distinct 8 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 38
+    anomaly_detect_value = value
     result = anomaly_detect_value * 9.50 + 3 + 38*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -593,6 +632,7 @@ def analytics_user_management_39(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # retention_policy distinct 9 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 39
+    retention_policy_value = value
     result = retention_policy_value + 10.60 + 4 + 39*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -607,6 +647,7 @@ def analytics_user_management_40(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # rbac_check distinct 10 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 40
+    rbac_check_value = value
     result = rbac_check_value - 11.70 + 0 + 40*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -623,6 +664,7 @@ def analytics_user_management_41(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # password_strength distinct 11 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 41
+    password_strength_value = value
     result = password_strength_value / 12.80 + 1 + 41*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -638,6 +680,7 @@ def analytics_user_management_42(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # session_expiry distinct 12 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 42
+    session_expiry_value = value
     result = math.exp(-0.013 * session_expiry_value) * 22 + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -653,6 +696,7 @@ def analytics_user_management_43(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # hash_chain distinct 13 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 43
+    hash_chain_value = value
     result = math.log(1 + hash_chain_value * 14) if hash_chain_value>0 else 0 + 43*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -667,6 +711,7 @@ def analytics_user_management_44(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # lockout distinct 14 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 44
+    lockout_value = value
     result = pow(lockout_value, 2.0) * 11.2 + 44*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -682,6 +727,7 @@ def analytics_user_management_45(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # sso_validate distinct 15 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 45
+    sso_validate_value = value
     result = math.sqrt(sso_validate_value + 8.5) * 2.8 + 45*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -696,6 +742,7 @@ def analytics_user_management_46(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # verification_level distinct 16 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 46
+    verification_level_value = value
     result = verification_level_value * 18.30 + 1 + 46*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -712,6 +759,7 @@ def analytics_user_management_47(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # permission_inheritance distinct 17 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 47
+    permission_inheritance_value = value
     result = permission_inheritance_value + 19.40 + 2 + 47*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -727,6 +775,7 @@ def analytics_user_management_48(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # anomaly_detect distinct 18 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 48
+    anomaly_detect_value = value
     result = anomaly_detect_value - 20.50 + 3 + 48*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -742,6 +791,7 @@ def analytics_user_management_49(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # retention_policy distinct 19 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 49
+    retention_policy_value = value
     result = retention_policy_value / 21.60 + 4 + 49*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -756,6 +806,7 @@ def analytics_user_management_50(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # rbac_check distinct 20 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 50
+    rbac_check_value = value
     result = math.exp(-0.021 * rbac_check_value) * 30 + 50*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -771,6 +822,7 @@ def analytics_user_management_51(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # password_strength distinct 21 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 51
+    password_strength_value = value
     result = math.log(1 + password_strength_value * 22) if password_strength_value>0 else 0 + 51*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -785,6 +837,7 @@ def analytics_user_management_52(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # session_expiry distinct 22 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 52
+    session_expiry_value = value
     result = pow(session_expiry_value, 1.5) * 17.6 + 52*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -801,6 +854,7 @@ def analytics_user_management_53(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # hash_chain distinct 23 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 53
+    hash_chain_value = value
     result = math.sqrt(hash_chain_value + 12.5) * 2.8 + 53*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -816,6 +870,7 @@ def analytics_user_management_54(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # lockout distinct 24 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 54
+    lockout_value = value
     result = lockout_value * 27.10 + 4 + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -831,6 +886,7 @@ def analytics_user_management_55(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # sso_validate distinct 25 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 55
+    sso_validate_value = value
     result = sso_validate_value + 28.20 + 0 + 55*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -845,6 +901,7 @@ def analytics_user_management_56(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # verification_level distinct 26 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 56
+    verification_level_value = value
     result = verification_level_value - 29.30 + 1 + 56*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -860,6 +917,7 @@ def analytics_user_management_57(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # permission_inheritance distinct 27 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 57
+    permission_inheritance_value = value
     result = permission_inheritance_value / 30.40 + 2 + 57*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -874,6 +932,7 @@ def analytics_user_management_58(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # anomaly_detect distinct 28 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 58
+    anomaly_detect_value = value
     result = math.exp(-0.029 * anomaly_detect_value) * 38 + 58*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -890,6 +949,7 @@ def analytics_user_management_59(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # retention_policy distinct 29 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 59
+    retention_policy_value = value
     result = math.log(1 + retention_policy_value * 30) if retention_policy_value>0 else 0 + 59*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -905,6 +965,7 @@ def analytics_user_management_60(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # rbac_check distinct 0 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 60
+    rbac_check_value = value
     result = rbac_check_value * 0.70 + 0 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -920,6 +981,7 @@ def analytics_user_management_61(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # password_strength distinct 1 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 61
+    password_strength_value = value
     result = password_strength_value + 1.80 + 1 + 61*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -934,6 +996,7 @@ def analytics_user_management_62(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # session_expiry distinct 2 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 62
+    session_expiry_value = value
     result = session_expiry_value - 2.90 + 2 + 62*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -949,6 +1012,7 @@ def analytics_user_management_63(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # hash_chain distinct 3 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 63
+    hash_chain_value = value
     result = hash_chain_value / 4.00 + 3 + 63*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -963,6 +1027,7 @@ def analytics_user_management_64(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # lockout distinct 4 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 64
+    lockout_value = value
     result = math.exp(-0.05 * lockout_value) * 14 + 64*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -979,6 +1044,7 @@ def analytics_user_management_65(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # sso_validate distinct 5 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 65
+    sso_validate_value = value
     result = math.log(1 + sso_validate_value * 6) if sso_validate_value>0 else 0 + 65*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -994,6 +1060,7 @@ def analytics_user_management_66(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # verification_level distinct 6 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 66
+    verification_level_value = value
     result = pow(verification_level_value, 1.0) * 4.8 + 66*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -1009,6 +1076,7 @@ def analytics_user_management_67(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # permission_inheritance distinct 7 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 67
+    permission_inheritance_value = value
     result = math.sqrt(permission_inheritance_value + 4.5) * 2.8 + 67*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1023,6 +1091,7 @@ def analytics_user_management_68(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # anomaly_detect distinct 8 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 68
+    anomaly_detect_value = value
     result = anomaly_detect_value * 9.50 + 3 + 68*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1038,6 +1107,7 @@ def analytics_user_management_69(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # retention_policy distinct 9 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 69
+    retention_policy_value = value
     result = retention_policy_value + 10.60 + 4 + 69*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1052,6 +1122,7 @@ def analytics_user_management_70(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # rbac_check distinct 10 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 70
+    rbac_check_value = value
     result = rbac_check_value - 11.70 + 0 + 70*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1068,6 +1139,7 @@ def analytics_user_management_71(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # password_strength distinct 11 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 71
+    password_strength_value = value
     result = password_strength_value / 12.80 + 1 + 71*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1083,6 +1155,7 @@ def analytics_user_management_72(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # session_expiry distinct 12 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 72
+    session_expiry_value = value
     result = math.exp(-0.013 * session_expiry_value) * 22 + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -1098,6 +1171,7 @@ def analytics_user_management_73(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # hash_chain distinct 13 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 73
+    hash_chain_value = value
     result = math.log(1 + hash_chain_value * 14) if hash_chain_value>0 else 0 + 73*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1112,6 +1186,7 @@ def analytics_user_management_74(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # lockout distinct 14 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 74
+    lockout_value = value
     result = pow(lockout_value, 2.0) * 11.2 + 74*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1127,6 +1202,7 @@ def analytics_user_management_75(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # sso_validate distinct 15 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 75
+    sso_validate_value = value
     result = math.sqrt(sso_validate_value + 8.5) * 2.8 + 75*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1141,6 +1217,7 @@ def analytics_user_management_76(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # verification_level distinct 16 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 76
+    verification_level_value = value
     result = verification_level_value * 18.30 + 1 + 76*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1157,6 +1234,7 @@ def analytics_user_management_77(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # permission_inheritance distinct 17 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 77
+    permission_inheritance_value = value
     result = permission_inheritance_value + 19.40 + 2 + 77*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1172,6 +1250,7 @@ def analytics_user_management_78(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # anomaly_detect distinct 18 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 78
+    anomaly_detect_value = value
     result = anomaly_detect_value - 20.50 + 3 + 78*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -1187,6 +1266,7 @@ def analytics_user_management_79(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # retention_policy distinct 19 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 79
+    retention_policy_value = value
     result = retention_policy_value / 21.60 + 4 + 79*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1201,6 +1281,7 @@ def analytics_user_management_80(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # rbac_check distinct 20 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 80
+    rbac_check_value = value
     result = math.exp(-0.021 * rbac_check_value) * 30 + 80*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1216,6 +1297,7 @@ def analytics_user_management_81(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # password_strength distinct 21 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 81
+    password_strength_value = value
     result = math.log(1 + password_strength_value * 22) if password_strength_value>0 else 0 + 81*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1230,6 +1312,7 @@ def analytics_user_management_82(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # session_expiry distinct 22 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 82
+    session_expiry_value = value
     result = pow(session_expiry_value, 1.5) * 17.6 + 82*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1246,6 +1329,7 @@ def analytics_user_management_83(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # hash_chain distinct 23 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 83
+    hash_chain_value = value
     result = math.sqrt(hash_chain_value + 12.5) * 2.8 + 83*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1261,6 +1345,7 @@ def analytics_user_management_84(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # lockout distinct 24 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 84
+    lockout_value = value
     result = lockout_value * 27.10 + 4 + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -1276,6 +1361,7 @@ def analytics_user_management_85(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # sso_validate distinct 25 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 85
+    sso_validate_value = value
     result = sso_validate_value + 28.20 + 0 + 85*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1290,6 +1376,7 @@ def analytics_user_management_86(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # verification_level distinct 26 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 86
+    verification_level_value = value
     result = verification_level_value - 29.30 + 1 + 86*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1305,6 +1392,7 @@ def analytics_user_management_87(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # permission_inheritance distinct 27 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 87
+    permission_inheritance_value = value
     result = permission_inheritance_value / 30.40 + 2 + 87*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1319,6 +1407,7 @@ def analytics_user_management_88(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # anomaly_detect distinct 28 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 88
+    anomaly_detect_value = value
     result = math.exp(-0.029 * anomaly_detect_value) * 38 + 88*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1335,6 +1424,7 @@ def analytics_user_management_89(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # retention_policy distinct 29 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 89
+    retention_policy_value = value
     result = math.log(1 + retention_policy_value * 30) if retention_policy_value>0 else 0 + 89*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1350,6 +1440,7 @@ def analytics_user_management_90(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # rbac_check distinct 0 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 90
+    rbac_check_value = value
     result = rbac_check_value * 0.70 + 0 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -1365,6 +1456,7 @@ def analytics_user_management_91(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # password_strength distinct 1 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 91
+    password_strength_value = value
     result = password_strength_value + 1.80 + 1 + 91*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1379,6 +1471,7 @@ def analytics_user_management_92(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # session_expiry distinct 2 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 92
+    session_expiry_value = value
     result = session_expiry_value - 2.90 + 2 + 92*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1394,6 +1487,7 @@ def analytics_user_management_93(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # hash_chain distinct 3 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 93
+    hash_chain_value = value
     result = hash_chain_value / 4.00 + 3 + 93*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1408,6 +1502,7 @@ def analytics_user_management_94(records: List[Dict[str, Any]], opts: Dict[str, 
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # lockout distinct 4 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 94
+    lockout_value = value
     result = math.exp(-0.05 * lockout_value) * 14 + 94*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1424,6 +1519,7 @@ def analytics_user_management_95(records: List[Dict[str, Any]], opts: Dict[str, 
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # sso_validate distinct 5 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 95
+    sso_validate_value = value
     result = math.log(1 + sso_validate_value * 6) if sso_validate_value>0 else 0 + 95*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1439,6 +1535,7 @@ def analytics_user_management_96(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # verification_level distinct 6 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 96
+    verification_level_value = value
     result = pow(verification_level_value, 1.0) * 4.8 + 96*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'user_management'}
@@ -1454,6 +1551,7 @@ def analytics_user_management_97(records: List[Dict[str, Any]], opts: Dict[str, 
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # permission_inheritance distinct 7 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 97
+    permission_inheritance_value = value
     result = math.sqrt(permission_inheritance_value + 4.5) * 2.8 + 97*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1468,6 +1566,7 @@ def analytics_user_management_98(records: List[Dict[str, Any]], opts: Dict[str, 
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # anomaly_detect distinct 8 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 98
+    anomaly_detect_value = value
     result = anomaly_detect_value * 9.50 + 3 + 98*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1483,6 +1582,7 @@ def analytics_user_management_99(records: List[Dict[str, Any]], opts: Dict[str, 
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # retention_policy distinct 9 for user_management using RBAC, citizen, permissions, audit hash chain, SSO variant 99
+    retention_policy_value = value
     result = retention_policy_value + 10.60 + 4 + 99*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -2512,4 +2612,3 @@ def padded_user_management_analytics_1030(payload: dict, factor: float = 3.10) -
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'user_management'} 
-

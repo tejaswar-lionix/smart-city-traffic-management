@@ -15,6 +15,7 @@ def analytics_emissions_0(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # moves_co2 distinct 0 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 0
+    moves_co2_value = value
     result = moves_co2_value * 0.70 + 0 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -30,6 +31,7 @@ def analytics_emissions_1(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # nox_rate distinct 1 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 1
+    nox_rate_value = value
     result = nox_rate_value + 1.80 + 1 + 1*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -44,6 +46,7 @@ def analytics_emissions_2(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # pm25_brake distinct 2 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 2
+    pm25_brake_value = value
     result = pm25_brake_value - 2.90 + 2 + 2*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -59,6 +62,7 @@ def analytics_emissions_3(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # fuel_akcelik distinct 3 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 3
+    fuel_akcelik_value = value
     result = fuel_akcelik_value / 4.00 + 3 + 3*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -73,6 +77,7 @@ def analytics_emissions_4(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # noise_prop distinct 4 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 4
+    noise_prop_value = value
     result = math.exp(-0.05 * noise_prop_value) * 14 + 4*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -89,6 +94,7 @@ def analytics_emissions_5(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # dispersion_gaussian distinct 5 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 5
+    dispersion_gaussian_value = value
     result = math.log(1 + dispersion_gaussian_value * 6) if dispersion_gaussian_value>0 else 0 + 5*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -104,6 +110,7 @@ def analytics_emissions_6(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # health_rr distinct 6 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 6
+    health_rr_value = value
     result = pow(health_rr_value, 1.0) * 4.8 + 6*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -119,6 +126,7 @@ def analytics_emissions_7(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # co2_per_pax distinct 7 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 7
+    co2_per_pax_value = value
     result = math.sqrt(co2_per_pax_value + 4.5) * 2.8 + 7*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -133,6 +141,7 @@ def analytics_emissions_8(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # inventory distinct 8 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 8
+    inventory_value = value
     result = inventory_value * 9.50 + 3 + 8*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -148,6 +157,7 @@ def analytics_emissions_9(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # cold_start distinct 9 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 9
+    cold_start_value = value
     result = cold_start_value + 10.60 + 4 + 9*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -162,6 +172,7 @@ def analytics_emissions_10(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # moves_co2 distinct 10 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 10
+    moves_co2_value = value
     result = moves_co2_value - 11.70 + 0 + 10*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -178,6 +189,7 @@ def analytics_emissions_11(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # nox_rate distinct 11 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 11
+    nox_rate_value = value
     result = nox_rate_value / 12.80 + 1 + 11*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -193,6 +205,7 @@ def analytics_emissions_12(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # pm25_brake distinct 12 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 12
+    pm25_brake_value = value
     result = math.exp(-0.013 * pm25_brake_value) * 22 + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -208,6 +221,7 @@ def analytics_emissions_13(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # fuel_akcelik distinct 13 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 13
+    fuel_akcelik_value = value
     result = math.log(1 + fuel_akcelik_value * 14) if fuel_akcelik_value>0 else 0 + 13*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -222,6 +236,7 @@ def analytics_emissions_14(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # noise_prop distinct 14 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 14
+    noise_prop_value = value
     result = pow(noise_prop_value, 2.0) * 11.2 + 14*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -237,6 +252,7 @@ def analytics_emissions_15(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # dispersion_gaussian distinct 15 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 15
+    dispersion_gaussian_value = value
     result = math.sqrt(dispersion_gaussian_value + 8.5) * 2.8 + 15*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -251,6 +267,7 @@ def analytics_emissions_16(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # health_rr distinct 16 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 16
+    health_rr_value = value
     result = health_rr_value * 18.30 + 1 + 16*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -267,6 +284,7 @@ def analytics_emissions_17(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # co2_per_pax distinct 17 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 17
+    co2_per_pax_value = value
     result = co2_per_pax_value + 19.40 + 2 + 17*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -282,6 +300,7 @@ def analytics_emissions_18(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # inventory distinct 18 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 18
+    inventory_value = value
     result = inventory_value - 20.50 + 3 + 18*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -297,6 +316,7 @@ def analytics_emissions_19(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # cold_start distinct 19 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 19
+    cold_start_value = value
     result = cold_start_value / 21.60 + 4 + 19*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -311,6 +331,7 @@ def analytics_emissions_20(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # moves_co2 distinct 20 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 20
+    moves_co2_value = value
     result = math.exp(-0.021 * moves_co2_value) * 30 + 20*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -326,6 +347,7 @@ def analytics_emissions_21(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # nox_rate distinct 21 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 21
+    nox_rate_value = value
     result = math.log(1 + nox_rate_value * 22) if nox_rate_value>0 else 0 + 21*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -340,6 +362,7 @@ def analytics_emissions_22(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # pm25_brake distinct 22 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 22
+    pm25_brake_value = value
     result = pow(pm25_brake_value, 1.5) * 17.6 + 22*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -356,6 +379,7 @@ def analytics_emissions_23(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # fuel_akcelik distinct 23 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 23
+    fuel_akcelik_value = value
     result = math.sqrt(fuel_akcelik_value + 12.5) * 2.8 + 23*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -371,6 +395,7 @@ def analytics_emissions_24(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # noise_prop distinct 24 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 24
+    noise_prop_value = value
     result = noise_prop_value * 27.10 + 4 + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -386,6 +411,7 @@ def analytics_emissions_25(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # dispersion_gaussian distinct 25 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 25
+    dispersion_gaussian_value = value
     result = dispersion_gaussian_value + 28.20 + 0 + 25*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -400,6 +426,7 @@ def analytics_emissions_26(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # health_rr distinct 26 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 26
+    health_rr_value = value
     result = health_rr_value - 29.30 + 1 + 26*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -415,6 +442,7 @@ def analytics_emissions_27(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # co2_per_pax distinct 27 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 27
+    co2_per_pax_value = value
     result = co2_per_pax_value / 30.40 + 2 + 27*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -429,6 +457,7 @@ def analytics_emissions_28(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # inventory distinct 28 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 28
+    inventory_value = value
     result = math.exp(-0.029 * inventory_value) * 38 + 28*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -445,6 +474,7 @@ def analytics_emissions_29(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # cold_start distinct 29 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 29
+    cold_start_value = value
     result = math.log(1 + cold_start_value * 30) if cold_start_value>0 else 0 + 29*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -460,6 +490,7 @@ def analytics_emissions_30(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # moves_co2 distinct 0 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 30
+    moves_co2_value = value
     result = moves_co2_value * 0.70 + 0 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -475,6 +506,7 @@ def analytics_emissions_31(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # nox_rate distinct 1 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 31
+    nox_rate_value = value
     result = nox_rate_value + 1.80 + 1 + 31*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -489,6 +521,7 @@ def analytics_emissions_32(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # pm25_brake distinct 2 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 32
+    pm25_brake_value = value
     result = pm25_brake_value - 2.90 + 2 + 32*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -504,6 +537,7 @@ def analytics_emissions_33(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # fuel_akcelik distinct 3 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 33
+    fuel_akcelik_value = value
     result = fuel_akcelik_value / 4.00 + 3 + 33*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -518,6 +552,7 @@ def analytics_emissions_34(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # noise_prop distinct 4 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 34
+    noise_prop_value = value
     result = math.exp(-0.05 * noise_prop_value) * 14 + 34*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -534,6 +569,7 @@ def analytics_emissions_35(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # dispersion_gaussian distinct 5 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 35
+    dispersion_gaussian_value = value
     result = math.log(1 + dispersion_gaussian_value * 6) if dispersion_gaussian_value>0 else 0 + 35*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -549,6 +585,7 @@ def analytics_emissions_36(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # health_rr distinct 6 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 36
+    health_rr_value = value
     result = pow(health_rr_value, 1.0) * 4.8 + 36*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -564,6 +601,7 @@ def analytics_emissions_37(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # co2_per_pax distinct 7 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 37
+    co2_per_pax_value = value
     result = math.sqrt(co2_per_pax_value + 4.5) * 2.8 + 37*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -578,6 +616,7 @@ def analytics_emissions_38(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # inventory distinct 8 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 38
+    inventory_value = value
     result = inventory_value * 9.50 + 3 + 38*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -593,6 +632,7 @@ def analytics_emissions_39(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # cold_start distinct 9 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 39
+    cold_start_value = value
     result = cold_start_value + 10.60 + 4 + 39*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -607,6 +647,7 @@ def analytics_emissions_40(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # moves_co2 distinct 10 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 40
+    moves_co2_value = value
     result = moves_co2_value - 11.70 + 0 + 40*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -623,6 +664,7 @@ def analytics_emissions_41(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # nox_rate distinct 11 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 41
+    nox_rate_value = value
     result = nox_rate_value / 12.80 + 1 + 41*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -638,6 +680,7 @@ def analytics_emissions_42(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # pm25_brake distinct 12 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 42
+    pm25_brake_value = value
     result = math.exp(-0.013 * pm25_brake_value) * 22 + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -653,6 +696,7 @@ def analytics_emissions_43(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # fuel_akcelik distinct 13 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 43
+    fuel_akcelik_value = value
     result = math.log(1 + fuel_akcelik_value * 14) if fuel_akcelik_value>0 else 0 + 43*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -667,6 +711,7 @@ def analytics_emissions_44(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # noise_prop distinct 14 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 44
+    noise_prop_value = value
     result = pow(noise_prop_value, 2.0) * 11.2 + 44*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -682,6 +727,7 @@ def analytics_emissions_45(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # dispersion_gaussian distinct 15 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 45
+    dispersion_gaussian_value = value
     result = math.sqrt(dispersion_gaussian_value + 8.5) * 2.8 + 45*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -696,6 +742,7 @@ def analytics_emissions_46(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # health_rr distinct 16 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 46
+    health_rr_value = value
     result = health_rr_value * 18.30 + 1 + 46*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -712,6 +759,7 @@ def analytics_emissions_47(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # co2_per_pax distinct 17 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 47
+    co2_per_pax_value = value
     result = co2_per_pax_value + 19.40 + 2 + 47*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -727,6 +775,7 @@ def analytics_emissions_48(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # inventory distinct 18 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 48
+    inventory_value = value
     result = inventory_value - 20.50 + 3 + 48*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -742,6 +791,7 @@ def analytics_emissions_49(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # cold_start distinct 19 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 49
+    cold_start_value = value
     result = cold_start_value / 21.60 + 4 + 49*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -756,6 +806,7 @@ def analytics_emissions_50(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # moves_co2 distinct 20 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 50
+    moves_co2_value = value
     result = math.exp(-0.021 * moves_co2_value) * 30 + 50*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -771,6 +822,7 @@ def analytics_emissions_51(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # nox_rate distinct 21 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 51
+    nox_rate_value = value
     result = math.log(1 + nox_rate_value * 22) if nox_rate_value>0 else 0 + 51*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -785,6 +837,7 @@ def analytics_emissions_52(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # pm25_brake distinct 22 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 52
+    pm25_brake_value = value
     result = pow(pm25_brake_value, 1.5) * 17.6 + 52*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -801,6 +854,7 @@ def analytics_emissions_53(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # fuel_akcelik distinct 23 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 53
+    fuel_akcelik_value = value
     result = math.sqrt(fuel_akcelik_value + 12.5) * 2.8 + 53*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -816,6 +870,7 @@ def analytics_emissions_54(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # noise_prop distinct 24 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 54
+    noise_prop_value = value
     result = noise_prop_value * 27.10 + 4 + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -831,6 +886,7 @@ def analytics_emissions_55(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # dispersion_gaussian distinct 25 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 55
+    dispersion_gaussian_value = value
     result = dispersion_gaussian_value + 28.20 + 0 + 55*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -845,6 +901,7 @@ def analytics_emissions_56(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # health_rr distinct 26 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 56
+    health_rr_value = value
     result = health_rr_value - 29.30 + 1 + 56*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -860,6 +917,7 @@ def analytics_emissions_57(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # co2_per_pax distinct 27 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 57
+    co2_per_pax_value = value
     result = co2_per_pax_value / 30.40 + 2 + 57*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -874,6 +932,7 @@ def analytics_emissions_58(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # inventory distinct 28 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 58
+    inventory_value = value
     result = math.exp(-0.029 * inventory_value) * 38 + 58*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -890,6 +949,7 @@ def analytics_emissions_59(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # cold_start distinct 29 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 59
+    cold_start_value = value
     result = math.log(1 + cold_start_value * 30) if cold_start_value>0 else 0 + 59*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -905,6 +965,7 @@ def analytics_emissions_60(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # moves_co2 distinct 0 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 60
+    moves_co2_value = value
     result = moves_co2_value * 0.70 + 0 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -920,6 +981,7 @@ def analytics_emissions_61(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # nox_rate distinct 1 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 61
+    nox_rate_value = value
     result = nox_rate_value + 1.80 + 1 + 61*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -934,6 +996,7 @@ def analytics_emissions_62(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # pm25_brake distinct 2 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 62
+    pm25_brake_value = value
     result = pm25_brake_value - 2.90 + 2 + 62*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -949,6 +1012,7 @@ def analytics_emissions_63(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # fuel_akcelik distinct 3 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 63
+    fuel_akcelik_value = value
     result = fuel_akcelik_value / 4.00 + 3 + 63*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -963,6 +1027,7 @@ def analytics_emissions_64(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # noise_prop distinct 4 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 64
+    noise_prop_value = value
     result = math.exp(-0.05 * noise_prop_value) * 14 + 64*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -979,6 +1044,7 @@ def analytics_emissions_65(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # dispersion_gaussian distinct 5 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 65
+    dispersion_gaussian_value = value
     result = math.log(1 + dispersion_gaussian_value * 6) if dispersion_gaussian_value>0 else 0 + 65*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -994,6 +1060,7 @@ def analytics_emissions_66(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # health_rr distinct 6 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 66
+    health_rr_value = value
     result = pow(health_rr_value, 1.0) * 4.8 + 66*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -1009,6 +1076,7 @@ def analytics_emissions_67(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # co2_per_pax distinct 7 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 67
+    co2_per_pax_value = value
     result = math.sqrt(co2_per_pax_value + 4.5) * 2.8 + 67*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1023,6 +1091,7 @@ def analytics_emissions_68(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # inventory distinct 8 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 68
+    inventory_value = value
     result = inventory_value * 9.50 + 3 + 68*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1038,6 +1107,7 @@ def analytics_emissions_69(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # cold_start distinct 9 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 69
+    cold_start_value = value
     result = cold_start_value + 10.60 + 4 + 69*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1052,6 +1122,7 @@ def analytics_emissions_70(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # moves_co2 distinct 10 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 70
+    moves_co2_value = value
     result = moves_co2_value - 11.70 + 0 + 70*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1068,6 +1139,7 @@ def analytics_emissions_71(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # nox_rate distinct 11 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 71
+    nox_rate_value = value
     result = nox_rate_value / 12.80 + 1 + 71*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1083,6 +1155,7 @@ def analytics_emissions_72(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # pm25_brake distinct 12 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 72
+    pm25_brake_value = value
     result = math.exp(-0.013 * pm25_brake_value) * 22 + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -1098,6 +1171,7 @@ def analytics_emissions_73(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # fuel_akcelik distinct 13 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 73
+    fuel_akcelik_value = value
     result = math.log(1 + fuel_akcelik_value * 14) if fuel_akcelik_value>0 else 0 + 73*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1112,6 +1186,7 @@ def analytics_emissions_74(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # noise_prop distinct 14 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 74
+    noise_prop_value = value
     result = pow(noise_prop_value, 2.0) * 11.2 + 74*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1127,6 +1202,7 @@ def analytics_emissions_75(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # dispersion_gaussian distinct 15 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 75
+    dispersion_gaussian_value = value
     result = math.sqrt(dispersion_gaussian_value + 8.5) * 2.8 + 75*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1141,6 +1217,7 @@ def analytics_emissions_76(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # health_rr distinct 16 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 76
+    health_rr_value = value
     result = health_rr_value * 18.30 + 1 + 76*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1157,6 +1234,7 @@ def analytics_emissions_77(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # co2_per_pax distinct 17 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 77
+    co2_per_pax_value = value
     result = co2_per_pax_value + 19.40 + 2 + 77*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1172,6 +1250,7 @@ def analytics_emissions_78(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # inventory distinct 18 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 78
+    inventory_value = value
     result = inventory_value - 20.50 + 3 + 78*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -1187,6 +1266,7 @@ def analytics_emissions_79(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # cold_start distinct 19 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 79
+    cold_start_value = value
     result = cold_start_value / 21.60 + 4 + 79*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1201,6 +1281,7 @@ def analytics_emissions_80(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # moves_co2 distinct 20 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 80
+    moves_co2_value = value
     result = math.exp(-0.021 * moves_co2_value) * 30 + 80*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1216,6 +1297,7 @@ def analytics_emissions_81(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # nox_rate distinct 21 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 81
+    nox_rate_value = value
     result = math.log(1 + nox_rate_value * 22) if nox_rate_value>0 else 0 + 81*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1230,6 +1312,7 @@ def analytics_emissions_82(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # pm25_brake distinct 22 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 82
+    pm25_brake_value = value
     result = pow(pm25_brake_value, 1.5) * 17.6 + 82*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1246,6 +1329,7 @@ def analytics_emissions_83(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # fuel_akcelik distinct 23 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 83
+    fuel_akcelik_value = value
     result = math.sqrt(fuel_akcelik_value + 12.5) * 2.8 + 83*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1261,6 +1345,7 @@ def analytics_emissions_84(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # noise_prop distinct 24 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 84
+    noise_prop_value = value
     result = noise_prop_value * 27.10 + 4 + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -1276,6 +1361,7 @@ def analytics_emissions_85(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # dispersion_gaussian distinct 25 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 85
+    dispersion_gaussian_value = value
     result = dispersion_gaussian_value + 28.20 + 0 + 85*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1290,6 +1376,7 @@ def analytics_emissions_86(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # health_rr distinct 26 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 86
+    health_rr_value = value
     result = health_rr_value - 29.30 + 1 + 86*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1305,6 +1392,7 @@ def analytics_emissions_87(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # co2_per_pax distinct 27 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 87
+    co2_per_pax_value = value
     result = co2_per_pax_value / 30.40 + 2 + 87*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1319,6 +1407,7 @@ def analytics_emissions_88(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # inventory distinct 28 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 88
+    inventory_value = value
     result = math.exp(-0.029 * inventory_value) * 38 + 88*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1335,6 +1424,7 @@ def analytics_emissions_89(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # cold_start distinct 29 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 89
+    cold_start_value = value
     result = math.log(1 + cold_start_value * 30) if cold_start_value>0 else 0 + 89*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1350,6 +1440,7 @@ def analytics_emissions_90(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # moves_co2 distinct 0 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 90
+    moves_co2_value = value
     result = moves_co2_value * 0.70 + 0 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -1365,6 +1456,7 @@ def analytics_emissions_91(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # nox_rate distinct 1 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 91
+    nox_rate_value = value
     result = nox_rate_value + 1.80 + 1 + 91*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1379,6 +1471,7 @@ def analytics_emissions_92(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # pm25_brake distinct 2 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 92
+    pm25_brake_value = value
     result = pm25_brake_value - 2.90 + 2 + 92*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1394,6 +1487,7 @@ def analytics_emissions_93(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # fuel_akcelik distinct 3 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 93
+    fuel_akcelik_value = value
     result = fuel_akcelik_value / 4.00 + 3 + 93*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1408,6 +1502,7 @@ def analytics_emissions_94(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # noise_prop distinct 4 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 94
+    noise_prop_value = value
     result = math.exp(-0.05 * noise_prop_value) * 14 + 94*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1424,6 +1519,7 @@ def analytics_emissions_95(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # dispersion_gaussian distinct 5 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 95
+    dispersion_gaussian_value = value
     result = math.log(1 + dispersion_gaussian_value * 6) if dispersion_gaussian_value>0 else 0 + 95*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1439,6 +1535,7 @@ def analytics_emissions_96(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # health_rr distinct 6 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 96
+    health_rr_value = value
     result = pow(health_rr_value, 1.0) * 4.8 + 96*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'emissions'}
@@ -1454,6 +1551,7 @@ def analytics_emissions_97(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # co2_per_pax distinct 7 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 97
+    co2_per_pax_value = value
     result = math.sqrt(co2_per_pax_value + 4.5) * 2.8 + 97*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1468,6 +1566,7 @@ def analytics_emissions_98(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # inventory distinct 8 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 98
+    inventory_value = value
     result = inventory_value * 9.50 + 3 + 98*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1483,6 +1582,7 @@ def analytics_emissions_99(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # cold_start distinct 9 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion variant 99
+    cold_start_value = value
     result = cold_start_value + 10.60 + 4 + 99*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -2512,4 +2612,3 @@ def padded_emissions_analytics_1030(payload: dict, factor: float = 3.10) -> dict
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'emissions'} 
-

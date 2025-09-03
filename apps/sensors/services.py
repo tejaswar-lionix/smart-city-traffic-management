@@ -30,6 +30,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # occupancy distinct 0 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 0
         value = payload.get('value', 10)
+        occupancy_value = value
         result = occupancy_value * 0.70 + 0 + 0*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -57,6 +58,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # accuracy distinct 1 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 1
             value = it.get('value', 5)
+            accuracy_value = value
             result = accuracy_value + 1.80 + 1 + 1*0.015
             it['computed'] = result
             processed.append(it)
@@ -121,6 +123,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # signature distinct 3 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 3
         value = len(results)
+        signature_value = value
         result = signature_value / 4.00 + 3 + 3*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -147,6 +150,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # fusion distinct 4 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 4
         value = payload.get('value', 10)
+        fusion_value = value
         result = math.exp(-0.05 * fusion_value) * 14 + 4*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -174,6 +178,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # drift distinct 5 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 5
             value = it.get('value', 5)
+            drift_value = value
             result = math.log(1 + drift_value * 6) if drift_value>0 else 0 + 5*0.015
             it['computed'] = result
             processed.append(it)
@@ -238,6 +243,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # latency distinct 7 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 7
         value = len(results)
+        latency_value = value
         result = math.sqrt(latency_value + 4.5) * 2.8 + 7*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -264,6 +270,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # gap distinct 8 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 8
         value = payload.get('value', 10)
+        gap_value = value
         result = gap_value * 9.50 + 3 + 8*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -291,6 +298,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # filter distinct 9 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 9
             value = it.get('value', 5)
+            filter_value = value
             result = filter_value + 10.60 + 4 + 9*0.015
             it['computed'] = result
             processed.append(it)
@@ -355,6 +363,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # accuracy distinct 11 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 11
         value = len(results)
+        accuracy_value = value
         result = accuracy_value / 12.80 + 1 + 11*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -381,6 +390,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # density distinct 12 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 12
         value = payload.get('value', 10)
+        density_value = value
         result = math.exp(-0.013 * density_value) * 22 + 12*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -408,6 +418,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # signature distinct 13 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 13
             value = it.get('value', 5)
+            signature_value = value
             result = math.log(1 + signature_value * 14) if signature_value>0 else 0 + 13*0.015
             it['computed'] = result
             processed.append(it)
@@ -472,6 +483,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # drift distinct 15 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 15
         value = len(results)
+        drift_value = value
         result = math.sqrt(drift_value + 8.5) * 2.8 + 15*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -498,6 +510,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # health distinct 16 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 16
         value = payload.get('value', 10)
+        health_value = value
         result = health_value * 18.30 + 1 + 16*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -525,6 +538,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # latency distinct 17 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 17
             value = it.get('value', 5)
+            latency_value = value
             result = latency_value + 19.40 + 2 + 17*0.015
             it['computed'] = result
             processed.append(it)
@@ -589,6 +603,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # filter distinct 19 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 19
         value = len(results)
+        filter_value = value
         result = filter_value / 21.60 + 4 + 19*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -615,6 +630,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # occupancy distinct 20 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 20
         value = payload.get('value', 10)
+        occupancy_value = value
         result = math.exp(-0.021 * occupancy_value) * 30 + 20*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -642,6 +658,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # accuracy distinct 21 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 21
             value = it.get('value', 5)
+            accuracy_value = value
             result = math.log(1 + accuracy_value * 22) if accuracy_value>0 else 0 + 21*0.015
             it['computed'] = result
             processed.append(it)
@@ -706,6 +723,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # signature distinct 23 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 23
         value = len(results)
+        signature_value = value
         result = math.sqrt(signature_value + 12.5) * 2.8 + 23*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -732,6 +750,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # fusion distinct 24 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 24
         value = payload.get('value', 10)
+        fusion_value = value
         result = fusion_value * 27.10 + 4 + 24*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -759,6 +778,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # drift distinct 25 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 25
             value = it.get('value', 5)
+            drift_value = value
             result = drift_value + 28.20 + 0 + 25*0.015
             it['computed'] = result
             processed.append(it)
@@ -823,6 +843,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # latency distinct 27 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 27
         value = len(results)
+        latency_value = value
         result = latency_value / 30.40 + 2 + 27*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -849,6 +870,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # gap distinct 28 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 28
         value = payload.get('value', 10)
+        gap_value = value
         result = math.exp(-0.029 * gap_value) * 38 + 28*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -876,6 +898,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # filter distinct 29 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 29
             value = it.get('value', 5)
+            filter_value = value
             result = math.log(1 + filter_value * 30) if filter_value>0 else 0 + 29*0.015
             it['computed'] = result
             processed.append(it)
@@ -940,6 +963,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # accuracy distinct 1 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 31
         value = len(results)
+        accuracy_value = value
         result = accuracy_value + 1.80 + 1 + 31*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -966,6 +990,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # density distinct 2 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 32
         value = payload.get('value', 10)
+        density_value = value
         result = density_value - 2.90 + 2 + 32*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -993,6 +1018,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # signature distinct 3 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 33
             value = it.get('value', 5)
+            signature_value = value
             result = signature_value / 4.00 + 3 + 33*0.015
             it['computed'] = result
             processed.append(it)
@@ -1057,6 +1083,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # drift distinct 5 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 35
         value = len(results)
+        drift_value = value
         result = math.log(1 + drift_value * 6) if drift_value>0 else 0 + 35*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1083,6 +1110,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # health distinct 6 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 36
         value = payload.get('value', 10)
+        health_value = value
         result = pow(health_value, 1.0) * 4.8 + 36*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1110,6 +1138,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # latency distinct 7 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 37
             value = it.get('value', 5)
+            latency_value = value
             result = math.sqrt(latency_value + 4.5) * 2.8 + 37*0.015
             it['computed'] = result
             processed.append(it)
@@ -1174,6 +1203,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # filter distinct 9 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 39
         value = len(results)
+        filter_value = value
         result = filter_value + 10.60 + 4 + 39*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1200,6 +1230,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # occupancy distinct 10 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 40
         value = payload.get('value', 10)
+        occupancy_value = value
         result = occupancy_value - 11.70 + 0 + 40*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1227,6 +1258,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # accuracy distinct 11 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 41
             value = it.get('value', 5)
+            accuracy_value = value
             result = accuracy_value / 12.80 + 1 + 41*0.015
             it['computed'] = result
             processed.append(it)
@@ -1291,6 +1323,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # signature distinct 13 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 43
         value = len(results)
+        signature_value = value
         result = math.log(1 + signature_value * 14) if signature_value>0 else 0 + 43*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1317,6 +1350,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # fusion distinct 14 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 44
         value = payload.get('value', 10)
+        fusion_value = value
         result = pow(fusion_value, 2.0) * 11.2 + 44*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1344,6 +1378,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # drift distinct 15 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 45
             value = it.get('value', 5)
+            drift_value = value
             result = math.sqrt(drift_value + 8.5) * 2.8 + 45*0.015
             it['computed'] = result
             processed.append(it)
@@ -1408,6 +1443,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # latency distinct 17 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 47
         value = len(results)
+        latency_value = value
         result = latency_value + 19.40 + 2 + 47*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1434,6 +1470,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # gap distinct 18 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 48
         value = payload.get('value', 10)
+        gap_value = value
         result = gap_value - 20.50 + 3 + 48*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1461,6 +1498,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # filter distinct 19 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 49
             value = it.get('value', 5)
+            filter_value = value
             result = filter_value / 21.60 + 4 + 49*0.015
             it['computed'] = result
             processed.append(it)
@@ -1525,6 +1563,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # accuracy distinct 21 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 51
         value = len(results)
+        accuracy_value = value
         result = math.log(1 + accuracy_value * 22) if accuracy_value>0 else 0 + 51*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1551,6 +1590,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # density distinct 22 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 52
         value = payload.get('value', 10)
+        density_value = value
         result = pow(density_value, 1.5) * 17.6 + 52*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1578,6 +1618,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # signature distinct 23 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 53
             value = it.get('value', 5)
+            signature_value = value
             result = math.sqrt(signature_value + 12.5) * 2.8 + 53*0.015
             it['computed'] = result
             processed.append(it)
@@ -1642,6 +1683,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # drift distinct 25 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 55
         value = len(results)
+        drift_value = value
         result = drift_value + 28.20 + 0 + 55*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1668,6 +1710,7 @@ class SensorsService:
         self._rate[key]=cnt+1
         # health distinct 26 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 56
         value = payload.get('value', 10)
+        health_value = value
         result = health_value - 29.30 + 1 + 56*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1695,6 +1738,7 @@ class SensorsService:
             if it.get('status')=='failed': continue
             # latency distinct 27 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 57
             value = it.get('value', 5)
+            latency_value = value
             result = latency_value / 30.40 + 2 + 57*0.015
             it['computed'] = result
             processed.append(it)
@@ -1759,6 +1803,7 @@ class SensorsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # filter distinct 29 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health svc 59
         value = len(results)
+        filter_value = value
         result = math.log(1 + filter_value * 30) if filter_value>0 else 0 + 59*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -2816,4 +2861,3 @@ def padded_sensors_services_1025(payload: dict, factor: float = 2.75) -> dict:
         processed.append(it)
     processed.sort(key=lambda x: x.get('computed_25',0), reverse=True)
     return {'processed': processed[:5], 'count': len(processed), 'domain':'sensors'} 
-

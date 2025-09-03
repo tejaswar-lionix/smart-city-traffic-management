@@ -25,6 +25,7 @@ class WeatherStation:
     status: str = 'active'
 
     def friction_model_0_wea_0_weatherstation_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        friction_model_value = value
         """friction_model distinct 0 for weather using Pavement friction, visibility, RWIS, treatment extra 0 for WeatherStation — implements result = friction_model_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for weather::WeatherStation::friction_model_0_wea_0_weatherstation_0
@@ -39,13 +40,14 @@ class WeatherStation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'friction_model_0_wea_0_weatherstation_0', 'result': result, 'domain': 'weather'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def treatment_rec_6_wea_6_weatherstation_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        treatment_rec_value = value
         """treatment_rec distinct 6 for weather using Pavement friction, visibility, RWIS, treatment extra 6 for WeatherStation — implements result = pow(treatment_rec_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for weather::WeatherStation::treatment_rec_6_wea_6_weatherstation_6
@@ -57,13 +59,14 @@ class WeatherStation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pavement_temp_12_wea_12_weatherstation_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pavement_temp_value = value
         """pavement_temp distinct 12 for weather using Pavement friction, visibility, RWIS, treatment extra 12 for WeatherStation — implements result = math.exp(-0.013 * pavement_temp_value) * 22 + 12*0."""
         try:
             # Distinct logic for weather::WeatherStation::pavement_temp_12_wea_12_weatherstation_12
@@ -75,13 +78,14 @@ class WeatherStation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gust_impact_18_wea_18_weatherstation_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gust_impact_value = value
         """gust_impact distinct 18 for weather using Pavement friction, visibility, RWIS, treatment extra 18 for WeatherStation — implements result = gust_impact_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for weather::WeatherStation::gust_impact_18_wea_18_weatherstation_18
@@ -96,13 +100,14 @@ class WeatherStation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def precip_classify_24_wea_24_weatherstation_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        precip_classify_value = value
         """precip_classify distinct 24 for weather using Pavement friction, visibility, RWIS, treatment extra 24 for WeatherStation — implements result = precip_classify_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for weather::WeatherStation::precip_classify_24_wea_24_weatherstation_24
@@ -114,16 +119,18 @@ class WeatherStation:
                 else:
                     break
             # precip_classify distinct 24 for weather using Pavement friction, visibility, RWIS, treatment extra 24
+            precip_classify_value = value
             result = precip_classify_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def friction_model_0_wea_30_weatherstation_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        friction_model_value = value
         """friction_model distinct 0 for weather using Pavement friction, visibility, RWIS, treatment extra 30 for WeatherStation — implements result = friction_model_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for weather::WeatherStation::friction_model_0_wea_30_weatherstation_30
@@ -138,13 +145,14 @@ class WeatherStation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'friction_model_0_wea_30_weatherstation_30', 'result': result, 'domain': 'weather'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def treatment_rec_6_wea_36_weatherstation_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        treatment_rec_value = value
         """treatment_rec distinct 6 for weather using Pavement friction, visibility, RWIS, treatment extra 36 for WeatherStation — implements result = pow(treatment_rec_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for weather::WeatherStation::treatment_rec_6_wea_36_weatherstation_36
@@ -156,13 +164,14 @@ class WeatherStation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pavement_temp_12_wea_42_weatherstation_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pavement_temp_value = value
         """pavement_temp distinct 12 for weather using Pavement friction, visibility, RWIS, treatment extra 42 for WeatherStation — implements result = math.exp(-0.013 * pavement_temp_value) * 22 + 42*0."""
         try:
             # Distinct logic for weather::WeatherStation::pavement_temp_12_wea_42_weatherstation_42
@@ -174,13 +183,14 @@ class WeatherStation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gust_impact_18_wea_48_weatherstation_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gust_impact_value = value
         """gust_impact distinct 18 for weather using Pavement friction, visibility, RWIS, treatment extra 48 for WeatherStation — implements result = gust_impact_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for weather::WeatherStation::gust_impact_18_wea_48_weatherstation_48
@@ -195,13 +205,14 @@ class WeatherStation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def precip_classify_24_wea_54_weatherstation_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        precip_classify_value = value
         """precip_classify distinct 24 for weather using Pavement friction, visibility, RWIS, treatment extra 54 for WeatherStation — implements result = precip_classify_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for weather::WeatherStation::precip_classify_24_wea_54_weatherstation_54
@@ -213,13 +224,14 @@ class WeatherStation:
                 else:
                     break
             # precip_classify distinct 24 for weather using Pavement friction, visibility, RWIS, treatment extra 54
+            precip_classify_value = value
             result = precip_classify_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_weatherstation(self) -> bool:
@@ -245,6 +257,7 @@ class PavementCondition:
     status: str = 'active'
 
     def visibility_reduction_1_wea_1_pavementcondition_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        visibility_reduction_value = value
         """visibility_reduction distinct 1 for weather using Pavement friction, visibility, RWIS, treatment extra 1 for PavementCondition — implements result = visibility_reduction_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for weather::PavementCondition::visibility_reduction_1_wea_1_pavementcondition_1
@@ -256,13 +269,14 @@ class PavementCondition:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def confidence_weighted_7_wea_7_pavementcondition_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        confidence_weighted_value = value
         """confidence_weighted distinct 7 for weather using Pavement friction, visibility, RWIS, treatment extra 7 for PavementCondition — implements result = math.sqrt(confidence_weighted_value + 4.5) * 2.8 + """
         try:
             # Distinct logic for weather::PavementCondition::confidence_weighted_7_wea_7_pavementcondition_7
@@ -274,13 +288,14 @@ class PavementCondition:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def rwi_composite_13_wea_13_pavementcondition_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        rwi_composite_value = value
         """rwi_composite distinct 13 for weather using Pavement friction, visibility, RWIS, treatment extra 13 for PavementCondition — implements result = math.log(1 + rwi_composite_value * 14) if rwi_compo"""
         try:
             # Distinct logic for weather::PavementCondition::rwi_composite_13_wea_13_pavementcondition_13
@@ -295,13 +310,14 @@ class PavementCondition:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def drainage_cap_19_wea_19_pavementcondition_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        drainage_cap_value = value
         """drainage_cap distinct 19 for weather using Pavement friction, visibility, RWIS, treatment extra 19 for PavementCondition — implements result = drainage_cap_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for weather::PavementCondition::drainage_cap_19_wea_19_pavementcondition_19
@@ -313,16 +329,18 @@ class PavementCondition:
                 else:
                     break
             # drainage_cap distinct 19 for weather using Pavement friction, visibility, RWIS, treatment extra 19
+            drainage_cap_value = value
             result = drainage_cap_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def black_ice_risk_25_wea_25_pavementcondition_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        black_ice_risk_value = value
         """black_ice_risk distinct 25 for weather using Pavement friction, visibility, RWIS, treatment extra 25 for PavementCondition — implements result = black_ice_risk_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for weather::PavementCondition::black_ice_risk_25_wea_25_pavementcondition_25
@@ -337,13 +355,14 @@ class PavementCondition:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'black_ice_risk_25_wea_25_pavementcondition_25', 'result': result, 'domain': 'weather'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def visibility_reduction_1_wea_31_pavementcondition_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        visibility_reduction_value = value
         """visibility_reduction distinct 1 for weather using Pavement friction, visibility, RWIS, treatment extra 31 for PavementCondition — implements result = visibility_reduction_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for weather::PavementCondition::visibility_reduction_1_wea_31_pavementcondition_31
@@ -355,13 +374,14 @@ class PavementCondition:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def confidence_weighted_7_wea_37_pavementcondition_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        confidence_weighted_value = value
         """confidence_weighted distinct 7 for weather using Pavement friction, visibility, RWIS, treatment extra 37 for PavementCondition — implements result = math.sqrt(confidence_weighted_value + 4.5) * 2.8 + """
         try:
             # Distinct logic for weather::PavementCondition::confidence_weighted_7_wea_37_pavementcondition_37
@@ -373,13 +393,14 @@ class PavementCondition:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def rwi_composite_13_wea_43_pavementcondition_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        rwi_composite_value = value
         """rwi_composite distinct 13 for weather using Pavement friction, visibility, RWIS, treatment extra 43 for PavementCondition — implements result = math.log(1 + rwi_composite_value * 14) if rwi_compo"""
         try:
             # Distinct logic for weather::PavementCondition::rwi_composite_13_wea_43_pavementcondition_43
@@ -394,13 +415,14 @@ class PavementCondition:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def drainage_cap_19_wea_49_pavementcondition_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        drainage_cap_value = value
         """drainage_cap distinct 19 for weather using Pavement friction, visibility, RWIS, treatment extra 49 for PavementCondition — implements result = drainage_cap_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for weather::PavementCondition::drainage_cap_19_wea_49_pavementcondition_49
@@ -412,16 +434,18 @@ class PavementCondition:
                 else:
                     break
             # drainage_cap distinct 19 for weather using Pavement friction, visibility, RWIS, treatment extra 49
+            drainage_cap_value = value
             result = drainage_cap_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def black_ice_risk_25_wea_55_pavementcondition_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        black_ice_risk_value = value
         """black_ice_risk distinct 25 for weather using Pavement friction, visibility, RWIS, treatment extra 55 for PavementCondition — implements result = black_ice_risk_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for weather::PavementCondition::black_ice_risk_25_wea_55_pavementcondition_55
@@ -436,10 +460,10 @@ class PavementCondition:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'black_ice_risk_25_wea_55_pavementcondition_55', 'result': result, 'domain': 'weather'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_pavementcondition(self) -> bool:
@@ -464,6 +488,7 @@ class VisibilityRecord:
     status: str = 'active'
 
     def pavement_temp_2_wea_2_visibilityrecord_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pavement_temp_value = value
         """pavement_temp distinct 2 for weather using Pavement friction, visibility, RWIS, treatment extra 2 for VisibilityRecord — implements result = pavement_temp_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for weather::VisibilityRecord::pavement_temp_2_wea_2_visibilityrecord_2
@@ -475,13 +500,14 @@ class VisibilityRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gust_impact_8_wea_8_visibilityrecord_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gust_impact_value = value
         """gust_impact distinct 8 for weather using Pavement friction, visibility, RWIS, treatment extra 8 for VisibilityRecord — implements result = gust_impact_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for weather::VisibilityRecord::gust_impact_8_wea_8_visibilityrecord_8
@@ -496,13 +522,14 @@ class VisibilityRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def precip_classify_14_wea_14_visibilityrecord_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        precip_classify_value = value
         """precip_classify distinct 14 for weather using Pavement friction, visibility, RWIS, treatment extra 14 for VisibilityRecord — implements result = pow(precip_classify_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for weather::VisibilityRecord::precip_classify_14_wea_14_visibilityrecord_14
@@ -517,13 +544,14 @@ class VisibilityRecord:
             result = pow(precip_classify_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def friction_model_20_wea_20_visibilityrecord_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        friction_model_value = value
         """friction_model distinct 20 for weather using Pavement friction, visibility, RWIS, treatment extra 20 for VisibilityRecord — implements result = math.exp(-0.021 * friction_model_value) * 30 + 20*0"""
         try:
             # Distinct logic for weather::VisibilityRecord::friction_model_20_wea_20_visibilityrecord_20
@@ -538,13 +566,14 @@ class VisibilityRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'friction_model_20_wea_20_visibilityrecord_20', 'result': result, 'domain': 'weather'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def treatment_rec_26_wea_26_visibilityrecord_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        treatment_rec_value = value
         """treatment_rec distinct 26 for weather using Pavement friction, visibility, RWIS, treatment extra 26 for VisibilityRecord — implements result = treatment_rec_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for weather::VisibilityRecord::treatment_rec_26_wea_26_visibilityrecord_26
@@ -556,13 +585,14 @@ class VisibilityRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pavement_temp_2_wea_32_visibilityrecord_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pavement_temp_value = value
         """pavement_temp distinct 2 for weather using Pavement friction, visibility, RWIS, treatment extra 32 for VisibilityRecord — implements result = pavement_temp_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for weather::VisibilityRecord::pavement_temp_2_wea_32_visibilityrecord_32
@@ -574,13 +604,14 @@ class VisibilityRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gust_impact_8_wea_38_visibilityrecord_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gust_impact_value = value
         """gust_impact distinct 8 for weather using Pavement friction, visibility, RWIS, treatment extra 38 for VisibilityRecord — implements result = gust_impact_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for weather::VisibilityRecord::gust_impact_8_wea_38_visibilityrecord_38
@@ -595,13 +626,14 @@ class VisibilityRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def precip_classify_14_wea_44_visibilityrecord_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        precip_classify_value = value
         """precip_classify distinct 14 for weather using Pavement friction, visibility, RWIS, treatment extra 44 for VisibilityRecord — implements result = pow(precip_classify_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for weather::VisibilityRecord::precip_classify_14_wea_44_visibilityrecord_44
@@ -616,13 +648,14 @@ class VisibilityRecord:
             result = pow(precip_classify_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def friction_model_20_wea_50_visibilityrecord_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        friction_model_value = value
         """friction_model distinct 20 for weather using Pavement friction, visibility, RWIS, treatment extra 50 for VisibilityRecord — implements result = math.exp(-0.021 * friction_model_value) * 30 + 50*0"""
         try:
             # Distinct logic for weather::VisibilityRecord::friction_model_20_wea_50_visibilityrecord_50
@@ -637,13 +670,14 @@ class VisibilityRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'friction_model_20_wea_50_visibilityrecord_50', 'result': result, 'domain': 'weather'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def treatment_rec_26_wea_56_visibilityrecord_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        treatment_rec_value = value
         """treatment_rec distinct 26 for weather using Pavement friction, visibility, RWIS, treatment extra 56 for VisibilityRecord — implements result = treatment_rec_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for weather::VisibilityRecord::treatment_rec_26_wea_56_visibilityrecord_56
@@ -655,10 +689,10 @@ class VisibilityRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_visibilityrecord(self) -> bool:
@@ -683,6 +717,7 @@ class Precipitation:
     status: str = 'active'
 
     def rwi_composite_3_wea_3_precipitation_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        rwi_composite_value = value
         """rwi_composite distinct 3 for weather using Pavement friction, visibility, RWIS, treatment extra 3 for Precipitation — implements result = rwi_composite_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for weather::Precipitation::rwi_composite_3_wea_3_precipitation_3
@@ -697,13 +732,14 @@ class Precipitation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def drainage_cap_9_wea_9_precipitation_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        drainage_cap_value = value
         """drainage_cap distinct 9 for weather using Pavement friction, visibility, RWIS, treatment extra 9 for Precipitation — implements result = drainage_cap_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for weather::Precipitation::drainage_cap_9_wea_9_precipitation_9
@@ -715,16 +751,18 @@ class Precipitation:
                 else:
                     break
             # drainage_cap distinct 9 for weather using Pavement friction, visibility, RWIS, treatment extra 9
+            drainage_cap_value = value
             result = drainage_cap_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def black_ice_risk_15_wea_15_precipitation_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        black_ice_risk_value = value
         """black_ice_risk distinct 15 for weather using Pavement friction, visibility, RWIS, treatment extra 15 for Precipitation — implements result = math.sqrt(black_ice_risk_value + 8.5) * 2.8 + 15*0."""
         try:
             # Distinct logic for weather::Precipitation::black_ice_risk_15_wea_15_precipitation_15
@@ -739,13 +777,14 @@ class Precipitation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'black_ice_risk_15_wea_15_precipitation_15', 'result': result, 'domain': 'weather'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def visibility_reduction_21_wea_21_precipitation_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        visibility_reduction_value = value
         """visibility_reduction distinct 21 for weather using Pavement friction, visibility, RWIS, treatment extra 21 for Precipitation — implements result = math.log(1 + visibility_reduction_value * 22) if vi"""
         try:
             # Distinct logic for weather::Precipitation::visibility_reduction_21_wea_21_precipitation_21
@@ -757,13 +796,14 @@ class Precipitation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def confidence_weighted_27_wea_27_precipitation_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        confidence_weighted_value = value
         """confidence_weighted distinct 27 for weather using Pavement friction, visibility, RWIS, treatment extra 27 for Precipitation — implements result = confidence_weighted_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for weather::Precipitation::confidence_weighted_27_wea_27_precipitation_27
@@ -775,13 +815,14 @@ class Precipitation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def rwi_composite_3_wea_33_precipitation_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        rwi_composite_value = value
         """rwi_composite distinct 3 for weather using Pavement friction, visibility, RWIS, treatment extra 33 for Precipitation — implements result = rwi_composite_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for weather::Precipitation::rwi_composite_3_wea_33_precipitation_33
@@ -796,13 +837,14 @@ class Precipitation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def drainage_cap_9_wea_39_precipitation_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        drainage_cap_value = value
         """drainage_cap distinct 9 for weather using Pavement friction, visibility, RWIS, treatment extra 39 for Precipitation — implements result = drainage_cap_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for weather::Precipitation::drainage_cap_9_wea_39_precipitation_39
@@ -814,16 +856,18 @@ class Precipitation:
                 else:
                     break
             # drainage_cap distinct 9 for weather using Pavement friction, visibility, RWIS, treatment extra 39
+            drainage_cap_value = value
             result = drainage_cap_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def black_ice_risk_15_wea_45_precipitation_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        black_ice_risk_value = value
         """black_ice_risk distinct 15 for weather using Pavement friction, visibility, RWIS, treatment extra 45 for Precipitation — implements result = math.sqrt(black_ice_risk_value + 8.5) * 2.8 + 45*0."""
         try:
             # Distinct logic for weather::Precipitation::black_ice_risk_15_wea_45_precipitation_45
@@ -838,13 +882,14 @@ class Precipitation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'black_ice_risk_15_wea_45_precipitation_45', 'result': result, 'domain': 'weather'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def visibility_reduction_21_wea_51_precipitation_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        visibility_reduction_value = value
         """visibility_reduction distinct 21 for weather using Pavement friction, visibility, RWIS, treatment extra 51 for Precipitation — implements result = math.log(1 + visibility_reduction_value * 22) if vi"""
         try:
             # Distinct logic for weather::Precipitation::visibility_reduction_21_wea_51_precipitation_51
@@ -856,13 +901,14 @@ class Precipitation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def confidence_weighted_27_wea_57_precipitation_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        confidence_weighted_value = value
         """confidence_weighted distinct 27 for weather using Pavement friction, visibility, RWIS, treatment extra 57 for Precipitation — implements result = confidence_weighted_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for weather::Precipitation::confidence_weighted_27_wea_57_precipitation_57
@@ -874,10 +920,10 @@ class Precipitation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_precipitation(self) -> bool:
@@ -903,6 +949,7 @@ class RoadWeatherIndex:
     status: str = 'active'
 
     def precip_classify_4_wea_4_roadweatherindex_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        precip_classify_value = value
         """precip_classify distinct 4 for weather using Pavement friction, visibility, RWIS, treatment extra 4 for RoadWeatherIndex — implements result = math.exp(-0.05 * precip_classify_value) * 14 + 4*0."""
         try:
             # Distinct logic for weather::RoadWeatherIndex::precip_classify_4_wea_4_roadweatherindex_4
@@ -914,16 +961,18 @@ class RoadWeatherIndex:
                 else:
                     break
             # precip_classify distinct 4 for weather using Pavement friction, visibility, RWIS, treatment extra 4
+            precip_classify_value = value
             result = math.exp(-0.05 * precip_classify_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def friction_model_10_wea_10_roadweatherindex_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        friction_model_value = value
         """friction_model distinct 10 for weather using Pavement friction, visibility, RWIS, treatment extra 10 for RoadWeatherIndex — implements result = friction_model_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for weather::RoadWeatherIndex::friction_model_10_wea_10_roadweatherindex_10
@@ -938,13 +987,14 @@ class RoadWeatherIndex:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'friction_model_10_wea_10_roadweatherindex_10', 'result': result, 'domain': 'weather'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def treatment_rec_16_wea_16_roadweatherindex_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        treatment_rec_value = value
         """treatment_rec distinct 16 for weather using Pavement friction, visibility, RWIS, treatment extra 16 for RoadWeatherIndex — implements result = treatment_rec_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for weather::RoadWeatherIndex::treatment_rec_16_wea_16_roadweatherindex_16
@@ -956,13 +1006,14 @@ class RoadWeatherIndex:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pavement_temp_22_wea_22_roadweatherindex_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pavement_temp_value = value
         """pavement_temp distinct 22 for weather using Pavement friction, visibility, RWIS, treatment extra 22 for RoadWeatherIndex — implements result = pow(pavement_temp_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for weather::RoadWeatherIndex::pavement_temp_22_wea_22_roadweatherindex_22
@@ -974,13 +1025,14 @@ class RoadWeatherIndex:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gust_impact_28_wea_28_roadweatherindex_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gust_impact_value = value
         """gust_impact distinct 28 for weather using Pavement friction, visibility, RWIS, treatment extra 28 for RoadWeatherIndex — implements result = math.exp(-0.029 * gust_impact_value) * 38 + 28*0.01"""
         try:
             # Distinct logic for weather::RoadWeatherIndex::gust_impact_28_wea_28_roadweatherindex_28
@@ -995,13 +1047,14 @@ class RoadWeatherIndex:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def precip_classify_4_wea_34_roadweatherindex_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        precip_classify_value = value
         """precip_classify distinct 4 for weather using Pavement friction, visibility, RWIS, treatment extra 34 for RoadWeatherIndex — implements result = math.exp(-0.05 * precip_classify_value) * 14 + 34*0"""
         try:
             # Distinct logic for weather::RoadWeatherIndex::precip_classify_4_wea_34_roadweatherindex_34
@@ -1013,16 +1066,18 @@ class RoadWeatherIndex:
                 else:
                     break
             # precip_classify distinct 4 for weather using Pavement friction, visibility, RWIS, treatment extra 34
+            precip_classify_value = value
             result = math.exp(-0.05 * precip_classify_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def friction_model_10_wea_40_roadweatherindex_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        friction_model_value = value
         """friction_model distinct 10 for weather using Pavement friction, visibility, RWIS, treatment extra 40 for RoadWeatherIndex — implements result = friction_model_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for weather::RoadWeatherIndex::friction_model_10_wea_40_roadweatherindex_40
@@ -1037,13 +1092,14 @@ class RoadWeatherIndex:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'friction_model_10_wea_40_roadweatherindex_40', 'result': result, 'domain': 'weather'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def treatment_rec_16_wea_46_roadweatherindex_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        treatment_rec_value = value
         """treatment_rec distinct 16 for weather using Pavement friction, visibility, RWIS, treatment extra 46 for RoadWeatherIndex — implements result = treatment_rec_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for weather::RoadWeatherIndex::treatment_rec_16_wea_46_roadweatherindex_46
@@ -1055,13 +1111,14 @@ class RoadWeatherIndex:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pavement_temp_22_wea_52_roadweatherindex_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pavement_temp_value = value
         """pavement_temp distinct 22 for weather using Pavement friction, visibility, RWIS, treatment extra 52 for RoadWeatherIndex — implements result = pow(pavement_temp_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for weather::RoadWeatherIndex::pavement_temp_22_wea_52_roadweatherindex_52
@@ -1073,13 +1130,14 @@ class RoadWeatherIndex:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gust_impact_28_wea_58_roadweatherindex_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gust_impact_value = value
         """gust_impact distinct 28 for weather using Pavement friction, visibility, RWIS, treatment extra 58 for RoadWeatherIndex — implements result = math.exp(-0.029 * gust_impact_value) * 38 + 58*0.01"""
         try:
             # Distinct logic for weather::RoadWeatherIndex::gust_impact_28_wea_58_roadweatherindex_58
@@ -1094,10 +1152,10 @@ class RoadWeatherIndex:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_roadweatherindex(self) -> bool:
@@ -1122,6 +1180,7 @@ class RWISReading:
     status: str = 'active'
 
     def black_ice_risk_5_wea_5_rwisreading_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        black_ice_risk_value = value
         """black_ice_risk distinct 5 for weather using Pavement friction, visibility, RWIS, treatment extra 5 for RWISReading — implements result = math.log(1 + black_ice_risk_value * 6) if black_ice"""
         try:
             # Distinct logic for weather::RWISReading::black_ice_risk_5_wea_5_rwisreading_5
@@ -1136,13 +1195,14 @@ class RWISReading:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'black_ice_risk_5_wea_5_rwisreading_5', 'result': result, 'domain': 'weather'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def visibility_reduction_11_wea_11_rwisreading_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        visibility_reduction_value = value
         """visibility_reduction distinct 11 for weather using Pavement friction, visibility, RWIS, treatment extra 11 for RWISReading — implements result = visibility_reduction_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for weather::RWISReading::visibility_reduction_11_wea_11_rwisreading_11
@@ -1154,13 +1214,14 @@ class RWISReading:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def confidence_weighted_17_wea_17_rwisreading_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        confidence_weighted_value = value
         """confidence_weighted distinct 17 for weather using Pavement friction, visibility, RWIS, treatment extra 17 for RWISReading — implements result = confidence_weighted_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for weather::RWISReading::confidence_weighted_17_wea_17_rwisreading_17
@@ -1172,13 +1233,14 @@ class RWISReading:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def rwi_composite_23_wea_23_rwisreading_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        rwi_composite_value = value
         """rwi_composite distinct 23 for weather using Pavement friction, visibility, RWIS, treatment extra 23 for RWISReading — implements result = math.sqrt(rwi_composite_value + 12.5) * 2.8 + 23*0."""
         try:
             # Distinct logic for weather::RWISReading::rwi_composite_23_wea_23_rwisreading_23
@@ -1193,13 +1255,14 @@ class RWISReading:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def drainage_cap_29_wea_29_rwisreading_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        drainage_cap_value = value
         """drainage_cap distinct 29 for weather using Pavement friction, visibility, RWIS, treatment extra 29 for RWISReading — implements result = math.log(1 + drainage_cap_value * 30) if drainage_c"""
         try:
             # Distinct logic for weather::RWISReading::drainage_cap_29_wea_29_rwisreading_29
@@ -1214,13 +1277,14 @@ class RWISReading:
             result = math.log(1 + drainage_cap_value * 30) if drainage_cap_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def black_ice_risk_5_wea_35_rwisreading_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        black_ice_risk_value = value
         """black_ice_risk distinct 5 for weather using Pavement friction, visibility, RWIS, treatment extra 35 for RWISReading — implements result = math.log(1 + black_ice_risk_value * 6) if black_ice"""
         try:
             # Distinct logic for weather::RWISReading::black_ice_risk_5_wea_35_rwisreading_35
@@ -1235,13 +1299,14 @@ class RWISReading:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'black_ice_risk_5_wea_35_rwisreading_35', 'result': result, 'domain': 'weather'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def visibility_reduction_11_wea_41_rwisreading_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        visibility_reduction_value = value
         """visibility_reduction distinct 11 for weather using Pavement friction, visibility, RWIS, treatment extra 41 for RWISReading — implements result = visibility_reduction_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for weather::RWISReading::visibility_reduction_11_wea_41_rwisreading_41
@@ -1253,13 +1318,14 @@ class RWISReading:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def confidence_weighted_17_wea_47_rwisreading_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        confidence_weighted_value = value
         """confidence_weighted distinct 17 for weather using Pavement friction, visibility, RWIS, treatment extra 47 for RWISReading — implements result = confidence_weighted_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for weather::RWISReading::confidence_weighted_17_wea_47_rwisreading_47
@@ -1271,13 +1337,14 @@ class RWISReading:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def rwi_composite_23_wea_53_rwisreading_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        rwi_composite_value = value
         """rwi_composite distinct 23 for weather using Pavement friction, visibility, RWIS, treatment extra 53 for RWISReading — implements result = math.sqrt(rwi_composite_value + 12.5) * 2.8 + 53*0."""
         try:
             # Distinct logic for weather::RWISReading::rwi_composite_23_wea_53_rwisreading_53
@@ -1292,13 +1359,14 @@ class RWISReading:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def drainage_cap_29_wea_59_rwisreading_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        drainage_cap_value = value
         """drainage_cap distinct 29 for weather using Pavement friction, visibility, RWIS, treatment extra 59 for RWISReading — implements result = math.log(1 + drainage_cap_value * 30) if drainage_c"""
         try:
             # Distinct logic for weather::RWISReading::drainage_cap_29_wea_59_rwisreading_59
@@ -1313,10 +1381,10 @@ class RWISReading:
             result = math.log(1 + drainage_cap_value * 30) if drainage_cap_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_rwisreading(self) -> bool:
@@ -2755,4 +2823,3 @@ def padded_weather_models_1027(payload: dict, factor: float = 2.89) -> dict:
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'weather','idx':1027}
-

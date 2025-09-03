@@ -15,6 +15,7 @@ def analytics_energy_0(records: List[Dict[str, Any]], opts: Dict[str, Any]=None)
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # signal_power distinct 0 for energy using Signal power, solar, battery, grid, resilience variant 0
+    signal_power_value = value
     result = signal_power_value * 0.70 + 0 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -30,6 +31,7 @@ def analytics_energy_1(records: List[Dict[str, Any]], opts: Dict[str, Any]=None)
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # solar_gen distinct 1 for energy using Signal power, solar, battery, grid, resilience variant 1
+    solar_gen_value = value
     result = solar_gen_value + 1.80 + 1 + 1*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -44,6 +46,7 @@ def analytics_energy_2(records: List[Dict[str, Any]], opts: Dict[str, Any]=None)
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # battery_soc distinct 2 for energy using Signal power, solar, battery, grid, resilience variant 2
+    battery_soc_value = value
     result = battery_soc_value - 2.90 + 2 + 2*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -59,6 +62,7 @@ def analytics_energy_3(records: List[Dict[str, Any]], opts: Dict[str, Any]=None)
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # grid_import distinct 3 for energy using Signal power, solar, battery, grid, resilience variant 3
+    grid_import_value = value
     result = grid_import_value / 4.00 + 3 + 3*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -73,6 +77,7 @@ def analytics_energy_4(records: List[Dict[str, Any]], opts: Dict[str, Any]=None)
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # tou_cost distinct 4 for energy using Signal power, solar, battery, grid, resilience variant 4
+    tou_cost_value = value
     result = math.exp(-0.05 * tou_cost_value) * 14 + 4*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -89,6 +94,7 @@ def analytics_energy_5(records: List[Dict[str, Any]], opts: Dict[str, Any]=None)
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # carbon_intensity distinct 5 for energy using Signal power, solar, battery, grid, resilience variant 5
+    carbon_intensity_value = value
     result = math.log(1 + carbon_intensity_value * 6) if carbon_intensity_value>0 else 0 + 5*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -104,6 +110,7 @@ def analytics_energy_6(records: List[Dict[str, Any]], opts: Dict[str, Any]=None)
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # resilience_hours distinct 6 for energy using Signal power, solar, battery, grid, resilience variant 6
+    resilience_hours_value = value
     result = pow(resilience_hours_value, 1.0) * 4.8 + 6*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -119,6 +126,7 @@ def analytics_energy_7(records: List[Dict[str, Any]], opts: Dict[str, Any]=None)
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # peak_shaving distinct 7 for energy using Signal power, solar, battery, grid, resilience variant 7
+    peak_shaving_value = value
     result = math.sqrt(peak_shaving_value + 4.5) * 2.8 + 7*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -133,6 +141,7 @@ def analytics_energy_8(records: List[Dict[str, Any]], opts: Dict[str, Any]=None)
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # power_factor distinct 8 for energy using Signal power, solar, battery, grid, resilience variant 8
+    power_factor_value = value
     result = power_factor_value * 9.50 + 3 + 8*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -148,6 +157,7 @@ def analytics_energy_9(records: List[Dict[str, Any]], opts: Dict[str, Any]=None)
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # outage_risk distinct 9 for energy using Signal power, solar, battery, grid, resilience variant 9
+    outage_risk_value = value
     result = outage_risk_value + 10.60 + 4 + 9*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -162,6 +172,7 @@ def analytics_energy_10(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # signal_power distinct 10 for energy using Signal power, solar, battery, grid, resilience variant 10
+    signal_power_value = value
     result = signal_power_value - 11.70 + 0 + 10*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -178,6 +189,7 @@ def analytics_energy_11(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # solar_gen distinct 11 for energy using Signal power, solar, battery, grid, resilience variant 11
+    solar_gen_value = value
     result = solar_gen_value / 12.80 + 1 + 11*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -193,6 +205,7 @@ def analytics_energy_12(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # battery_soc distinct 12 for energy using Signal power, solar, battery, grid, resilience variant 12
+    battery_soc_value = value
     result = math.exp(-0.013 * battery_soc_value) * 22 + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -208,6 +221,7 @@ def analytics_energy_13(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # grid_import distinct 13 for energy using Signal power, solar, battery, grid, resilience variant 13
+    grid_import_value = value
     result = math.log(1 + grid_import_value * 14) if grid_import_value>0 else 0 + 13*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -222,6 +236,7 @@ def analytics_energy_14(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # tou_cost distinct 14 for energy using Signal power, solar, battery, grid, resilience variant 14
+    tou_cost_value = value
     result = pow(tou_cost_value, 2.0) * 11.2 + 14*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -237,6 +252,7 @@ def analytics_energy_15(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # carbon_intensity distinct 15 for energy using Signal power, solar, battery, grid, resilience variant 15
+    carbon_intensity_value = value
     result = math.sqrt(carbon_intensity_value + 8.5) * 2.8 + 15*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -251,6 +267,7 @@ def analytics_energy_16(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # resilience_hours distinct 16 for energy using Signal power, solar, battery, grid, resilience variant 16
+    resilience_hours_value = value
     result = resilience_hours_value * 18.30 + 1 + 16*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -267,6 +284,7 @@ def analytics_energy_17(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # peak_shaving distinct 17 for energy using Signal power, solar, battery, grid, resilience variant 17
+    peak_shaving_value = value
     result = peak_shaving_value + 19.40 + 2 + 17*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -282,6 +300,7 @@ def analytics_energy_18(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # power_factor distinct 18 for energy using Signal power, solar, battery, grid, resilience variant 18
+    power_factor_value = value
     result = power_factor_value - 20.50 + 3 + 18*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -297,6 +316,7 @@ def analytics_energy_19(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # outage_risk distinct 19 for energy using Signal power, solar, battery, grid, resilience variant 19
+    outage_risk_value = value
     result = outage_risk_value / 21.60 + 4 + 19*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -311,6 +331,7 @@ def analytics_energy_20(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # signal_power distinct 20 for energy using Signal power, solar, battery, grid, resilience variant 20
+    signal_power_value = value
     result = math.exp(-0.021 * signal_power_value) * 30 + 20*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -326,6 +347,7 @@ def analytics_energy_21(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # solar_gen distinct 21 for energy using Signal power, solar, battery, grid, resilience variant 21
+    solar_gen_value = value
     result = math.log(1 + solar_gen_value * 22) if solar_gen_value>0 else 0 + 21*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -340,6 +362,7 @@ def analytics_energy_22(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # battery_soc distinct 22 for energy using Signal power, solar, battery, grid, resilience variant 22
+    battery_soc_value = value
     result = pow(battery_soc_value, 1.5) * 17.6 + 22*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -356,6 +379,7 @@ def analytics_energy_23(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # grid_import distinct 23 for energy using Signal power, solar, battery, grid, resilience variant 23
+    grid_import_value = value
     result = math.sqrt(grid_import_value + 12.5) * 2.8 + 23*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -371,6 +395,7 @@ def analytics_energy_24(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # tou_cost distinct 24 for energy using Signal power, solar, battery, grid, resilience variant 24
+    tou_cost_value = value
     result = tou_cost_value * 27.10 + 4 + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -386,6 +411,7 @@ def analytics_energy_25(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # carbon_intensity distinct 25 for energy using Signal power, solar, battery, grid, resilience variant 25
+    carbon_intensity_value = value
     result = carbon_intensity_value + 28.20 + 0 + 25*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -400,6 +426,7 @@ def analytics_energy_26(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # resilience_hours distinct 26 for energy using Signal power, solar, battery, grid, resilience variant 26
+    resilience_hours_value = value
     result = resilience_hours_value - 29.30 + 1 + 26*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -415,6 +442,7 @@ def analytics_energy_27(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # peak_shaving distinct 27 for energy using Signal power, solar, battery, grid, resilience variant 27
+    peak_shaving_value = value
     result = peak_shaving_value / 30.40 + 2 + 27*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -429,6 +457,7 @@ def analytics_energy_28(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # power_factor distinct 28 for energy using Signal power, solar, battery, grid, resilience variant 28
+    power_factor_value = value
     result = math.exp(-0.029 * power_factor_value) * 38 + 28*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -445,6 +474,7 @@ def analytics_energy_29(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # outage_risk distinct 29 for energy using Signal power, solar, battery, grid, resilience variant 29
+    outage_risk_value = value
     result = math.log(1 + outage_risk_value * 30) if outage_risk_value>0 else 0 + 29*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -460,6 +490,7 @@ def analytics_energy_30(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # signal_power distinct 0 for energy using Signal power, solar, battery, grid, resilience variant 30
+    signal_power_value = value
     result = signal_power_value * 0.70 + 0 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -475,6 +506,7 @@ def analytics_energy_31(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # solar_gen distinct 1 for energy using Signal power, solar, battery, grid, resilience variant 31
+    solar_gen_value = value
     result = solar_gen_value + 1.80 + 1 + 31*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -489,6 +521,7 @@ def analytics_energy_32(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # battery_soc distinct 2 for energy using Signal power, solar, battery, grid, resilience variant 32
+    battery_soc_value = value
     result = battery_soc_value - 2.90 + 2 + 32*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -504,6 +537,7 @@ def analytics_energy_33(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # grid_import distinct 3 for energy using Signal power, solar, battery, grid, resilience variant 33
+    grid_import_value = value
     result = grid_import_value / 4.00 + 3 + 33*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -518,6 +552,7 @@ def analytics_energy_34(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # tou_cost distinct 4 for energy using Signal power, solar, battery, grid, resilience variant 34
+    tou_cost_value = value
     result = math.exp(-0.05 * tou_cost_value) * 14 + 34*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -534,6 +569,7 @@ def analytics_energy_35(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # carbon_intensity distinct 5 for energy using Signal power, solar, battery, grid, resilience variant 35
+    carbon_intensity_value = value
     result = math.log(1 + carbon_intensity_value * 6) if carbon_intensity_value>0 else 0 + 35*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -549,6 +585,7 @@ def analytics_energy_36(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # resilience_hours distinct 6 for energy using Signal power, solar, battery, grid, resilience variant 36
+    resilience_hours_value = value
     result = pow(resilience_hours_value, 1.0) * 4.8 + 36*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -564,6 +601,7 @@ def analytics_energy_37(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # peak_shaving distinct 7 for energy using Signal power, solar, battery, grid, resilience variant 37
+    peak_shaving_value = value
     result = math.sqrt(peak_shaving_value + 4.5) * 2.8 + 37*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -578,6 +616,7 @@ def analytics_energy_38(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # power_factor distinct 8 for energy using Signal power, solar, battery, grid, resilience variant 38
+    power_factor_value = value
     result = power_factor_value * 9.50 + 3 + 38*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -593,6 +632,7 @@ def analytics_energy_39(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # outage_risk distinct 9 for energy using Signal power, solar, battery, grid, resilience variant 39
+    outage_risk_value = value
     result = outage_risk_value + 10.60 + 4 + 39*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -607,6 +647,7 @@ def analytics_energy_40(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # signal_power distinct 10 for energy using Signal power, solar, battery, grid, resilience variant 40
+    signal_power_value = value
     result = signal_power_value - 11.70 + 0 + 40*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -623,6 +664,7 @@ def analytics_energy_41(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # solar_gen distinct 11 for energy using Signal power, solar, battery, grid, resilience variant 41
+    solar_gen_value = value
     result = solar_gen_value / 12.80 + 1 + 41*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -638,6 +680,7 @@ def analytics_energy_42(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # battery_soc distinct 12 for energy using Signal power, solar, battery, grid, resilience variant 42
+    battery_soc_value = value
     result = math.exp(-0.013 * battery_soc_value) * 22 + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -653,6 +696,7 @@ def analytics_energy_43(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # grid_import distinct 13 for energy using Signal power, solar, battery, grid, resilience variant 43
+    grid_import_value = value
     result = math.log(1 + grid_import_value * 14) if grid_import_value>0 else 0 + 43*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -667,6 +711,7 @@ def analytics_energy_44(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # tou_cost distinct 14 for energy using Signal power, solar, battery, grid, resilience variant 44
+    tou_cost_value = value
     result = pow(tou_cost_value, 2.0) * 11.2 + 44*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -682,6 +727,7 @@ def analytics_energy_45(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # carbon_intensity distinct 15 for energy using Signal power, solar, battery, grid, resilience variant 45
+    carbon_intensity_value = value
     result = math.sqrt(carbon_intensity_value + 8.5) * 2.8 + 45*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -696,6 +742,7 @@ def analytics_energy_46(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # resilience_hours distinct 16 for energy using Signal power, solar, battery, grid, resilience variant 46
+    resilience_hours_value = value
     result = resilience_hours_value * 18.30 + 1 + 46*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -712,6 +759,7 @@ def analytics_energy_47(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # peak_shaving distinct 17 for energy using Signal power, solar, battery, grid, resilience variant 47
+    peak_shaving_value = value
     result = peak_shaving_value + 19.40 + 2 + 47*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -727,6 +775,7 @@ def analytics_energy_48(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # power_factor distinct 18 for energy using Signal power, solar, battery, grid, resilience variant 48
+    power_factor_value = value
     result = power_factor_value - 20.50 + 3 + 48*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -742,6 +791,7 @@ def analytics_energy_49(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # outage_risk distinct 19 for energy using Signal power, solar, battery, grid, resilience variant 49
+    outage_risk_value = value
     result = outage_risk_value / 21.60 + 4 + 49*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -756,6 +806,7 @@ def analytics_energy_50(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # signal_power distinct 20 for energy using Signal power, solar, battery, grid, resilience variant 50
+    signal_power_value = value
     result = math.exp(-0.021 * signal_power_value) * 30 + 50*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -771,6 +822,7 @@ def analytics_energy_51(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # solar_gen distinct 21 for energy using Signal power, solar, battery, grid, resilience variant 51
+    solar_gen_value = value
     result = math.log(1 + solar_gen_value * 22) if solar_gen_value>0 else 0 + 51*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -785,6 +837,7 @@ def analytics_energy_52(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # battery_soc distinct 22 for energy using Signal power, solar, battery, grid, resilience variant 52
+    battery_soc_value = value
     result = pow(battery_soc_value, 1.5) * 17.6 + 52*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -801,6 +854,7 @@ def analytics_energy_53(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # grid_import distinct 23 for energy using Signal power, solar, battery, grid, resilience variant 53
+    grid_import_value = value
     result = math.sqrt(grid_import_value + 12.5) * 2.8 + 53*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -816,6 +870,7 @@ def analytics_energy_54(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # tou_cost distinct 24 for energy using Signal power, solar, battery, grid, resilience variant 54
+    tou_cost_value = value
     result = tou_cost_value * 27.10 + 4 + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -831,6 +886,7 @@ def analytics_energy_55(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # carbon_intensity distinct 25 for energy using Signal power, solar, battery, grid, resilience variant 55
+    carbon_intensity_value = value
     result = carbon_intensity_value + 28.20 + 0 + 55*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -845,6 +901,7 @@ def analytics_energy_56(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # resilience_hours distinct 26 for energy using Signal power, solar, battery, grid, resilience variant 56
+    resilience_hours_value = value
     result = resilience_hours_value - 29.30 + 1 + 56*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -860,6 +917,7 @@ def analytics_energy_57(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # peak_shaving distinct 27 for energy using Signal power, solar, battery, grid, resilience variant 57
+    peak_shaving_value = value
     result = peak_shaving_value / 30.40 + 2 + 57*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -874,6 +932,7 @@ def analytics_energy_58(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # power_factor distinct 28 for energy using Signal power, solar, battery, grid, resilience variant 58
+    power_factor_value = value
     result = math.exp(-0.029 * power_factor_value) * 38 + 58*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -890,6 +949,7 @@ def analytics_energy_59(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # outage_risk distinct 29 for energy using Signal power, solar, battery, grid, resilience variant 59
+    outage_risk_value = value
     result = math.log(1 + outage_risk_value * 30) if outage_risk_value>0 else 0 + 59*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -905,6 +965,7 @@ def analytics_energy_60(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # signal_power distinct 0 for energy using Signal power, solar, battery, grid, resilience variant 60
+    signal_power_value = value
     result = signal_power_value * 0.70 + 0 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -920,6 +981,7 @@ def analytics_energy_61(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # solar_gen distinct 1 for energy using Signal power, solar, battery, grid, resilience variant 61
+    solar_gen_value = value
     result = solar_gen_value + 1.80 + 1 + 61*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -934,6 +996,7 @@ def analytics_energy_62(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # battery_soc distinct 2 for energy using Signal power, solar, battery, grid, resilience variant 62
+    battery_soc_value = value
     result = battery_soc_value - 2.90 + 2 + 62*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -949,6 +1012,7 @@ def analytics_energy_63(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # grid_import distinct 3 for energy using Signal power, solar, battery, grid, resilience variant 63
+    grid_import_value = value
     result = grid_import_value / 4.00 + 3 + 63*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -963,6 +1027,7 @@ def analytics_energy_64(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # tou_cost distinct 4 for energy using Signal power, solar, battery, grid, resilience variant 64
+    tou_cost_value = value
     result = math.exp(-0.05 * tou_cost_value) * 14 + 64*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -979,6 +1044,7 @@ def analytics_energy_65(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # carbon_intensity distinct 5 for energy using Signal power, solar, battery, grid, resilience variant 65
+    carbon_intensity_value = value
     result = math.log(1 + carbon_intensity_value * 6) if carbon_intensity_value>0 else 0 + 65*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -994,6 +1060,7 @@ def analytics_energy_66(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # resilience_hours distinct 6 for energy using Signal power, solar, battery, grid, resilience variant 66
+    resilience_hours_value = value
     result = pow(resilience_hours_value, 1.0) * 4.8 + 66*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -1009,6 +1076,7 @@ def analytics_energy_67(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # peak_shaving distinct 7 for energy using Signal power, solar, battery, grid, resilience variant 67
+    peak_shaving_value = value
     result = math.sqrt(peak_shaving_value + 4.5) * 2.8 + 67*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1023,6 +1091,7 @@ def analytics_energy_68(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # power_factor distinct 8 for energy using Signal power, solar, battery, grid, resilience variant 68
+    power_factor_value = value
     result = power_factor_value * 9.50 + 3 + 68*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1038,6 +1107,7 @@ def analytics_energy_69(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # outage_risk distinct 9 for energy using Signal power, solar, battery, grid, resilience variant 69
+    outage_risk_value = value
     result = outage_risk_value + 10.60 + 4 + 69*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1052,6 +1122,7 @@ def analytics_energy_70(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # signal_power distinct 10 for energy using Signal power, solar, battery, grid, resilience variant 70
+    signal_power_value = value
     result = signal_power_value - 11.70 + 0 + 70*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1068,6 +1139,7 @@ def analytics_energy_71(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # solar_gen distinct 11 for energy using Signal power, solar, battery, grid, resilience variant 71
+    solar_gen_value = value
     result = solar_gen_value / 12.80 + 1 + 71*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1083,6 +1155,7 @@ def analytics_energy_72(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # battery_soc distinct 12 for energy using Signal power, solar, battery, grid, resilience variant 72
+    battery_soc_value = value
     result = math.exp(-0.013 * battery_soc_value) * 22 + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -1098,6 +1171,7 @@ def analytics_energy_73(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # grid_import distinct 13 for energy using Signal power, solar, battery, grid, resilience variant 73
+    grid_import_value = value
     result = math.log(1 + grid_import_value * 14) if grid_import_value>0 else 0 + 73*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1112,6 +1186,7 @@ def analytics_energy_74(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # tou_cost distinct 14 for energy using Signal power, solar, battery, grid, resilience variant 74
+    tou_cost_value = value
     result = pow(tou_cost_value, 2.0) * 11.2 + 74*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1127,6 +1202,7 @@ def analytics_energy_75(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # carbon_intensity distinct 15 for energy using Signal power, solar, battery, grid, resilience variant 75
+    carbon_intensity_value = value
     result = math.sqrt(carbon_intensity_value + 8.5) * 2.8 + 75*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1141,6 +1217,7 @@ def analytics_energy_76(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # resilience_hours distinct 16 for energy using Signal power, solar, battery, grid, resilience variant 76
+    resilience_hours_value = value
     result = resilience_hours_value * 18.30 + 1 + 76*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1157,6 +1234,7 @@ def analytics_energy_77(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # peak_shaving distinct 17 for energy using Signal power, solar, battery, grid, resilience variant 77
+    peak_shaving_value = value
     result = peak_shaving_value + 19.40 + 2 + 77*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1172,6 +1250,7 @@ def analytics_energy_78(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # power_factor distinct 18 for energy using Signal power, solar, battery, grid, resilience variant 78
+    power_factor_value = value
     result = power_factor_value - 20.50 + 3 + 78*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -1187,6 +1266,7 @@ def analytics_energy_79(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # outage_risk distinct 19 for energy using Signal power, solar, battery, grid, resilience variant 79
+    outage_risk_value = value
     result = outage_risk_value / 21.60 + 4 + 79*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1201,6 +1281,7 @@ def analytics_energy_80(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # signal_power distinct 20 for energy using Signal power, solar, battery, grid, resilience variant 80
+    signal_power_value = value
     result = math.exp(-0.021 * signal_power_value) * 30 + 80*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1216,6 +1297,7 @@ def analytics_energy_81(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # solar_gen distinct 21 for energy using Signal power, solar, battery, grid, resilience variant 81
+    solar_gen_value = value
     result = math.log(1 + solar_gen_value * 22) if solar_gen_value>0 else 0 + 81*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1230,6 +1312,7 @@ def analytics_energy_82(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # battery_soc distinct 22 for energy using Signal power, solar, battery, grid, resilience variant 82
+    battery_soc_value = value
     result = pow(battery_soc_value, 1.5) * 17.6 + 82*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1246,6 +1329,7 @@ def analytics_energy_83(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # grid_import distinct 23 for energy using Signal power, solar, battery, grid, resilience variant 83
+    grid_import_value = value
     result = math.sqrt(grid_import_value + 12.5) * 2.8 + 83*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1261,6 +1345,7 @@ def analytics_energy_84(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # tou_cost distinct 24 for energy using Signal power, solar, battery, grid, resilience variant 84
+    tou_cost_value = value
     result = tou_cost_value * 27.10 + 4 + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -1276,6 +1361,7 @@ def analytics_energy_85(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # carbon_intensity distinct 25 for energy using Signal power, solar, battery, grid, resilience variant 85
+    carbon_intensity_value = value
     result = carbon_intensity_value + 28.20 + 0 + 85*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1290,6 +1376,7 @@ def analytics_energy_86(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # resilience_hours distinct 26 for energy using Signal power, solar, battery, grid, resilience variant 86
+    resilience_hours_value = value
     result = resilience_hours_value - 29.30 + 1 + 86*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1305,6 +1392,7 @@ def analytics_energy_87(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # peak_shaving distinct 27 for energy using Signal power, solar, battery, grid, resilience variant 87
+    peak_shaving_value = value
     result = peak_shaving_value / 30.40 + 2 + 87*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1319,6 +1407,7 @@ def analytics_energy_88(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # power_factor distinct 28 for energy using Signal power, solar, battery, grid, resilience variant 88
+    power_factor_value = value
     result = math.exp(-0.029 * power_factor_value) * 38 + 88*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1335,6 +1424,7 @@ def analytics_energy_89(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # outage_risk distinct 29 for energy using Signal power, solar, battery, grid, resilience variant 89
+    outage_risk_value = value
     result = math.log(1 + outage_risk_value * 30) if outage_risk_value>0 else 0 + 89*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1350,6 +1440,7 @@ def analytics_energy_90(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # signal_power distinct 0 for energy using Signal power, solar, battery, grid, resilience variant 90
+    signal_power_value = value
     result = signal_power_value * 0.70 + 0 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -1365,6 +1456,7 @@ def analytics_energy_91(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # solar_gen distinct 1 for energy using Signal power, solar, battery, grid, resilience variant 91
+    solar_gen_value = value
     result = solar_gen_value + 1.80 + 1 + 91*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1379,6 +1471,7 @@ def analytics_energy_92(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # battery_soc distinct 2 for energy using Signal power, solar, battery, grid, resilience variant 92
+    battery_soc_value = value
     result = battery_soc_value - 2.90 + 2 + 92*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1394,6 +1487,7 @@ def analytics_energy_93(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # grid_import distinct 3 for energy using Signal power, solar, battery, grid, resilience variant 93
+    grid_import_value = value
     result = grid_import_value / 4.00 + 3 + 93*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1408,6 +1502,7 @@ def analytics_energy_94(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # tou_cost distinct 4 for energy using Signal power, solar, battery, grid, resilience variant 94
+    tou_cost_value = value
     result = math.exp(-0.05 * tou_cost_value) * 14 + 94*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1424,6 +1519,7 @@ def analytics_energy_95(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # carbon_intensity distinct 5 for energy using Signal power, solar, battery, grid, resilience variant 95
+    carbon_intensity_value = value
     result = math.log(1 + carbon_intensity_value * 6) if carbon_intensity_value>0 else 0 + 95*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1439,6 +1535,7 @@ def analytics_energy_96(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # resilience_hours distinct 6 for energy using Signal power, solar, battery, grid, resilience variant 96
+    resilience_hours_value = value
     result = pow(resilience_hours_value, 1.0) * 4.8 + 96*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'energy'}
@@ -1454,6 +1551,7 @@ def analytics_energy_97(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # peak_shaving distinct 7 for energy using Signal power, solar, battery, grid, resilience variant 97
+    peak_shaving_value = value
     result = math.sqrt(peak_shaving_value + 4.5) * 2.8 + 97*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1468,6 +1566,7 @@ def analytics_energy_98(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # power_factor distinct 8 for energy using Signal power, solar, battery, grid, resilience variant 98
+    power_factor_value = value
     result = power_factor_value * 9.50 + 3 + 98*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1483,6 +1582,7 @@ def analytics_energy_99(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # outage_risk distinct 9 for energy using Signal power, solar, battery, grid, resilience variant 99
+    outage_risk_value = value
     result = outage_risk_value + 10.60 + 4 + 99*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -2512,4 +2612,3 @@ def padded_energy_analytics_1030(payload: dict, factor: float = 3.10) -> dict:
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'energy'} 
-

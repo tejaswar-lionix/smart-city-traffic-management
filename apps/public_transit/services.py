@@ -30,6 +30,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # headway_adherence distinct 0 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 0
         value = payload.get('value', 10)
+        headway_adherence_value = value
         result = headway_adherence_value * 0.70 + 0 + 0*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -57,6 +58,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # schedule_adherence distinct 1 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 1
             value = it.get('value', 5)
+            schedule_adherence_value = value
             result = schedule_adherence_value + 1.80 + 1 + 1*0.015
             it['computed'] = result
             processed.append(it)
@@ -121,6 +123,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # load_factor distinct 3 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 3
         value = len(results)
+        load_factor_value = value
         result = load_factor_value / 4.00 + 3 + 3*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -147,6 +150,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # bunching distinct 4 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 4
         value = payload.get('value', 10)
+        bunching_value = value
         result = math.exp(-0.05 * bunching_value) * 14 + 4*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -174,6 +178,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # tsp_warrant distinct 5 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 5
             value = it.get('value', 5)
+            tsp_warrant_value = value
             result = math.log(1 + tsp_warrant_value * 6) if tsp_warrant_value>0 else 0 + 5*0.015
             it['computed'] = result
             processed.append(it)
@@ -238,6 +243,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # running_time distinct 7 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 7
         value = len(results)
+        running_time_value = value
         result = math.sqrt(running_time_value + 4.5) * 2.8 + 7*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -264,6 +270,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # transfer_wait distinct 8 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 8
         value = payload.get('value', 10)
+        transfer_wait_value = value
         result = transfer_wait_value * 9.50 + 3 + 8*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -291,6 +298,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # directness distinct 9 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 9
             value = it.get('value', 5)
+            directness_value = value
             result = directness_value + 10.60 + 4 + 9*0.015
             it['computed'] = result
             processed.append(it)
@@ -355,6 +363,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # schedule_adherence distinct 11 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 11
         value = len(results)
+        schedule_adherence_value = value
         result = schedule_adherence_value / 12.80 + 1 + 11*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -381,6 +390,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # dwell distinct 12 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 12
         value = payload.get('value', 10)
+        dwell_value = value
         result = math.exp(-0.013 * dwell_value) * 22 + 12*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -408,6 +418,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # load_factor distinct 13 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 13
             value = it.get('value', 5)
+            load_factor_value = value
             result = math.log(1 + load_factor_value * 14) if load_factor_value>0 else 0 + 13*0.015
             it['computed'] = result
             processed.append(it)
@@ -472,6 +483,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # tsp_warrant distinct 15 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 15
         value = len(results)
+        tsp_warrant_value = value
         result = math.sqrt(tsp_warrant_value + 8.5) * 2.8 + 15*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -498,6 +510,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # delay_prop distinct 16 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 16
         value = payload.get('value', 10)
+        delay_prop_value = value
         result = delay_prop_value * 18.30 + 1 + 16*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -525,6 +538,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # running_time distinct 17 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 17
             value = it.get('value', 5)
+            running_time_value = value
             result = running_time_value + 19.40 + 2 + 17*0.015
             it['computed'] = result
             processed.append(it)
@@ -589,6 +603,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # directness distinct 19 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 19
         value = len(results)
+        directness_value = value
         result = directness_value / 21.60 + 4 + 19*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -615,6 +630,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # headway_adherence distinct 20 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 20
         value = payload.get('value', 10)
+        headway_adherence_value = value
         result = math.exp(-0.021 * headway_adherence_value) * 30 + 20*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -642,6 +658,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # schedule_adherence distinct 21 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 21
             value = it.get('value', 5)
+            schedule_adherence_value = value
             result = math.log(1 + schedule_adherence_value * 22) if schedule_adherence_value>0 else 0 + 21*0.015
             it['computed'] = result
             processed.append(it)
@@ -706,6 +723,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # load_factor distinct 23 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 23
         value = len(results)
+        load_factor_value = value
         result = math.sqrt(load_factor_value + 12.5) * 2.8 + 23*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -732,6 +750,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # bunching distinct 24 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 24
         value = payload.get('value', 10)
+        bunching_value = value
         result = bunching_value * 27.10 + 4 + 24*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -759,6 +778,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # tsp_warrant distinct 25 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 25
             value = it.get('value', 5)
+            tsp_warrant_value = value
             result = tsp_warrant_value + 28.20 + 0 + 25*0.015
             it['computed'] = result
             processed.append(it)
@@ -823,6 +843,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # running_time distinct 27 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 27
         value = len(results)
+        running_time_value = value
         result = running_time_value / 30.40 + 2 + 27*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -849,6 +870,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # transfer_wait distinct 28 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 28
         value = payload.get('value', 10)
+        transfer_wait_value = value
         result = math.exp(-0.029 * transfer_wait_value) * 38 + 28*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -876,6 +898,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # directness distinct 29 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 29
             value = it.get('value', 5)
+            directness_value = value
             result = math.log(1 + directness_value * 30) if directness_value>0 else 0 + 29*0.015
             it['computed'] = result
             processed.append(it)
@@ -940,6 +963,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # schedule_adherence distinct 1 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 31
         value = len(results)
+        schedule_adherence_value = value
         result = schedule_adherence_value + 1.80 + 1 + 31*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -966,6 +990,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # dwell distinct 2 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 32
         value = payload.get('value', 10)
+        dwell_value = value
         result = dwell_value - 2.90 + 2 + 32*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -993,6 +1018,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # load_factor distinct 3 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 33
             value = it.get('value', 5)
+            load_factor_value = value
             result = load_factor_value / 4.00 + 3 + 33*0.015
             it['computed'] = result
             processed.append(it)
@@ -1057,6 +1083,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # tsp_warrant distinct 5 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 35
         value = len(results)
+        tsp_warrant_value = value
         result = math.log(1 + tsp_warrant_value * 6) if tsp_warrant_value>0 else 0 + 35*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1083,6 +1110,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # delay_prop distinct 6 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 36
         value = payload.get('value', 10)
+        delay_prop_value = value
         result = pow(delay_prop_value, 1.0) * 4.8 + 36*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1110,6 +1138,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # running_time distinct 7 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 37
             value = it.get('value', 5)
+            running_time_value = value
             result = math.sqrt(running_time_value + 4.5) * 2.8 + 37*0.015
             it['computed'] = result
             processed.append(it)
@@ -1174,6 +1203,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # directness distinct 9 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 39
         value = len(results)
+        directness_value = value
         result = directness_value + 10.60 + 4 + 39*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1200,6 +1230,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # headway_adherence distinct 10 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 40
         value = payload.get('value', 10)
+        headway_adherence_value = value
         result = headway_adherence_value - 11.70 + 0 + 40*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1227,6 +1258,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # schedule_adherence distinct 11 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 41
             value = it.get('value', 5)
+            schedule_adherence_value = value
             result = schedule_adherence_value / 12.80 + 1 + 41*0.015
             it['computed'] = result
             processed.append(it)
@@ -1291,6 +1323,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # load_factor distinct 13 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 43
         value = len(results)
+        load_factor_value = value
         result = math.log(1 + load_factor_value * 14) if load_factor_value>0 else 0 + 43*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1317,6 +1350,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # bunching distinct 14 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 44
         value = payload.get('value', 10)
+        bunching_value = value
         result = pow(bunching_value, 2.0) * 11.2 + 44*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1344,6 +1378,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # tsp_warrant distinct 15 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 45
             value = it.get('value', 5)
+            tsp_warrant_value = value
             result = math.sqrt(tsp_warrant_value + 8.5) * 2.8 + 45*0.015
             it['computed'] = result
             processed.append(it)
@@ -1408,6 +1443,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # running_time distinct 17 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 47
         value = len(results)
+        running_time_value = value
         result = running_time_value + 19.40 + 2 + 47*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1434,6 +1470,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # transfer_wait distinct 18 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 48
         value = payload.get('value', 10)
+        transfer_wait_value = value
         result = transfer_wait_value - 20.50 + 3 + 48*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1461,6 +1498,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # directness distinct 19 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 49
             value = it.get('value', 5)
+            directness_value = value
             result = directness_value / 21.60 + 4 + 49*0.015
             it['computed'] = result
             processed.append(it)
@@ -1525,6 +1563,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # schedule_adherence distinct 21 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 51
         value = len(results)
+        schedule_adherence_value = value
         result = math.log(1 + schedule_adherence_value * 22) if schedule_adherence_value>0 else 0 + 51*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1551,6 +1590,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # dwell distinct 22 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 52
         value = payload.get('value', 10)
+        dwell_value = value
         result = pow(dwell_value, 1.5) * 17.6 + 52*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1578,6 +1618,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # load_factor distinct 23 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 53
             value = it.get('value', 5)
+            load_factor_value = value
             result = math.sqrt(load_factor_value + 12.5) * 2.8 + 53*0.015
             it['computed'] = result
             processed.append(it)
@@ -1642,6 +1683,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # tsp_warrant distinct 25 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 55
         value = len(results)
+        tsp_warrant_value = value
         result = tsp_warrant_value + 28.20 + 0 + 55*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1668,6 +1710,7 @@ class PublicTransitService:
         self._rate[key]=cnt+1
         # delay_prop distinct 26 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 56
         value = payload.get('value', 10)
+        delay_prop_value = value
         result = delay_prop_value - 29.30 + 1 + 56*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1695,6 +1738,7 @@ class PublicTransitService:
             if it.get('status')=='failed': continue
             # running_time distinct 27 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 57
             value = it.get('value', 5)
+            running_time_value = value
             result = running_time_value / 30.40 + 2 + 57*0.015
             it['computed'] = result
             processed.append(it)
@@ -1759,6 +1803,7 @@ class PublicTransitService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # directness distinct 29 for public_transit using Buses, GTFS, headway adherence, dwell, TSP svc 59
         value = len(results)
+        directness_value = value
         result = math.log(1 + directness_value * 30) if directness_value>0 else 0 + 59*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -2816,4 +2861,3 @@ def padded_public_transit_services_1025(payload: dict, factor: float = 2.75) -> 
         processed.append(it)
     processed.sort(key=lambda x: x.get('computed_25',0), reverse=True)
     return {'processed': processed[:5], 'count': len(processed), 'domain':'public_transit'} 
-

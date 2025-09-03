@@ -30,6 +30,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # moves_co2 distinct 0 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 0
         value = payload.get('value', 10)
+        moves_co2_value = value
         result = moves_co2_value * 0.70 + 0 + 0*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -57,6 +58,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # nox_rate distinct 1 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 1
             value = it.get('value', 5)
+            nox_rate_value = value
             result = nox_rate_value + 1.80 + 1 + 1*0.015
             it['computed'] = result
             processed.append(it)
@@ -121,6 +123,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # fuel_akcelik distinct 3 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 3
         value = len(results)
+        fuel_akcelik_value = value
         result = fuel_akcelik_value / 4.00 + 3 + 3*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -147,6 +150,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # noise_prop distinct 4 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 4
         value = payload.get('value', 10)
+        noise_prop_value = value
         result = math.exp(-0.05 * noise_prop_value) * 14 + 4*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -174,6 +178,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # dispersion_gaussian distinct 5 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 5
             value = it.get('value', 5)
+            dispersion_gaussian_value = value
             result = math.log(1 + dispersion_gaussian_value * 6) if dispersion_gaussian_value>0 else 0 + 5*0.015
             it['computed'] = result
             processed.append(it)
@@ -238,6 +243,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # co2_per_pax distinct 7 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 7
         value = len(results)
+        co2_per_pax_value = value
         result = math.sqrt(co2_per_pax_value + 4.5) * 2.8 + 7*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -264,6 +270,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # inventory distinct 8 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 8
         value = payload.get('value', 10)
+        inventory_value = value
         result = inventory_value * 9.50 + 3 + 8*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -291,6 +298,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # cold_start distinct 9 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 9
             value = it.get('value', 5)
+            cold_start_value = value
             result = cold_start_value + 10.60 + 4 + 9*0.015
             it['computed'] = result
             processed.append(it)
@@ -355,6 +363,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # nox_rate distinct 11 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 11
         value = len(results)
+        nox_rate_value = value
         result = nox_rate_value / 12.80 + 1 + 11*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -381,6 +390,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # pm25_brake distinct 12 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 12
         value = payload.get('value', 10)
+        pm25_brake_value = value
         result = math.exp(-0.013 * pm25_brake_value) * 22 + 12*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -408,6 +418,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # fuel_akcelik distinct 13 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 13
             value = it.get('value', 5)
+            fuel_akcelik_value = value
             result = math.log(1 + fuel_akcelik_value * 14) if fuel_akcelik_value>0 else 0 + 13*0.015
             it['computed'] = result
             processed.append(it)
@@ -472,6 +483,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # dispersion_gaussian distinct 15 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 15
         value = len(results)
+        dispersion_gaussian_value = value
         result = math.sqrt(dispersion_gaussian_value + 8.5) * 2.8 + 15*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -498,6 +510,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # health_rr distinct 16 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 16
         value = payload.get('value', 10)
+        health_rr_value = value
         result = health_rr_value * 18.30 + 1 + 16*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -525,6 +538,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # co2_per_pax distinct 17 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 17
             value = it.get('value', 5)
+            co2_per_pax_value = value
             result = co2_per_pax_value + 19.40 + 2 + 17*0.015
             it['computed'] = result
             processed.append(it)
@@ -589,6 +603,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # cold_start distinct 19 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 19
         value = len(results)
+        cold_start_value = value
         result = cold_start_value / 21.60 + 4 + 19*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -615,6 +630,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # moves_co2 distinct 20 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 20
         value = payload.get('value', 10)
+        moves_co2_value = value
         result = math.exp(-0.021 * moves_co2_value) * 30 + 20*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -642,6 +658,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # nox_rate distinct 21 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 21
             value = it.get('value', 5)
+            nox_rate_value = value
             result = math.log(1 + nox_rate_value * 22) if nox_rate_value>0 else 0 + 21*0.015
             it['computed'] = result
             processed.append(it)
@@ -706,6 +723,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # fuel_akcelik distinct 23 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 23
         value = len(results)
+        fuel_akcelik_value = value
         result = math.sqrt(fuel_akcelik_value + 12.5) * 2.8 + 23*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -732,6 +750,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # noise_prop distinct 24 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 24
         value = payload.get('value', 10)
+        noise_prop_value = value
         result = noise_prop_value * 27.10 + 4 + 24*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -759,6 +778,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # dispersion_gaussian distinct 25 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 25
             value = it.get('value', 5)
+            dispersion_gaussian_value = value
             result = dispersion_gaussian_value + 28.20 + 0 + 25*0.015
             it['computed'] = result
             processed.append(it)
@@ -823,6 +843,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # co2_per_pax distinct 27 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 27
         value = len(results)
+        co2_per_pax_value = value
         result = co2_per_pax_value / 30.40 + 2 + 27*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -849,6 +870,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # inventory distinct 28 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 28
         value = payload.get('value', 10)
+        inventory_value = value
         result = math.exp(-0.029 * inventory_value) * 38 + 28*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -876,6 +898,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # cold_start distinct 29 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 29
             value = it.get('value', 5)
+            cold_start_value = value
             result = math.log(1 + cold_start_value * 30) if cold_start_value>0 else 0 + 29*0.015
             it['computed'] = result
             processed.append(it)
@@ -940,6 +963,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # nox_rate distinct 1 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 31
         value = len(results)
+        nox_rate_value = value
         result = nox_rate_value + 1.80 + 1 + 31*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -966,6 +990,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # pm25_brake distinct 2 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 32
         value = payload.get('value', 10)
+        pm25_brake_value = value
         result = pm25_brake_value - 2.90 + 2 + 32*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -993,6 +1018,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # fuel_akcelik distinct 3 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 33
             value = it.get('value', 5)
+            fuel_akcelik_value = value
             result = fuel_akcelik_value / 4.00 + 3 + 33*0.015
             it['computed'] = result
             processed.append(it)
@@ -1057,6 +1083,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # dispersion_gaussian distinct 5 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 35
         value = len(results)
+        dispersion_gaussian_value = value
         result = math.log(1 + dispersion_gaussian_value * 6) if dispersion_gaussian_value>0 else 0 + 35*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1083,6 +1110,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # health_rr distinct 6 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 36
         value = payload.get('value', 10)
+        health_rr_value = value
         result = pow(health_rr_value, 1.0) * 4.8 + 36*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1110,6 +1138,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # co2_per_pax distinct 7 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 37
             value = it.get('value', 5)
+            co2_per_pax_value = value
             result = math.sqrt(co2_per_pax_value + 4.5) * 2.8 + 37*0.015
             it['computed'] = result
             processed.append(it)
@@ -1174,6 +1203,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # cold_start distinct 9 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 39
         value = len(results)
+        cold_start_value = value
         result = cold_start_value + 10.60 + 4 + 39*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1200,6 +1230,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # moves_co2 distinct 10 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 40
         value = payload.get('value', 10)
+        moves_co2_value = value
         result = moves_co2_value - 11.70 + 0 + 40*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1227,6 +1258,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # nox_rate distinct 11 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 41
             value = it.get('value', 5)
+            nox_rate_value = value
             result = nox_rate_value / 12.80 + 1 + 41*0.015
             it['computed'] = result
             processed.append(it)
@@ -1291,6 +1323,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # fuel_akcelik distinct 13 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 43
         value = len(results)
+        fuel_akcelik_value = value
         result = math.log(1 + fuel_akcelik_value * 14) if fuel_akcelik_value>0 else 0 + 43*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1317,6 +1350,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # noise_prop distinct 14 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 44
         value = payload.get('value', 10)
+        noise_prop_value = value
         result = pow(noise_prop_value, 2.0) * 11.2 + 44*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1344,6 +1378,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # dispersion_gaussian distinct 15 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 45
             value = it.get('value', 5)
+            dispersion_gaussian_value = value
             result = math.sqrt(dispersion_gaussian_value + 8.5) * 2.8 + 45*0.015
             it['computed'] = result
             processed.append(it)
@@ -1408,6 +1443,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # co2_per_pax distinct 17 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 47
         value = len(results)
+        co2_per_pax_value = value
         result = co2_per_pax_value + 19.40 + 2 + 47*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1434,6 +1470,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # inventory distinct 18 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 48
         value = payload.get('value', 10)
+        inventory_value = value
         result = inventory_value - 20.50 + 3 + 48*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1461,6 +1498,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # cold_start distinct 19 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 49
             value = it.get('value', 5)
+            cold_start_value = value
             result = cold_start_value / 21.60 + 4 + 49*0.015
             it['computed'] = result
             processed.append(it)
@@ -1525,6 +1563,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # nox_rate distinct 21 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 51
         value = len(results)
+        nox_rate_value = value
         result = math.log(1 + nox_rate_value * 22) if nox_rate_value>0 else 0 + 51*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1551,6 +1590,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # pm25_brake distinct 22 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 52
         value = payload.get('value', 10)
+        pm25_brake_value = value
         result = pow(pm25_brake_value, 1.5) * 17.6 + 52*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1578,6 +1618,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # fuel_akcelik distinct 23 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 53
             value = it.get('value', 5)
+            fuel_akcelik_value = value
             result = math.sqrt(fuel_akcelik_value + 12.5) * 2.8 + 53*0.015
             it['computed'] = result
             processed.append(it)
@@ -1642,6 +1683,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # dispersion_gaussian distinct 25 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 55
         value = len(results)
+        dispersion_gaussian_value = value
         result = dispersion_gaussian_value + 28.20 + 0 + 55*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1668,6 +1710,7 @@ class EmissionsService:
         self._rate[key]=cnt+1
         # health_rr distinct 26 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 56
         value = payload.get('value', 10)
+        health_rr_value = value
         result = health_rr_value - 29.30 + 1 + 56*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1695,6 +1738,7 @@ class EmissionsService:
             if it.get('status')=='failed': continue
             # co2_per_pax distinct 27 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 57
             value = it.get('value', 5)
+            co2_per_pax_value = value
             result = co2_per_pax_value / 30.40 + 2 + 57*0.015
             it['computed'] = result
             processed.append(it)
@@ -1759,6 +1803,7 @@ class EmissionsService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # cold_start distinct 29 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion svc 59
         value = len(results)
+        cold_start_value = value
         result = math.log(1 + cold_start_value * 30) if cold_start_value>0 else 0 + 59*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -2816,4 +2861,3 @@ def padded_emissions_services_1025(payload: dict, factor: float = 2.75) -> dict:
         processed.append(it)
     processed.sort(key=lambda x: x.get('computed_25',0), reverse=True)
     return {'processed': processed[:5], 'count': len(processed), 'domain':'emissions'} 
-

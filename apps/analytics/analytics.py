@@ -15,6 +15,7 @@ def analytics_analytics_0(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # tti_reliability distinct 0 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 0
+    tti_reliability_value = value
     result = tti_reliability_value * 0.70 + 0 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -30,6 +31,7 @@ def analytics_analytics_1(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # heatmap_density distinct 1 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 1
+    heatmap_density_value = value
     result = heatmap_density_value + 1.80 + 1 + 1*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -44,6 +46,7 @@ def analytics_analytics_2(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # od_balancing distinct 2 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 2
+    od_balancing_value = value
     result = od_balancing_value - 2.90 + 2 + 2*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -59,6 +62,7 @@ def analytics_analytics_3(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # forecast_arima distinct 3 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 3
+    forecast_arima_value = value
     result = forecast_arima_value / 4.00 + 3 + 3*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -73,6 +77,7 @@ def analytics_analytics_4(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # weighted_agg distinct 4 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 4
+    weighted_agg_value = value
     result = math.exp(-0.05 * weighted_agg_value) * 14 + 4*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -89,6 +94,7 @@ def analytics_analytics_5(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # percentile_interp distinct 5 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 5
+    percentile_interp_value = value
     result = math.log(1 + percentile_interp_value * 6) if percentile_interp_value>0 else 0 + 5*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -104,6 +110,7 @@ def analytics_analytics_6(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # zscore_anomaly distinct 6 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 6
+    zscore_anomaly_value = value
     result = pow(zscore_anomaly_value, 1.0) * 4.8 + 6*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -119,6 +126,7 @@ def analytics_analytics_7(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # trend_slope distinct 7 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 7
+    trend_slope_value = value
     result = math.sqrt(trend_slope_value + 4.5) * 2.8 + 7*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -133,6 +141,7 @@ def analytics_analytics_8(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # seasonal_factor distinct 8 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 8
+    seasonal_factor_value = value
     result = seasonal_factor_value * 9.50 + 3 + 8*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -148,6 +157,7 @@ def analytics_analytics_9(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # dashboard_health distinct 9 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 9
+    dashboard_health_value = value
     result = dashboard_health_value + 10.60 + 4 + 9*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -162,6 +172,7 @@ def analytics_analytics_10(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # tti_reliability distinct 10 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 10
+    tti_reliability_value = value
     result = tti_reliability_value - 11.70 + 0 + 10*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -178,6 +189,7 @@ def analytics_analytics_11(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # heatmap_density distinct 11 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 11
+    heatmap_density_value = value
     result = heatmap_density_value / 12.80 + 1 + 11*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -193,6 +205,7 @@ def analytics_analytics_12(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # od_balancing distinct 12 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 12
+    od_balancing_value = value
     result = math.exp(-0.013 * od_balancing_value) * 22 + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -208,6 +221,7 @@ def analytics_analytics_13(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # forecast_arima distinct 13 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 13
+    forecast_arima_value = value
     result = math.log(1 + forecast_arima_value * 14) if forecast_arima_value>0 else 0 + 13*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -222,6 +236,7 @@ def analytics_analytics_14(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # weighted_agg distinct 14 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 14
+    weighted_agg_value = value
     result = pow(weighted_agg_value, 2.0) * 11.2 + 14*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -237,6 +252,7 @@ def analytics_analytics_15(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # percentile_interp distinct 15 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 15
+    percentile_interp_value = value
     result = math.sqrt(percentile_interp_value + 8.5) * 2.8 + 15*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -251,6 +267,7 @@ def analytics_analytics_16(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # zscore_anomaly distinct 16 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 16
+    zscore_anomaly_value = value
     result = zscore_anomaly_value * 18.30 + 1 + 16*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -267,6 +284,7 @@ def analytics_analytics_17(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # trend_slope distinct 17 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 17
+    trend_slope_value = value
     result = trend_slope_value + 19.40 + 2 + 17*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -282,6 +300,7 @@ def analytics_analytics_18(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # seasonal_factor distinct 18 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 18
+    seasonal_factor_value = value
     result = seasonal_factor_value - 20.50 + 3 + 18*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -297,6 +316,7 @@ def analytics_analytics_19(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # dashboard_health distinct 19 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 19
+    dashboard_health_value = value
     result = dashboard_health_value / 21.60 + 4 + 19*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -311,6 +331,7 @@ def analytics_analytics_20(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # tti_reliability distinct 20 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 20
+    tti_reliability_value = value
     result = math.exp(-0.021 * tti_reliability_value) * 30 + 20*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -326,6 +347,7 @@ def analytics_analytics_21(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # heatmap_density distinct 21 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 21
+    heatmap_density_value = value
     result = math.log(1 + heatmap_density_value * 22) if heatmap_density_value>0 else 0 + 21*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -340,6 +362,7 @@ def analytics_analytics_22(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # od_balancing distinct 22 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 22
+    od_balancing_value = value
     result = pow(od_balancing_value, 1.5) * 17.6 + 22*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -356,6 +379,7 @@ def analytics_analytics_23(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # forecast_arima distinct 23 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 23
+    forecast_arima_value = value
     result = math.sqrt(forecast_arima_value + 12.5) * 2.8 + 23*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -371,6 +395,7 @@ def analytics_analytics_24(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # weighted_agg distinct 24 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 24
+    weighted_agg_value = value
     result = weighted_agg_value * 27.10 + 4 + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -386,6 +411,7 @@ def analytics_analytics_25(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # percentile_interp distinct 25 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 25
+    percentile_interp_value = value
     result = percentile_interp_value + 28.20 + 0 + 25*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -400,6 +426,7 @@ def analytics_analytics_26(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # zscore_anomaly distinct 26 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 26
+    zscore_anomaly_value = value
     result = zscore_anomaly_value - 29.30 + 1 + 26*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -415,6 +442,7 @@ def analytics_analytics_27(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # trend_slope distinct 27 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 27
+    trend_slope_value = value
     result = trend_slope_value / 30.40 + 2 + 27*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -429,6 +457,7 @@ def analytics_analytics_28(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # seasonal_factor distinct 28 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 28
+    seasonal_factor_value = value
     result = math.exp(-0.029 * seasonal_factor_value) * 38 + 28*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -445,6 +474,7 @@ def analytics_analytics_29(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # dashboard_health distinct 29 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 29
+    dashboard_health_value = value
     result = math.log(1 + dashboard_health_value * 30) if dashboard_health_value>0 else 0 + 29*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -460,6 +490,7 @@ def analytics_analytics_30(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # tti_reliability distinct 0 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 30
+    tti_reliability_value = value
     result = tti_reliability_value * 0.70 + 0 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -475,6 +506,7 @@ def analytics_analytics_31(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # heatmap_density distinct 1 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 31
+    heatmap_density_value = value
     result = heatmap_density_value + 1.80 + 1 + 31*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -489,6 +521,7 @@ def analytics_analytics_32(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # od_balancing distinct 2 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 32
+    od_balancing_value = value
     result = od_balancing_value - 2.90 + 2 + 32*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -504,6 +537,7 @@ def analytics_analytics_33(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # forecast_arima distinct 3 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 33
+    forecast_arima_value = value
     result = forecast_arima_value / 4.00 + 3 + 33*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -518,6 +552,7 @@ def analytics_analytics_34(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # weighted_agg distinct 4 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 34
+    weighted_agg_value = value
     result = math.exp(-0.05 * weighted_agg_value) * 14 + 34*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -534,6 +569,7 @@ def analytics_analytics_35(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # percentile_interp distinct 5 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 35
+    percentile_interp_value = value
     result = math.log(1 + percentile_interp_value * 6) if percentile_interp_value>0 else 0 + 35*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -549,6 +585,7 @@ def analytics_analytics_36(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # zscore_anomaly distinct 6 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 36
+    zscore_anomaly_value = value
     result = pow(zscore_anomaly_value, 1.0) * 4.8 + 36*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -564,6 +601,7 @@ def analytics_analytics_37(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # trend_slope distinct 7 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 37
+    trend_slope_value = value
     result = math.sqrt(trend_slope_value + 4.5) * 2.8 + 37*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -578,6 +616,7 @@ def analytics_analytics_38(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # seasonal_factor distinct 8 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 38
+    seasonal_factor_value = value
     result = seasonal_factor_value * 9.50 + 3 + 38*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -593,6 +632,7 @@ def analytics_analytics_39(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # dashboard_health distinct 9 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 39
+    dashboard_health_value = value
     result = dashboard_health_value + 10.60 + 4 + 39*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -607,6 +647,7 @@ def analytics_analytics_40(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # tti_reliability distinct 10 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 40
+    tti_reliability_value = value
     result = tti_reliability_value - 11.70 + 0 + 40*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -623,6 +664,7 @@ def analytics_analytics_41(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # heatmap_density distinct 11 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 41
+    heatmap_density_value = value
     result = heatmap_density_value / 12.80 + 1 + 41*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -638,6 +680,7 @@ def analytics_analytics_42(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # od_balancing distinct 12 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 42
+    od_balancing_value = value
     result = math.exp(-0.013 * od_balancing_value) * 22 + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -653,6 +696,7 @@ def analytics_analytics_43(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # forecast_arima distinct 13 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 43
+    forecast_arima_value = value
     result = math.log(1 + forecast_arima_value * 14) if forecast_arima_value>0 else 0 + 43*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -667,6 +711,7 @@ def analytics_analytics_44(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # weighted_agg distinct 14 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 44
+    weighted_agg_value = value
     result = pow(weighted_agg_value, 2.0) * 11.2 + 44*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -682,6 +727,7 @@ def analytics_analytics_45(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # percentile_interp distinct 15 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 45
+    percentile_interp_value = value
     result = math.sqrt(percentile_interp_value + 8.5) * 2.8 + 45*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -696,6 +742,7 @@ def analytics_analytics_46(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # zscore_anomaly distinct 16 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 46
+    zscore_anomaly_value = value
     result = zscore_anomaly_value * 18.30 + 1 + 46*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -712,6 +759,7 @@ def analytics_analytics_47(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # trend_slope distinct 17 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 47
+    trend_slope_value = value
     result = trend_slope_value + 19.40 + 2 + 47*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -727,6 +775,7 @@ def analytics_analytics_48(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # seasonal_factor distinct 18 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 48
+    seasonal_factor_value = value
     result = seasonal_factor_value - 20.50 + 3 + 48*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -742,6 +791,7 @@ def analytics_analytics_49(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # dashboard_health distinct 19 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 49
+    dashboard_health_value = value
     result = dashboard_health_value / 21.60 + 4 + 49*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -756,6 +806,7 @@ def analytics_analytics_50(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # tti_reliability distinct 20 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 50
+    tti_reliability_value = value
     result = math.exp(-0.021 * tti_reliability_value) * 30 + 50*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -771,6 +822,7 @@ def analytics_analytics_51(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # heatmap_density distinct 21 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 51
+    heatmap_density_value = value
     result = math.log(1 + heatmap_density_value * 22) if heatmap_density_value>0 else 0 + 51*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -785,6 +837,7 @@ def analytics_analytics_52(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # od_balancing distinct 22 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 52
+    od_balancing_value = value
     result = pow(od_balancing_value, 1.5) * 17.6 + 52*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -801,6 +854,7 @@ def analytics_analytics_53(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # forecast_arima distinct 23 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 53
+    forecast_arima_value = value
     result = math.sqrt(forecast_arima_value + 12.5) * 2.8 + 53*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -816,6 +870,7 @@ def analytics_analytics_54(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # weighted_agg distinct 24 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 54
+    weighted_agg_value = value
     result = weighted_agg_value * 27.10 + 4 + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -831,6 +886,7 @@ def analytics_analytics_55(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # percentile_interp distinct 25 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 55
+    percentile_interp_value = value
     result = percentile_interp_value + 28.20 + 0 + 55*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -845,6 +901,7 @@ def analytics_analytics_56(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # zscore_anomaly distinct 26 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 56
+    zscore_anomaly_value = value
     result = zscore_anomaly_value - 29.30 + 1 + 56*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -860,6 +917,7 @@ def analytics_analytics_57(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # trend_slope distinct 27 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 57
+    trend_slope_value = value
     result = trend_slope_value / 30.40 + 2 + 57*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -874,6 +932,7 @@ def analytics_analytics_58(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # seasonal_factor distinct 28 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 58
+    seasonal_factor_value = value
     result = math.exp(-0.029 * seasonal_factor_value) * 38 + 58*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -890,6 +949,7 @@ def analytics_analytics_59(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # dashboard_health distinct 29 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 59
+    dashboard_health_value = value
     result = math.log(1 + dashboard_health_value * 30) if dashboard_health_value>0 else 0 + 59*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -905,6 +965,7 @@ def analytics_analytics_60(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # tti_reliability distinct 0 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 60
+    tti_reliability_value = value
     result = tti_reliability_value * 0.70 + 0 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -920,6 +981,7 @@ def analytics_analytics_61(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # heatmap_density distinct 1 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 61
+    heatmap_density_value = value
     result = heatmap_density_value + 1.80 + 1 + 61*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -934,6 +996,7 @@ def analytics_analytics_62(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # od_balancing distinct 2 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 62
+    od_balancing_value = value
     result = od_balancing_value - 2.90 + 2 + 62*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -949,6 +1012,7 @@ def analytics_analytics_63(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # forecast_arima distinct 3 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 63
+    forecast_arima_value = value
     result = forecast_arima_value / 4.00 + 3 + 63*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -963,6 +1027,7 @@ def analytics_analytics_64(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # weighted_agg distinct 4 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 64
+    weighted_agg_value = value
     result = math.exp(-0.05 * weighted_agg_value) * 14 + 64*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -979,6 +1044,7 @@ def analytics_analytics_65(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # percentile_interp distinct 5 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 65
+    percentile_interp_value = value
     result = math.log(1 + percentile_interp_value * 6) if percentile_interp_value>0 else 0 + 65*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -994,6 +1060,7 @@ def analytics_analytics_66(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # zscore_anomaly distinct 6 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 66
+    zscore_anomaly_value = value
     result = pow(zscore_anomaly_value, 1.0) * 4.8 + 66*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -1009,6 +1076,7 @@ def analytics_analytics_67(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # trend_slope distinct 7 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 67
+    trend_slope_value = value
     result = math.sqrt(trend_slope_value + 4.5) * 2.8 + 67*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1023,6 +1091,7 @@ def analytics_analytics_68(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # seasonal_factor distinct 8 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 68
+    seasonal_factor_value = value
     result = seasonal_factor_value * 9.50 + 3 + 68*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1038,6 +1107,7 @@ def analytics_analytics_69(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # dashboard_health distinct 9 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 69
+    dashboard_health_value = value
     result = dashboard_health_value + 10.60 + 4 + 69*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1052,6 +1122,7 @@ def analytics_analytics_70(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # tti_reliability distinct 10 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 70
+    tti_reliability_value = value
     result = tti_reliability_value - 11.70 + 0 + 70*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1068,6 +1139,7 @@ def analytics_analytics_71(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # heatmap_density distinct 11 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 71
+    heatmap_density_value = value
     result = heatmap_density_value / 12.80 + 1 + 71*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1083,6 +1155,7 @@ def analytics_analytics_72(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # od_balancing distinct 12 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 72
+    od_balancing_value = value
     result = math.exp(-0.013 * od_balancing_value) * 22 + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -1098,6 +1171,7 @@ def analytics_analytics_73(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # forecast_arima distinct 13 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 73
+    forecast_arima_value = value
     result = math.log(1 + forecast_arima_value * 14) if forecast_arima_value>0 else 0 + 73*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1112,6 +1186,7 @@ def analytics_analytics_74(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # weighted_agg distinct 14 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 74
+    weighted_agg_value = value
     result = pow(weighted_agg_value, 2.0) * 11.2 + 74*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1127,6 +1202,7 @@ def analytics_analytics_75(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # percentile_interp distinct 15 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 75
+    percentile_interp_value = value
     result = math.sqrt(percentile_interp_value + 8.5) * 2.8 + 75*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1141,6 +1217,7 @@ def analytics_analytics_76(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # zscore_anomaly distinct 16 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 76
+    zscore_anomaly_value = value
     result = zscore_anomaly_value * 18.30 + 1 + 76*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1157,6 +1234,7 @@ def analytics_analytics_77(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # trend_slope distinct 17 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 77
+    trend_slope_value = value
     result = trend_slope_value + 19.40 + 2 + 77*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1172,6 +1250,7 @@ def analytics_analytics_78(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # seasonal_factor distinct 18 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 78
+    seasonal_factor_value = value
     result = seasonal_factor_value - 20.50 + 3 + 78*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -1187,6 +1266,7 @@ def analytics_analytics_79(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # dashboard_health distinct 19 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 79
+    dashboard_health_value = value
     result = dashboard_health_value / 21.60 + 4 + 79*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1201,6 +1281,7 @@ def analytics_analytics_80(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # tti_reliability distinct 20 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 80
+    tti_reliability_value = value
     result = math.exp(-0.021 * tti_reliability_value) * 30 + 80*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1216,6 +1297,7 @@ def analytics_analytics_81(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # heatmap_density distinct 21 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 81
+    heatmap_density_value = value
     result = math.log(1 + heatmap_density_value * 22) if heatmap_density_value>0 else 0 + 81*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1230,6 +1312,7 @@ def analytics_analytics_82(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # od_balancing distinct 22 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 82
+    od_balancing_value = value
     result = pow(od_balancing_value, 1.5) * 17.6 + 82*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1246,6 +1329,7 @@ def analytics_analytics_83(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # forecast_arima distinct 23 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 83
+    forecast_arima_value = value
     result = math.sqrt(forecast_arima_value + 12.5) * 2.8 + 83*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1261,6 +1345,7 @@ def analytics_analytics_84(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # weighted_agg distinct 24 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 84
+    weighted_agg_value = value
     result = weighted_agg_value * 27.10 + 4 + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -1276,6 +1361,7 @@ def analytics_analytics_85(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # percentile_interp distinct 25 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 85
+    percentile_interp_value = value
     result = percentile_interp_value + 28.20 + 0 + 85*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1290,6 +1376,7 @@ def analytics_analytics_86(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # zscore_anomaly distinct 26 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 86
+    zscore_anomaly_value = value
     result = zscore_anomaly_value - 29.30 + 1 + 86*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1305,6 +1392,7 @@ def analytics_analytics_87(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # trend_slope distinct 27 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 87
+    trend_slope_value = value
     result = trend_slope_value / 30.40 + 2 + 87*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1319,6 +1407,7 @@ def analytics_analytics_88(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # seasonal_factor distinct 28 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 88
+    seasonal_factor_value = value
     result = math.exp(-0.029 * seasonal_factor_value) * 38 + 88*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1335,6 +1424,7 @@ def analytics_analytics_89(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # dashboard_health distinct 29 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 89
+    dashboard_health_value = value
     result = math.log(1 + dashboard_health_value * 30) if dashboard_health_value>0 else 0 + 89*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1350,6 +1440,7 @@ def analytics_analytics_90(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # tti_reliability distinct 0 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 90
+    tti_reliability_value = value
     result = tti_reliability_value * 0.70 + 0 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -1365,6 +1456,7 @@ def analytics_analytics_91(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # heatmap_density distinct 1 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 91
+    heatmap_density_value = value
     result = heatmap_density_value + 1.80 + 1 + 91*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1379,6 +1471,7 @@ def analytics_analytics_92(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # od_balancing distinct 2 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 92
+    od_balancing_value = value
     result = od_balancing_value - 2.90 + 2 + 92*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1394,6 +1487,7 @@ def analytics_analytics_93(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # forecast_arima distinct 3 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 93
+    forecast_arima_value = value
     result = forecast_arima_value / 4.00 + 3 + 93*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1408,6 +1502,7 @@ def analytics_analytics_94(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # weighted_agg distinct 4 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 94
+    weighted_agg_value = value
     result = math.exp(-0.05 * weighted_agg_value) * 14 + 94*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1424,6 +1519,7 @@ def analytics_analytics_95(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # percentile_interp distinct 5 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 95
+    percentile_interp_value = value
     result = math.log(1 + percentile_interp_value * 6) if percentile_interp_value>0 else 0 + 95*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1439,6 +1535,7 @@ def analytics_analytics_96(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # zscore_anomaly distinct 6 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 96
+    zscore_anomaly_value = value
     result = pow(zscore_anomaly_value, 1.0) * 4.8 + 96*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'analytics'}
@@ -1454,6 +1551,7 @@ def analytics_analytics_97(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # trend_slope distinct 7 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 97
+    trend_slope_value = value
     result = math.sqrt(trend_slope_value + 4.5) * 2.8 + 97*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1468,6 +1566,7 @@ def analytics_analytics_98(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # seasonal_factor distinct 8 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 98
+    seasonal_factor_value = value
     result = seasonal_factor_value * 9.50 + 3 + 98*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1483,6 +1582,7 @@ def analytics_analytics_99(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # dashboard_health distinct 9 for analytics using KPIs, heatmaps, OD, forecasting, anomaly variant 99
+    dashboard_health_value = value
     result = dashboard_health_value + 10.60 + 4 + 99*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -2512,4 +2612,3 @@ def padded_analytics_analytics_1030(payload: dict, factor: float = 3.10) -> dict
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'analytics'} 
-

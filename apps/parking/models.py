@@ -24,6 +24,7 @@ class ParkingFacility:
     status: str = 'active'
 
     def occupancy_rate_0_par_0_parkingfacility_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_rate_value = value
         """occupancy_rate distinct 0 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 0 for ParkingFacility — implements result = occupancy_rate_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for parking::ParkingFacility::occupancy_rate_0_par_0_parkingfacility_0
@@ -38,13 +39,14 @@ class ParkingFacility:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'occupancy_rate_0_par_0_parkingfacility_0', 'result': result, 'domain': 'parking'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def availability_pred_6_par_6_parkingfacility_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        availability_pred_value = value
         """availability_pred distinct 6 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 6 for ParkingFacility — implements result = pow(availability_pred_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for parking::ParkingFacility::availability_pred_6_par_6_parkingfacility_6
@@ -56,13 +58,14 @@ class ParkingFacility:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def avg_duration_12_par_12_parkingfacility_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        avg_duration_value = value
         """avg_duration distinct 12 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 12 for ParkingFacility — implements result = math.exp(-0.013 * avg_duration_value) * 22 + 12*0.0"""
         try:
             # Distinct logic for parking::ParkingFacility::avg_duration_12_par_12_parkingfacility_12
@@ -74,13 +77,14 @@ class ParkingFacility:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def reservation_conflict_18_par_18_parkingfacility_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        reservation_conflict_value = value
         """reservation_conflict distinct 18 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 18 for ParkingFacility — implements result = reservation_conflict_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for parking::ParkingFacility::reservation_conflict_18_par_18_parkingfacility_18
@@ -95,13 +99,14 @@ class ParkingFacility:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def elasticity_24_par_24_parkingfacility_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        elasticity_value = value
         """elasticity distinct 24 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 24 for ParkingFacility — implements result = elasticity_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for parking::ParkingFacility::elasticity_24_par_24_parkingfacility_24
@@ -113,16 +118,18 @@ class ParkingFacility:
                 else:
                     break
             # elasticity distinct 24 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 24
+            elasticity_value = value
             result = elasticity_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_rate_0_par_30_parkingfacility_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_rate_value = value
         """occupancy_rate distinct 0 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 30 for ParkingFacility — implements result = occupancy_rate_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for parking::ParkingFacility::occupancy_rate_0_par_30_parkingfacility_30
@@ -137,13 +144,14 @@ class ParkingFacility:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'occupancy_rate_0_par_30_parkingfacility_30', 'result': result, 'domain': 'parking'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def availability_pred_6_par_36_parkingfacility_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        availability_pred_value = value
         """availability_pred distinct 6 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 36 for ParkingFacility — implements result = pow(availability_pred_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for parking::ParkingFacility::availability_pred_6_par_36_parkingfacility_36
@@ -155,13 +163,14 @@ class ParkingFacility:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def avg_duration_12_par_42_parkingfacility_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        avg_duration_value = value
         """avg_duration distinct 12 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 42 for ParkingFacility — implements result = math.exp(-0.013 * avg_duration_value) * 22 + 42*0.0"""
         try:
             # Distinct logic for parking::ParkingFacility::avg_duration_12_par_42_parkingfacility_42
@@ -173,13 +182,14 @@ class ParkingFacility:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def reservation_conflict_18_par_48_parkingfacility_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        reservation_conflict_value = value
         """reservation_conflict distinct 18 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 48 for ParkingFacility — implements result = reservation_conflict_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for parking::ParkingFacility::reservation_conflict_18_par_48_parkingfacility_48
@@ -194,13 +204,14 @@ class ParkingFacility:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def elasticity_24_par_54_parkingfacility_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        elasticity_value = value
         """elasticity distinct 24 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 54 for ParkingFacility — implements result = elasticity_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for parking::ParkingFacility::elasticity_24_par_54_parkingfacility_54
@@ -212,13 +223,14 @@ class ParkingFacility:
                 else:
                     break
             # elasticity distinct 24 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 54
+            elasticity_value = value
             result = elasticity_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_parkingfacility(self) -> bool:
@@ -244,6 +256,7 @@ class ParkingSpace:
     status: str = 'active'
 
     def turnover_1_par_1_parkingspace_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        turnover_value = value
         """turnover distinct 1 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 1 for ParkingSpace — implements result = turnover_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for parking::ParkingSpace::turnover_1_par_1_parkingspace_1
@@ -255,13 +268,14 @@ class ParkingSpace:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def guidance_nearest_7_par_7_parkingspace_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        guidance_nearest_value = value
         """guidance_nearest distinct 7 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 7 for ParkingSpace — implements result = math.sqrt(guidance_nearest_value + 4.5) * 2.8 + 7*0"""
         try:
             # Distinct logic for parking::ParkingSpace::guidance_nearest_7_par_7_parkingspace_7
@@ -273,13 +287,14 @@ class ParkingSpace:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def search_time_13_par_13_parkingspace_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        search_time_value = value
         """search_time distinct 13 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 13 for ParkingSpace — implements result = math.log(1 + search_time_value * 14) if search_time"""
         try:
             # Distinct logic for parking::ParkingSpace::search_time_13_par_13_parkingspace_13
@@ -294,13 +309,14 @@ class ParkingSpace:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def hit_rate_19_par_19_parkingspace_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        hit_rate_value = value
         """hit_rate distinct 19 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 19 for ParkingSpace — implements result = hit_rate_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for parking::ParkingSpace::hit_rate_19_par_19_parkingspace_19
@@ -312,16 +328,18 @@ class ParkingSpace:
                 else:
                     break
             # hit_rate distinct 19 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 19
+            hit_rate_value = value
             result = hit_rate_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def revenue_25_par_25_parkingspace_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        revenue_value = value
         """revenue distinct 25 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 25 for ParkingSpace — implements result = revenue_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for parking::ParkingSpace::revenue_25_par_25_parkingspace_25
@@ -336,13 +354,14 @@ class ParkingSpace:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'revenue_25_par_25_parkingspace_25', 'result': result, 'domain': 'parking'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def turnover_1_par_31_parkingspace_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        turnover_value = value
         """turnover distinct 1 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 31 for ParkingSpace — implements result = turnover_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for parking::ParkingSpace::turnover_1_par_31_parkingspace_31
@@ -354,13 +373,14 @@ class ParkingSpace:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def guidance_nearest_7_par_37_parkingspace_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        guidance_nearest_value = value
         """guidance_nearest distinct 7 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 37 for ParkingSpace — implements result = math.sqrt(guidance_nearest_value + 4.5) * 2.8 + 37*"""
         try:
             # Distinct logic for parking::ParkingSpace::guidance_nearest_7_par_37_parkingspace_37
@@ -372,13 +392,14 @@ class ParkingSpace:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def search_time_13_par_43_parkingspace_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        search_time_value = value
         """search_time distinct 13 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 43 for ParkingSpace — implements result = math.log(1 + search_time_value * 14) if search_time"""
         try:
             # Distinct logic for parking::ParkingSpace::search_time_13_par_43_parkingspace_43
@@ -393,13 +414,14 @@ class ParkingSpace:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def hit_rate_19_par_49_parkingspace_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        hit_rate_value = value
         """hit_rate distinct 19 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 49 for ParkingSpace — implements result = hit_rate_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for parking::ParkingSpace::hit_rate_19_par_49_parkingspace_49
@@ -411,16 +433,18 @@ class ParkingSpace:
                 else:
                     break
             # hit_rate distinct 19 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 49
+            hit_rate_value = value
             result = hit_rate_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def revenue_25_par_55_parkingspace_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        revenue_value = value
         """revenue distinct 25 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 55 for ParkingSpace — implements result = revenue_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for parking::ParkingSpace::revenue_25_par_55_parkingspace_55
@@ -435,10 +459,10 @@ class ParkingSpace:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'revenue_25_par_55_parkingspace_55', 'result': result, 'domain': 'parking'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_parkingspace(self) -> bool:
@@ -463,6 +487,7 @@ class OccupancyRecord:
     status: str = 'active'
 
     def avg_duration_2_par_2_occupancyrecord_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        avg_duration_value = value
         """avg_duration distinct 2 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 2 for OccupancyRecord — implements result = avg_duration_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for parking::OccupancyRecord::avg_duration_2_par_2_occupancyrecord_2
@@ -474,13 +499,14 @@ class OccupancyRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def reservation_conflict_8_par_8_occupancyrecord_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        reservation_conflict_value = value
         """reservation_conflict distinct 8 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 8 for OccupancyRecord — implements result = reservation_conflict_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for parking::OccupancyRecord::reservation_conflict_8_par_8_occupancyrecord_8
@@ -495,13 +521,14 @@ class OccupancyRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def elasticity_14_par_14_occupancyrecord_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        elasticity_value = value
         """elasticity distinct 14 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 14 for OccupancyRecord — implements result = pow(elasticity_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for parking::OccupancyRecord::elasticity_14_par_14_occupancyrecord_14
@@ -516,13 +543,14 @@ class OccupancyRecord:
             result = pow(elasticity_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_rate_20_par_20_occupancyrecord_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_rate_value = value
         """occupancy_rate distinct 20 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 20 for OccupancyRecord — implements result = math.exp(-0.021 * occupancy_rate_value) * 30 + 20*0"""
         try:
             # Distinct logic for parking::OccupancyRecord::occupancy_rate_20_par_20_occupancyrecord_20
@@ -537,13 +565,14 @@ class OccupancyRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'occupancy_rate_20_par_20_occupancyrecord_20', 'result': result, 'domain': 'parking'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def availability_pred_26_par_26_occupancyrecord_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        availability_pred_value = value
         """availability_pred distinct 26 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 26 for OccupancyRecord — implements result = availability_pred_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for parking::OccupancyRecord::availability_pred_26_par_26_occupancyrecord_26
@@ -555,13 +584,14 @@ class OccupancyRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def avg_duration_2_par_32_occupancyrecord_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        avg_duration_value = value
         """avg_duration distinct 2 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 32 for OccupancyRecord — implements result = avg_duration_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for parking::OccupancyRecord::avg_duration_2_par_32_occupancyrecord_32
@@ -573,13 +603,14 @@ class OccupancyRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def reservation_conflict_8_par_38_occupancyrecord_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        reservation_conflict_value = value
         """reservation_conflict distinct 8 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 38 for OccupancyRecord — implements result = reservation_conflict_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for parking::OccupancyRecord::reservation_conflict_8_par_38_occupancyrecord_38
@@ -594,13 +625,14 @@ class OccupancyRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def elasticity_14_par_44_occupancyrecord_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        elasticity_value = value
         """elasticity distinct 14 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 44 for OccupancyRecord — implements result = pow(elasticity_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for parking::OccupancyRecord::elasticity_14_par_44_occupancyrecord_44
@@ -615,13 +647,14 @@ class OccupancyRecord:
             result = pow(elasticity_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_rate_20_par_50_occupancyrecord_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_rate_value = value
         """occupancy_rate distinct 20 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 50 for OccupancyRecord — implements result = math.exp(-0.021 * occupancy_rate_value) * 30 + 50*0"""
         try:
             # Distinct logic for parking::OccupancyRecord::occupancy_rate_20_par_50_occupancyrecord_50
@@ -636,13 +669,14 @@ class OccupancyRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'occupancy_rate_20_par_50_occupancyrecord_50', 'result': result, 'domain': 'parking'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def availability_pred_26_par_56_occupancyrecord_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        availability_pred_value = value
         """availability_pred distinct 26 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 56 for OccupancyRecord — implements result = availability_pred_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for parking::OccupancyRecord::availability_pred_26_par_56_occupancyrecord_56
@@ -654,10 +688,10 @@ class OccupancyRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_occupancyrecord(self) -> bool:
@@ -682,6 +716,7 @@ class PricingRule:
     status: str = 'active'
 
     def search_time_3_par_3_pricingrule_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        search_time_value = value
         """search_time distinct 3 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 3 for PricingRule — implements result = search_time_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for parking::PricingRule::search_time_3_par_3_pricingrule_3
@@ -696,13 +731,14 @@ class PricingRule:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def hit_rate_9_par_9_pricingrule_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        hit_rate_value = value
         """hit_rate distinct 9 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 9 for PricingRule — implements result = hit_rate_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for parking::PricingRule::hit_rate_9_par_9_pricingrule_9
@@ -714,16 +750,18 @@ class PricingRule:
                 else:
                     break
             # hit_rate distinct 9 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 9
+            hit_rate_value = value
             result = hit_rate_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def revenue_15_par_15_pricingrule_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        revenue_value = value
         """revenue distinct 15 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 15 for PricingRule — implements result = math.sqrt(revenue_value + 8.5) * 2.8 + 15*0.01"""
         try:
             # Distinct logic for parking::PricingRule::revenue_15_par_15_pricingrule_15
@@ -738,13 +776,14 @@ class PricingRule:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'revenue_15_par_15_pricingrule_15', 'result': result, 'domain': 'parking'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def turnover_21_par_21_pricingrule_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        turnover_value = value
         """turnover distinct 21 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 21 for PricingRule — implements result = math.log(1 + turnover_value * 22) if turnover_value"""
         try:
             # Distinct logic for parking::PricingRule::turnover_21_par_21_pricingrule_21
@@ -756,13 +795,14 @@ class PricingRule:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def guidance_nearest_27_par_27_pricingrule_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        guidance_nearest_value = value
         """guidance_nearest distinct 27 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 27 for PricingRule — implements result = guidance_nearest_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for parking::PricingRule::guidance_nearest_27_par_27_pricingrule_27
@@ -774,13 +814,14 @@ class PricingRule:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def search_time_3_par_33_pricingrule_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        search_time_value = value
         """search_time distinct 3 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 33 for PricingRule — implements result = search_time_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for parking::PricingRule::search_time_3_par_33_pricingrule_33
@@ -795,13 +836,14 @@ class PricingRule:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def hit_rate_9_par_39_pricingrule_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        hit_rate_value = value
         """hit_rate distinct 9 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 39 for PricingRule — implements result = hit_rate_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for parking::PricingRule::hit_rate_9_par_39_pricingrule_39
@@ -813,16 +855,18 @@ class PricingRule:
                 else:
                     break
             # hit_rate distinct 9 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 39
+            hit_rate_value = value
             result = hit_rate_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def revenue_15_par_45_pricingrule_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        revenue_value = value
         """revenue distinct 15 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 45 for PricingRule — implements result = math.sqrt(revenue_value + 8.5) * 2.8 + 45*0.01"""
         try:
             # Distinct logic for parking::PricingRule::revenue_15_par_45_pricingrule_45
@@ -837,13 +881,14 @@ class PricingRule:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'revenue_15_par_45_pricingrule_45', 'result': result, 'domain': 'parking'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def turnover_21_par_51_pricingrule_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        turnover_value = value
         """turnover distinct 21 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 51 for PricingRule — implements result = math.log(1 + turnover_value * 22) if turnover_value"""
         try:
             # Distinct logic for parking::PricingRule::turnover_21_par_51_pricingrule_51
@@ -855,13 +900,14 @@ class PricingRule:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def guidance_nearest_27_par_57_pricingrule_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        guidance_nearest_value = value
         """guidance_nearest distinct 27 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 57 for PricingRule — implements result = guidance_nearest_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for parking::PricingRule::guidance_nearest_27_par_57_pricingrule_57
@@ -873,10 +919,10 @@ class PricingRule:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_pricingrule(self) -> bool:
@@ -902,6 +948,7 @@ class Reservation:
     status: str = 'active'
 
     def elasticity_4_par_4_reservation_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        elasticity_value = value
         """elasticity distinct 4 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 4 for Reservation — implements result = math.exp(-0.05 * elasticity_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for parking::Reservation::elasticity_4_par_4_reservation_4
@@ -913,16 +960,18 @@ class Reservation:
                 else:
                     break
             # elasticity distinct 4 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 4
+            elasticity_value = value
             result = math.exp(-0.05 * elasticity_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_rate_10_par_10_reservation_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_rate_value = value
         """occupancy_rate distinct 10 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 10 for Reservation — implements result = occupancy_rate_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for parking::Reservation::occupancy_rate_10_par_10_reservation_10
@@ -937,13 +986,14 @@ class Reservation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'occupancy_rate_10_par_10_reservation_10', 'result': result, 'domain': 'parking'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def availability_pred_16_par_16_reservation_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        availability_pred_value = value
         """availability_pred distinct 16 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 16 for Reservation — implements result = availability_pred_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for parking::Reservation::availability_pred_16_par_16_reservation_16
@@ -955,13 +1005,14 @@ class Reservation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def avg_duration_22_par_22_reservation_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        avg_duration_value = value
         """avg_duration distinct 22 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 22 for Reservation — implements result = pow(avg_duration_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for parking::Reservation::avg_duration_22_par_22_reservation_22
@@ -973,13 +1024,14 @@ class Reservation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def reservation_conflict_28_par_28_reservation_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        reservation_conflict_value = value
         """reservation_conflict distinct 28 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 28 for Reservation — implements result = math.exp(-0.029 * reservation_conflict_value) * 38 """
         try:
             # Distinct logic for parking::Reservation::reservation_conflict_28_par_28_reservation_28
@@ -994,13 +1046,14 @@ class Reservation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def elasticity_4_par_34_reservation_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        elasticity_value = value
         """elasticity distinct 4 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 34 for Reservation — implements result = math.exp(-0.05 * elasticity_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for parking::Reservation::elasticity_4_par_34_reservation_34
@@ -1012,16 +1065,18 @@ class Reservation:
                 else:
                     break
             # elasticity distinct 4 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 34
+            elasticity_value = value
             result = math.exp(-0.05 * elasticity_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_rate_10_par_40_reservation_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_rate_value = value
         """occupancy_rate distinct 10 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 40 for Reservation — implements result = occupancy_rate_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for parking::Reservation::occupancy_rate_10_par_40_reservation_40
@@ -1036,13 +1091,14 @@ class Reservation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'occupancy_rate_10_par_40_reservation_40', 'result': result, 'domain': 'parking'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def availability_pred_16_par_46_reservation_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        availability_pred_value = value
         """availability_pred distinct 16 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 46 for Reservation — implements result = availability_pred_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for parking::Reservation::availability_pred_16_par_46_reservation_46
@@ -1054,13 +1110,14 @@ class Reservation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def avg_duration_22_par_52_reservation_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        avg_duration_value = value
         """avg_duration distinct 22 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 52 for Reservation — implements result = pow(avg_duration_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for parking::Reservation::avg_duration_22_par_52_reservation_52
@@ -1072,13 +1129,14 @@ class Reservation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def reservation_conflict_28_par_58_reservation_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        reservation_conflict_value = value
         """reservation_conflict distinct 28 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 58 for Reservation — implements result = math.exp(-0.029 * reservation_conflict_value) * 38 """
         try:
             # Distinct logic for parking::Reservation::reservation_conflict_28_par_58_reservation_58
@@ -1093,10 +1151,10 @@ class Reservation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_reservation(self) -> bool:
@@ -1121,6 +1179,7 @@ class GuidanceMessage:
     status: str = 'active'
 
     def revenue_5_par_5_guidancemessage_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        revenue_value = value
         """revenue distinct 5 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 5 for GuidanceMessage — implements result = math.log(1 + revenue_value * 6) if revenue_value>0 """
         try:
             # Distinct logic for parking::GuidanceMessage::revenue_5_par_5_guidancemessage_5
@@ -1135,13 +1194,14 @@ class GuidanceMessage:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'revenue_5_par_5_guidancemessage_5', 'result': result, 'domain': 'parking'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def turnover_11_par_11_guidancemessage_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        turnover_value = value
         """turnover distinct 11 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 11 for GuidanceMessage — implements result = turnover_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for parking::GuidanceMessage::turnover_11_par_11_guidancemessage_11
@@ -1153,13 +1213,14 @@ class GuidanceMessage:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def guidance_nearest_17_par_17_guidancemessage_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        guidance_nearest_value = value
         """guidance_nearest distinct 17 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 17 for GuidanceMessage — implements result = guidance_nearest_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for parking::GuidanceMessage::guidance_nearest_17_par_17_guidancemessage_17
@@ -1171,13 +1232,14 @@ class GuidanceMessage:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def search_time_23_par_23_guidancemessage_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        search_time_value = value
         """search_time distinct 23 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 23 for GuidanceMessage — implements result = math.sqrt(search_time_value + 12.5) * 2.8 + 23*0.01"""
         try:
             # Distinct logic for parking::GuidanceMessage::search_time_23_par_23_guidancemessage_23
@@ -1192,13 +1254,14 @@ class GuidanceMessage:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def hit_rate_29_par_29_guidancemessage_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        hit_rate_value = value
         """hit_rate distinct 29 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 29 for GuidanceMessage — implements result = math.log(1 + hit_rate_value * 30) if hit_rate_value"""
         try:
             # Distinct logic for parking::GuidanceMessage::hit_rate_29_par_29_guidancemessage_29
@@ -1213,13 +1276,14 @@ class GuidanceMessage:
             result = math.log(1 + hit_rate_value * 30) if hit_rate_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def revenue_5_par_35_guidancemessage_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        revenue_value = value
         """revenue distinct 5 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 35 for GuidanceMessage — implements result = math.log(1 + revenue_value * 6) if revenue_value>0 """
         try:
             # Distinct logic for parking::GuidanceMessage::revenue_5_par_35_guidancemessage_35
@@ -1234,13 +1298,14 @@ class GuidanceMessage:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'revenue_5_par_35_guidancemessage_35', 'result': result, 'domain': 'parking'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def turnover_11_par_41_guidancemessage_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        turnover_value = value
         """turnover distinct 11 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 41 for GuidanceMessage — implements result = turnover_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for parking::GuidanceMessage::turnover_11_par_41_guidancemessage_41
@@ -1252,13 +1317,14 @@ class GuidanceMessage:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def guidance_nearest_17_par_47_guidancemessage_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        guidance_nearest_value = value
         """guidance_nearest distinct 17 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 47 for GuidanceMessage — implements result = guidance_nearest_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for parking::GuidanceMessage::guidance_nearest_17_par_47_guidancemessage_47
@@ -1270,13 +1336,14 @@ class GuidanceMessage:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def search_time_23_par_53_guidancemessage_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        search_time_value = value
         """search_time distinct 23 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 53 for GuidanceMessage — implements result = math.sqrt(search_time_value + 12.5) * 2.8 + 53*0.01"""
         try:
             # Distinct logic for parking::GuidanceMessage::search_time_23_par_53_guidancemessage_53
@@ -1291,13 +1358,14 @@ class GuidanceMessage:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def hit_rate_29_par_59_guidancemessage_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        hit_rate_value = value
         """hit_rate distinct 29 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance extra 59 for GuidanceMessage — implements result = math.log(1 + hit_rate_value * 30) if hit_rate_value"""
         try:
             # Distinct logic for parking::GuidanceMessage::hit_rate_29_par_59_guidancemessage_59
@@ -1312,10 +1380,10 @@ class GuidanceMessage:
             result = math.log(1 + hit_rate_value * 30) if hit_rate_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_guidancemessage(self) -> bool:
@@ -2754,4 +2822,3 @@ def padded_parking_models_1027(payload: dict, factor: float = 2.89) -> dict:
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'parking','idx':1027}
-

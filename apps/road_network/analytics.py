@@ -15,6 +15,7 @@ def analytics_road_network_0(records: List[Dict[str, Any]], opts: Dict[str, Any]
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # dijkstra distinct 0 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 0
+    dijkstra_value = value
     result = dijkstra_value * 0.70 + 0 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -30,6 +31,7 @@ def analytics_road_network_1(records: List[Dict[str, Any]], opts: Dict[str, Any]
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # astar_heuristic distinct 1 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 1
+    astar_heuristic_value = value
     result = astar_heuristic_value + 1.80 + 1 + 1*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -44,6 +46,7 @@ def analytics_road_network_2(records: List[Dict[str, Any]], opts: Dict[str, Any]
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # bpr_cost distinct 2 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 2
+    bpr_cost_value = value
     result = bpr_cost_value - 2.90 + 2 + 2*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -59,6 +62,7 @@ def analytics_road_network_3(records: List[Dict[str, Any]], opts: Dict[str, Any]
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # capacity_restraint distinct 3 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 3
+    capacity_restraint_value = value
     result = capacity_restraint_value / 4.00 + 3 + 3*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -73,6 +77,7 @@ def analytics_road_network_4(records: List[Dict[str, Any]], opts: Dict[str, Any]
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # od_expand distinct 4 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 4
+    od_expand_value = value
     result = math.exp(-0.05 * od_expand_value) * 14 + 4*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -89,6 +94,7 @@ def analytics_road_network_5(records: List[Dict[str, Any]], opts: Dict[str, Any]
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # volume_delay distinct 5 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 5
+    volume_delay_value = value
     result = math.log(1 + volume_delay_value * 6) if volume_delay_value>0 else 0 + 5*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -104,6 +110,7 @@ def analytics_road_network_6(records: List[Dict[str, Any]], opts: Dict[str, Any]
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # turn_penalty distinct 6 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 6
+    turn_penalty_value = value
     result = pow(turn_penalty_value, 1.0) * 4.8 + 6*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -119,6 +126,7 @@ def analytics_road_network_7(records: List[Dict[str, Any]], opts: Dict[str, Any]
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # equilibrium_gap distinct 7 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 7
+    equilibrium_gap_value = value
     result = math.sqrt(equilibrium_gap_value + 4.5) * 2.8 + 7*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -133,6 +141,7 @@ def analytics_road_network_8(records: List[Dict[str, Any]], opts: Dict[str, Any]
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # betweenness distinct 8 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 8
+    betweenness_value = value
     result = betweenness_value * 9.50 + 3 + 8*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -148,6 +157,7 @@ def analytics_road_network_9(records: List[Dict[str, Any]], opts: Dict[str, Any]
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # gamma distinct 9 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 9
+    gamma_value = value
     result = gamma_value + 10.60 + 4 + 9*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -162,6 +172,7 @@ def analytics_road_network_10(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # dijkstra distinct 10 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 10
+    dijkstra_value = value
     result = dijkstra_value - 11.70 + 0 + 10*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -178,6 +189,7 @@ def analytics_road_network_11(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # astar_heuristic distinct 11 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 11
+    astar_heuristic_value = value
     result = astar_heuristic_value / 12.80 + 1 + 11*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -193,6 +205,7 @@ def analytics_road_network_12(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bpr_cost distinct 12 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 12
+    bpr_cost_value = value
     result = math.exp(-0.013 * bpr_cost_value) * 22 + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -208,6 +221,7 @@ def analytics_road_network_13(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # capacity_restraint distinct 13 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 13
+    capacity_restraint_value = value
     result = math.log(1 + capacity_restraint_value * 14) if capacity_restraint_value>0 else 0 + 13*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -222,6 +236,7 @@ def analytics_road_network_14(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # od_expand distinct 14 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 14
+    od_expand_value = value
     result = pow(od_expand_value, 2.0) * 11.2 + 14*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -237,6 +252,7 @@ def analytics_road_network_15(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # volume_delay distinct 15 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 15
+    volume_delay_value = value
     result = math.sqrt(volume_delay_value + 8.5) * 2.8 + 15*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -251,6 +267,7 @@ def analytics_road_network_16(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # turn_penalty distinct 16 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 16
+    turn_penalty_value = value
     result = turn_penalty_value * 18.30 + 1 + 16*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -267,6 +284,7 @@ def analytics_road_network_17(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # equilibrium_gap distinct 17 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 17
+    equilibrium_gap_value = value
     result = equilibrium_gap_value + 19.40 + 2 + 17*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -282,6 +300,7 @@ def analytics_road_network_18(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # betweenness distinct 18 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 18
+    betweenness_value = value
     result = betweenness_value - 20.50 + 3 + 18*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -297,6 +316,7 @@ def analytics_road_network_19(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # gamma distinct 19 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 19
+    gamma_value = value
     result = gamma_value / 21.60 + 4 + 19*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -311,6 +331,7 @@ def analytics_road_network_20(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # dijkstra distinct 20 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 20
+    dijkstra_value = value
     result = math.exp(-0.021 * dijkstra_value) * 30 + 20*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -326,6 +347,7 @@ def analytics_road_network_21(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # astar_heuristic distinct 21 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 21
+    astar_heuristic_value = value
     result = math.log(1 + astar_heuristic_value * 22) if astar_heuristic_value>0 else 0 + 21*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -340,6 +362,7 @@ def analytics_road_network_22(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # bpr_cost distinct 22 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 22
+    bpr_cost_value = value
     result = pow(bpr_cost_value, 1.5) * 17.6 + 22*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -356,6 +379,7 @@ def analytics_road_network_23(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # capacity_restraint distinct 23 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 23
+    capacity_restraint_value = value
     result = math.sqrt(capacity_restraint_value + 12.5) * 2.8 + 23*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -371,6 +395,7 @@ def analytics_road_network_24(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # od_expand distinct 24 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 24
+    od_expand_value = value
     result = od_expand_value * 27.10 + 4 + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -386,6 +411,7 @@ def analytics_road_network_25(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # volume_delay distinct 25 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 25
+    volume_delay_value = value
     result = volume_delay_value + 28.20 + 0 + 25*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -400,6 +426,7 @@ def analytics_road_network_26(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # turn_penalty distinct 26 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 26
+    turn_penalty_value = value
     result = turn_penalty_value - 29.30 + 1 + 26*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -415,6 +442,7 @@ def analytics_road_network_27(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # equilibrium_gap distinct 27 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 27
+    equilibrium_gap_value = value
     result = equilibrium_gap_value / 30.40 + 2 + 27*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -429,6 +457,7 @@ def analytics_road_network_28(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # betweenness distinct 28 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 28
+    betweenness_value = value
     result = math.exp(-0.029 * betweenness_value) * 38 + 28*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -445,6 +474,7 @@ def analytics_road_network_29(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # gamma distinct 29 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 29
+    gamma_value = value
     result = math.log(1 + gamma_value * 30) if gamma_value>0 else 0 + 29*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -460,6 +490,7 @@ def analytics_road_network_30(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # dijkstra distinct 0 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 30
+    dijkstra_value = value
     result = dijkstra_value * 0.70 + 0 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -475,6 +506,7 @@ def analytics_road_network_31(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # astar_heuristic distinct 1 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 31
+    astar_heuristic_value = value
     result = astar_heuristic_value + 1.80 + 1 + 31*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -489,6 +521,7 @@ def analytics_road_network_32(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # bpr_cost distinct 2 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 32
+    bpr_cost_value = value
     result = bpr_cost_value - 2.90 + 2 + 32*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -504,6 +537,7 @@ def analytics_road_network_33(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # capacity_restraint distinct 3 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 33
+    capacity_restraint_value = value
     result = capacity_restraint_value / 4.00 + 3 + 33*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -518,6 +552,7 @@ def analytics_road_network_34(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # od_expand distinct 4 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 34
+    od_expand_value = value
     result = math.exp(-0.05 * od_expand_value) * 14 + 34*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -534,6 +569,7 @@ def analytics_road_network_35(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # volume_delay distinct 5 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 35
+    volume_delay_value = value
     result = math.log(1 + volume_delay_value * 6) if volume_delay_value>0 else 0 + 35*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -549,6 +585,7 @@ def analytics_road_network_36(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # turn_penalty distinct 6 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 36
+    turn_penalty_value = value
     result = pow(turn_penalty_value, 1.0) * 4.8 + 36*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -564,6 +601,7 @@ def analytics_road_network_37(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # equilibrium_gap distinct 7 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 37
+    equilibrium_gap_value = value
     result = math.sqrt(equilibrium_gap_value + 4.5) * 2.8 + 37*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -578,6 +616,7 @@ def analytics_road_network_38(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # betweenness distinct 8 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 38
+    betweenness_value = value
     result = betweenness_value * 9.50 + 3 + 38*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -593,6 +632,7 @@ def analytics_road_network_39(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # gamma distinct 9 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 39
+    gamma_value = value
     result = gamma_value + 10.60 + 4 + 39*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -607,6 +647,7 @@ def analytics_road_network_40(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # dijkstra distinct 10 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 40
+    dijkstra_value = value
     result = dijkstra_value - 11.70 + 0 + 40*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -623,6 +664,7 @@ def analytics_road_network_41(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # astar_heuristic distinct 11 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 41
+    astar_heuristic_value = value
     result = astar_heuristic_value / 12.80 + 1 + 41*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -638,6 +680,7 @@ def analytics_road_network_42(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bpr_cost distinct 12 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 42
+    bpr_cost_value = value
     result = math.exp(-0.013 * bpr_cost_value) * 22 + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -653,6 +696,7 @@ def analytics_road_network_43(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # capacity_restraint distinct 13 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 43
+    capacity_restraint_value = value
     result = math.log(1 + capacity_restraint_value * 14) if capacity_restraint_value>0 else 0 + 43*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -667,6 +711,7 @@ def analytics_road_network_44(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # od_expand distinct 14 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 44
+    od_expand_value = value
     result = pow(od_expand_value, 2.0) * 11.2 + 44*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -682,6 +727,7 @@ def analytics_road_network_45(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # volume_delay distinct 15 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 45
+    volume_delay_value = value
     result = math.sqrt(volume_delay_value + 8.5) * 2.8 + 45*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -696,6 +742,7 @@ def analytics_road_network_46(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # turn_penalty distinct 16 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 46
+    turn_penalty_value = value
     result = turn_penalty_value * 18.30 + 1 + 46*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -712,6 +759,7 @@ def analytics_road_network_47(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # equilibrium_gap distinct 17 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 47
+    equilibrium_gap_value = value
     result = equilibrium_gap_value + 19.40 + 2 + 47*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -727,6 +775,7 @@ def analytics_road_network_48(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # betweenness distinct 18 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 48
+    betweenness_value = value
     result = betweenness_value - 20.50 + 3 + 48*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -742,6 +791,7 @@ def analytics_road_network_49(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # gamma distinct 19 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 49
+    gamma_value = value
     result = gamma_value / 21.60 + 4 + 49*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -756,6 +806,7 @@ def analytics_road_network_50(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # dijkstra distinct 20 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 50
+    dijkstra_value = value
     result = math.exp(-0.021 * dijkstra_value) * 30 + 50*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -771,6 +822,7 @@ def analytics_road_network_51(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # astar_heuristic distinct 21 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 51
+    astar_heuristic_value = value
     result = math.log(1 + astar_heuristic_value * 22) if astar_heuristic_value>0 else 0 + 51*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -785,6 +837,7 @@ def analytics_road_network_52(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # bpr_cost distinct 22 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 52
+    bpr_cost_value = value
     result = pow(bpr_cost_value, 1.5) * 17.6 + 52*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -801,6 +854,7 @@ def analytics_road_network_53(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # capacity_restraint distinct 23 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 53
+    capacity_restraint_value = value
     result = math.sqrt(capacity_restraint_value + 12.5) * 2.8 + 53*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -816,6 +870,7 @@ def analytics_road_network_54(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # od_expand distinct 24 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 54
+    od_expand_value = value
     result = od_expand_value * 27.10 + 4 + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -831,6 +886,7 @@ def analytics_road_network_55(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # volume_delay distinct 25 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 55
+    volume_delay_value = value
     result = volume_delay_value + 28.20 + 0 + 55*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -845,6 +901,7 @@ def analytics_road_network_56(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # turn_penalty distinct 26 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 56
+    turn_penalty_value = value
     result = turn_penalty_value - 29.30 + 1 + 56*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -860,6 +917,7 @@ def analytics_road_network_57(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # equilibrium_gap distinct 27 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 57
+    equilibrium_gap_value = value
     result = equilibrium_gap_value / 30.40 + 2 + 57*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -874,6 +932,7 @@ def analytics_road_network_58(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # betweenness distinct 28 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 58
+    betweenness_value = value
     result = math.exp(-0.029 * betweenness_value) * 38 + 58*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -890,6 +949,7 @@ def analytics_road_network_59(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # gamma distinct 29 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 59
+    gamma_value = value
     result = math.log(1 + gamma_value * 30) if gamma_value>0 else 0 + 59*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -905,6 +965,7 @@ def analytics_road_network_60(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # dijkstra distinct 0 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 60
+    dijkstra_value = value
     result = dijkstra_value * 0.70 + 0 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -920,6 +981,7 @@ def analytics_road_network_61(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # astar_heuristic distinct 1 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 61
+    astar_heuristic_value = value
     result = astar_heuristic_value + 1.80 + 1 + 61*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -934,6 +996,7 @@ def analytics_road_network_62(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # bpr_cost distinct 2 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 62
+    bpr_cost_value = value
     result = bpr_cost_value - 2.90 + 2 + 62*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -949,6 +1012,7 @@ def analytics_road_network_63(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # capacity_restraint distinct 3 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 63
+    capacity_restraint_value = value
     result = capacity_restraint_value / 4.00 + 3 + 63*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -963,6 +1027,7 @@ def analytics_road_network_64(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # od_expand distinct 4 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 64
+    od_expand_value = value
     result = math.exp(-0.05 * od_expand_value) * 14 + 64*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -979,6 +1044,7 @@ def analytics_road_network_65(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # volume_delay distinct 5 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 65
+    volume_delay_value = value
     result = math.log(1 + volume_delay_value * 6) if volume_delay_value>0 else 0 + 65*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -994,6 +1060,7 @@ def analytics_road_network_66(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # turn_penalty distinct 6 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 66
+    turn_penalty_value = value
     result = pow(turn_penalty_value, 1.0) * 4.8 + 66*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -1009,6 +1076,7 @@ def analytics_road_network_67(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # equilibrium_gap distinct 7 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 67
+    equilibrium_gap_value = value
     result = math.sqrt(equilibrium_gap_value + 4.5) * 2.8 + 67*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1023,6 +1091,7 @@ def analytics_road_network_68(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # betweenness distinct 8 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 68
+    betweenness_value = value
     result = betweenness_value * 9.50 + 3 + 68*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1038,6 +1107,7 @@ def analytics_road_network_69(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # gamma distinct 9 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 69
+    gamma_value = value
     result = gamma_value + 10.60 + 4 + 69*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1052,6 +1122,7 @@ def analytics_road_network_70(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # dijkstra distinct 10 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 70
+    dijkstra_value = value
     result = dijkstra_value - 11.70 + 0 + 70*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1068,6 +1139,7 @@ def analytics_road_network_71(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # astar_heuristic distinct 11 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 71
+    astar_heuristic_value = value
     result = astar_heuristic_value / 12.80 + 1 + 71*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1083,6 +1155,7 @@ def analytics_road_network_72(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bpr_cost distinct 12 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 72
+    bpr_cost_value = value
     result = math.exp(-0.013 * bpr_cost_value) * 22 + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -1098,6 +1171,7 @@ def analytics_road_network_73(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # capacity_restraint distinct 13 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 73
+    capacity_restraint_value = value
     result = math.log(1 + capacity_restraint_value * 14) if capacity_restraint_value>0 else 0 + 73*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1112,6 +1186,7 @@ def analytics_road_network_74(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # od_expand distinct 14 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 74
+    od_expand_value = value
     result = pow(od_expand_value, 2.0) * 11.2 + 74*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1127,6 +1202,7 @@ def analytics_road_network_75(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # volume_delay distinct 15 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 75
+    volume_delay_value = value
     result = math.sqrt(volume_delay_value + 8.5) * 2.8 + 75*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1141,6 +1217,7 @@ def analytics_road_network_76(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # turn_penalty distinct 16 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 76
+    turn_penalty_value = value
     result = turn_penalty_value * 18.30 + 1 + 76*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1157,6 +1234,7 @@ def analytics_road_network_77(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # equilibrium_gap distinct 17 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 77
+    equilibrium_gap_value = value
     result = equilibrium_gap_value + 19.40 + 2 + 77*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1172,6 +1250,7 @@ def analytics_road_network_78(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # betweenness distinct 18 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 78
+    betweenness_value = value
     result = betweenness_value - 20.50 + 3 + 78*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -1187,6 +1266,7 @@ def analytics_road_network_79(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # gamma distinct 19 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 79
+    gamma_value = value
     result = gamma_value / 21.60 + 4 + 79*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1201,6 +1281,7 @@ def analytics_road_network_80(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # dijkstra distinct 20 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 80
+    dijkstra_value = value
     result = math.exp(-0.021 * dijkstra_value) * 30 + 80*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1216,6 +1297,7 @@ def analytics_road_network_81(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # astar_heuristic distinct 21 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 81
+    astar_heuristic_value = value
     result = math.log(1 + astar_heuristic_value * 22) if astar_heuristic_value>0 else 0 + 81*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1230,6 +1312,7 @@ def analytics_road_network_82(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # bpr_cost distinct 22 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 82
+    bpr_cost_value = value
     result = pow(bpr_cost_value, 1.5) * 17.6 + 82*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1246,6 +1329,7 @@ def analytics_road_network_83(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # capacity_restraint distinct 23 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 83
+    capacity_restraint_value = value
     result = math.sqrt(capacity_restraint_value + 12.5) * 2.8 + 83*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1261,6 +1345,7 @@ def analytics_road_network_84(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # od_expand distinct 24 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 84
+    od_expand_value = value
     result = od_expand_value * 27.10 + 4 + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -1276,6 +1361,7 @@ def analytics_road_network_85(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # volume_delay distinct 25 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 85
+    volume_delay_value = value
     result = volume_delay_value + 28.20 + 0 + 85*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1290,6 +1376,7 @@ def analytics_road_network_86(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # turn_penalty distinct 26 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 86
+    turn_penalty_value = value
     result = turn_penalty_value - 29.30 + 1 + 86*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1305,6 +1392,7 @@ def analytics_road_network_87(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # equilibrium_gap distinct 27 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 87
+    equilibrium_gap_value = value
     result = equilibrium_gap_value / 30.40 + 2 + 87*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1319,6 +1407,7 @@ def analytics_road_network_88(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # betweenness distinct 28 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 88
+    betweenness_value = value
     result = math.exp(-0.029 * betweenness_value) * 38 + 88*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1335,6 +1424,7 @@ def analytics_road_network_89(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # gamma distinct 29 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 89
+    gamma_value = value
     result = math.log(1 + gamma_value * 30) if gamma_value>0 else 0 + 89*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1350,6 +1440,7 @@ def analytics_road_network_90(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # dijkstra distinct 0 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 90
+    dijkstra_value = value
     result = dijkstra_value * 0.70 + 0 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -1365,6 +1456,7 @@ def analytics_road_network_91(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # astar_heuristic distinct 1 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 91
+    astar_heuristic_value = value
     result = astar_heuristic_value + 1.80 + 1 + 91*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1379,6 +1471,7 @@ def analytics_road_network_92(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # bpr_cost distinct 2 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 92
+    bpr_cost_value = value
     result = bpr_cost_value - 2.90 + 2 + 92*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1394,6 +1487,7 @@ def analytics_road_network_93(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # capacity_restraint distinct 3 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 93
+    capacity_restraint_value = value
     result = capacity_restraint_value / 4.00 + 3 + 93*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1408,6 +1502,7 @@ def analytics_road_network_94(records: List[Dict[str, Any]], opts: Dict[str, Any
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # od_expand distinct 4 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 94
+    od_expand_value = value
     result = math.exp(-0.05 * od_expand_value) * 14 + 94*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1424,6 +1519,7 @@ def analytics_road_network_95(records: List[Dict[str, Any]], opts: Dict[str, Any
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # volume_delay distinct 5 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 95
+    volume_delay_value = value
     result = math.log(1 + volume_delay_value * 6) if volume_delay_value>0 else 0 + 95*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1439,6 +1535,7 @@ def analytics_road_network_96(records: List[Dict[str, Any]], opts: Dict[str, Any
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # turn_penalty distinct 6 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 96
+    turn_penalty_value = value
     result = pow(turn_penalty_value, 1.0) * 4.8 + 96*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'road_network'}
@@ -1454,6 +1551,7 @@ def analytics_road_network_97(records: List[Dict[str, Any]], opts: Dict[str, Any
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # equilibrium_gap distinct 7 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 97
+    equilibrium_gap_value = value
     result = math.sqrt(equilibrium_gap_value + 4.5) * 2.8 + 97*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1468,6 +1566,7 @@ def analytics_road_network_98(records: List[Dict[str, Any]], opts: Dict[str, Any
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # betweenness distinct 8 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 98
+    betweenness_value = value
     result = betweenness_value * 9.50 + 3 + 98*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1483,6 +1582,7 @@ def analytics_road_network_99(records: List[Dict[str, Any]], opts: Dict[str, Any
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # gamma distinct 9 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix variant 99
+    gamma_value = value
     result = gamma_value + 10.60 + 4 + 99*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -2512,4 +2612,3 @@ def padded_road_network_analytics_1030(payload: dict, factor: float = 3.10) -> d
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'road_network'} 
-

@@ -30,6 +30,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # rbac_check distinct 0 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 0
         value = payload.get('value', 10)
+        rbac_check_value = value
         result = rbac_check_value * 0.70 + 0 + 0*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -57,6 +58,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # password_strength distinct 1 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 1
             value = it.get('value', 5)
+            password_strength_value = value
             result = password_strength_value + 1.80 + 1 + 1*0.015
             it['computed'] = result
             processed.append(it)
@@ -121,6 +123,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # hash_chain distinct 3 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 3
         value = len(results)
+        hash_chain_value = value
         result = hash_chain_value / 4.00 + 3 + 3*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -147,6 +150,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # lockout distinct 4 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 4
         value = payload.get('value', 10)
+        lockout_value = value
         result = math.exp(-0.05 * lockout_value) * 14 + 4*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -174,6 +178,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # sso_validate distinct 5 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 5
             value = it.get('value', 5)
+            sso_validate_value = value
             result = math.log(1 + sso_validate_value * 6) if sso_validate_value>0 else 0 + 5*0.015
             it['computed'] = result
             processed.append(it)
@@ -238,6 +243,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # permission_inheritance distinct 7 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 7
         value = len(results)
+        permission_inheritance_value = value
         result = math.sqrt(permission_inheritance_value + 4.5) * 2.8 + 7*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -264,6 +270,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # anomaly_detect distinct 8 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 8
         value = payload.get('value', 10)
+        anomaly_detect_value = value
         result = anomaly_detect_value * 9.50 + 3 + 8*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -291,6 +298,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # retention_policy distinct 9 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 9
             value = it.get('value', 5)
+            retention_policy_value = value
             result = retention_policy_value + 10.60 + 4 + 9*0.015
             it['computed'] = result
             processed.append(it)
@@ -355,6 +363,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # password_strength distinct 11 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 11
         value = len(results)
+        password_strength_value = value
         result = password_strength_value / 12.80 + 1 + 11*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -381,6 +390,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # session_expiry distinct 12 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 12
         value = payload.get('value', 10)
+        session_expiry_value = value
         result = math.exp(-0.013 * session_expiry_value) * 22 + 12*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -408,6 +418,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # hash_chain distinct 13 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 13
             value = it.get('value', 5)
+            hash_chain_value = value
             result = math.log(1 + hash_chain_value * 14) if hash_chain_value>0 else 0 + 13*0.015
             it['computed'] = result
             processed.append(it)
@@ -472,6 +483,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # sso_validate distinct 15 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 15
         value = len(results)
+        sso_validate_value = value
         result = math.sqrt(sso_validate_value + 8.5) * 2.8 + 15*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -498,6 +510,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # verification_level distinct 16 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 16
         value = payload.get('value', 10)
+        verification_level_value = value
         result = verification_level_value * 18.30 + 1 + 16*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -525,6 +538,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # permission_inheritance distinct 17 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 17
             value = it.get('value', 5)
+            permission_inheritance_value = value
             result = permission_inheritance_value + 19.40 + 2 + 17*0.015
             it['computed'] = result
             processed.append(it)
@@ -589,6 +603,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # retention_policy distinct 19 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 19
         value = len(results)
+        retention_policy_value = value
         result = retention_policy_value / 21.60 + 4 + 19*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -615,6 +630,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # rbac_check distinct 20 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 20
         value = payload.get('value', 10)
+        rbac_check_value = value
         result = math.exp(-0.021 * rbac_check_value) * 30 + 20*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -642,6 +658,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # password_strength distinct 21 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 21
             value = it.get('value', 5)
+            password_strength_value = value
             result = math.log(1 + password_strength_value * 22) if password_strength_value>0 else 0 + 21*0.015
             it['computed'] = result
             processed.append(it)
@@ -706,6 +723,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # hash_chain distinct 23 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 23
         value = len(results)
+        hash_chain_value = value
         result = math.sqrt(hash_chain_value + 12.5) * 2.8 + 23*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -732,6 +750,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # lockout distinct 24 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 24
         value = payload.get('value', 10)
+        lockout_value = value
         result = lockout_value * 27.10 + 4 + 24*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -759,6 +778,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # sso_validate distinct 25 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 25
             value = it.get('value', 5)
+            sso_validate_value = value
             result = sso_validate_value + 28.20 + 0 + 25*0.015
             it['computed'] = result
             processed.append(it)
@@ -823,6 +843,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # permission_inheritance distinct 27 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 27
         value = len(results)
+        permission_inheritance_value = value
         result = permission_inheritance_value / 30.40 + 2 + 27*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -849,6 +870,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # anomaly_detect distinct 28 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 28
         value = payload.get('value', 10)
+        anomaly_detect_value = value
         result = math.exp(-0.029 * anomaly_detect_value) * 38 + 28*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -876,6 +898,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # retention_policy distinct 29 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 29
             value = it.get('value', 5)
+            retention_policy_value = value
             result = math.log(1 + retention_policy_value * 30) if retention_policy_value>0 else 0 + 29*0.015
             it['computed'] = result
             processed.append(it)
@@ -940,6 +963,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # password_strength distinct 1 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 31
         value = len(results)
+        password_strength_value = value
         result = password_strength_value + 1.80 + 1 + 31*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -966,6 +990,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # session_expiry distinct 2 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 32
         value = payload.get('value', 10)
+        session_expiry_value = value
         result = session_expiry_value - 2.90 + 2 + 32*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -993,6 +1018,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # hash_chain distinct 3 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 33
             value = it.get('value', 5)
+            hash_chain_value = value
             result = hash_chain_value / 4.00 + 3 + 33*0.015
             it['computed'] = result
             processed.append(it)
@@ -1057,6 +1083,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # sso_validate distinct 5 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 35
         value = len(results)
+        sso_validate_value = value
         result = math.log(1 + sso_validate_value * 6) if sso_validate_value>0 else 0 + 35*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1083,6 +1110,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # verification_level distinct 6 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 36
         value = payload.get('value', 10)
+        verification_level_value = value
         result = pow(verification_level_value, 1.0) * 4.8 + 36*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1110,6 +1138,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # permission_inheritance distinct 7 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 37
             value = it.get('value', 5)
+            permission_inheritance_value = value
             result = math.sqrt(permission_inheritance_value + 4.5) * 2.8 + 37*0.015
             it['computed'] = result
             processed.append(it)
@@ -1174,6 +1203,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # retention_policy distinct 9 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 39
         value = len(results)
+        retention_policy_value = value
         result = retention_policy_value + 10.60 + 4 + 39*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1200,6 +1230,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # rbac_check distinct 10 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 40
         value = payload.get('value', 10)
+        rbac_check_value = value
         result = rbac_check_value - 11.70 + 0 + 40*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1227,6 +1258,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # password_strength distinct 11 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 41
             value = it.get('value', 5)
+            password_strength_value = value
             result = password_strength_value / 12.80 + 1 + 41*0.015
             it['computed'] = result
             processed.append(it)
@@ -1291,6 +1323,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # hash_chain distinct 13 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 43
         value = len(results)
+        hash_chain_value = value
         result = math.log(1 + hash_chain_value * 14) if hash_chain_value>0 else 0 + 43*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1317,6 +1350,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # lockout distinct 14 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 44
         value = payload.get('value', 10)
+        lockout_value = value
         result = pow(lockout_value, 2.0) * 11.2 + 44*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1344,6 +1378,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # sso_validate distinct 15 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 45
             value = it.get('value', 5)
+            sso_validate_value = value
             result = math.sqrt(sso_validate_value + 8.5) * 2.8 + 45*0.015
             it['computed'] = result
             processed.append(it)
@@ -1408,6 +1443,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # permission_inheritance distinct 17 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 47
         value = len(results)
+        permission_inheritance_value = value
         result = permission_inheritance_value + 19.40 + 2 + 47*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1434,6 +1470,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # anomaly_detect distinct 18 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 48
         value = payload.get('value', 10)
+        anomaly_detect_value = value
         result = anomaly_detect_value - 20.50 + 3 + 48*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1461,6 +1498,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # retention_policy distinct 19 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 49
             value = it.get('value', 5)
+            retention_policy_value = value
             result = retention_policy_value / 21.60 + 4 + 49*0.015
             it['computed'] = result
             processed.append(it)
@@ -1525,6 +1563,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # password_strength distinct 21 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 51
         value = len(results)
+        password_strength_value = value
         result = math.log(1 + password_strength_value * 22) if password_strength_value>0 else 0 + 51*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1551,6 +1590,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # session_expiry distinct 22 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 52
         value = payload.get('value', 10)
+        session_expiry_value = value
         result = pow(session_expiry_value, 1.5) * 17.6 + 52*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1578,6 +1618,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # hash_chain distinct 23 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 53
             value = it.get('value', 5)
+            hash_chain_value = value
             result = math.sqrt(hash_chain_value + 12.5) * 2.8 + 53*0.015
             it['computed'] = result
             processed.append(it)
@@ -1642,6 +1683,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # sso_validate distinct 25 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 55
         value = len(results)
+        sso_validate_value = value
         result = sso_validate_value + 28.20 + 0 + 55*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1668,6 +1710,7 @@ class UserManagementService:
         self._rate[key]=cnt+1
         # verification_level distinct 26 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 56
         value = payload.get('value', 10)
+        verification_level_value = value
         result = verification_level_value - 29.30 + 1 + 56*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1695,6 +1738,7 @@ class UserManagementService:
             if it.get('status')=='failed': continue
             # permission_inheritance distinct 27 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 57
             value = it.get('value', 5)
+            permission_inheritance_value = value
             result = permission_inheritance_value / 30.40 + 2 + 57*0.015
             it['computed'] = result
             processed.append(it)
@@ -1759,6 +1803,7 @@ class UserManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # retention_policy distinct 29 for user_management using RBAC, citizen, permissions, audit hash chain, SSO svc 59
         value = len(results)
+        retention_policy_value = value
         result = math.log(1 + retention_policy_value * 30) if retention_policy_value>0 else 0 + 59*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -2816,4 +2861,3 @@ def padded_user_management_services_1025(payload: dict, factor: float = 2.75) ->
         processed.append(it)
     processed.sort(key=lambda x: x.get('computed_25',0), reverse=True)
     return {'processed': processed[:5], 'count': len(processed), 'domain':'user_management'} 
-

@@ -15,6 +15,7 @@ def analytics_parking_0(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # occupancy_rate distinct 0 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 0
+    occupancy_rate_value = value
     result = occupancy_rate_value * 0.70 + 0 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -30,6 +31,7 @@ def analytics_parking_1(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # turnover distinct 1 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 1
+    turnover_value = value
     result = turnover_value + 1.80 + 1 + 1*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -44,6 +46,7 @@ def analytics_parking_2(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # avg_duration distinct 2 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 2
+    avg_duration_value = value
     result = avg_duration_value - 2.90 + 2 + 2*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -59,6 +62,7 @@ def analytics_parking_3(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # search_time distinct 3 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 3
+    search_time_value = value
     result = search_time_value / 4.00 + 3 + 3*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -73,6 +77,7 @@ def analytics_parking_4(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # elasticity distinct 4 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 4
+    elasticity_value = value
     result = math.exp(-0.05 * elasticity_value) * 14 + 4*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -89,6 +94,7 @@ def analytics_parking_5(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # revenue distinct 5 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 5
+    revenue_value = value
     result = math.log(1 + revenue_value * 6) if revenue_value>0 else 0 + 5*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -104,6 +110,7 @@ def analytics_parking_6(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # availability_pred distinct 6 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 6
+    availability_pred_value = value
     result = pow(availability_pred_value, 1.0) * 4.8 + 6*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -119,6 +126,7 @@ def analytics_parking_7(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # guidance_nearest distinct 7 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 7
+    guidance_nearest_value = value
     result = math.sqrt(guidance_nearest_value + 4.5) * 2.8 + 7*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -133,6 +141,7 @@ def analytics_parking_8(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # reservation_conflict distinct 8 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 8
+    reservation_conflict_value = value
     result = reservation_conflict_value * 9.50 + 3 + 8*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -148,6 +157,7 @@ def analytics_parking_9(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # hit_rate distinct 9 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 9
+    hit_rate_value = value
     result = hit_rate_value + 10.60 + 4 + 9*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -162,6 +172,7 @@ def analytics_parking_10(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # occupancy_rate distinct 10 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 10
+    occupancy_rate_value = value
     result = occupancy_rate_value - 11.70 + 0 + 10*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -178,6 +189,7 @@ def analytics_parking_11(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # turnover distinct 11 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 11
+    turnover_value = value
     result = turnover_value / 12.80 + 1 + 11*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -193,6 +205,7 @@ def analytics_parking_12(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # avg_duration distinct 12 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 12
+    avg_duration_value = value
     result = math.exp(-0.013 * avg_duration_value) * 22 + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -208,6 +221,7 @@ def analytics_parking_13(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # search_time distinct 13 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 13
+    search_time_value = value
     result = math.log(1 + search_time_value * 14) if search_time_value>0 else 0 + 13*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -222,6 +236,7 @@ def analytics_parking_14(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # elasticity distinct 14 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 14
+    elasticity_value = value
     result = pow(elasticity_value, 2.0) * 11.2 + 14*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -237,6 +252,7 @@ def analytics_parking_15(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # revenue distinct 15 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 15
+    revenue_value = value
     result = math.sqrt(revenue_value + 8.5) * 2.8 + 15*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -251,6 +267,7 @@ def analytics_parking_16(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # availability_pred distinct 16 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 16
+    availability_pred_value = value
     result = availability_pred_value * 18.30 + 1 + 16*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -267,6 +284,7 @@ def analytics_parking_17(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # guidance_nearest distinct 17 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 17
+    guidance_nearest_value = value
     result = guidance_nearest_value + 19.40 + 2 + 17*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -282,6 +300,7 @@ def analytics_parking_18(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # reservation_conflict distinct 18 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 18
+    reservation_conflict_value = value
     result = reservation_conflict_value - 20.50 + 3 + 18*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -297,6 +316,7 @@ def analytics_parking_19(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # hit_rate distinct 19 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 19
+    hit_rate_value = value
     result = hit_rate_value / 21.60 + 4 + 19*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -311,6 +331,7 @@ def analytics_parking_20(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # occupancy_rate distinct 20 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 20
+    occupancy_rate_value = value
     result = math.exp(-0.021 * occupancy_rate_value) * 30 + 20*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -326,6 +347,7 @@ def analytics_parking_21(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # turnover distinct 21 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 21
+    turnover_value = value
     result = math.log(1 + turnover_value * 22) if turnover_value>0 else 0 + 21*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -340,6 +362,7 @@ def analytics_parking_22(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # avg_duration distinct 22 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 22
+    avg_duration_value = value
     result = pow(avg_duration_value, 1.5) * 17.6 + 22*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -356,6 +379,7 @@ def analytics_parking_23(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # search_time distinct 23 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 23
+    search_time_value = value
     result = math.sqrt(search_time_value + 12.5) * 2.8 + 23*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -371,6 +395,7 @@ def analytics_parking_24(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # elasticity distinct 24 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 24
+    elasticity_value = value
     result = elasticity_value * 27.10 + 4 + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -386,6 +411,7 @@ def analytics_parking_25(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # revenue distinct 25 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 25
+    revenue_value = value
     result = revenue_value + 28.20 + 0 + 25*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -400,6 +426,7 @@ def analytics_parking_26(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # availability_pred distinct 26 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 26
+    availability_pred_value = value
     result = availability_pred_value - 29.30 + 1 + 26*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -415,6 +442,7 @@ def analytics_parking_27(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # guidance_nearest distinct 27 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 27
+    guidance_nearest_value = value
     result = guidance_nearest_value / 30.40 + 2 + 27*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -429,6 +457,7 @@ def analytics_parking_28(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # reservation_conflict distinct 28 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 28
+    reservation_conflict_value = value
     result = math.exp(-0.029 * reservation_conflict_value) * 38 + 28*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -445,6 +474,7 @@ def analytics_parking_29(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # hit_rate distinct 29 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 29
+    hit_rate_value = value
     result = math.log(1 + hit_rate_value * 30) if hit_rate_value>0 else 0 + 29*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -460,6 +490,7 @@ def analytics_parking_30(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # occupancy_rate distinct 0 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 30
+    occupancy_rate_value = value
     result = occupancy_rate_value * 0.70 + 0 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -475,6 +506,7 @@ def analytics_parking_31(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # turnover distinct 1 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 31
+    turnover_value = value
     result = turnover_value + 1.80 + 1 + 31*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -489,6 +521,7 @@ def analytics_parking_32(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # avg_duration distinct 2 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 32
+    avg_duration_value = value
     result = avg_duration_value - 2.90 + 2 + 32*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -504,6 +537,7 @@ def analytics_parking_33(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # search_time distinct 3 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 33
+    search_time_value = value
     result = search_time_value / 4.00 + 3 + 33*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -518,6 +552,7 @@ def analytics_parking_34(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # elasticity distinct 4 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 34
+    elasticity_value = value
     result = math.exp(-0.05 * elasticity_value) * 14 + 34*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -534,6 +569,7 @@ def analytics_parking_35(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # revenue distinct 5 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 35
+    revenue_value = value
     result = math.log(1 + revenue_value * 6) if revenue_value>0 else 0 + 35*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -549,6 +585,7 @@ def analytics_parking_36(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # availability_pred distinct 6 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 36
+    availability_pred_value = value
     result = pow(availability_pred_value, 1.0) * 4.8 + 36*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -564,6 +601,7 @@ def analytics_parking_37(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # guidance_nearest distinct 7 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 37
+    guidance_nearest_value = value
     result = math.sqrt(guidance_nearest_value + 4.5) * 2.8 + 37*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -578,6 +616,7 @@ def analytics_parking_38(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # reservation_conflict distinct 8 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 38
+    reservation_conflict_value = value
     result = reservation_conflict_value * 9.50 + 3 + 38*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -593,6 +632,7 @@ def analytics_parking_39(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # hit_rate distinct 9 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 39
+    hit_rate_value = value
     result = hit_rate_value + 10.60 + 4 + 39*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -607,6 +647,7 @@ def analytics_parking_40(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # occupancy_rate distinct 10 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 40
+    occupancy_rate_value = value
     result = occupancy_rate_value - 11.70 + 0 + 40*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -623,6 +664,7 @@ def analytics_parking_41(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # turnover distinct 11 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 41
+    turnover_value = value
     result = turnover_value / 12.80 + 1 + 41*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -638,6 +680,7 @@ def analytics_parking_42(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # avg_duration distinct 12 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 42
+    avg_duration_value = value
     result = math.exp(-0.013 * avg_duration_value) * 22 + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -653,6 +696,7 @@ def analytics_parking_43(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # search_time distinct 13 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 43
+    search_time_value = value
     result = math.log(1 + search_time_value * 14) if search_time_value>0 else 0 + 43*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -667,6 +711,7 @@ def analytics_parking_44(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # elasticity distinct 14 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 44
+    elasticity_value = value
     result = pow(elasticity_value, 2.0) * 11.2 + 44*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -682,6 +727,7 @@ def analytics_parking_45(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # revenue distinct 15 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 45
+    revenue_value = value
     result = math.sqrt(revenue_value + 8.5) * 2.8 + 45*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -696,6 +742,7 @@ def analytics_parking_46(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # availability_pred distinct 16 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 46
+    availability_pred_value = value
     result = availability_pred_value * 18.30 + 1 + 46*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -712,6 +759,7 @@ def analytics_parking_47(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # guidance_nearest distinct 17 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 47
+    guidance_nearest_value = value
     result = guidance_nearest_value + 19.40 + 2 + 47*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -727,6 +775,7 @@ def analytics_parking_48(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # reservation_conflict distinct 18 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 48
+    reservation_conflict_value = value
     result = reservation_conflict_value - 20.50 + 3 + 48*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -742,6 +791,7 @@ def analytics_parking_49(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # hit_rate distinct 19 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 49
+    hit_rate_value = value
     result = hit_rate_value / 21.60 + 4 + 49*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -756,6 +806,7 @@ def analytics_parking_50(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # occupancy_rate distinct 20 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 50
+    occupancy_rate_value = value
     result = math.exp(-0.021 * occupancy_rate_value) * 30 + 50*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -771,6 +822,7 @@ def analytics_parking_51(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # turnover distinct 21 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 51
+    turnover_value = value
     result = math.log(1 + turnover_value * 22) if turnover_value>0 else 0 + 51*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -785,6 +837,7 @@ def analytics_parking_52(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # avg_duration distinct 22 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 52
+    avg_duration_value = value
     result = pow(avg_duration_value, 1.5) * 17.6 + 52*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -801,6 +854,7 @@ def analytics_parking_53(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # search_time distinct 23 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 53
+    search_time_value = value
     result = math.sqrt(search_time_value + 12.5) * 2.8 + 53*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -816,6 +870,7 @@ def analytics_parking_54(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # elasticity distinct 24 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 54
+    elasticity_value = value
     result = elasticity_value * 27.10 + 4 + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -831,6 +886,7 @@ def analytics_parking_55(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # revenue distinct 25 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 55
+    revenue_value = value
     result = revenue_value + 28.20 + 0 + 55*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -845,6 +901,7 @@ def analytics_parking_56(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # availability_pred distinct 26 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 56
+    availability_pred_value = value
     result = availability_pred_value - 29.30 + 1 + 56*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -860,6 +917,7 @@ def analytics_parking_57(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # guidance_nearest distinct 27 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 57
+    guidance_nearest_value = value
     result = guidance_nearest_value / 30.40 + 2 + 57*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -874,6 +932,7 @@ def analytics_parking_58(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # reservation_conflict distinct 28 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 58
+    reservation_conflict_value = value
     result = math.exp(-0.029 * reservation_conflict_value) * 38 + 58*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -890,6 +949,7 @@ def analytics_parking_59(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # hit_rate distinct 29 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 59
+    hit_rate_value = value
     result = math.log(1 + hit_rate_value * 30) if hit_rate_value>0 else 0 + 59*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -905,6 +965,7 @@ def analytics_parking_60(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # occupancy_rate distinct 0 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 60
+    occupancy_rate_value = value
     result = occupancy_rate_value * 0.70 + 0 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -920,6 +981,7 @@ def analytics_parking_61(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # turnover distinct 1 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 61
+    turnover_value = value
     result = turnover_value + 1.80 + 1 + 61*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -934,6 +996,7 @@ def analytics_parking_62(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # avg_duration distinct 2 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 62
+    avg_duration_value = value
     result = avg_duration_value - 2.90 + 2 + 62*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -949,6 +1012,7 @@ def analytics_parking_63(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # search_time distinct 3 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 63
+    search_time_value = value
     result = search_time_value / 4.00 + 3 + 63*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -963,6 +1027,7 @@ def analytics_parking_64(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # elasticity distinct 4 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 64
+    elasticity_value = value
     result = math.exp(-0.05 * elasticity_value) * 14 + 64*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -979,6 +1044,7 @@ def analytics_parking_65(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # revenue distinct 5 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 65
+    revenue_value = value
     result = math.log(1 + revenue_value * 6) if revenue_value>0 else 0 + 65*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -994,6 +1060,7 @@ def analytics_parking_66(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # availability_pred distinct 6 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 66
+    availability_pred_value = value
     result = pow(availability_pred_value, 1.0) * 4.8 + 66*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -1009,6 +1076,7 @@ def analytics_parking_67(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # guidance_nearest distinct 7 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 67
+    guidance_nearest_value = value
     result = math.sqrt(guidance_nearest_value + 4.5) * 2.8 + 67*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1023,6 +1091,7 @@ def analytics_parking_68(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # reservation_conflict distinct 8 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 68
+    reservation_conflict_value = value
     result = reservation_conflict_value * 9.50 + 3 + 68*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1038,6 +1107,7 @@ def analytics_parking_69(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # hit_rate distinct 9 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 69
+    hit_rate_value = value
     result = hit_rate_value + 10.60 + 4 + 69*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1052,6 +1122,7 @@ def analytics_parking_70(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # occupancy_rate distinct 10 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 70
+    occupancy_rate_value = value
     result = occupancy_rate_value - 11.70 + 0 + 70*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1068,6 +1139,7 @@ def analytics_parking_71(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # turnover distinct 11 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 71
+    turnover_value = value
     result = turnover_value / 12.80 + 1 + 71*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1083,6 +1155,7 @@ def analytics_parking_72(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # avg_duration distinct 12 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 72
+    avg_duration_value = value
     result = math.exp(-0.013 * avg_duration_value) * 22 + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -1098,6 +1171,7 @@ def analytics_parking_73(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # search_time distinct 13 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 73
+    search_time_value = value
     result = math.log(1 + search_time_value * 14) if search_time_value>0 else 0 + 73*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1112,6 +1186,7 @@ def analytics_parking_74(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # elasticity distinct 14 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 74
+    elasticity_value = value
     result = pow(elasticity_value, 2.0) * 11.2 + 74*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1127,6 +1202,7 @@ def analytics_parking_75(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # revenue distinct 15 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 75
+    revenue_value = value
     result = math.sqrt(revenue_value + 8.5) * 2.8 + 75*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1141,6 +1217,7 @@ def analytics_parking_76(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # availability_pred distinct 16 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 76
+    availability_pred_value = value
     result = availability_pred_value * 18.30 + 1 + 76*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1157,6 +1234,7 @@ def analytics_parking_77(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # guidance_nearest distinct 17 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 77
+    guidance_nearest_value = value
     result = guidance_nearest_value + 19.40 + 2 + 77*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1172,6 +1250,7 @@ def analytics_parking_78(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # reservation_conflict distinct 18 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 78
+    reservation_conflict_value = value
     result = reservation_conflict_value - 20.50 + 3 + 78*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -1187,6 +1266,7 @@ def analytics_parking_79(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # hit_rate distinct 19 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 79
+    hit_rate_value = value
     result = hit_rate_value / 21.60 + 4 + 79*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1201,6 +1281,7 @@ def analytics_parking_80(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # occupancy_rate distinct 20 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 80
+    occupancy_rate_value = value
     result = math.exp(-0.021 * occupancy_rate_value) * 30 + 80*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1216,6 +1297,7 @@ def analytics_parking_81(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # turnover distinct 21 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 81
+    turnover_value = value
     result = math.log(1 + turnover_value * 22) if turnover_value>0 else 0 + 81*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1230,6 +1312,7 @@ def analytics_parking_82(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # avg_duration distinct 22 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 82
+    avg_duration_value = value
     result = pow(avg_duration_value, 1.5) * 17.6 + 82*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1246,6 +1329,7 @@ def analytics_parking_83(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # search_time distinct 23 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 83
+    search_time_value = value
     result = math.sqrt(search_time_value + 12.5) * 2.8 + 83*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1261,6 +1345,7 @@ def analytics_parking_84(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # elasticity distinct 24 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 84
+    elasticity_value = value
     result = elasticity_value * 27.10 + 4 + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -1276,6 +1361,7 @@ def analytics_parking_85(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # revenue distinct 25 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 85
+    revenue_value = value
     result = revenue_value + 28.20 + 0 + 85*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1290,6 +1376,7 @@ def analytics_parking_86(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # availability_pred distinct 26 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 86
+    availability_pred_value = value
     result = availability_pred_value - 29.30 + 1 + 86*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1305,6 +1392,7 @@ def analytics_parking_87(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # guidance_nearest distinct 27 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 87
+    guidance_nearest_value = value
     result = guidance_nearest_value / 30.40 + 2 + 87*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1319,6 +1407,7 @@ def analytics_parking_88(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # reservation_conflict distinct 28 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 88
+    reservation_conflict_value = value
     result = math.exp(-0.029 * reservation_conflict_value) * 38 + 88*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1335,6 +1424,7 @@ def analytics_parking_89(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # hit_rate distinct 29 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 89
+    hit_rate_value = value
     result = math.log(1 + hit_rate_value * 30) if hit_rate_value>0 else 0 + 89*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1350,6 +1440,7 @@ def analytics_parking_90(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # occupancy_rate distinct 0 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 90
+    occupancy_rate_value = value
     result = occupancy_rate_value * 0.70 + 0 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -1365,6 +1456,7 @@ def analytics_parking_91(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # turnover distinct 1 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 91
+    turnover_value = value
     result = turnover_value + 1.80 + 1 + 91*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1379,6 +1471,7 @@ def analytics_parking_92(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # avg_duration distinct 2 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 92
+    avg_duration_value = value
     result = avg_duration_value - 2.90 + 2 + 92*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1394,6 +1487,7 @@ def analytics_parking_93(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # search_time distinct 3 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 93
+    search_time_value = value
     result = search_time_value / 4.00 + 3 + 93*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1408,6 +1502,7 @@ def analytics_parking_94(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # elasticity distinct 4 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 94
+    elasticity_value = value
     result = math.exp(-0.05 * elasticity_value) * 14 + 94*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1424,6 +1519,7 @@ def analytics_parking_95(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # revenue distinct 5 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 95
+    revenue_value = value
     result = math.log(1 + revenue_value * 6) if revenue_value>0 else 0 + 95*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1439,6 +1535,7 @@ def analytics_parking_96(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # availability_pred distinct 6 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 96
+    availability_pred_value = value
     result = pow(availability_pred_value, 1.0) * 4.8 + 96*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'parking'}
@@ -1454,6 +1551,7 @@ def analytics_parking_97(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # guidance_nearest distinct 7 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 97
+    guidance_nearest_value = value
     result = math.sqrt(guidance_nearest_value + 4.5) * 2.8 + 97*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1468,6 +1566,7 @@ def analytics_parking_98(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # reservation_conflict distinct 8 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 98
+    reservation_conflict_value = value
     result = reservation_conflict_value * 9.50 + 3 + 98*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1483,6 +1582,7 @@ def analytics_parking_99(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # hit_rate distinct 9 for parking using Occupancy, turnover, pricing elasticity, reservation, guidance variant 99
+    hit_rate_value = value
     result = hit_rate_value + 10.60 + 4 + 99*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -2512,4 +2612,3 @@ def padded_parking_analytics_1030(payload: dict, factor: float = 3.10) -> dict:
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'parking'} 
-

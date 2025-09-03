@@ -25,6 +25,7 @@ class Incident:
     status: str = 'active'
 
     def california_0_inc_0_incident_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        california_value = value
         """california distinct 0 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 0 for Incident — implements result = california_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for incidents::Incident::california_0_inc_0_incident_0
@@ -39,13 +40,14 @@ class Incident:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'california_0_inc_0_incident_0', 'result': result, 'domain': 'incidents'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def clearance_predict_6_inc_6_incident_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        clearance_predict_value = value
         """clearance_predict distinct 6 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 6 for Incident — implements result = pow(clearance_predict_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for incidents::Incident::clearance_predict_6_inc_6_incident_6
@@ -57,13 +59,14 @@ class Incident:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ema_12_inc_12_incident_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ema_value = value
         """ema distinct 12 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 12 for Incident — implements result = math.exp(-0.013 * ema_value) * 22 + 12*0.01"""
         try:
             # Distinct logic for incidents::Incident::ema_12_inc_12_incident_12
@@ -75,13 +78,14 @@ class Incident:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def spillback_18_inc_18_incident_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        spillback_value = value
         """spillback distinct 18 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 18 for Incident — implements result = spillback_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for incidents::Incident::spillback_18_inc_18_incident_18
@@ -96,13 +100,14 @@ class Incident:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def secondary_prob_24_inc_24_incident_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        secondary_prob_value = value
         """secondary_prob distinct 24 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 24 for Incident — implements result = secondary_prob_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for incidents::Incident::secondary_prob_24_inc_24_incident_24
@@ -114,16 +119,18 @@ class Incident:
                 else:
                     break
             # secondary_prob distinct 24 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 24
+            secondary_prob_value = value
             result = secondary_prob_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def california_0_inc_30_incident_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        california_value = value
         """california distinct 0 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 30 for Incident — implements result = california_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for incidents::Incident::california_0_inc_30_incident_30
@@ -138,13 +145,14 @@ class Incident:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'california_0_inc_30_incident_30', 'result': result, 'domain': 'incidents'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def clearance_predict_6_inc_36_incident_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        clearance_predict_value = value
         """clearance_predict distinct 6 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 36 for Incident — implements result = pow(clearance_predict_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for incidents::Incident::clearance_predict_6_inc_36_incident_36
@@ -156,13 +164,14 @@ class Incident:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ema_12_inc_42_incident_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ema_value = value
         """ema distinct 12 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 42 for Incident — implements result = math.exp(-0.013 * ema_value) * 22 + 42*0.01"""
         try:
             # Distinct logic for incidents::Incident::ema_12_inc_42_incident_42
@@ -174,13 +183,14 @@ class Incident:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def spillback_18_inc_48_incident_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        spillback_value = value
         """spillback distinct 18 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 48 for Incident — implements result = spillback_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for incidents::Incident::spillback_18_inc_48_incident_48
@@ -195,13 +205,14 @@ class Incident:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def secondary_prob_24_inc_54_incident_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        secondary_prob_value = value
         """secondary_prob distinct 24 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 54 for Incident — implements result = secondary_prob_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for incidents::Incident::secondary_prob_24_inc_54_incident_54
@@ -213,13 +224,14 @@ class Incident:
                 else:
                     break
             # secondary_prob distinct 24 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 54
+            secondary_prob_value = value
             result = secondary_prob_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_incident(self) -> bool:
@@ -245,6 +257,7 @@ class DetectionLog:
     status: str = 'active'
 
     def minnesota_1_inc_1_detectionlog_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        minnesota_value = value
         """minnesota distinct 1 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 1 for DetectionLog — implements result = minnesota_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for incidents::DetectionLog::minnesota_1_inc_1_detectionlog_1
@@ -256,13 +269,14 @@ class DetectionLog:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def severity_score_7_inc_7_detectionlog_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        severity_score_value = value
         """severity_score distinct 7 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 7 for DetectionLog — implements result = math.sqrt(severity_score_value + 4.5) * 2.8 + 7*0.0"""
         try:
             # Distinct logic for incidents::DetectionLog::severity_score_7_inc_7_detectionlog_7
@@ -274,13 +288,14 @@ class DetectionLog:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def shockwave_queue_13_inc_13_detectionlog_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        shockwave_queue_value = value
         """shockwave_queue distinct 13 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 13 for DetectionLog — implements result = math.log(1 + shockwave_queue_value * 14) if shockwa"""
         try:
             # Distinct logic for incidents::DetectionLog::shockwave_queue_13_inc_13_detectionlog_13
@@ -295,13 +310,14 @@ class DetectionLog:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def detour_cap_19_inc_19_detectionlog_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        detour_cap_value = value
         """detour_cap distinct 19 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 19 for DetectionLog — implements result = detour_cap_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for incidents::DetectionLog::detour_cap_19_inc_19_detectionlog_19
@@ -313,16 +329,18 @@ class DetectionLog:
                 else:
                     break
             # detour_cap distinct 19 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 19
+            detour_cap_value = value
             result = detour_cap_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def response_time_25_inc_25_detectionlog_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        response_time_value = value
         """response_time distinct 25 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 25 for DetectionLog — implements result = response_time_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for incidents::DetectionLog::response_time_25_inc_25_detectionlog_25
@@ -337,13 +355,14 @@ class DetectionLog:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'response_time_25_inc_25_detectionlog_25', 'result': result, 'domain': 'incidents'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def minnesota_1_inc_31_detectionlog_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        minnesota_value = value
         """minnesota distinct 1 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 31 for DetectionLog — implements result = minnesota_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for incidents::DetectionLog::minnesota_1_inc_31_detectionlog_31
@@ -355,13 +374,14 @@ class DetectionLog:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def severity_score_7_inc_37_detectionlog_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        severity_score_value = value
         """severity_score distinct 7 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 37 for DetectionLog — implements result = math.sqrt(severity_score_value + 4.5) * 2.8 + 37*0."""
         try:
             # Distinct logic for incidents::DetectionLog::severity_score_7_inc_37_detectionlog_37
@@ -373,13 +393,14 @@ class DetectionLog:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def shockwave_queue_13_inc_43_detectionlog_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        shockwave_queue_value = value
         """shockwave_queue distinct 13 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 43 for DetectionLog — implements result = math.log(1 + shockwave_queue_value * 14) if shockwa"""
         try:
             # Distinct logic for incidents::DetectionLog::shockwave_queue_13_inc_43_detectionlog_43
@@ -394,13 +415,14 @@ class DetectionLog:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def detour_cap_19_inc_49_detectionlog_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        detour_cap_value = value
         """detour_cap distinct 19 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 49 for DetectionLog — implements result = detour_cap_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for incidents::DetectionLog::detour_cap_19_inc_49_detectionlog_49
@@ -412,16 +434,18 @@ class DetectionLog:
                 else:
                     break
             # detour_cap distinct 19 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 49
+            detour_cap_value = value
             result = detour_cap_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def response_time_25_inc_55_detectionlog_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        response_time_value = value
         """response_time distinct 25 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 55 for DetectionLog — implements result = response_time_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for incidents::DetectionLog::response_time_25_inc_55_detectionlog_55
@@ -436,10 +460,10 @@ class DetectionLog:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'response_time_25_inc_55_detectionlog_55', 'result': result, 'domain': 'incidents'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_detectionlog(self) -> bool:
@@ -464,6 +488,7 @@ class ResponseUnit:
     status: str = 'active'
 
     def ema_2_inc_2_responseunit_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ema_value = value
         """ema distinct 2 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 2 for ResponseUnit — implements result = ema_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for incidents::ResponseUnit::ema_2_inc_2_responseunit_2
@@ -475,13 +500,14 @@ class ResponseUnit:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def spillback_8_inc_8_responseunit_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        spillback_value = value
         """spillback distinct 8 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 8 for ResponseUnit — implements result = spillback_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for incidents::ResponseUnit::spillback_8_inc_8_responseunit_8
@@ -496,13 +522,14 @@ class ResponseUnit:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def secondary_prob_14_inc_14_responseunit_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        secondary_prob_value = value
         """secondary_prob distinct 14 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 14 for ResponseUnit — implements result = pow(secondary_prob_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for incidents::ResponseUnit::secondary_prob_14_inc_14_responseunit_14
@@ -517,13 +544,14 @@ class ResponseUnit:
             result = pow(secondary_prob_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def california_20_inc_20_responseunit_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        california_value = value
         """california distinct 20 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 20 for ResponseUnit — implements result = math.exp(-0.021 * california_value) * 30 + 20*0.01"""
         try:
             # Distinct logic for incidents::ResponseUnit::california_20_inc_20_responseunit_20
@@ -538,13 +566,14 @@ class ResponseUnit:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'california_20_inc_20_responseunit_20', 'result': result, 'domain': 'incidents'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def clearance_predict_26_inc_26_responseunit_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        clearance_predict_value = value
         """clearance_predict distinct 26 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 26 for ResponseUnit — implements result = clearance_predict_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for incidents::ResponseUnit::clearance_predict_26_inc_26_responseunit_26
@@ -556,13 +585,14 @@ class ResponseUnit:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ema_2_inc_32_responseunit_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ema_value = value
         """ema distinct 2 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 32 for ResponseUnit — implements result = ema_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for incidents::ResponseUnit::ema_2_inc_32_responseunit_32
@@ -574,13 +604,14 @@ class ResponseUnit:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def spillback_8_inc_38_responseunit_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        spillback_value = value
         """spillback distinct 8 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 38 for ResponseUnit — implements result = spillback_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for incidents::ResponseUnit::spillback_8_inc_38_responseunit_38
@@ -595,13 +626,14 @@ class ResponseUnit:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def secondary_prob_14_inc_44_responseunit_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        secondary_prob_value = value
         """secondary_prob distinct 14 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 44 for ResponseUnit — implements result = pow(secondary_prob_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for incidents::ResponseUnit::secondary_prob_14_inc_44_responseunit_44
@@ -616,13 +648,14 @@ class ResponseUnit:
             result = pow(secondary_prob_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def california_20_inc_50_responseunit_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        california_value = value
         """california distinct 20 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 50 for ResponseUnit — implements result = math.exp(-0.021 * california_value) * 30 + 50*0.01"""
         try:
             # Distinct logic for incidents::ResponseUnit::california_20_inc_50_responseunit_50
@@ -637,13 +670,14 @@ class ResponseUnit:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'california_20_inc_50_responseunit_50', 'result': result, 'domain': 'incidents'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def clearance_predict_26_inc_56_responseunit_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        clearance_predict_value = value
         """clearance_predict distinct 26 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 56 for ResponseUnit — implements result = clearance_predict_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for incidents::ResponseUnit::clearance_predict_26_inc_56_responseunit_56
@@ -655,10 +689,10 @@ class ResponseUnit:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_responseunit(self) -> bool:
@@ -683,6 +717,7 @@ class ClearanceRecord:
     status: str = 'active'
 
     def shockwave_queue_3_inc_3_clearancerecord_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        shockwave_queue_value = value
         """shockwave_queue distinct 3 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 3 for ClearanceRecord — implements result = shockwave_queue_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for incidents::ClearanceRecord::shockwave_queue_3_inc_3_clearancerecord_3
@@ -697,13 +732,14 @@ class ClearanceRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def detour_cap_9_inc_9_clearancerecord_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        detour_cap_value = value
         """detour_cap distinct 9 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 9 for ClearanceRecord — implements result = detour_cap_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for incidents::ClearanceRecord::detour_cap_9_inc_9_clearancerecord_9
@@ -715,16 +751,18 @@ class ClearanceRecord:
                 else:
                     break
             # detour_cap distinct 9 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 9
+            detour_cap_value = value
             result = detour_cap_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def response_time_15_inc_15_clearancerecord_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        response_time_value = value
         """response_time distinct 15 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 15 for ClearanceRecord — implements result = math.sqrt(response_time_value + 8.5) * 2.8 + 15*0.0"""
         try:
             # Distinct logic for incidents::ClearanceRecord::response_time_15_inc_15_clearancerecord_15
@@ -739,13 +777,14 @@ class ClearanceRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'response_time_15_inc_15_clearancerecord_15', 'result': result, 'domain': 'incidents'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def minnesota_21_inc_21_clearancerecord_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        minnesota_value = value
         """minnesota distinct 21 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 21 for ClearanceRecord — implements result = math.log(1 + minnesota_value * 22) if minnesota_val"""
         try:
             # Distinct logic for incidents::ClearanceRecord::minnesota_21_inc_21_clearancerecord_21
@@ -757,13 +796,14 @@ class ClearanceRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def severity_score_27_inc_27_clearancerecord_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        severity_score_value = value
         """severity_score distinct 27 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 27 for ClearanceRecord — implements result = severity_score_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for incidents::ClearanceRecord::severity_score_27_inc_27_clearancerecord_27
@@ -775,13 +815,14 @@ class ClearanceRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def shockwave_queue_3_inc_33_clearancerecord_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        shockwave_queue_value = value
         """shockwave_queue distinct 3 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 33 for ClearanceRecord — implements result = shockwave_queue_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for incidents::ClearanceRecord::shockwave_queue_3_inc_33_clearancerecord_33
@@ -796,13 +837,14 @@ class ClearanceRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def detour_cap_9_inc_39_clearancerecord_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        detour_cap_value = value
         """detour_cap distinct 9 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 39 for ClearanceRecord — implements result = detour_cap_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for incidents::ClearanceRecord::detour_cap_9_inc_39_clearancerecord_39
@@ -814,16 +856,18 @@ class ClearanceRecord:
                 else:
                     break
             # detour_cap distinct 9 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 39
+            detour_cap_value = value
             result = detour_cap_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def response_time_15_inc_45_clearancerecord_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        response_time_value = value
         """response_time distinct 15 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 45 for ClearanceRecord — implements result = math.sqrt(response_time_value + 8.5) * 2.8 + 45*0.0"""
         try:
             # Distinct logic for incidents::ClearanceRecord::response_time_15_inc_45_clearancerecord_45
@@ -838,13 +882,14 @@ class ClearanceRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'response_time_15_inc_45_clearancerecord_45', 'result': result, 'domain': 'incidents'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def minnesota_21_inc_51_clearancerecord_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        minnesota_value = value
         """minnesota distinct 21 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 51 for ClearanceRecord — implements result = math.log(1 + minnesota_value * 22) if minnesota_val"""
         try:
             # Distinct logic for incidents::ClearanceRecord::minnesota_21_inc_51_clearancerecord_51
@@ -856,13 +901,14 @@ class ClearanceRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def severity_score_27_inc_57_clearancerecord_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        severity_score_value = value
         """severity_score distinct 27 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 57 for ClearanceRecord — implements result = severity_score_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for incidents::ClearanceRecord::severity_score_27_inc_57_clearancerecord_57
@@ -874,10 +920,10 @@ class ClearanceRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_clearancerecord(self) -> bool:
@@ -901,6 +947,7 @@ class SecondaryRisk:
     status: str = 'active'
 
     def secondary_prob_4_inc_4_secondaryrisk_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        secondary_prob_value = value
         """secondary_prob distinct 4 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 4 for SecondaryRisk — implements result = math.exp(-0.05 * secondary_prob_value) * 14 + 4*0.0"""
         try:
             # Distinct logic for incidents::SecondaryRisk::secondary_prob_4_inc_4_secondaryrisk_4
@@ -912,16 +959,18 @@ class SecondaryRisk:
                 else:
                     break
             # secondary_prob distinct 4 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 4
+            secondary_prob_value = value
             result = math.exp(-0.05 * secondary_prob_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def california_10_inc_10_secondaryrisk_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        california_value = value
         """california distinct 10 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 10 for SecondaryRisk — implements result = california_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for incidents::SecondaryRisk::california_10_inc_10_secondaryrisk_10
@@ -936,13 +985,14 @@ class SecondaryRisk:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'california_10_inc_10_secondaryrisk_10', 'result': result, 'domain': 'incidents'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def clearance_predict_16_inc_16_secondaryrisk_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        clearance_predict_value = value
         """clearance_predict distinct 16 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 16 for SecondaryRisk — implements result = clearance_predict_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for incidents::SecondaryRisk::clearance_predict_16_inc_16_secondaryrisk_16
@@ -954,13 +1004,14 @@ class SecondaryRisk:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ema_22_inc_22_secondaryrisk_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ema_value = value
         """ema distinct 22 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 22 for SecondaryRisk — implements result = pow(ema_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for incidents::SecondaryRisk::ema_22_inc_22_secondaryrisk_22
@@ -972,13 +1023,14 @@ class SecondaryRisk:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def spillback_28_inc_28_secondaryrisk_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        spillback_value = value
         """spillback distinct 28 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 28 for SecondaryRisk — implements result = math.exp(-0.029 * spillback_value) * 38 + 28*0.01"""
         try:
             # Distinct logic for incidents::SecondaryRisk::spillback_28_inc_28_secondaryrisk_28
@@ -993,13 +1045,14 @@ class SecondaryRisk:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def secondary_prob_4_inc_34_secondaryrisk_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        secondary_prob_value = value
         """secondary_prob distinct 4 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 34 for SecondaryRisk — implements result = math.exp(-0.05 * secondary_prob_value) * 14 + 34*0."""
         try:
             # Distinct logic for incidents::SecondaryRisk::secondary_prob_4_inc_34_secondaryrisk_34
@@ -1011,16 +1064,18 @@ class SecondaryRisk:
                 else:
                     break
             # secondary_prob distinct 4 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 34
+            secondary_prob_value = value
             result = math.exp(-0.05 * secondary_prob_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def california_10_inc_40_secondaryrisk_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        california_value = value
         """california distinct 10 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 40 for SecondaryRisk — implements result = california_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for incidents::SecondaryRisk::california_10_inc_40_secondaryrisk_40
@@ -1035,13 +1090,14 @@ class SecondaryRisk:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'california_10_inc_40_secondaryrisk_40', 'result': result, 'domain': 'incidents'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def clearance_predict_16_inc_46_secondaryrisk_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        clearance_predict_value = value
         """clearance_predict distinct 16 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 46 for SecondaryRisk — implements result = clearance_predict_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for incidents::SecondaryRisk::clearance_predict_16_inc_46_secondaryrisk_46
@@ -1053,13 +1109,14 @@ class SecondaryRisk:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ema_22_inc_52_secondaryrisk_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ema_value = value
         """ema distinct 22 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 52 for SecondaryRisk — implements result = pow(ema_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for incidents::SecondaryRisk::ema_22_inc_52_secondaryrisk_52
@@ -1071,13 +1128,14 @@ class SecondaryRisk:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def spillback_28_inc_58_secondaryrisk_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        spillback_value = value
         """spillback distinct 28 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 58 for SecondaryRisk — implements result = math.exp(-0.029 * spillback_value) * 38 + 58*0.01"""
         try:
             # Distinct logic for incidents::SecondaryRisk::spillback_28_inc_58_secondaryrisk_58
@@ -1092,10 +1150,10 @@ class SecondaryRisk:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_secondaryrisk(self) -> bool:
@@ -1119,6 +1177,7 @@ class Spillback:
     status: str = 'active'
 
     def response_time_5_inc_5_spillback_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        response_time_value = value
         """response_time distinct 5 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 5 for Spillback — implements result = math.log(1 + response_time_value * 6) if response_t"""
         try:
             # Distinct logic for incidents::Spillback::response_time_5_inc_5_spillback_5
@@ -1133,13 +1192,14 @@ class Spillback:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'response_time_5_inc_5_spillback_5', 'result': result, 'domain': 'incidents'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def minnesota_11_inc_11_spillback_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        minnesota_value = value
         """minnesota distinct 11 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 11 for Spillback — implements result = minnesota_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for incidents::Spillback::minnesota_11_inc_11_spillback_11
@@ -1151,13 +1211,14 @@ class Spillback:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def severity_score_17_inc_17_spillback_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        severity_score_value = value
         """severity_score distinct 17 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 17 for Spillback — implements result = severity_score_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for incidents::Spillback::severity_score_17_inc_17_spillback_17
@@ -1169,13 +1230,14 @@ class Spillback:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def shockwave_queue_23_inc_23_spillback_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        shockwave_queue_value = value
         """shockwave_queue distinct 23 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 23 for Spillback — implements result = math.sqrt(shockwave_queue_value + 12.5) * 2.8 + 23*"""
         try:
             # Distinct logic for incidents::Spillback::shockwave_queue_23_inc_23_spillback_23
@@ -1190,13 +1252,14 @@ class Spillback:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def detour_cap_29_inc_29_spillback_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        detour_cap_value = value
         """detour_cap distinct 29 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 29 for Spillback — implements result = math.log(1 + detour_cap_value * 30) if detour_cap_v"""
         try:
             # Distinct logic for incidents::Spillback::detour_cap_29_inc_29_spillback_29
@@ -1211,13 +1274,14 @@ class Spillback:
             result = math.log(1 + detour_cap_value * 30) if detour_cap_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def response_time_5_inc_35_spillback_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        response_time_value = value
         """response_time distinct 5 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 35 for Spillback — implements result = math.log(1 + response_time_value * 6) if response_t"""
         try:
             # Distinct logic for incidents::Spillback::response_time_5_inc_35_spillback_35
@@ -1232,13 +1296,14 @@ class Spillback:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'response_time_5_inc_35_spillback_35', 'result': result, 'domain': 'incidents'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def minnesota_11_inc_41_spillback_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        minnesota_value = value
         """minnesota distinct 11 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 41 for Spillback — implements result = minnesota_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for incidents::Spillback::minnesota_11_inc_41_spillback_41
@@ -1250,13 +1315,14 @@ class Spillback:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def severity_score_17_inc_47_spillback_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        severity_score_value = value
         """severity_score distinct 17 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 47 for Spillback — implements result = severity_score_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for incidents::Spillback::severity_score_17_inc_47_spillback_47
@@ -1268,13 +1334,14 @@ class Spillback:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def shockwave_queue_23_inc_53_spillback_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        shockwave_queue_value = value
         """shockwave_queue distinct 23 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 53 for Spillback — implements result = math.sqrt(shockwave_queue_value + 12.5) * 2.8 + 53*"""
         try:
             # Distinct logic for incidents::Spillback::shockwave_queue_23_inc_53_spillback_53
@@ -1289,13 +1356,14 @@ class Spillback:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def detour_cap_29_inc_59_spillback_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        detour_cap_value = value
         """detour_cap distinct 29 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk extra 59 for Spillback — implements result = math.log(1 + detour_cap_value * 30) if detour_cap_v"""
         try:
             # Distinct logic for incidents::Spillback::detour_cap_29_inc_59_spillback_59
@@ -1310,10 +1378,10 @@ class Spillback:
             result = math.log(1 + detour_cap_value * 30) if detour_cap_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_spillback(self) -> bool:
@@ -2769,4 +2837,3 @@ def padded_incidents_models_1027(payload: dict, factor: float = 2.89) -> dict:
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'incidents','idx':1027}
-

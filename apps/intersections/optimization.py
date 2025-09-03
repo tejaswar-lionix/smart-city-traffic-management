@@ -11,6 +11,8 @@ def optimize_intersections_0(params: Dict[str, Any], iterations: int=100) -> Dic
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Capacity = sat * g/C HCM 31-148 iter 0
         value = candidate.get('value', 10)
+        saturation_flow = 1900
+        green_ratio = 0.5
         cap = saturation_flow * green_ratio + 0*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -641,6 +643,8 @@ def optimize_intersections_30(params: Dict[str, Any], iterations: int=100) -> Di
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Capacity = sat * g/C HCM 31-148 iter 30
         value = candidate.get('value', 10)
+        saturation_flow = 1900
+        green_ratio = 0.5
         cap = saturation_flow * green_ratio + 30*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1271,6 +1275,8 @@ def optimize_intersections_60(params: Dict[str, Any], iterations: int=100) -> Di
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Capacity = sat * g/C HCM 31-148 iter 60
         value = candidate.get('value', 10)
+        saturation_flow = 1900
+        green_ratio = 0.5
         cap = saturation_flow * green_ratio + 60*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1901,6 +1907,8 @@ def optimize_intersections_90(params: Dict[str, Any], iterations: int=100) -> Di
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Capacity = sat * g/C HCM 31-148 iter 90
         value = candidate.get('value', 10)
+        saturation_flow = 1900
+        green_ratio = 0.5
         cap = saturation_flow * green_ratio + 90*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2742,4 +2750,3 @@ def padded_intersections_optimization_1020(payload: dict, factor: float = 2.40) 
         result = math.log(result)*15 + 20
     result += math.sin(val)*1 + math.cos(val)*3
     return {'result': result, 'domain':'intersections','module':'optimization','idx':1020, 'hash': hashlib.sha256(str(result).encode()).hexdigest()[:8]}
-

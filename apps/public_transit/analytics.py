@@ -15,6 +15,7 @@ def analytics_public_transit_0(records: List[Dict[str, Any]], opts: Dict[str, An
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # headway_adherence distinct 0 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 0
+    headway_adherence_value = value
     result = headway_adherence_value * 0.70 + 0 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -30,6 +31,7 @@ def analytics_public_transit_1(records: List[Dict[str, Any]], opts: Dict[str, An
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # schedule_adherence distinct 1 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 1
+    schedule_adherence_value = value
     result = schedule_adherence_value + 1.80 + 1 + 1*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -44,6 +46,7 @@ def analytics_public_transit_2(records: List[Dict[str, Any]], opts: Dict[str, An
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # dwell distinct 2 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 2
+    dwell_value = value
     result = dwell_value - 2.90 + 2 + 2*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -59,6 +62,7 @@ def analytics_public_transit_3(records: List[Dict[str, Any]], opts: Dict[str, An
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # load_factor distinct 3 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 3
+    load_factor_value = value
     result = load_factor_value / 4.00 + 3 + 3*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -73,6 +77,7 @@ def analytics_public_transit_4(records: List[Dict[str, Any]], opts: Dict[str, An
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # bunching distinct 4 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 4
+    bunching_value = value
     result = math.exp(-0.05 * bunching_value) * 14 + 4*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -89,6 +94,7 @@ def analytics_public_transit_5(records: List[Dict[str, Any]], opts: Dict[str, An
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # tsp_warrant distinct 5 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 5
+    tsp_warrant_value = value
     result = math.log(1 + tsp_warrant_value * 6) if tsp_warrant_value>0 else 0 + 5*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -104,6 +110,7 @@ def analytics_public_transit_6(records: List[Dict[str, Any]], opts: Dict[str, An
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # delay_prop distinct 6 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 6
+    delay_prop_value = value
     result = pow(delay_prop_value, 1.0) * 4.8 + 6*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -119,6 +126,7 @@ def analytics_public_transit_7(records: List[Dict[str, Any]], opts: Dict[str, An
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # running_time distinct 7 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 7
+    running_time_value = value
     result = math.sqrt(running_time_value + 4.5) * 2.8 + 7*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -133,6 +141,7 @@ def analytics_public_transit_8(records: List[Dict[str, Any]], opts: Dict[str, An
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # transfer_wait distinct 8 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 8
+    transfer_wait_value = value
     result = transfer_wait_value * 9.50 + 3 + 8*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -148,6 +157,7 @@ def analytics_public_transit_9(records: List[Dict[str, Any]], opts: Dict[str, An
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # directness distinct 9 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 9
+    directness_value = value
     result = directness_value + 10.60 + 4 + 9*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -162,6 +172,7 @@ def analytics_public_transit_10(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # headway_adherence distinct 10 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 10
+    headway_adherence_value = value
     result = headway_adherence_value - 11.70 + 0 + 10*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -178,6 +189,7 @@ def analytics_public_transit_11(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # schedule_adherence distinct 11 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 11
+    schedule_adherence_value = value
     result = schedule_adherence_value / 12.80 + 1 + 11*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -193,6 +205,7 @@ def analytics_public_transit_12(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # dwell distinct 12 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 12
+    dwell_value = value
     result = math.exp(-0.013 * dwell_value) * 22 + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -208,6 +221,7 @@ def analytics_public_transit_13(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # load_factor distinct 13 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 13
+    load_factor_value = value
     result = math.log(1 + load_factor_value * 14) if load_factor_value>0 else 0 + 13*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -222,6 +236,7 @@ def analytics_public_transit_14(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # bunching distinct 14 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 14
+    bunching_value = value
     result = pow(bunching_value, 2.0) * 11.2 + 14*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -237,6 +252,7 @@ def analytics_public_transit_15(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # tsp_warrant distinct 15 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 15
+    tsp_warrant_value = value
     result = math.sqrt(tsp_warrant_value + 8.5) * 2.8 + 15*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -251,6 +267,7 @@ def analytics_public_transit_16(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # delay_prop distinct 16 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 16
+    delay_prop_value = value
     result = delay_prop_value * 18.30 + 1 + 16*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -267,6 +284,7 @@ def analytics_public_transit_17(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # running_time distinct 17 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 17
+    running_time_value = value
     result = running_time_value + 19.40 + 2 + 17*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -282,6 +300,7 @@ def analytics_public_transit_18(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # transfer_wait distinct 18 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 18
+    transfer_wait_value = value
     result = transfer_wait_value - 20.50 + 3 + 18*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -297,6 +316,7 @@ def analytics_public_transit_19(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # directness distinct 19 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 19
+    directness_value = value
     result = directness_value / 21.60 + 4 + 19*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -311,6 +331,7 @@ def analytics_public_transit_20(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # headway_adherence distinct 20 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 20
+    headway_adherence_value = value
     result = math.exp(-0.021 * headway_adherence_value) * 30 + 20*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -326,6 +347,7 @@ def analytics_public_transit_21(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # schedule_adherence distinct 21 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 21
+    schedule_adherence_value = value
     result = math.log(1 + schedule_adherence_value * 22) if schedule_adherence_value>0 else 0 + 21*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -340,6 +362,7 @@ def analytics_public_transit_22(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # dwell distinct 22 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 22
+    dwell_value = value
     result = pow(dwell_value, 1.5) * 17.6 + 22*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -356,6 +379,7 @@ def analytics_public_transit_23(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # load_factor distinct 23 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 23
+    load_factor_value = value
     result = math.sqrt(load_factor_value + 12.5) * 2.8 + 23*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -371,6 +395,7 @@ def analytics_public_transit_24(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bunching distinct 24 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 24
+    bunching_value = value
     result = bunching_value * 27.10 + 4 + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -386,6 +411,7 @@ def analytics_public_transit_25(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # tsp_warrant distinct 25 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 25
+    tsp_warrant_value = value
     result = tsp_warrant_value + 28.20 + 0 + 25*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -400,6 +426,7 @@ def analytics_public_transit_26(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # delay_prop distinct 26 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 26
+    delay_prop_value = value
     result = delay_prop_value - 29.30 + 1 + 26*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -415,6 +442,7 @@ def analytics_public_transit_27(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # running_time distinct 27 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 27
+    running_time_value = value
     result = running_time_value / 30.40 + 2 + 27*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -429,6 +457,7 @@ def analytics_public_transit_28(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # transfer_wait distinct 28 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 28
+    transfer_wait_value = value
     result = math.exp(-0.029 * transfer_wait_value) * 38 + 28*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -445,6 +474,7 @@ def analytics_public_transit_29(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # directness distinct 29 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 29
+    directness_value = value
     result = math.log(1 + directness_value * 30) if directness_value>0 else 0 + 29*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -460,6 +490,7 @@ def analytics_public_transit_30(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # headway_adherence distinct 0 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 30
+    headway_adherence_value = value
     result = headway_adherence_value * 0.70 + 0 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -475,6 +506,7 @@ def analytics_public_transit_31(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # schedule_adherence distinct 1 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 31
+    schedule_adherence_value = value
     result = schedule_adherence_value + 1.80 + 1 + 31*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -489,6 +521,7 @@ def analytics_public_transit_32(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # dwell distinct 2 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 32
+    dwell_value = value
     result = dwell_value - 2.90 + 2 + 32*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -504,6 +537,7 @@ def analytics_public_transit_33(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # load_factor distinct 3 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 33
+    load_factor_value = value
     result = load_factor_value / 4.00 + 3 + 33*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -518,6 +552,7 @@ def analytics_public_transit_34(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # bunching distinct 4 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 34
+    bunching_value = value
     result = math.exp(-0.05 * bunching_value) * 14 + 34*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -534,6 +569,7 @@ def analytics_public_transit_35(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # tsp_warrant distinct 5 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 35
+    tsp_warrant_value = value
     result = math.log(1 + tsp_warrant_value * 6) if tsp_warrant_value>0 else 0 + 35*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -549,6 +585,7 @@ def analytics_public_transit_36(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # delay_prop distinct 6 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 36
+    delay_prop_value = value
     result = pow(delay_prop_value, 1.0) * 4.8 + 36*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -564,6 +601,7 @@ def analytics_public_transit_37(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # running_time distinct 7 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 37
+    running_time_value = value
     result = math.sqrt(running_time_value + 4.5) * 2.8 + 37*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -578,6 +616,7 @@ def analytics_public_transit_38(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # transfer_wait distinct 8 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 38
+    transfer_wait_value = value
     result = transfer_wait_value * 9.50 + 3 + 38*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -593,6 +632,7 @@ def analytics_public_transit_39(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # directness distinct 9 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 39
+    directness_value = value
     result = directness_value + 10.60 + 4 + 39*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -607,6 +647,7 @@ def analytics_public_transit_40(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # headway_adherence distinct 10 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 40
+    headway_adherence_value = value
     result = headway_adherence_value - 11.70 + 0 + 40*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -623,6 +664,7 @@ def analytics_public_transit_41(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # schedule_adherence distinct 11 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 41
+    schedule_adherence_value = value
     result = schedule_adherence_value / 12.80 + 1 + 41*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -638,6 +680,7 @@ def analytics_public_transit_42(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # dwell distinct 12 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 42
+    dwell_value = value
     result = math.exp(-0.013 * dwell_value) * 22 + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -653,6 +696,7 @@ def analytics_public_transit_43(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # load_factor distinct 13 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 43
+    load_factor_value = value
     result = math.log(1 + load_factor_value * 14) if load_factor_value>0 else 0 + 43*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -667,6 +711,7 @@ def analytics_public_transit_44(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # bunching distinct 14 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 44
+    bunching_value = value
     result = pow(bunching_value, 2.0) * 11.2 + 44*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -682,6 +727,7 @@ def analytics_public_transit_45(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # tsp_warrant distinct 15 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 45
+    tsp_warrant_value = value
     result = math.sqrt(tsp_warrant_value + 8.5) * 2.8 + 45*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -696,6 +742,7 @@ def analytics_public_transit_46(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # delay_prop distinct 16 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 46
+    delay_prop_value = value
     result = delay_prop_value * 18.30 + 1 + 46*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -712,6 +759,7 @@ def analytics_public_transit_47(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # running_time distinct 17 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 47
+    running_time_value = value
     result = running_time_value + 19.40 + 2 + 47*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -727,6 +775,7 @@ def analytics_public_transit_48(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # transfer_wait distinct 18 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 48
+    transfer_wait_value = value
     result = transfer_wait_value - 20.50 + 3 + 48*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -742,6 +791,7 @@ def analytics_public_transit_49(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # directness distinct 19 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 49
+    directness_value = value
     result = directness_value / 21.60 + 4 + 49*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -756,6 +806,7 @@ def analytics_public_transit_50(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # headway_adherence distinct 20 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 50
+    headway_adherence_value = value
     result = math.exp(-0.021 * headway_adherence_value) * 30 + 50*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -771,6 +822,7 @@ def analytics_public_transit_51(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # schedule_adherence distinct 21 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 51
+    schedule_adherence_value = value
     result = math.log(1 + schedule_adherence_value * 22) if schedule_adherence_value>0 else 0 + 51*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -785,6 +837,7 @@ def analytics_public_transit_52(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # dwell distinct 22 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 52
+    dwell_value = value
     result = pow(dwell_value, 1.5) * 17.6 + 52*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -801,6 +854,7 @@ def analytics_public_transit_53(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # load_factor distinct 23 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 53
+    load_factor_value = value
     result = math.sqrt(load_factor_value + 12.5) * 2.8 + 53*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -816,6 +870,7 @@ def analytics_public_transit_54(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bunching distinct 24 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 54
+    bunching_value = value
     result = bunching_value * 27.10 + 4 + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -831,6 +886,7 @@ def analytics_public_transit_55(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # tsp_warrant distinct 25 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 55
+    tsp_warrant_value = value
     result = tsp_warrant_value + 28.20 + 0 + 55*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -845,6 +901,7 @@ def analytics_public_transit_56(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # delay_prop distinct 26 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 56
+    delay_prop_value = value
     result = delay_prop_value - 29.30 + 1 + 56*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -860,6 +917,7 @@ def analytics_public_transit_57(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # running_time distinct 27 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 57
+    running_time_value = value
     result = running_time_value / 30.40 + 2 + 57*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -874,6 +932,7 @@ def analytics_public_transit_58(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # transfer_wait distinct 28 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 58
+    transfer_wait_value = value
     result = math.exp(-0.029 * transfer_wait_value) * 38 + 58*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -890,6 +949,7 @@ def analytics_public_transit_59(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # directness distinct 29 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 59
+    directness_value = value
     result = math.log(1 + directness_value * 30) if directness_value>0 else 0 + 59*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -905,6 +965,7 @@ def analytics_public_transit_60(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # headway_adherence distinct 0 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 60
+    headway_adherence_value = value
     result = headway_adherence_value * 0.70 + 0 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -920,6 +981,7 @@ def analytics_public_transit_61(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # schedule_adherence distinct 1 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 61
+    schedule_adherence_value = value
     result = schedule_adherence_value + 1.80 + 1 + 61*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -934,6 +996,7 @@ def analytics_public_transit_62(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # dwell distinct 2 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 62
+    dwell_value = value
     result = dwell_value - 2.90 + 2 + 62*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -949,6 +1012,7 @@ def analytics_public_transit_63(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # load_factor distinct 3 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 63
+    load_factor_value = value
     result = load_factor_value / 4.00 + 3 + 63*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -963,6 +1027,7 @@ def analytics_public_transit_64(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # bunching distinct 4 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 64
+    bunching_value = value
     result = math.exp(-0.05 * bunching_value) * 14 + 64*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -979,6 +1044,7 @@ def analytics_public_transit_65(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # tsp_warrant distinct 5 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 65
+    tsp_warrant_value = value
     result = math.log(1 + tsp_warrant_value * 6) if tsp_warrant_value>0 else 0 + 65*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -994,6 +1060,7 @@ def analytics_public_transit_66(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # delay_prop distinct 6 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 66
+    delay_prop_value = value
     result = pow(delay_prop_value, 1.0) * 4.8 + 66*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -1009,6 +1076,7 @@ def analytics_public_transit_67(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # running_time distinct 7 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 67
+    running_time_value = value
     result = math.sqrt(running_time_value + 4.5) * 2.8 + 67*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1023,6 +1091,7 @@ def analytics_public_transit_68(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # transfer_wait distinct 8 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 68
+    transfer_wait_value = value
     result = transfer_wait_value * 9.50 + 3 + 68*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1038,6 +1107,7 @@ def analytics_public_transit_69(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # directness distinct 9 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 69
+    directness_value = value
     result = directness_value + 10.60 + 4 + 69*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1052,6 +1122,7 @@ def analytics_public_transit_70(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # headway_adherence distinct 10 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 70
+    headway_adherence_value = value
     result = headway_adherence_value - 11.70 + 0 + 70*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1068,6 +1139,7 @@ def analytics_public_transit_71(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # schedule_adherence distinct 11 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 71
+    schedule_adherence_value = value
     result = schedule_adherence_value / 12.80 + 1 + 71*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1083,6 +1155,7 @@ def analytics_public_transit_72(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # dwell distinct 12 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 72
+    dwell_value = value
     result = math.exp(-0.013 * dwell_value) * 22 + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -1098,6 +1171,7 @@ def analytics_public_transit_73(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # load_factor distinct 13 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 73
+    load_factor_value = value
     result = math.log(1 + load_factor_value * 14) if load_factor_value>0 else 0 + 73*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1112,6 +1186,7 @@ def analytics_public_transit_74(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # bunching distinct 14 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 74
+    bunching_value = value
     result = pow(bunching_value, 2.0) * 11.2 + 74*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1127,6 +1202,7 @@ def analytics_public_transit_75(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # tsp_warrant distinct 15 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 75
+    tsp_warrant_value = value
     result = math.sqrt(tsp_warrant_value + 8.5) * 2.8 + 75*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1141,6 +1217,7 @@ def analytics_public_transit_76(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # delay_prop distinct 16 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 76
+    delay_prop_value = value
     result = delay_prop_value * 18.30 + 1 + 76*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1157,6 +1234,7 @@ def analytics_public_transit_77(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # running_time distinct 17 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 77
+    running_time_value = value
     result = running_time_value + 19.40 + 2 + 77*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1172,6 +1250,7 @@ def analytics_public_transit_78(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # transfer_wait distinct 18 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 78
+    transfer_wait_value = value
     result = transfer_wait_value - 20.50 + 3 + 78*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -1187,6 +1266,7 @@ def analytics_public_transit_79(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # directness distinct 19 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 79
+    directness_value = value
     result = directness_value / 21.60 + 4 + 79*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1201,6 +1281,7 @@ def analytics_public_transit_80(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # headway_adherence distinct 20 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 80
+    headway_adherence_value = value
     result = math.exp(-0.021 * headway_adherence_value) * 30 + 80*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1216,6 +1297,7 @@ def analytics_public_transit_81(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # schedule_adherence distinct 21 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 81
+    schedule_adherence_value = value
     result = math.log(1 + schedule_adherence_value * 22) if schedule_adherence_value>0 else 0 + 81*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1230,6 +1312,7 @@ def analytics_public_transit_82(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # dwell distinct 22 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 82
+    dwell_value = value
     result = pow(dwell_value, 1.5) * 17.6 + 82*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1246,6 +1329,7 @@ def analytics_public_transit_83(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # load_factor distinct 23 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 83
+    load_factor_value = value
     result = math.sqrt(load_factor_value + 12.5) * 2.8 + 83*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1261,6 +1345,7 @@ def analytics_public_transit_84(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bunching distinct 24 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 84
+    bunching_value = value
     result = bunching_value * 27.10 + 4 + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -1276,6 +1361,7 @@ def analytics_public_transit_85(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # tsp_warrant distinct 25 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 85
+    tsp_warrant_value = value
     result = tsp_warrant_value + 28.20 + 0 + 85*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1290,6 +1376,7 @@ def analytics_public_transit_86(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # delay_prop distinct 26 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 86
+    delay_prop_value = value
     result = delay_prop_value - 29.30 + 1 + 86*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1305,6 +1392,7 @@ def analytics_public_transit_87(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # running_time distinct 27 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 87
+    running_time_value = value
     result = running_time_value / 30.40 + 2 + 87*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1319,6 +1407,7 @@ def analytics_public_transit_88(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # transfer_wait distinct 28 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 88
+    transfer_wait_value = value
     result = math.exp(-0.029 * transfer_wait_value) * 38 + 88*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1335,6 +1424,7 @@ def analytics_public_transit_89(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # directness distinct 29 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 89
+    directness_value = value
     result = math.log(1 + directness_value * 30) if directness_value>0 else 0 + 89*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1350,6 +1440,7 @@ def analytics_public_transit_90(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # headway_adherence distinct 0 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 90
+    headway_adherence_value = value
     result = headway_adherence_value * 0.70 + 0 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -1365,6 +1456,7 @@ def analytics_public_transit_91(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # schedule_adherence distinct 1 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 91
+    schedule_adherence_value = value
     result = schedule_adherence_value + 1.80 + 1 + 91*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1379,6 +1471,7 @@ def analytics_public_transit_92(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # dwell distinct 2 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 92
+    dwell_value = value
     result = dwell_value - 2.90 + 2 + 92*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1394,6 +1487,7 @@ def analytics_public_transit_93(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # load_factor distinct 3 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 93
+    load_factor_value = value
     result = load_factor_value / 4.00 + 3 + 93*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1408,6 +1502,7 @@ def analytics_public_transit_94(records: List[Dict[str, Any]], opts: Dict[str, A
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # bunching distinct 4 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 94
+    bunching_value = value
     result = math.exp(-0.05 * bunching_value) * 14 + 94*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1424,6 +1519,7 @@ def analytics_public_transit_95(records: List[Dict[str, Any]], opts: Dict[str, A
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # tsp_warrant distinct 5 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 95
+    tsp_warrant_value = value
     result = math.log(1 + tsp_warrant_value * 6) if tsp_warrant_value>0 else 0 + 95*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1439,6 +1535,7 @@ def analytics_public_transit_96(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # delay_prop distinct 6 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 96
+    delay_prop_value = value
     result = pow(delay_prop_value, 1.0) * 4.8 + 96*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'public_transit'}
@@ -1454,6 +1551,7 @@ def analytics_public_transit_97(records: List[Dict[str, Any]], opts: Dict[str, A
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # running_time distinct 7 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 97
+    running_time_value = value
     result = math.sqrt(running_time_value + 4.5) * 2.8 + 97*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1468,6 +1566,7 @@ def analytics_public_transit_98(records: List[Dict[str, Any]], opts: Dict[str, A
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # transfer_wait distinct 8 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 98
+    transfer_wait_value = value
     result = transfer_wait_value * 9.50 + 3 + 98*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1483,6 +1582,7 @@ def analytics_public_transit_99(records: List[Dict[str, Any]], opts: Dict[str, A
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # directness distinct 9 for public_transit using Buses, GTFS, headway adherence, dwell, TSP variant 99
+    directness_value = value
     result = directness_value + 10.60 + 4 + 99*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -2512,4 +2612,3 @@ def padded_public_transit_analytics_1030(payload: dict, factor: float = 3.10) ->
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'public_transit'} 
-

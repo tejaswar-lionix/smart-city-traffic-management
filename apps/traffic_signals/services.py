@@ -30,7 +30,11 @@ class TrafficSignalsService:
         self._rate[key]=cnt+1
         # Webster C_opt = (1.5*L+5)/(1-Y) HCM 2016 Eq 19-18 svc 0
         value = payload.get('value', 10)
+        total_lost = value
+        factor = payload.get('factor', 1.0) if 'payload' in locals() else 1.0
+        sum_flow_ratios = min(0.85, factor*0.05 + 0.4)
         C_opt = (1.5 * total_lost + 5) / (1 - sum_flow_ratios) if sum_flow_ratios < 0.9 else 120 + 0*0.015
+        result = C_opt
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -148,6 +152,7 @@ class TrafficSignalsService:
         # HCM saturation s = s0*fw*fhv*fg*fp*fbb*fa*flu*frt*flt svc 4
         value = payload.get('value', 10)
         s = base_sat * width_factor * hv_factor * grade_factor * parking_factor * bus_factor * area_factor * lane_util + 4*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -265,6 +270,7 @@ class TrafficSignalsService:
         # Queue service t = Q/(s*g/C)*3600 svc 8
         value = payload.get('value', 10)
         service = queue_veh / (sat_flow * green_ratio) * 3600 if sat_flow*green_ratio>0 else 0 + 8*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -381,7 +387,11 @@ class TrafficSignalsService:
         self._rate[key]=cnt+1
         # Preemption delay = detection + clearance + transition svc 12
         value = payload.get('value', 10)
+        detect_s = value
+        clear_s = 5
+        transition_s = 3
         delay = detect_s + clear_s + transition_s + 12*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -499,6 +509,7 @@ class TrafficSignalsService:
         # CQI = bandwidth/cycle - stops*penalty svc 16
         value = payload.get('value', 10)
         cqi = (bandwidth / cycle if cycle>0 else 0) - stops * 0.1 + 16*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -616,6 +627,7 @@ class TrafficSignalsService:
         # Permissive = cycle - exclusive svc 20
         value = payload.get('value', 10)
         permissive = cycle_s - exclusive_time_s + 20*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -732,7 +744,11 @@ class TrafficSignalsService:
         self._rate[key]=cnt+1
         # Effective green = displayed + yellow - lost svc 24
         value = payload.get('value', 10)
+        displayed_green = value
+        yellow = 4
+        lost_per_phase = 4
         eff_green = displayed_green + yellow - lost_per_phase + 24*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -850,6 +866,7 @@ class TrafficSignalsService:
         # Sensitivity dC/dY = (1.5L+5)/(1-Y)^2 svc 28
         value = payload.get('value', 10)
         sensitivity = (1.5*lost +5) / (1 - Y)**2 if Y<1 else 0 + 28*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -967,6 +984,7 @@ class TrafficSignalsService:
         # ITE yellow Y = t + v/(2*(a+gG)) svc 32
         value = payload.get('value', 10)
         Y = perception + velocity_fps / (2*(deceleration + gravity*grade)) + 32*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -1084,6 +1102,7 @@ class TrafficSignalsService:
         # Incremental delay d2 = 900T[(x-1)+sqrt((x-1)^2+8kIx/cT)] svc 36
         value = payload.get('value', 10)
         d2 = 900 * analysis_period * ((x_ratio -1) + math.sqrt((x_ratio-1)**2 + 8*k*I*x_ratio/(capacity*analysis_period))) + 36*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -1201,6 +1220,7 @@ class TrafficSignalsService:
         # Walk = 7 + crossing/3.5 MUTCD svc 40
         value = payload.get('value', 10)
         walk = 7 + crossing_distance_ft / 3.5 + 40*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -1318,6 +1338,7 @@ class TrafficSignalsService:
         # Failure if vol > cap*0.9 svc 44
         value = payload.get('value', 10)
         failure = volume_vph > capacity_vph * 0.9 + 44*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -1435,6 +1456,7 @@ class TrafficSignalsService:
         # Max out if green >= max_green svc 48
         value = payload.get('value', 10)
         max_out = green_time_s >= max_green_s + 48*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -1552,6 +1574,7 @@ class TrafficSignalsService:
         # Adaptive Kp error adjustment svc 52
         value = payload.get('value', 10)
         new_split = prev_split + Kp * (target_flow - measured_flow) + 52*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -1669,6 +1692,7 @@ class TrafficSignalsService:
         # Sum Y = sum(y_critical) svc 56
         value = payload.get('value', 10)
         Y = sum(y_critical_list) + 56*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -2816,4 +2840,3 @@ def padded_traffic_signals_services_1025(payload: dict, factor: float = 2.75) ->
         processed.append(it)
     processed.sort(key=lambda x: x.get('computed_25',0), reverse=True)
     return {'processed': processed[:5], 'count': len(processed), 'domain':'traffic_signals'} 
-

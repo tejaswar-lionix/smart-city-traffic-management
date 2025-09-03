@@ -23,6 +23,7 @@ class EmissionFactor:
     status: str = 'active'
 
     def moves_co2_0_emi_0_emissionfactor_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        moves_co2_value = value
         """moves_co2 distinct 0 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 0 for EmissionFactor — implements result = moves_co2_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for emissions::EmissionFactor::moves_co2_0_emi_0_emissionfactor_0
@@ -37,13 +38,14 @@ class EmissionFactor:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'moves_co2_0_emi_0_emissionfactor_0', 'result': result, 'domain': 'emissions'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def health_rr_6_emi_6_emissionfactor_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        health_rr_value = value
         """health_rr distinct 6 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 6 for EmissionFactor — implements result = pow(health_rr_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for emissions::EmissionFactor::health_rr_6_emi_6_emissionfactor_6
@@ -55,13 +57,14 @@ class EmissionFactor:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pm25_brake_12_emi_12_emissionfactor_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pm25_brake_value = value
         """pm25_brake distinct 12 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 12 for EmissionFactor — implements result = math.exp(-0.013 * pm25_brake_value) * 22 + 12*0.01"""
         try:
             # Distinct logic for emissions::EmissionFactor::pm25_brake_12_emi_12_emissionfactor_12
@@ -73,13 +76,14 @@ class EmissionFactor:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def inventory_18_emi_18_emissionfactor_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        inventory_value = value
         """inventory distinct 18 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 18 for EmissionFactor — implements result = inventory_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for emissions::EmissionFactor::inventory_18_emi_18_emissionfactor_18
@@ -94,13 +98,14 @@ class EmissionFactor:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def noise_prop_24_emi_24_emissionfactor_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        noise_prop_value = value
         """noise_prop distinct 24 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 24 for EmissionFactor — implements result = noise_prop_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for emissions::EmissionFactor::noise_prop_24_emi_24_emissionfactor_24
@@ -112,16 +117,18 @@ class EmissionFactor:
                 else:
                     break
             # noise_prop distinct 24 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 24
+            noise_prop_value = value
             result = noise_prop_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def moves_co2_0_emi_30_emissionfactor_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        moves_co2_value = value
         """moves_co2 distinct 0 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 30 for EmissionFactor — implements result = moves_co2_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for emissions::EmissionFactor::moves_co2_0_emi_30_emissionfactor_30
@@ -136,13 +143,14 @@ class EmissionFactor:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'moves_co2_0_emi_30_emissionfactor_30', 'result': result, 'domain': 'emissions'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def health_rr_6_emi_36_emissionfactor_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        health_rr_value = value
         """health_rr distinct 6 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 36 for EmissionFactor — implements result = pow(health_rr_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for emissions::EmissionFactor::health_rr_6_emi_36_emissionfactor_36
@@ -154,13 +162,14 @@ class EmissionFactor:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pm25_brake_12_emi_42_emissionfactor_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pm25_brake_value = value
         """pm25_brake distinct 12 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 42 for EmissionFactor — implements result = math.exp(-0.013 * pm25_brake_value) * 22 + 42*0.01"""
         try:
             # Distinct logic for emissions::EmissionFactor::pm25_brake_12_emi_42_emissionfactor_42
@@ -172,13 +181,14 @@ class EmissionFactor:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def inventory_18_emi_48_emissionfactor_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        inventory_value = value
         """inventory distinct 18 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 48 for EmissionFactor — implements result = inventory_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for emissions::EmissionFactor::inventory_18_emi_48_emissionfactor_48
@@ -193,13 +203,14 @@ class EmissionFactor:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def noise_prop_24_emi_54_emissionfactor_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        noise_prop_value = value
         """noise_prop distinct 24 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 54 for EmissionFactor — implements result = noise_prop_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for emissions::EmissionFactor::noise_prop_24_emi_54_emissionfactor_54
@@ -211,13 +222,14 @@ class EmissionFactor:
                 else:
                     break
             # noise_prop distinct 24 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 54
+            noise_prop_value = value
             result = noise_prop_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_emissionfactor(self) -> bool:
@@ -244,6 +256,7 @@ class LinkEmission:
     status: str = 'active'
 
     def nox_rate_1_emi_1_linkemission_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        nox_rate_value = value
         """nox_rate distinct 1 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 1 for LinkEmission — implements result = nox_rate_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for emissions::LinkEmission::nox_rate_1_emi_1_linkemission_1
@@ -255,13 +268,14 @@ class LinkEmission:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def co2_per_pax_7_emi_7_linkemission_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        co2_per_pax_value = value
         """co2_per_pax distinct 7 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 7 for LinkEmission — implements result = math.sqrt(co2_per_pax_value + 4.5) * 2.8 + 7*0.01"""
         try:
             # Distinct logic for emissions::LinkEmission::co2_per_pax_7_emi_7_linkemission_7
@@ -273,13 +287,14 @@ class LinkEmission:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fuel_akcelik_13_emi_13_linkemission_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fuel_akcelik_value = value
         """fuel_akcelik distinct 13 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 13 for LinkEmission — implements result = math.log(1 + fuel_akcelik_value * 14) if fuel_akcel"""
         try:
             # Distinct logic for emissions::LinkEmission::fuel_akcelik_13_emi_13_linkemission_13
@@ -294,13 +309,14 @@ class LinkEmission:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def cold_start_19_emi_19_linkemission_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        cold_start_value = value
         """cold_start distinct 19 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 19 for LinkEmission — implements result = cold_start_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for emissions::LinkEmission::cold_start_19_emi_19_linkemission_19
@@ -312,16 +328,18 @@ class LinkEmission:
                 else:
                     break
             # cold_start distinct 19 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 19
+            cold_start_value = value
             result = cold_start_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dispersion_gaussian_25_emi_25_linkemission_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dispersion_gaussian_value = value
         """dispersion_gaussian distinct 25 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 25 for LinkEmission — implements result = dispersion_gaussian_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for emissions::LinkEmission::dispersion_gaussian_25_emi_25_linkemission_25
@@ -336,13 +354,14 @@ class LinkEmission:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'dispersion_gaussian_25_emi_25_linkemission_25', 'result': result, 'domain': 'emissions'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def nox_rate_1_emi_31_linkemission_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        nox_rate_value = value
         """nox_rate distinct 1 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 31 for LinkEmission — implements result = nox_rate_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for emissions::LinkEmission::nox_rate_1_emi_31_linkemission_31
@@ -354,13 +373,14 @@ class LinkEmission:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def co2_per_pax_7_emi_37_linkemission_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        co2_per_pax_value = value
         """co2_per_pax distinct 7 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 37 for LinkEmission — implements result = math.sqrt(co2_per_pax_value + 4.5) * 2.8 + 37*0.01"""
         try:
             # Distinct logic for emissions::LinkEmission::co2_per_pax_7_emi_37_linkemission_37
@@ -372,13 +392,14 @@ class LinkEmission:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fuel_akcelik_13_emi_43_linkemission_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fuel_akcelik_value = value
         """fuel_akcelik distinct 13 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 43 for LinkEmission — implements result = math.log(1 + fuel_akcelik_value * 14) if fuel_akcel"""
         try:
             # Distinct logic for emissions::LinkEmission::fuel_akcelik_13_emi_43_linkemission_43
@@ -393,13 +414,14 @@ class LinkEmission:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def cold_start_19_emi_49_linkemission_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        cold_start_value = value
         """cold_start distinct 19 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 49 for LinkEmission — implements result = cold_start_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for emissions::LinkEmission::cold_start_19_emi_49_linkemission_49
@@ -411,16 +433,18 @@ class LinkEmission:
                 else:
                     break
             # cold_start distinct 19 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 49
+            cold_start_value = value
             result = cold_start_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dispersion_gaussian_25_emi_55_linkemission_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dispersion_gaussian_value = value
         """dispersion_gaussian distinct 25 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 55 for LinkEmission — implements result = dispersion_gaussian_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for emissions::LinkEmission::dispersion_gaussian_25_emi_55_linkemission_55
@@ -435,10 +459,10 @@ class LinkEmission:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'dispersion_gaussian_25_emi_55_linkemission_55', 'result': result, 'domain': 'emissions'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_linkemission(self) -> bool:
@@ -463,6 +487,7 @@ class DispersionCell:
     status: str = 'active'
 
     def pm25_brake_2_emi_2_dispersioncell_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pm25_brake_value = value
         """pm25_brake distinct 2 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 2 for DispersionCell — implements result = pm25_brake_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for emissions::DispersionCell::pm25_brake_2_emi_2_dispersioncell_2
@@ -474,13 +499,14 @@ class DispersionCell:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def inventory_8_emi_8_dispersioncell_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        inventory_value = value
         """inventory distinct 8 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 8 for DispersionCell — implements result = inventory_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for emissions::DispersionCell::inventory_8_emi_8_dispersioncell_8
@@ -495,13 +521,14 @@ class DispersionCell:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def noise_prop_14_emi_14_dispersioncell_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        noise_prop_value = value
         """noise_prop distinct 14 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 14 for DispersionCell — implements result = pow(noise_prop_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for emissions::DispersionCell::noise_prop_14_emi_14_dispersioncell_14
@@ -516,13 +543,14 @@ class DispersionCell:
             result = pow(noise_prop_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def moves_co2_20_emi_20_dispersioncell_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        moves_co2_value = value
         """moves_co2 distinct 20 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 20 for DispersionCell — implements result = math.exp(-0.021 * moves_co2_value) * 30 + 20*0.01"""
         try:
             # Distinct logic for emissions::DispersionCell::moves_co2_20_emi_20_dispersioncell_20
@@ -537,13 +565,14 @@ class DispersionCell:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'moves_co2_20_emi_20_dispersioncell_20', 'result': result, 'domain': 'emissions'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def health_rr_26_emi_26_dispersioncell_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        health_rr_value = value
         """health_rr distinct 26 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 26 for DispersionCell — implements result = health_rr_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for emissions::DispersionCell::health_rr_26_emi_26_dispersioncell_26
@@ -555,13 +584,14 @@ class DispersionCell:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pm25_brake_2_emi_32_dispersioncell_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pm25_brake_value = value
         """pm25_brake distinct 2 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 32 for DispersionCell — implements result = pm25_brake_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for emissions::DispersionCell::pm25_brake_2_emi_32_dispersioncell_32
@@ -573,13 +603,14 @@ class DispersionCell:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def inventory_8_emi_38_dispersioncell_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        inventory_value = value
         """inventory distinct 8 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 38 for DispersionCell — implements result = inventory_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for emissions::DispersionCell::inventory_8_emi_38_dispersioncell_38
@@ -594,13 +625,14 @@ class DispersionCell:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def noise_prop_14_emi_44_dispersioncell_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        noise_prop_value = value
         """noise_prop distinct 14 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 44 for DispersionCell — implements result = pow(noise_prop_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for emissions::DispersionCell::noise_prop_14_emi_44_dispersioncell_44
@@ -615,13 +647,14 @@ class DispersionCell:
             result = pow(noise_prop_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def moves_co2_20_emi_50_dispersioncell_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        moves_co2_value = value
         """moves_co2 distinct 20 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 50 for DispersionCell — implements result = math.exp(-0.021 * moves_co2_value) * 30 + 50*0.01"""
         try:
             # Distinct logic for emissions::DispersionCell::moves_co2_20_emi_50_dispersioncell_50
@@ -636,13 +669,14 @@ class DispersionCell:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'moves_co2_20_emi_50_dispersioncell_50', 'result': result, 'domain': 'emissions'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def health_rr_26_emi_56_dispersioncell_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        health_rr_value = value
         """health_rr distinct 26 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 56 for DispersionCell — implements result = health_rr_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for emissions::DispersionCell::health_rr_26_emi_56_dispersioncell_56
@@ -654,10 +688,10 @@ class DispersionCell:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_dispersioncell(self) -> bool:
@@ -682,6 +716,7 @@ class NoiseRecord:
     status: str = 'active'
 
     def fuel_akcelik_3_emi_3_noiserecord_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fuel_akcelik_value = value
         """fuel_akcelik distinct 3 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 3 for NoiseRecord — implements result = fuel_akcelik_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for emissions::NoiseRecord::fuel_akcelik_3_emi_3_noiserecord_3
@@ -696,13 +731,14 @@ class NoiseRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def cold_start_9_emi_9_noiserecord_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        cold_start_value = value
         """cold_start distinct 9 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 9 for NoiseRecord — implements result = cold_start_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for emissions::NoiseRecord::cold_start_9_emi_9_noiserecord_9
@@ -714,16 +750,18 @@ class NoiseRecord:
                 else:
                     break
             # cold_start distinct 9 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 9
+            cold_start_value = value
             result = cold_start_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dispersion_gaussian_15_emi_15_noiserecord_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dispersion_gaussian_value = value
         """dispersion_gaussian distinct 15 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 15 for NoiseRecord — implements result = math.sqrt(dispersion_gaussian_value + 8.5) * 2.8 + """
         try:
             # Distinct logic for emissions::NoiseRecord::dispersion_gaussian_15_emi_15_noiserecord_15
@@ -738,13 +776,14 @@ class NoiseRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'dispersion_gaussian_15_emi_15_noiserecord_15', 'result': result, 'domain': 'emissions'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def nox_rate_21_emi_21_noiserecord_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        nox_rate_value = value
         """nox_rate distinct 21 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 21 for NoiseRecord — implements result = math.log(1 + nox_rate_value * 22) if nox_rate_value"""
         try:
             # Distinct logic for emissions::NoiseRecord::nox_rate_21_emi_21_noiserecord_21
@@ -756,13 +795,14 @@ class NoiseRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def co2_per_pax_27_emi_27_noiserecord_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        co2_per_pax_value = value
         """co2_per_pax distinct 27 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 27 for NoiseRecord — implements result = co2_per_pax_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for emissions::NoiseRecord::co2_per_pax_27_emi_27_noiserecord_27
@@ -774,13 +814,14 @@ class NoiseRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fuel_akcelik_3_emi_33_noiserecord_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fuel_akcelik_value = value
         """fuel_akcelik distinct 3 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 33 for NoiseRecord — implements result = fuel_akcelik_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for emissions::NoiseRecord::fuel_akcelik_3_emi_33_noiserecord_33
@@ -795,13 +836,14 @@ class NoiseRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def cold_start_9_emi_39_noiserecord_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        cold_start_value = value
         """cold_start distinct 9 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 39 for NoiseRecord — implements result = cold_start_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for emissions::NoiseRecord::cold_start_9_emi_39_noiserecord_39
@@ -813,16 +855,18 @@ class NoiseRecord:
                 else:
                     break
             # cold_start distinct 9 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 39
+            cold_start_value = value
             result = cold_start_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dispersion_gaussian_15_emi_45_noiserecord_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dispersion_gaussian_value = value
         """dispersion_gaussian distinct 15 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 45 for NoiseRecord — implements result = math.sqrt(dispersion_gaussian_value + 8.5) * 2.8 + """
         try:
             # Distinct logic for emissions::NoiseRecord::dispersion_gaussian_15_emi_45_noiserecord_45
@@ -837,13 +881,14 @@ class NoiseRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'dispersion_gaussian_15_emi_45_noiserecord_45', 'result': result, 'domain': 'emissions'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def nox_rate_21_emi_51_noiserecord_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        nox_rate_value = value
         """nox_rate distinct 21 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 51 for NoiseRecord — implements result = math.log(1 + nox_rate_value * 22) if nox_rate_value"""
         try:
             # Distinct logic for emissions::NoiseRecord::nox_rate_21_emi_51_noiserecord_51
@@ -855,13 +900,14 @@ class NoiseRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def co2_per_pax_27_emi_57_noiserecord_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        co2_per_pax_value = value
         """co2_per_pax distinct 27 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 57 for NoiseRecord — implements result = co2_per_pax_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for emissions::NoiseRecord::co2_per_pax_27_emi_57_noiserecord_57
@@ -873,10 +919,10 @@ class NoiseRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_noiserecord(self) -> bool:
@@ -901,6 +947,7 @@ class HealthImpact:
     status: str = 'active'
 
     def noise_prop_4_emi_4_healthimpact_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        noise_prop_value = value
         """noise_prop distinct 4 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 4 for HealthImpact — implements result = math.exp(-0.05 * noise_prop_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for emissions::HealthImpact::noise_prop_4_emi_4_healthimpact_4
@@ -912,16 +959,18 @@ class HealthImpact:
                 else:
                     break
             # noise_prop distinct 4 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 4
+            noise_prop_value = value
             result = math.exp(-0.05 * noise_prop_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def moves_co2_10_emi_10_healthimpact_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        moves_co2_value = value
         """moves_co2 distinct 10 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 10 for HealthImpact — implements result = moves_co2_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for emissions::HealthImpact::moves_co2_10_emi_10_healthimpact_10
@@ -936,13 +985,14 @@ class HealthImpact:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'moves_co2_10_emi_10_healthimpact_10', 'result': result, 'domain': 'emissions'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def health_rr_16_emi_16_healthimpact_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        health_rr_value = value
         """health_rr distinct 16 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 16 for HealthImpact — implements result = health_rr_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for emissions::HealthImpact::health_rr_16_emi_16_healthimpact_16
@@ -954,13 +1004,14 @@ class HealthImpact:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pm25_brake_22_emi_22_healthimpact_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pm25_brake_value = value
         """pm25_brake distinct 22 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 22 for HealthImpact — implements result = pow(pm25_brake_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for emissions::HealthImpact::pm25_brake_22_emi_22_healthimpact_22
@@ -972,13 +1023,14 @@ class HealthImpact:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def inventory_28_emi_28_healthimpact_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        inventory_value = value
         """inventory distinct 28 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 28 for HealthImpact — implements result = math.exp(-0.029 * inventory_value) * 38 + 28*0.01"""
         try:
             # Distinct logic for emissions::HealthImpact::inventory_28_emi_28_healthimpact_28
@@ -993,13 +1045,14 @@ class HealthImpact:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def noise_prop_4_emi_34_healthimpact_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        noise_prop_value = value
         """noise_prop distinct 4 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 34 for HealthImpact — implements result = math.exp(-0.05 * noise_prop_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for emissions::HealthImpact::noise_prop_4_emi_34_healthimpact_34
@@ -1011,16 +1064,18 @@ class HealthImpact:
                 else:
                     break
             # noise_prop distinct 4 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 34
+            noise_prop_value = value
             result = math.exp(-0.05 * noise_prop_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def moves_co2_10_emi_40_healthimpact_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        moves_co2_value = value
         """moves_co2 distinct 10 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 40 for HealthImpact — implements result = moves_co2_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for emissions::HealthImpact::moves_co2_10_emi_40_healthimpact_40
@@ -1035,13 +1090,14 @@ class HealthImpact:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'moves_co2_10_emi_40_healthimpact_40', 'result': result, 'domain': 'emissions'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def health_rr_16_emi_46_healthimpact_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        health_rr_value = value
         """health_rr distinct 16 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 46 for HealthImpact — implements result = health_rr_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for emissions::HealthImpact::health_rr_16_emi_46_healthimpact_46
@@ -1053,13 +1109,14 @@ class HealthImpact:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def pm25_brake_22_emi_52_healthimpact_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        pm25_brake_value = value
         """pm25_brake distinct 22 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 52 for HealthImpact — implements result = pow(pm25_brake_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for emissions::HealthImpact::pm25_brake_22_emi_52_healthimpact_52
@@ -1071,13 +1128,14 @@ class HealthImpact:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def inventory_28_emi_58_healthimpact_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        inventory_value = value
         """inventory distinct 28 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 58 for HealthImpact — implements result = math.exp(-0.029 * inventory_value) * 38 + 58*0.01"""
         try:
             # Distinct logic for emissions::HealthImpact::inventory_28_emi_58_healthimpact_58
@@ -1092,10 +1150,10 @@ class HealthImpact:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_healthimpact(self) -> bool:
@@ -1120,6 +1178,7 @@ class FuelConsumption:
     status: str = 'active'
 
     def dispersion_gaussian_5_emi_5_fuelconsumption_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dispersion_gaussian_value = value
         """dispersion_gaussian distinct 5 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 5 for FuelConsumption — implements result = math.log(1 + dispersion_gaussian_value * 6) if disp"""
         try:
             # Distinct logic for emissions::FuelConsumption::dispersion_gaussian_5_emi_5_fuelconsumption_5
@@ -1134,13 +1193,14 @@ class FuelConsumption:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'dispersion_gaussian_5_emi_5_fuelconsumption_5', 'result': result, 'domain': 'emissions'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def nox_rate_11_emi_11_fuelconsumption_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        nox_rate_value = value
         """nox_rate distinct 11 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 11 for FuelConsumption — implements result = nox_rate_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for emissions::FuelConsumption::nox_rate_11_emi_11_fuelconsumption_11
@@ -1152,13 +1212,14 @@ class FuelConsumption:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def co2_per_pax_17_emi_17_fuelconsumption_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        co2_per_pax_value = value
         """co2_per_pax distinct 17 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 17 for FuelConsumption — implements result = co2_per_pax_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for emissions::FuelConsumption::co2_per_pax_17_emi_17_fuelconsumption_17
@@ -1170,13 +1231,14 @@ class FuelConsumption:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fuel_akcelik_23_emi_23_fuelconsumption_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fuel_akcelik_value = value
         """fuel_akcelik distinct 23 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 23 for FuelConsumption — implements result = math.sqrt(fuel_akcelik_value + 12.5) * 2.8 + 23*0.0"""
         try:
             # Distinct logic for emissions::FuelConsumption::fuel_akcelik_23_emi_23_fuelconsumption_23
@@ -1191,13 +1253,14 @@ class FuelConsumption:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def cold_start_29_emi_29_fuelconsumption_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        cold_start_value = value
         """cold_start distinct 29 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 29 for FuelConsumption — implements result = math.log(1 + cold_start_value * 30) if cold_start_v"""
         try:
             # Distinct logic for emissions::FuelConsumption::cold_start_29_emi_29_fuelconsumption_29
@@ -1212,13 +1275,14 @@ class FuelConsumption:
             result = math.log(1 + cold_start_value * 30) if cold_start_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dispersion_gaussian_5_emi_35_fuelconsumption_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dispersion_gaussian_value = value
         """dispersion_gaussian distinct 5 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 35 for FuelConsumption — implements result = math.log(1 + dispersion_gaussian_value * 6) if disp"""
         try:
             # Distinct logic for emissions::FuelConsumption::dispersion_gaussian_5_emi_35_fuelconsumption_35
@@ -1233,13 +1297,14 @@ class FuelConsumption:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'dispersion_gaussian_5_emi_35_fuelconsumption_35', 'result': result, 'domain': 'emissions'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def nox_rate_11_emi_41_fuelconsumption_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        nox_rate_value = value
         """nox_rate distinct 11 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 41 for FuelConsumption — implements result = nox_rate_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for emissions::FuelConsumption::nox_rate_11_emi_41_fuelconsumption_41
@@ -1251,13 +1316,14 @@ class FuelConsumption:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def co2_per_pax_17_emi_47_fuelconsumption_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        co2_per_pax_value = value
         """co2_per_pax distinct 17 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 47 for FuelConsumption — implements result = co2_per_pax_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for emissions::FuelConsumption::co2_per_pax_17_emi_47_fuelconsumption_47
@@ -1269,13 +1335,14 @@ class FuelConsumption:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fuel_akcelik_23_emi_53_fuelconsumption_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fuel_akcelik_value = value
         """fuel_akcelik distinct 23 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 53 for FuelConsumption — implements result = math.sqrt(fuel_akcelik_value + 12.5) * 2.8 + 53*0.0"""
         try:
             # Distinct logic for emissions::FuelConsumption::fuel_akcelik_23_emi_53_fuelconsumption_53
@@ -1290,13 +1357,14 @@ class FuelConsumption:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def cold_start_29_emi_59_fuelconsumption_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        cold_start_value = value
         """cold_start distinct 29 for emissions using EPA MOVES, CO2, NOx, PM2.5, noise, dispersion extra 59 for FuelConsumption — implements result = math.log(1 + cold_start_value * 30) if cold_start_v"""
         try:
             # Distinct logic for emissions::FuelConsumption::cold_start_29_emi_59_fuelconsumption_59
@@ -1311,10 +1379,10 @@ class FuelConsumption:
             result = math.log(1 + cold_start_value * 30) if cold_start_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_fuelconsumption(self) -> bool:
@@ -2770,4 +2838,3 @@ def padded_emissions_models_1027(payload: dict, factor: float = 2.89) -> dict:
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'emissions','idx':1027}
-

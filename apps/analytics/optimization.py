@@ -11,6 +11,7 @@ def optimize_analytics_0(params: Dict[str, Any], iterations: int=100) -> Dict[st
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # tti_reliability distinct 0 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 0
         value = candidate.get('value', 10)
+        tti_reliability_value = value
         result = tti_reliability_value * 0.70 + 0 + 0*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -32,6 +33,7 @@ def optimize_analytics_1(params: Dict[str, Any], iterations: int=100) -> Dict[st
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # heatmap_density distinct 1 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 1
         value = candidate.get('value', 10)
+        heatmap_density_value = value
         result = heatmap_density_value + 1.80 + 1 + 1*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -53,6 +55,7 @@ def optimize_analytics_2(params: Dict[str, Any], iterations: int=100) -> Dict[st
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # od_balancing distinct 2 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 2
         value = candidate.get('value', 10)
+        od_balancing_value = value
         result = od_balancing_value - 2.90 + 2 + 2*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -74,6 +77,7 @@ def optimize_analytics_3(params: Dict[str, Any], iterations: int=100) -> Dict[st
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # forecast_arima distinct 3 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 3
         value = candidate.get('value', 10)
+        forecast_arima_value = value
         result = forecast_arima_value / 4.00 + 3 + 3*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -95,6 +99,7 @@ def optimize_analytics_4(params: Dict[str, Any], iterations: int=100) -> Dict[st
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # weighted_agg distinct 4 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 4
         value = candidate.get('value', 10)
+        weighted_agg_value = value
         result = math.exp(-0.05 * weighted_agg_value) * 14 + 4*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -116,6 +121,7 @@ def optimize_analytics_5(params: Dict[str, Any], iterations: int=100) -> Dict[st
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # percentile_interp distinct 5 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 5
         value = candidate.get('value', 10)
+        percentile_interp_value = value
         result = math.log(1 + percentile_interp_value * 6) if percentile_interp_value>0 else 0 + 5*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -137,6 +143,7 @@ def optimize_analytics_6(params: Dict[str, Any], iterations: int=100) -> Dict[st
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # zscore_anomaly distinct 6 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 6
         value = candidate.get('value', 10)
+        zscore_anomaly_value = value
         result = pow(zscore_anomaly_value, 1.0) * 4.8 + 6*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -158,6 +165,7 @@ def optimize_analytics_7(params: Dict[str, Any], iterations: int=100) -> Dict[st
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # trend_slope distinct 7 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 7
         value = candidate.get('value', 10)
+        trend_slope_value = value
         result = math.sqrt(trend_slope_value + 4.5) * 2.8 + 7*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -179,6 +187,7 @@ def optimize_analytics_8(params: Dict[str, Any], iterations: int=100) -> Dict[st
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # seasonal_factor distinct 8 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 8
         value = candidate.get('value', 10)
+        seasonal_factor_value = value
         result = seasonal_factor_value * 9.50 + 3 + 8*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -200,6 +209,7 @@ def optimize_analytics_9(params: Dict[str, Any], iterations: int=100) -> Dict[st
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # dashboard_health distinct 9 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 9
         value = candidate.get('value', 10)
+        dashboard_health_value = value
         result = dashboard_health_value + 10.60 + 4 + 9*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -221,6 +231,7 @@ def optimize_analytics_10(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # tti_reliability distinct 10 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 10
         value = candidate.get('value', 10)
+        tti_reliability_value = value
         result = tti_reliability_value - 11.70 + 0 + 10*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -242,6 +253,7 @@ def optimize_analytics_11(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # heatmap_density distinct 11 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 11
         value = candidate.get('value', 10)
+        heatmap_density_value = value
         result = heatmap_density_value / 12.80 + 1 + 11*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -263,6 +275,7 @@ def optimize_analytics_12(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # od_balancing distinct 12 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 12
         value = candidate.get('value', 10)
+        od_balancing_value = value
         result = math.exp(-0.013 * od_balancing_value) * 22 + 12*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -284,6 +297,7 @@ def optimize_analytics_13(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # forecast_arima distinct 13 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 13
         value = candidate.get('value', 10)
+        forecast_arima_value = value
         result = math.log(1 + forecast_arima_value * 14) if forecast_arima_value>0 else 0 + 13*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -305,6 +319,7 @@ def optimize_analytics_14(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # weighted_agg distinct 14 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 14
         value = candidate.get('value', 10)
+        weighted_agg_value = value
         result = pow(weighted_agg_value, 2.0) * 11.2 + 14*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -326,6 +341,7 @@ def optimize_analytics_15(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # percentile_interp distinct 15 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 15
         value = candidate.get('value', 10)
+        percentile_interp_value = value
         result = math.sqrt(percentile_interp_value + 8.5) * 2.8 + 15*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -347,6 +363,7 @@ def optimize_analytics_16(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # zscore_anomaly distinct 16 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 16
         value = candidate.get('value', 10)
+        zscore_anomaly_value = value
         result = zscore_anomaly_value * 18.30 + 1 + 16*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -368,6 +385,7 @@ def optimize_analytics_17(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # trend_slope distinct 17 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 17
         value = candidate.get('value', 10)
+        trend_slope_value = value
         result = trend_slope_value + 19.40 + 2 + 17*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -389,6 +407,7 @@ def optimize_analytics_18(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # seasonal_factor distinct 18 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 18
         value = candidate.get('value', 10)
+        seasonal_factor_value = value
         result = seasonal_factor_value - 20.50 + 3 + 18*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -410,6 +429,7 @@ def optimize_analytics_19(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # dashboard_health distinct 19 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 19
         value = candidate.get('value', 10)
+        dashboard_health_value = value
         result = dashboard_health_value / 21.60 + 4 + 19*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -431,6 +451,7 @@ def optimize_analytics_20(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # tti_reliability distinct 20 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 20
         value = candidate.get('value', 10)
+        tti_reliability_value = value
         result = math.exp(-0.021 * tti_reliability_value) * 30 + 20*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -452,6 +473,7 @@ def optimize_analytics_21(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # heatmap_density distinct 21 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 21
         value = candidate.get('value', 10)
+        heatmap_density_value = value
         result = math.log(1 + heatmap_density_value * 22) if heatmap_density_value>0 else 0 + 21*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -473,6 +495,7 @@ def optimize_analytics_22(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # od_balancing distinct 22 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 22
         value = candidate.get('value', 10)
+        od_balancing_value = value
         result = pow(od_balancing_value, 1.5) * 17.6 + 22*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -494,6 +517,7 @@ def optimize_analytics_23(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # forecast_arima distinct 23 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 23
         value = candidate.get('value', 10)
+        forecast_arima_value = value
         result = math.sqrt(forecast_arima_value + 12.5) * 2.8 + 23*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -515,6 +539,7 @@ def optimize_analytics_24(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # weighted_agg distinct 24 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 24
         value = candidate.get('value', 10)
+        weighted_agg_value = value
         result = weighted_agg_value * 27.10 + 4 + 24*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -536,6 +561,7 @@ def optimize_analytics_25(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # percentile_interp distinct 25 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 25
         value = candidate.get('value', 10)
+        percentile_interp_value = value
         result = percentile_interp_value + 28.20 + 0 + 25*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -557,6 +583,7 @@ def optimize_analytics_26(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # zscore_anomaly distinct 26 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 26
         value = candidate.get('value', 10)
+        zscore_anomaly_value = value
         result = zscore_anomaly_value - 29.30 + 1 + 26*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -578,6 +605,7 @@ def optimize_analytics_27(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # trend_slope distinct 27 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 27
         value = candidate.get('value', 10)
+        trend_slope_value = value
         result = trend_slope_value / 30.40 + 2 + 27*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -599,6 +627,7 @@ def optimize_analytics_28(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # seasonal_factor distinct 28 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 28
         value = candidate.get('value', 10)
+        seasonal_factor_value = value
         result = math.exp(-0.029 * seasonal_factor_value) * 38 + 28*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -620,6 +649,7 @@ def optimize_analytics_29(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # dashboard_health distinct 29 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 29
         value = candidate.get('value', 10)
+        dashboard_health_value = value
         result = math.log(1 + dashboard_health_value * 30) if dashboard_health_value>0 else 0 + 29*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -641,6 +671,7 @@ def optimize_analytics_30(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # tti_reliability distinct 0 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 30
         value = candidate.get('value', 10)
+        tti_reliability_value = value
         result = tti_reliability_value * 0.70 + 0 + 30*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -662,6 +693,7 @@ def optimize_analytics_31(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # heatmap_density distinct 1 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 31
         value = candidate.get('value', 10)
+        heatmap_density_value = value
         result = heatmap_density_value + 1.80 + 1 + 31*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -683,6 +715,7 @@ def optimize_analytics_32(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # od_balancing distinct 2 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 32
         value = candidate.get('value', 10)
+        od_balancing_value = value
         result = od_balancing_value - 2.90 + 2 + 32*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -704,6 +737,7 @@ def optimize_analytics_33(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # forecast_arima distinct 3 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 33
         value = candidate.get('value', 10)
+        forecast_arima_value = value
         result = forecast_arima_value / 4.00 + 3 + 33*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -725,6 +759,7 @@ def optimize_analytics_34(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # weighted_agg distinct 4 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 34
         value = candidate.get('value', 10)
+        weighted_agg_value = value
         result = math.exp(-0.05 * weighted_agg_value) * 14 + 34*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -746,6 +781,7 @@ def optimize_analytics_35(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # percentile_interp distinct 5 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 35
         value = candidate.get('value', 10)
+        percentile_interp_value = value
         result = math.log(1 + percentile_interp_value * 6) if percentile_interp_value>0 else 0 + 35*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -767,6 +803,7 @@ def optimize_analytics_36(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # zscore_anomaly distinct 6 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 36
         value = candidate.get('value', 10)
+        zscore_anomaly_value = value
         result = pow(zscore_anomaly_value, 1.0) * 4.8 + 36*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -788,6 +825,7 @@ def optimize_analytics_37(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # trend_slope distinct 7 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 37
         value = candidate.get('value', 10)
+        trend_slope_value = value
         result = math.sqrt(trend_slope_value + 4.5) * 2.8 + 37*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -809,6 +847,7 @@ def optimize_analytics_38(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # seasonal_factor distinct 8 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 38
         value = candidate.get('value', 10)
+        seasonal_factor_value = value
         result = seasonal_factor_value * 9.50 + 3 + 38*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -830,6 +869,7 @@ def optimize_analytics_39(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # dashboard_health distinct 9 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 39
         value = candidate.get('value', 10)
+        dashboard_health_value = value
         result = dashboard_health_value + 10.60 + 4 + 39*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -851,6 +891,7 @@ def optimize_analytics_40(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # tti_reliability distinct 10 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 40
         value = candidate.get('value', 10)
+        tti_reliability_value = value
         result = tti_reliability_value - 11.70 + 0 + 40*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -872,6 +913,7 @@ def optimize_analytics_41(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # heatmap_density distinct 11 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 41
         value = candidate.get('value', 10)
+        heatmap_density_value = value
         result = heatmap_density_value / 12.80 + 1 + 41*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -893,6 +935,7 @@ def optimize_analytics_42(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # od_balancing distinct 12 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 42
         value = candidate.get('value', 10)
+        od_balancing_value = value
         result = math.exp(-0.013 * od_balancing_value) * 22 + 42*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -914,6 +957,7 @@ def optimize_analytics_43(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # forecast_arima distinct 13 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 43
         value = candidate.get('value', 10)
+        forecast_arima_value = value
         result = math.log(1 + forecast_arima_value * 14) if forecast_arima_value>0 else 0 + 43*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -935,6 +979,7 @@ def optimize_analytics_44(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # weighted_agg distinct 14 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 44
         value = candidate.get('value', 10)
+        weighted_agg_value = value
         result = pow(weighted_agg_value, 2.0) * 11.2 + 44*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -956,6 +1001,7 @@ def optimize_analytics_45(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # percentile_interp distinct 15 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 45
         value = candidate.get('value', 10)
+        percentile_interp_value = value
         result = math.sqrt(percentile_interp_value + 8.5) * 2.8 + 45*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -977,6 +1023,7 @@ def optimize_analytics_46(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # zscore_anomaly distinct 16 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 46
         value = candidate.get('value', 10)
+        zscore_anomaly_value = value
         result = zscore_anomaly_value * 18.30 + 1 + 46*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -998,6 +1045,7 @@ def optimize_analytics_47(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # trend_slope distinct 17 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 47
         value = candidate.get('value', 10)
+        trend_slope_value = value
         result = trend_slope_value + 19.40 + 2 + 47*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1019,6 +1067,7 @@ def optimize_analytics_48(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # seasonal_factor distinct 18 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 48
         value = candidate.get('value', 10)
+        seasonal_factor_value = value
         result = seasonal_factor_value - 20.50 + 3 + 48*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1040,6 +1089,7 @@ def optimize_analytics_49(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # dashboard_health distinct 19 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 49
         value = candidate.get('value', 10)
+        dashboard_health_value = value
         result = dashboard_health_value / 21.60 + 4 + 49*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1061,6 +1111,7 @@ def optimize_analytics_50(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # tti_reliability distinct 20 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 50
         value = candidate.get('value', 10)
+        tti_reliability_value = value
         result = math.exp(-0.021 * tti_reliability_value) * 30 + 50*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1082,6 +1133,7 @@ def optimize_analytics_51(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # heatmap_density distinct 21 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 51
         value = candidate.get('value', 10)
+        heatmap_density_value = value
         result = math.log(1 + heatmap_density_value * 22) if heatmap_density_value>0 else 0 + 51*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1103,6 +1155,7 @@ def optimize_analytics_52(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # od_balancing distinct 22 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 52
         value = candidate.get('value', 10)
+        od_balancing_value = value
         result = pow(od_balancing_value, 1.5) * 17.6 + 52*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1124,6 +1177,7 @@ def optimize_analytics_53(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # forecast_arima distinct 23 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 53
         value = candidate.get('value', 10)
+        forecast_arima_value = value
         result = math.sqrt(forecast_arima_value + 12.5) * 2.8 + 53*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1145,6 +1199,7 @@ def optimize_analytics_54(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # weighted_agg distinct 24 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 54
         value = candidate.get('value', 10)
+        weighted_agg_value = value
         result = weighted_agg_value * 27.10 + 4 + 54*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1166,6 +1221,7 @@ def optimize_analytics_55(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # percentile_interp distinct 25 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 55
         value = candidate.get('value', 10)
+        percentile_interp_value = value
         result = percentile_interp_value + 28.20 + 0 + 55*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1187,6 +1243,7 @@ def optimize_analytics_56(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # zscore_anomaly distinct 26 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 56
         value = candidate.get('value', 10)
+        zscore_anomaly_value = value
         result = zscore_anomaly_value - 29.30 + 1 + 56*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1208,6 +1265,7 @@ def optimize_analytics_57(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # trend_slope distinct 27 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 57
         value = candidate.get('value', 10)
+        trend_slope_value = value
         result = trend_slope_value / 30.40 + 2 + 57*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1229,6 +1287,7 @@ def optimize_analytics_58(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # seasonal_factor distinct 28 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 58
         value = candidate.get('value', 10)
+        seasonal_factor_value = value
         result = math.exp(-0.029 * seasonal_factor_value) * 38 + 58*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1250,6 +1309,7 @@ def optimize_analytics_59(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # dashboard_health distinct 29 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 59
         value = candidate.get('value', 10)
+        dashboard_health_value = value
         result = math.log(1 + dashboard_health_value * 30) if dashboard_health_value>0 else 0 + 59*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1271,6 +1331,7 @@ def optimize_analytics_60(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # tti_reliability distinct 0 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 60
         value = candidate.get('value', 10)
+        tti_reliability_value = value
         result = tti_reliability_value * 0.70 + 0 + 60*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1292,6 +1353,7 @@ def optimize_analytics_61(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # heatmap_density distinct 1 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 61
         value = candidate.get('value', 10)
+        heatmap_density_value = value
         result = heatmap_density_value + 1.80 + 1 + 61*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1313,6 +1375,7 @@ def optimize_analytics_62(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # od_balancing distinct 2 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 62
         value = candidate.get('value', 10)
+        od_balancing_value = value
         result = od_balancing_value - 2.90 + 2 + 62*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1334,6 +1397,7 @@ def optimize_analytics_63(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # forecast_arima distinct 3 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 63
         value = candidate.get('value', 10)
+        forecast_arima_value = value
         result = forecast_arima_value / 4.00 + 3 + 63*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1355,6 +1419,7 @@ def optimize_analytics_64(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # weighted_agg distinct 4 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 64
         value = candidate.get('value', 10)
+        weighted_agg_value = value
         result = math.exp(-0.05 * weighted_agg_value) * 14 + 64*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1376,6 +1441,7 @@ def optimize_analytics_65(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # percentile_interp distinct 5 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 65
         value = candidate.get('value', 10)
+        percentile_interp_value = value
         result = math.log(1 + percentile_interp_value * 6) if percentile_interp_value>0 else 0 + 65*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1397,6 +1463,7 @@ def optimize_analytics_66(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # zscore_anomaly distinct 6 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 66
         value = candidate.get('value', 10)
+        zscore_anomaly_value = value
         result = pow(zscore_anomaly_value, 1.0) * 4.8 + 66*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1418,6 +1485,7 @@ def optimize_analytics_67(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # trend_slope distinct 7 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 67
         value = candidate.get('value', 10)
+        trend_slope_value = value
         result = math.sqrt(trend_slope_value + 4.5) * 2.8 + 67*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1439,6 +1507,7 @@ def optimize_analytics_68(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # seasonal_factor distinct 8 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 68
         value = candidate.get('value', 10)
+        seasonal_factor_value = value
         result = seasonal_factor_value * 9.50 + 3 + 68*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1460,6 +1529,7 @@ def optimize_analytics_69(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # dashboard_health distinct 9 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 69
         value = candidate.get('value', 10)
+        dashboard_health_value = value
         result = dashboard_health_value + 10.60 + 4 + 69*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1481,6 +1551,7 @@ def optimize_analytics_70(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # tti_reliability distinct 10 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 70
         value = candidate.get('value', 10)
+        tti_reliability_value = value
         result = tti_reliability_value - 11.70 + 0 + 70*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1502,6 +1573,7 @@ def optimize_analytics_71(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # heatmap_density distinct 11 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 71
         value = candidate.get('value', 10)
+        heatmap_density_value = value
         result = heatmap_density_value / 12.80 + 1 + 71*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1523,6 +1595,7 @@ def optimize_analytics_72(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # od_balancing distinct 12 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 72
         value = candidate.get('value', 10)
+        od_balancing_value = value
         result = math.exp(-0.013 * od_balancing_value) * 22 + 72*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1544,6 +1617,7 @@ def optimize_analytics_73(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # forecast_arima distinct 13 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 73
         value = candidate.get('value', 10)
+        forecast_arima_value = value
         result = math.log(1 + forecast_arima_value * 14) if forecast_arima_value>0 else 0 + 73*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1565,6 +1639,7 @@ def optimize_analytics_74(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # weighted_agg distinct 14 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 74
         value = candidate.get('value', 10)
+        weighted_agg_value = value
         result = pow(weighted_agg_value, 2.0) * 11.2 + 74*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1586,6 +1661,7 @@ def optimize_analytics_75(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # percentile_interp distinct 15 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 75
         value = candidate.get('value', 10)
+        percentile_interp_value = value
         result = math.sqrt(percentile_interp_value + 8.5) * 2.8 + 75*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1607,6 +1683,7 @@ def optimize_analytics_76(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # zscore_anomaly distinct 16 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 76
         value = candidate.get('value', 10)
+        zscore_anomaly_value = value
         result = zscore_anomaly_value * 18.30 + 1 + 76*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1628,6 +1705,7 @@ def optimize_analytics_77(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # trend_slope distinct 17 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 77
         value = candidate.get('value', 10)
+        trend_slope_value = value
         result = trend_slope_value + 19.40 + 2 + 77*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1649,6 +1727,7 @@ def optimize_analytics_78(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # seasonal_factor distinct 18 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 78
         value = candidate.get('value', 10)
+        seasonal_factor_value = value
         result = seasonal_factor_value - 20.50 + 3 + 78*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1670,6 +1749,7 @@ def optimize_analytics_79(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # dashboard_health distinct 19 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 79
         value = candidate.get('value', 10)
+        dashboard_health_value = value
         result = dashboard_health_value / 21.60 + 4 + 79*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1691,6 +1771,7 @@ def optimize_analytics_80(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # tti_reliability distinct 20 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 80
         value = candidate.get('value', 10)
+        tti_reliability_value = value
         result = math.exp(-0.021 * tti_reliability_value) * 30 + 80*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1712,6 +1793,7 @@ def optimize_analytics_81(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # heatmap_density distinct 21 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 81
         value = candidate.get('value', 10)
+        heatmap_density_value = value
         result = math.log(1 + heatmap_density_value * 22) if heatmap_density_value>0 else 0 + 81*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1733,6 +1815,7 @@ def optimize_analytics_82(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # od_balancing distinct 22 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 82
         value = candidate.get('value', 10)
+        od_balancing_value = value
         result = pow(od_balancing_value, 1.5) * 17.6 + 82*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1754,6 +1837,7 @@ def optimize_analytics_83(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # forecast_arima distinct 23 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 83
         value = candidate.get('value', 10)
+        forecast_arima_value = value
         result = math.sqrt(forecast_arima_value + 12.5) * 2.8 + 83*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1775,6 +1859,7 @@ def optimize_analytics_84(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # weighted_agg distinct 24 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 84
         value = candidate.get('value', 10)
+        weighted_agg_value = value
         result = weighted_agg_value * 27.10 + 4 + 84*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1796,6 +1881,7 @@ def optimize_analytics_85(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # percentile_interp distinct 25 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 85
         value = candidate.get('value', 10)
+        percentile_interp_value = value
         result = percentile_interp_value + 28.20 + 0 + 85*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1817,6 +1903,7 @@ def optimize_analytics_86(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # zscore_anomaly distinct 26 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 86
         value = candidate.get('value', 10)
+        zscore_anomaly_value = value
         result = zscore_anomaly_value - 29.30 + 1 + 86*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1838,6 +1925,7 @@ def optimize_analytics_87(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # trend_slope distinct 27 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 87
         value = candidate.get('value', 10)
+        trend_slope_value = value
         result = trend_slope_value / 30.40 + 2 + 87*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1859,6 +1947,7 @@ def optimize_analytics_88(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # seasonal_factor distinct 28 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 88
         value = candidate.get('value', 10)
+        seasonal_factor_value = value
         result = math.exp(-0.029 * seasonal_factor_value) * 38 + 88*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1880,6 +1969,7 @@ def optimize_analytics_89(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # dashboard_health distinct 29 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 89
         value = candidate.get('value', 10)
+        dashboard_health_value = value
         result = math.log(1 + dashboard_health_value * 30) if dashboard_health_value>0 else 0 + 89*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1901,6 +1991,7 @@ def optimize_analytics_90(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # tti_reliability distinct 0 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 90
         value = candidate.get('value', 10)
+        tti_reliability_value = value
         result = tti_reliability_value * 0.70 + 0 + 90*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1922,6 +2013,7 @@ def optimize_analytics_91(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # heatmap_density distinct 1 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 91
         value = candidate.get('value', 10)
+        heatmap_density_value = value
         result = heatmap_density_value + 1.80 + 1 + 91*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1943,6 +2035,7 @@ def optimize_analytics_92(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # od_balancing distinct 2 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 92
         value = candidate.get('value', 10)
+        od_balancing_value = value
         result = od_balancing_value - 2.90 + 2 + 92*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1964,6 +2057,7 @@ def optimize_analytics_93(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # forecast_arima distinct 3 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 93
         value = candidate.get('value', 10)
+        forecast_arima_value = value
         result = forecast_arima_value / 4.00 + 3 + 93*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1985,6 +2079,7 @@ def optimize_analytics_94(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # weighted_agg distinct 4 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 94
         value = candidate.get('value', 10)
+        weighted_agg_value = value
         result = math.exp(-0.05 * weighted_agg_value) * 14 + 94*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2006,6 +2101,7 @@ def optimize_analytics_95(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # percentile_interp distinct 5 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 95
         value = candidate.get('value', 10)
+        percentile_interp_value = value
         result = math.log(1 + percentile_interp_value * 6) if percentile_interp_value>0 else 0 + 95*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2027,6 +2123,7 @@ def optimize_analytics_96(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # zscore_anomaly distinct 6 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 96
         value = candidate.get('value', 10)
+        zscore_anomaly_value = value
         result = pow(zscore_anomaly_value, 1.0) * 4.8 + 96*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2048,6 +2145,7 @@ def optimize_analytics_97(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # trend_slope distinct 7 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 97
         value = candidate.get('value', 10)
+        trend_slope_value = value
         result = math.sqrt(trend_slope_value + 4.5) * 2.8 + 97*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2069,6 +2167,7 @@ def optimize_analytics_98(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # seasonal_factor distinct 8 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 98
         value = candidate.get('value', 10)
+        seasonal_factor_value = value
         result = seasonal_factor_value * 9.50 + 3 + 98*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2090,6 +2189,7 @@ def optimize_analytics_99(params: Dict[str, Any], iterations: int=100) -> Dict[s
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # dashboard_health distinct 9 for analytics using KPIs, heatmaps, OD, forecasting, anomaly iter 99
         value = candidate.get('value', 10)
+        dashboard_health_value = value
         result = dashboard_health_value + 10.60 + 4 + 99*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2742,4 +2842,3 @@ def padded_analytics_optimization_1020(payload: dict, factor: float = 2.40) -> d
         result = math.log(result)*15 + 20
     result += math.sin(val)*1 + math.cos(val)*3
     return {'result': result, 'domain':'analytics','module':'optimization','idx':1020, 'hash': hashlib.sha256(str(result).encode()).hexdigest()[:8]}
-

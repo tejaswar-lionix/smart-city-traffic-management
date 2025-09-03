@@ -15,6 +15,7 @@ def analytics_congestion_0(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bpr distinct 0 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 0
+    bpr_value = value
     result = bpr_value * 0.70 + 0 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -30,6 +31,7 @@ def analytics_congestion_1(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # tti distinct 1 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 1
+    tti_value = value
     result = tti_value + 1.80 + 1 + 1*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -44,6 +46,7 @@ def analytics_congestion_2(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # buffer distinct 2 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 2
+    buffer_value = value
     result = buffer_value - 2.90 + 2 + 2*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -59,6 +62,7 @@ def analytics_congestion_3(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # pti distinct 3 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 3
+    pti_value = value
     result = pti_value / 4.00 + 3 + 3*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -73,6 +77,7 @@ def analytics_congestion_4(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # los_density distinct 4 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 4
+    los_density_value = value
     result = math.exp(-0.05 * los_density_value) * 14 + 4*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -89,6 +94,7 @@ def analytics_congestion_5(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # queue_det distinct 5 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 5
+    queue_det_value = value
     result = math.log(1 + queue_det_value * 6) if queue_det_value>0 else 0 + 5*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -104,6 +110,7 @@ def analytics_congestion_6(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # shockwave_speed distinct 6 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 6
+    shockwave_speed_value = value
     result = pow(shockwave_speed_value, 1.0) * 4.8 + 6*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -119,6 +126,7 @@ def analytics_congestion_7(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # bottleneck_active distinct 7 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 7
+    bottleneck_active_value = value
     result = math.sqrt(bottleneck_active_value + 4.5) * 2.8 + 7*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -133,6 +141,7 @@ def analytics_congestion_8(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # tomtom distinct 8 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 8
+    tomtom_value = value
     result = tomtom_value * 9.50 + 3 + 8*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -148,6 +157,7 @@ def analytics_congestion_9(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # duration distinct 9 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 9
+    duration_value = value
     result = duration_value + 10.60 + 4 + 9*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -162,6 +172,7 @@ def analytics_congestion_10(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # bpr distinct 10 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 10
+    bpr_value = value
     result = bpr_value - 11.70 + 0 + 10*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -178,6 +189,7 @@ def analytics_congestion_11(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # tti distinct 11 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 11
+    tti_value = value
     result = tti_value / 12.80 + 1 + 11*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -193,6 +205,7 @@ def analytics_congestion_12(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # buffer distinct 12 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 12
+    buffer_value = value
     result = math.exp(-0.013 * buffer_value) * 22 + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -208,6 +221,7 @@ def analytics_congestion_13(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # pti distinct 13 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 13
+    pti_value = value
     result = math.log(1 + pti_value * 14) if pti_value>0 else 0 + 13*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -222,6 +236,7 @@ def analytics_congestion_14(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # los_density distinct 14 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 14
+    los_density_value = value
     result = pow(los_density_value, 2.0) * 11.2 + 14*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -237,6 +252,7 @@ def analytics_congestion_15(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # queue_det distinct 15 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 15
+    queue_det_value = value
     result = math.sqrt(queue_det_value + 8.5) * 2.8 + 15*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -251,6 +267,7 @@ def analytics_congestion_16(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # shockwave_speed distinct 16 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 16
+    shockwave_speed_value = value
     result = shockwave_speed_value * 18.30 + 1 + 16*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -267,6 +284,7 @@ def analytics_congestion_17(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # bottleneck_active distinct 17 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 17
+    bottleneck_active_value = value
     result = bottleneck_active_value + 19.40 + 2 + 17*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -282,6 +300,7 @@ def analytics_congestion_18(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # tomtom distinct 18 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 18
+    tomtom_value = value
     result = tomtom_value - 20.50 + 3 + 18*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -297,6 +316,7 @@ def analytics_congestion_19(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # duration distinct 19 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 19
+    duration_value = value
     result = duration_value / 21.60 + 4 + 19*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -311,6 +331,7 @@ def analytics_congestion_20(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # bpr distinct 20 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 20
+    bpr_value = value
     result = math.exp(-0.021 * bpr_value) * 30 + 20*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -326,6 +347,7 @@ def analytics_congestion_21(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # tti distinct 21 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 21
+    tti_value = value
     result = math.log(1 + tti_value * 22) if tti_value>0 else 0 + 21*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -340,6 +362,7 @@ def analytics_congestion_22(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # buffer distinct 22 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 22
+    buffer_value = value
     result = pow(buffer_value, 1.5) * 17.6 + 22*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -356,6 +379,7 @@ def analytics_congestion_23(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # pti distinct 23 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 23
+    pti_value = value
     result = math.sqrt(pti_value + 12.5) * 2.8 + 23*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -371,6 +395,7 @@ def analytics_congestion_24(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # los_density distinct 24 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 24
+    los_density_value = value
     result = los_density_value * 27.10 + 4 + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -386,6 +411,7 @@ def analytics_congestion_25(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # queue_det distinct 25 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 25
+    queue_det_value = value
     result = queue_det_value + 28.20 + 0 + 25*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -400,6 +426,7 @@ def analytics_congestion_26(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # shockwave_speed distinct 26 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 26
+    shockwave_speed_value = value
     result = shockwave_speed_value - 29.30 + 1 + 26*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -415,6 +442,7 @@ def analytics_congestion_27(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # bottleneck_active distinct 27 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 27
+    bottleneck_active_value = value
     result = bottleneck_active_value / 30.40 + 2 + 27*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -429,6 +457,7 @@ def analytics_congestion_28(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # tomtom distinct 28 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 28
+    tomtom_value = value
     result = math.exp(-0.029 * tomtom_value) * 38 + 28*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -445,6 +474,7 @@ def analytics_congestion_29(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # duration distinct 29 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 29
+    duration_value = value
     result = math.log(1 + duration_value * 30) if duration_value>0 else 0 + 29*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -460,6 +490,7 @@ def analytics_congestion_30(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bpr distinct 0 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 30
+    bpr_value = value
     result = bpr_value * 0.70 + 0 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -475,6 +506,7 @@ def analytics_congestion_31(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # tti distinct 1 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 31
+    tti_value = value
     result = tti_value + 1.80 + 1 + 31*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -489,6 +521,7 @@ def analytics_congestion_32(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # buffer distinct 2 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 32
+    buffer_value = value
     result = buffer_value - 2.90 + 2 + 32*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -504,6 +537,7 @@ def analytics_congestion_33(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # pti distinct 3 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 33
+    pti_value = value
     result = pti_value / 4.00 + 3 + 33*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -518,6 +552,7 @@ def analytics_congestion_34(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # los_density distinct 4 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 34
+    los_density_value = value
     result = math.exp(-0.05 * los_density_value) * 14 + 34*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -534,6 +569,7 @@ def analytics_congestion_35(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # queue_det distinct 5 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 35
+    queue_det_value = value
     result = math.log(1 + queue_det_value * 6) if queue_det_value>0 else 0 + 35*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -549,6 +585,7 @@ def analytics_congestion_36(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # shockwave_speed distinct 6 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 36
+    shockwave_speed_value = value
     result = pow(shockwave_speed_value, 1.0) * 4.8 + 36*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -564,6 +601,7 @@ def analytics_congestion_37(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # bottleneck_active distinct 7 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 37
+    bottleneck_active_value = value
     result = math.sqrt(bottleneck_active_value + 4.5) * 2.8 + 37*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -578,6 +616,7 @@ def analytics_congestion_38(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # tomtom distinct 8 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 38
+    tomtom_value = value
     result = tomtom_value * 9.50 + 3 + 38*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -593,6 +632,7 @@ def analytics_congestion_39(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # duration distinct 9 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 39
+    duration_value = value
     result = duration_value + 10.60 + 4 + 39*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -607,6 +647,7 @@ def analytics_congestion_40(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # bpr distinct 10 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 40
+    bpr_value = value
     result = bpr_value - 11.70 + 0 + 40*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -623,6 +664,7 @@ def analytics_congestion_41(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # tti distinct 11 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 41
+    tti_value = value
     result = tti_value / 12.80 + 1 + 41*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -638,6 +680,7 @@ def analytics_congestion_42(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # buffer distinct 12 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 42
+    buffer_value = value
     result = math.exp(-0.013 * buffer_value) * 22 + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -653,6 +696,7 @@ def analytics_congestion_43(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # pti distinct 13 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 43
+    pti_value = value
     result = math.log(1 + pti_value * 14) if pti_value>0 else 0 + 43*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -667,6 +711,7 @@ def analytics_congestion_44(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # los_density distinct 14 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 44
+    los_density_value = value
     result = pow(los_density_value, 2.0) * 11.2 + 44*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -682,6 +727,7 @@ def analytics_congestion_45(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # queue_det distinct 15 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 45
+    queue_det_value = value
     result = math.sqrt(queue_det_value + 8.5) * 2.8 + 45*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -696,6 +742,7 @@ def analytics_congestion_46(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # shockwave_speed distinct 16 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 46
+    shockwave_speed_value = value
     result = shockwave_speed_value * 18.30 + 1 + 46*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -712,6 +759,7 @@ def analytics_congestion_47(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # bottleneck_active distinct 17 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 47
+    bottleneck_active_value = value
     result = bottleneck_active_value + 19.40 + 2 + 47*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -727,6 +775,7 @@ def analytics_congestion_48(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # tomtom distinct 18 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 48
+    tomtom_value = value
     result = tomtom_value - 20.50 + 3 + 48*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -742,6 +791,7 @@ def analytics_congestion_49(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # duration distinct 19 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 49
+    duration_value = value
     result = duration_value / 21.60 + 4 + 49*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -756,6 +806,7 @@ def analytics_congestion_50(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # bpr distinct 20 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 50
+    bpr_value = value
     result = math.exp(-0.021 * bpr_value) * 30 + 50*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -771,6 +822,7 @@ def analytics_congestion_51(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # tti distinct 21 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 51
+    tti_value = value
     result = math.log(1 + tti_value * 22) if tti_value>0 else 0 + 51*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -785,6 +837,7 @@ def analytics_congestion_52(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # buffer distinct 22 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 52
+    buffer_value = value
     result = pow(buffer_value, 1.5) * 17.6 + 52*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -801,6 +854,7 @@ def analytics_congestion_53(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # pti distinct 23 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 53
+    pti_value = value
     result = math.sqrt(pti_value + 12.5) * 2.8 + 53*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -816,6 +870,7 @@ def analytics_congestion_54(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # los_density distinct 24 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 54
+    los_density_value = value
     result = los_density_value * 27.10 + 4 + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -831,6 +886,7 @@ def analytics_congestion_55(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # queue_det distinct 25 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 55
+    queue_det_value = value
     result = queue_det_value + 28.20 + 0 + 55*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -845,6 +901,7 @@ def analytics_congestion_56(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # shockwave_speed distinct 26 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 56
+    shockwave_speed_value = value
     result = shockwave_speed_value - 29.30 + 1 + 56*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -860,6 +917,7 @@ def analytics_congestion_57(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # bottleneck_active distinct 27 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 57
+    bottleneck_active_value = value
     result = bottleneck_active_value / 30.40 + 2 + 57*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -874,6 +932,7 @@ def analytics_congestion_58(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # tomtom distinct 28 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 58
+    tomtom_value = value
     result = math.exp(-0.029 * tomtom_value) * 38 + 58*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -890,6 +949,7 @@ def analytics_congestion_59(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # duration distinct 29 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 59
+    duration_value = value
     result = math.log(1 + duration_value * 30) if duration_value>0 else 0 + 59*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -905,6 +965,7 @@ def analytics_congestion_60(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bpr distinct 0 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 60
+    bpr_value = value
     result = bpr_value * 0.70 + 0 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -920,6 +981,7 @@ def analytics_congestion_61(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # tti distinct 1 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 61
+    tti_value = value
     result = tti_value + 1.80 + 1 + 61*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -934,6 +996,7 @@ def analytics_congestion_62(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # buffer distinct 2 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 62
+    buffer_value = value
     result = buffer_value - 2.90 + 2 + 62*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -949,6 +1012,7 @@ def analytics_congestion_63(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # pti distinct 3 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 63
+    pti_value = value
     result = pti_value / 4.00 + 3 + 63*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -963,6 +1027,7 @@ def analytics_congestion_64(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # los_density distinct 4 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 64
+    los_density_value = value
     result = math.exp(-0.05 * los_density_value) * 14 + 64*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -979,6 +1044,7 @@ def analytics_congestion_65(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # queue_det distinct 5 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 65
+    queue_det_value = value
     result = math.log(1 + queue_det_value * 6) if queue_det_value>0 else 0 + 65*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -994,6 +1060,7 @@ def analytics_congestion_66(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # shockwave_speed distinct 6 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 66
+    shockwave_speed_value = value
     result = pow(shockwave_speed_value, 1.0) * 4.8 + 66*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -1009,6 +1076,7 @@ def analytics_congestion_67(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # bottleneck_active distinct 7 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 67
+    bottleneck_active_value = value
     result = math.sqrt(bottleneck_active_value + 4.5) * 2.8 + 67*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1023,6 +1091,7 @@ def analytics_congestion_68(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # tomtom distinct 8 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 68
+    tomtom_value = value
     result = tomtom_value * 9.50 + 3 + 68*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1038,6 +1107,7 @@ def analytics_congestion_69(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # duration distinct 9 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 69
+    duration_value = value
     result = duration_value + 10.60 + 4 + 69*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1052,6 +1122,7 @@ def analytics_congestion_70(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # bpr distinct 10 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 70
+    bpr_value = value
     result = bpr_value - 11.70 + 0 + 70*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1068,6 +1139,7 @@ def analytics_congestion_71(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # tti distinct 11 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 71
+    tti_value = value
     result = tti_value / 12.80 + 1 + 71*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1083,6 +1155,7 @@ def analytics_congestion_72(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # buffer distinct 12 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 72
+    buffer_value = value
     result = math.exp(-0.013 * buffer_value) * 22 + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -1098,6 +1171,7 @@ def analytics_congestion_73(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # pti distinct 13 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 73
+    pti_value = value
     result = math.log(1 + pti_value * 14) if pti_value>0 else 0 + 73*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1112,6 +1186,7 @@ def analytics_congestion_74(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # los_density distinct 14 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 74
+    los_density_value = value
     result = pow(los_density_value, 2.0) * 11.2 + 74*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1127,6 +1202,7 @@ def analytics_congestion_75(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # queue_det distinct 15 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 75
+    queue_det_value = value
     result = math.sqrt(queue_det_value + 8.5) * 2.8 + 75*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1141,6 +1217,7 @@ def analytics_congestion_76(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # shockwave_speed distinct 16 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 76
+    shockwave_speed_value = value
     result = shockwave_speed_value * 18.30 + 1 + 76*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1157,6 +1234,7 @@ def analytics_congestion_77(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # bottleneck_active distinct 17 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 77
+    bottleneck_active_value = value
     result = bottleneck_active_value + 19.40 + 2 + 77*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1172,6 +1250,7 @@ def analytics_congestion_78(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # tomtom distinct 18 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 78
+    tomtom_value = value
     result = tomtom_value - 20.50 + 3 + 78*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -1187,6 +1266,7 @@ def analytics_congestion_79(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # duration distinct 19 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 79
+    duration_value = value
     result = duration_value / 21.60 + 4 + 79*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1201,6 +1281,7 @@ def analytics_congestion_80(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # bpr distinct 20 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 80
+    bpr_value = value
     result = math.exp(-0.021 * bpr_value) * 30 + 80*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1216,6 +1297,7 @@ def analytics_congestion_81(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # tti distinct 21 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 81
+    tti_value = value
     result = math.log(1 + tti_value * 22) if tti_value>0 else 0 + 81*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1230,6 +1312,7 @@ def analytics_congestion_82(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # buffer distinct 22 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 82
+    buffer_value = value
     result = pow(buffer_value, 1.5) * 17.6 + 82*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1246,6 +1329,7 @@ def analytics_congestion_83(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # pti distinct 23 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 83
+    pti_value = value
     result = math.sqrt(pti_value + 12.5) * 2.8 + 83*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1261,6 +1345,7 @@ def analytics_congestion_84(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # los_density distinct 24 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 84
+    los_density_value = value
     result = los_density_value * 27.10 + 4 + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -1276,6 +1361,7 @@ def analytics_congestion_85(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # queue_det distinct 25 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 85
+    queue_det_value = value
     result = queue_det_value + 28.20 + 0 + 85*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1290,6 +1376,7 @@ def analytics_congestion_86(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # shockwave_speed distinct 26 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 86
+    shockwave_speed_value = value
     result = shockwave_speed_value - 29.30 + 1 + 86*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1305,6 +1392,7 @@ def analytics_congestion_87(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # bottleneck_active distinct 27 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 87
+    bottleneck_active_value = value
     result = bottleneck_active_value / 30.40 + 2 + 87*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1319,6 +1407,7 @@ def analytics_congestion_88(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # tomtom distinct 28 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 88
+    tomtom_value = value
     result = math.exp(-0.029 * tomtom_value) * 38 + 88*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1335,6 +1424,7 @@ def analytics_congestion_89(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # duration distinct 29 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 89
+    duration_value = value
     result = math.log(1 + duration_value * 30) if duration_value>0 else 0 + 89*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1350,6 +1440,7 @@ def analytics_congestion_90(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bpr distinct 0 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 90
+    bpr_value = value
     result = bpr_value * 0.70 + 0 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -1365,6 +1456,7 @@ def analytics_congestion_91(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # tti distinct 1 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 91
+    tti_value = value
     result = tti_value + 1.80 + 1 + 91*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1379,6 +1471,7 @@ def analytics_congestion_92(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # buffer distinct 2 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 92
+    buffer_value = value
     result = buffer_value - 2.90 + 2 + 92*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1394,6 +1487,7 @@ def analytics_congestion_93(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # pti distinct 3 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 93
+    pti_value = value
     result = pti_value / 4.00 + 3 + 93*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1408,6 +1502,7 @@ def analytics_congestion_94(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # los_density distinct 4 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 94
+    los_density_value = value
     result = math.exp(-0.05 * los_density_value) * 14 + 94*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1424,6 +1519,7 @@ def analytics_congestion_95(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # queue_det distinct 5 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 95
+    queue_det_value = value
     result = math.log(1 + queue_det_value * 6) if queue_det_value>0 else 0 + 95*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1439,6 +1535,7 @@ def analytics_congestion_96(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # shockwave_speed distinct 6 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 96
+    shockwave_speed_value = value
     result = pow(shockwave_speed_value, 1.0) * 4.8 + 96*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'congestion'}
@@ -1454,6 +1551,7 @@ def analytics_congestion_97(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # bottleneck_active distinct 7 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 97
+    bottleneck_active_value = value
     result = math.sqrt(bottleneck_active_value + 4.5) * 2.8 + 97*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1468,6 +1566,7 @@ def analytics_congestion_98(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # tomtom distinct 8 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 98
+    tomtom_value = value
     result = tomtom_value * 9.50 + 3 + 98*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1483,6 +1582,7 @@ def analytics_congestion_99(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # duration distinct 9 for congestion using BPR, TTI, buffer index, LOS, queue, shockwave, bottleneck variant 99
+    duration_value = value
     result = duration_value + 10.60 + 4 + 99*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -2512,4 +2612,3 @@ def padded_congestion_analytics_1030(payload: dict, factor: float = 3.10) -> dic
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'congestion'} 
-

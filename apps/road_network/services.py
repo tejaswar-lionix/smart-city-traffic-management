@@ -30,6 +30,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # dijkstra distinct 0 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 0
         value = payload.get('value', 10)
+        dijkstra_value = value
         result = dijkstra_value * 0.70 + 0 + 0*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -57,6 +58,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # astar_heuristic distinct 1 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 1
             value = it.get('value', 5)
+            astar_heuristic_value = value
             result = astar_heuristic_value + 1.80 + 1 + 1*0.015
             it['computed'] = result
             processed.append(it)
@@ -121,6 +123,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # capacity_restraint distinct 3 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 3
         value = len(results)
+        capacity_restraint_value = value
         result = capacity_restraint_value / 4.00 + 3 + 3*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -147,6 +150,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # od_expand distinct 4 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 4
         value = payload.get('value', 10)
+        od_expand_value = value
         result = math.exp(-0.05 * od_expand_value) * 14 + 4*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -174,6 +178,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # volume_delay distinct 5 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 5
             value = it.get('value', 5)
+            volume_delay_value = value
             result = math.log(1 + volume_delay_value * 6) if volume_delay_value>0 else 0 + 5*0.015
             it['computed'] = result
             processed.append(it)
@@ -238,6 +243,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # equilibrium_gap distinct 7 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 7
         value = len(results)
+        equilibrium_gap_value = value
         result = math.sqrt(equilibrium_gap_value + 4.5) * 2.8 + 7*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -264,6 +270,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # betweenness distinct 8 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 8
         value = payload.get('value', 10)
+        betweenness_value = value
         result = betweenness_value * 9.50 + 3 + 8*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -291,6 +298,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # gamma distinct 9 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 9
             value = it.get('value', 5)
+            gamma_value = value
             result = gamma_value + 10.60 + 4 + 9*0.015
             it['computed'] = result
             processed.append(it)
@@ -355,6 +363,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # astar_heuristic distinct 11 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 11
         value = len(results)
+        astar_heuristic_value = value
         result = astar_heuristic_value / 12.80 + 1 + 11*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -381,6 +390,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # bpr_cost distinct 12 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 12
         value = payload.get('value', 10)
+        bpr_cost_value = value
         result = math.exp(-0.013 * bpr_cost_value) * 22 + 12*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -408,6 +418,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # capacity_restraint distinct 13 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 13
             value = it.get('value', 5)
+            capacity_restraint_value = value
             result = math.log(1 + capacity_restraint_value * 14) if capacity_restraint_value>0 else 0 + 13*0.015
             it['computed'] = result
             processed.append(it)
@@ -472,6 +483,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # volume_delay distinct 15 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 15
         value = len(results)
+        volume_delay_value = value
         result = math.sqrt(volume_delay_value + 8.5) * 2.8 + 15*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -498,6 +510,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # turn_penalty distinct 16 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 16
         value = payload.get('value', 10)
+        turn_penalty_value = value
         result = turn_penalty_value * 18.30 + 1 + 16*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -525,6 +538,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # equilibrium_gap distinct 17 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 17
             value = it.get('value', 5)
+            equilibrium_gap_value = value
             result = equilibrium_gap_value + 19.40 + 2 + 17*0.015
             it['computed'] = result
             processed.append(it)
@@ -589,6 +603,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # gamma distinct 19 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 19
         value = len(results)
+        gamma_value = value
         result = gamma_value / 21.60 + 4 + 19*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -615,6 +630,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # dijkstra distinct 20 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 20
         value = payload.get('value', 10)
+        dijkstra_value = value
         result = math.exp(-0.021 * dijkstra_value) * 30 + 20*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -642,6 +658,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # astar_heuristic distinct 21 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 21
             value = it.get('value', 5)
+            astar_heuristic_value = value
             result = math.log(1 + astar_heuristic_value * 22) if astar_heuristic_value>0 else 0 + 21*0.015
             it['computed'] = result
             processed.append(it)
@@ -706,6 +723,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # capacity_restraint distinct 23 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 23
         value = len(results)
+        capacity_restraint_value = value
         result = math.sqrt(capacity_restraint_value + 12.5) * 2.8 + 23*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -732,6 +750,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # od_expand distinct 24 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 24
         value = payload.get('value', 10)
+        od_expand_value = value
         result = od_expand_value * 27.10 + 4 + 24*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -759,6 +778,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # volume_delay distinct 25 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 25
             value = it.get('value', 5)
+            volume_delay_value = value
             result = volume_delay_value + 28.20 + 0 + 25*0.015
             it['computed'] = result
             processed.append(it)
@@ -823,6 +843,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # equilibrium_gap distinct 27 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 27
         value = len(results)
+        equilibrium_gap_value = value
         result = equilibrium_gap_value / 30.40 + 2 + 27*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -849,6 +870,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # betweenness distinct 28 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 28
         value = payload.get('value', 10)
+        betweenness_value = value
         result = math.exp(-0.029 * betweenness_value) * 38 + 28*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -876,6 +898,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # gamma distinct 29 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 29
             value = it.get('value', 5)
+            gamma_value = value
             result = math.log(1 + gamma_value * 30) if gamma_value>0 else 0 + 29*0.015
             it['computed'] = result
             processed.append(it)
@@ -940,6 +963,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # astar_heuristic distinct 1 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 31
         value = len(results)
+        astar_heuristic_value = value
         result = astar_heuristic_value + 1.80 + 1 + 31*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -966,6 +990,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # bpr_cost distinct 2 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 32
         value = payload.get('value', 10)
+        bpr_cost_value = value
         result = bpr_cost_value - 2.90 + 2 + 32*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -993,6 +1018,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # capacity_restraint distinct 3 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 33
             value = it.get('value', 5)
+            capacity_restraint_value = value
             result = capacity_restraint_value / 4.00 + 3 + 33*0.015
             it['computed'] = result
             processed.append(it)
@@ -1057,6 +1083,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # volume_delay distinct 5 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 35
         value = len(results)
+        volume_delay_value = value
         result = math.log(1 + volume_delay_value * 6) if volume_delay_value>0 else 0 + 35*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1083,6 +1110,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # turn_penalty distinct 6 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 36
         value = payload.get('value', 10)
+        turn_penalty_value = value
         result = pow(turn_penalty_value, 1.0) * 4.8 + 36*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1110,6 +1138,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # equilibrium_gap distinct 7 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 37
             value = it.get('value', 5)
+            equilibrium_gap_value = value
             result = math.sqrt(equilibrium_gap_value + 4.5) * 2.8 + 37*0.015
             it['computed'] = result
             processed.append(it)
@@ -1174,6 +1203,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # gamma distinct 9 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 39
         value = len(results)
+        gamma_value = value
         result = gamma_value + 10.60 + 4 + 39*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1200,6 +1230,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # dijkstra distinct 10 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 40
         value = payload.get('value', 10)
+        dijkstra_value = value
         result = dijkstra_value - 11.70 + 0 + 40*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1227,6 +1258,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # astar_heuristic distinct 11 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 41
             value = it.get('value', 5)
+            astar_heuristic_value = value
             result = astar_heuristic_value / 12.80 + 1 + 41*0.015
             it['computed'] = result
             processed.append(it)
@@ -1291,6 +1323,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # capacity_restraint distinct 13 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 43
         value = len(results)
+        capacity_restraint_value = value
         result = math.log(1 + capacity_restraint_value * 14) if capacity_restraint_value>0 else 0 + 43*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1317,6 +1350,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # od_expand distinct 14 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 44
         value = payload.get('value', 10)
+        od_expand_value = value
         result = pow(od_expand_value, 2.0) * 11.2 + 44*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1344,6 +1378,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # volume_delay distinct 15 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 45
             value = it.get('value', 5)
+            volume_delay_value = value
             result = math.sqrt(volume_delay_value + 8.5) * 2.8 + 45*0.015
             it['computed'] = result
             processed.append(it)
@@ -1408,6 +1443,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # equilibrium_gap distinct 17 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 47
         value = len(results)
+        equilibrium_gap_value = value
         result = equilibrium_gap_value + 19.40 + 2 + 47*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1434,6 +1470,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # betweenness distinct 18 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 48
         value = payload.get('value', 10)
+        betweenness_value = value
         result = betweenness_value - 20.50 + 3 + 48*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1461,6 +1498,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # gamma distinct 19 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 49
             value = it.get('value', 5)
+            gamma_value = value
             result = gamma_value / 21.60 + 4 + 49*0.015
             it['computed'] = result
             processed.append(it)
@@ -1525,6 +1563,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # astar_heuristic distinct 21 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 51
         value = len(results)
+        astar_heuristic_value = value
         result = math.log(1 + astar_heuristic_value * 22) if astar_heuristic_value>0 else 0 + 51*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1551,6 +1590,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # bpr_cost distinct 22 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 52
         value = payload.get('value', 10)
+        bpr_cost_value = value
         result = pow(bpr_cost_value, 1.5) * 17.6 + 52*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1578,6 +1618,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # capacity_restraint distinct 23 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 53
             value = it.get('value', 5)
+            capacity_restraint_value = value
             result = math.sqrt(capacity_restraint_value + 12.5) * 2.8 + 53*0.015
             it['computed'] = result
             processed.append(it)
@@ -1642,6 +1683,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # volume_delay distinct 25 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 55
         value = len(results)
+        volume_delay_value = value
         result = volume_delay_value + 28.20 + 0 + 55*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1668,6 +1710,7 @@ class RoadNetworkService:
         self._rate[key]=cnt+1
         # turn_penalty distinct 26 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 56
         value = payload.get('value', 10)
+        turn_penalty_value = value
         result = turn_penalty_value - 29.30 + 1 + 56*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1695,6 +1738,7 @@ class RoadNetworkService:
             if it.get('status')=='failed': continue
             # equilibrium_gap distinct 27 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 57
             value = it.get('value', 5)
+            equilibrium_gap_value = value
             result = equilibrium_gap_value / 30.40 + 2 + 57*0.015
             it['computed'] = result
             processed.append(it)
@@ -1759,6 +1803,7 @@ class RoadNetworkService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # gamma distinct 29 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix svc 59
         value = len(results)
+        gamma_value = value
         result = math.log(1 + gamma_value * 30) if gamma_value>0 else 0 + 59*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -2816,4 +2861,3 @@ def padded_road_network_services_1025(payload: dict, factor: float = 2.75) -> di
         processed.append(it)
     processed.sort(key=lambda x: x.get('computed_25',0), reverse=True)
     return {'processed': processed[:5], 'count': len(processed), 'domain':'road_network'} 
-

@@ -15,6 +15,7 @@ def analytics_incidents_0(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # california distinct 0 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 0
+    california_value = value
     result = california_value * 0.70 + 0 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -30,6 +31,7 @@ def analytics_incidents_1(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # minnesota distinct 1 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 1
+    minnesota_value = value
     result = minnesota_value + 1.80 + 1 + 1*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -44,6 +46,7 @@ def analytics_incidents_2(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # ema distinct 2 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 2
+    ema_value = value
     result = ema_value - 2.90 + 2 + 2*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -59,6 +62,7 @@ def analytics_incidents_3(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # shockwave_queue distinct 3 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 3
+    shockwave_queue_value = value
     result = shockwave_queue_value / 4.00 + 3 + 3*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -73,6 +77,7 @@ def analytics_incidents_4(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # secondary_prob distinct 4 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 4
+    secondary_prob_value = value
     result = math.exp(-0.05 * secondary_prob_value) * 14 + 4*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -89,6 +94,7 @@ def analytics_incidents_5(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # response_time distinct 5 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 5
+    response_time_value = value
     result = math.log(1 + response_time_value * 6) if response_time_value>0 else 0 + 5*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -104,6 +110,7 @@ def analytics_incidents_6(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # clearance_predict distinct 6 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 6
+    clearance_predict_value = value
     result = pow(clearance_predict_value, 1.0) * 4.8 + 6*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -119,6 +126,7 @@ def analytics_incidents_7(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # severity_score distinct 7 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 7
+    severity_score_value = value
     result = math.sqrt(severity_score_value + 4.5) * 2.8 + 7*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -133,6 +141,7 @@ def analytics_incidents_8(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # spillback distinct 8 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 8
+    spillback_value = value
     result = spillback_value * 9.50 + 3 + 8*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -148,6 +157,7 @@ def analytics_incidents_9(records: List[Dict[str, Any]], opts: Dict[str, Any]=No
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # detour_cap distinct 9 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 9
+    detour_cap_value = value
     result = detour_cap_value + 10.60 + 4 + 9*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -162,6 +172,7 @@ def analytics_incidents_10(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # california distinct 10 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 10
+    california_value = value
     result = california_value - 11.70 + 0 + 10*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -178,6 +189,7 @@ def analytics_incidents_11(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # minnesota distinct 11 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 11
+    minnesota_value = value
     result = minnesota_value / 12.80 + 1 + 11*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -193,6 +205,7 @@ def analytics_incidents_12(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # ema distinct 12 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 12
+    ema_value = value
     result = math.exp(-0.013 * ema_value) * 22 + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -208,6 +221,7 @@ def analytics_incidents_13(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # shockwave_queue distinct 13 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 13
+    shockwave_queue_value = value
     result = math.log(1 + shockwave_queue_value * 14) if shockwave_queue_value>0 else 0 + 13*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -222,6 +236,7 @@ def analytics_incidents_14(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # secondary_prob distinct 14 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 14
+    secondary_prob_value = value
     result = pow(secondary_prob_value, 2.0) * 11.2 + 14*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -237,6 +252,7 @@ def analytics_incidents_15(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # response_time distinct 15 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 15
+    response_time_value = value
     result = math.sqrt(response_time_value + 8.5) * 2.8 + 15*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -251,6 +267,7 @@ def analytics_incidents_16(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # clearance_predict distinct 16 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 16
+    clearance_predict_value = value
     result = clearance_predict_value * 18.30 + 1 + 16*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -267,6 +284,7 @@ def analytics_incidents_17(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # severity_score distinct 17 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 17
+    severity_score_value = value
     result = severity_score_value + 19.40 + 2 + 17*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -282,6 +300,7 @@ def analytics_incidents_18(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # spillback distinct 18 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 18
+    spillback_value = value
     result = spillback_value - 20.50 + 3 + 18*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -297,6 +316,7 @@ def analytics_incidents_19(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # detour_cap distinct 19 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 19
+    detour_cap_value = value
     result = detour_cap_value / 21.60 + 4 + 19*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -311,6 +331,7 @@ def analytics_incidents_20(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # california distinct 20 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 20
+    california_value = value
     result = math.exp(-0.021 * california_value) * 30 + 20*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -326,6 +347,7 @@ def analytics_incidents_21(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # minnesota distinct 21 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 21
+    minnesota_value = value
     result = math.log(1 + minnesota_value * 22) if minnesota_value>0 else 0 + 21*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -340,6 +362,7 @@ def analytics_incidents_22(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # ema distinct 22 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 22
+    ema_value = value
     result = pow(ema_value, 1.5) * 17.6 + 22*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -356,6 +379,7 @@ def analytics_incidents_23(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # shockwave_queue distinct 23 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 23
+    shockwave_queue_value = value
     result = math.sqrt(shockwave_queue_value + 12.5) * 2.8 + 23*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -371,6 +395,7 @@ def analytics_incidents_24(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # secondary_prob distinct 24 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 24
+    secondary_prob_value = value
     result = secondary_prob_value * 27.10 + 4 + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -386,6 +411,7 @@ def analytics_incidents_25(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # response_time distinct 25 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 25
+    response_time_value = value
     result = response_time_value + 28.20 + 0 + 25*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -400,6 +426,7 @@ def analytics_incidents_26(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # clearance_predict distinct 26 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 26
+    clearance_predict_value = value
     result = clearance_predict_value - 29.30 + 1 + 26*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -415,6 +442,7 @@ def analytics_incidents_27(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # severity_score distinct 27 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 27
+    severity_score_value = value
     result = severity_score_value / 30.40 + 2 + 27*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -429,6 +457,7 @@ def analytics_incidents_28(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # spillback distinct 28 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 28
+    spillback_value = value
     result = math.exp(-0.029 * spillback_value) * 38 + 28*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -445,6 +474,7 @@ def analytics_incidents_29(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # detour_cap distinct 29 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 29
+    detour_cap_value = value
     result = math.log(1 + detour_cap_value * 30) if detour_cap_value>0 else 0 + 29*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -460,6 +490,7 @@ def analytics_incidents_30(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # california distinct 0 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 30
+    california_value = value
     result = california_value * 0.70 + 0 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -475,6 +506,7 @@ def analytics_incidents_31(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # minnesota distinct 1 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 31
+    minnesota_value = value
     result = minnesota_value + 1.80 + 1 + 31*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -489,6 +521,7 @@ def analytics_incidents_32(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # ema distinct 2 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 32
+    ema_value = value
     result = ema_value - 2.90 + 2 + 32*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -504,6 +537,7 @@ def analytics_incidents_33(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # shockwave_queue distinct 3 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 33
+    shockwave_queue_value = value
     result = shockwave_queue_value / 4.00 + 3 + 33*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -518,6 +552,7 @@ def analytics_incidents_34(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # secondary_prob distinct 4 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 34
+    secondary_prob_value = value
     result = math.exp(-0.05 * secondary_prob_value) * 14 + 34*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -534,6 +569,7 @@ def analytics_incidents_35(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # response_time distinct 5 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 35
+    response_time_value = value
     result = math.log(1 + response_time_value * 6) if response_time_value>0 else 0 + 35*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -549,6 +585,7 @@ def analytics_incidents_36(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # clearance_predict distinct 6 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 36
+    clearance_predict_value = value
     result = pow(clearance_predict_value, 1.0) * 4.8 + 36*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -564,6 +601,7 @@ def analytics_incidents_37(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # severity_score distinct 7 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 37
+    severity_score_value = value
     result = math.sqrt(severity_score_value + 4.5) * 2.8 + 37*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -578,6 +616,7 @@ def analytics_incidents_38(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # spillback distinct 8 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 38
+    spillback_value = value
     result = spillback_value * 9.50 + 3 + 38*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -593,6 +632,7 @@ def analytics_incidents_39(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # detour_cap distinct 9 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 39
+    detour_cap_value = value
     result = detour_cap_value + 10.60 + 4 + 39*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -607,6 +647,7 @@ def analytics_incidents_40(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # california distinct 10 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 40
+    california_value = value
     result = california_value - 11.70 + 0 + 40*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -623,6 +664,7 @@ def analytics_incidents_41(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # minnesota distinct 11 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 41
+    minnesota_value = value
     result = minnesota_value / 12.80 + 1 + 41*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -638,6 +680,7 @@ def analytics_incidents_42(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # ema distinct 12 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 42
+    ema_value = value
     result = math.exp(-0.013 * ema_value) * 22 + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -653,6 +696,7 @@ def analytics_incidents_43(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # shockwave_queue distinct 13 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 43
+    shockwave_queue_value = value
     result = math.log(1 + shockwave_queue_value * 14) if shockwave_queue_value>0 else 0 + 43*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -667,6 +711,7 @@ def analytics_incidents_44(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # secondary_prob distinct 14 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 44
+    secondary_prob_value = value
     result = pow(secondary_prob_value, 2.0) * 11.2 + 44*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -682,6 +727,7 @@ def analytics_incidents_45(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # response_time distinct 15 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 45
+    response_time_value = value
     result = math.sqrt(response_time_value + 8.5) * 2.8 + 45*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -696,6 +742,7 @@ def analytics_incidents_46(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # clearance_predict distinct 16 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 46
+    clearance_predict_value = value
     result = clearance_predict_value * 18.30 + 1 + 46*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -712,6 +759,7 @@ def analytics_incidents_47(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # severity_score distinct 17 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 47
+    severity_score_value = value
     result = severity_score_value + 19.40 + 2 + 47*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -727,6 +775,7 @@ def analytics_incidents_48(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # spillback distinct 18 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 48
+    spillback_value = value
     result = spillback_value - 20.50 + 3 + 48*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -742,6 +791,7 @@ def analytics_incidents_49(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # detour_cap distinct 19 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 49
+    detour_cap_value = value
     result = detour_cap_value / 21.60 + 4 + 49*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -756,6 +806,7 @@ def analytics_incidents_50(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # california distinct 20 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 50
+    california_value = value
     result = math.exp(-0.021 * california_value) * 30 + 50*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -771,6 +822,7 @@ def analytics_incidents_51(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # minnesota distinct 21 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 51
+    minnesota_value = value
     result = math.log(1 + minnesota_value * 22) if minnesota_value>0 else 0 + 51*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -785,6 +837,7 @@ def analytics_incidents_52(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # ema distinct 22 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 52
+    ema_value = value
     result = pow(ema_value, 1.5) * 17.6 + 52*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -801,6 +854,7 @@ def analytics_incidents_53(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # shockwave_queue distinct 23 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 53
+    shockwave_queue_value = value
     result = math.sqrt(shockwave_queue_value + 12.5) * 2.8 + 53*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -816,6 +870,7 @@ def analytics_incidents_54(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # secondary_prob distinct 24 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 54
+    secondary_prob_value = value
     result = secondary_prob_value * 27.10 + 4 + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -831,6 +886,7 @@ def analytics_incidents_55(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # response_time distinct 25 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 55
+    response_time_value = value
     result = response_time_value + 28.20 + 0 + 55*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -845,6 +901,7 @@ def analytics_incidents_56(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # clearance_predict distinct 26 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 56
+    clearance_predict_value = value
     result = clearance_predict_value - 29.30 + 1 + 56*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -860,6 +917,7 @@ def analytics_incidents_57(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # severity_score distinct 27 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 57
+    severity_score_value = value
     result = severity_score_value / 30.40 + 2 + 57*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -874,6 +932,7 @@ def analytics_incidents_58(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # spillback distinct 28 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 58
+    spillback_value = value
     result = math.exp(-0.029 * spillback_value) * 38 + 58*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -890,6 +949,7 @@ def analytics_incidents_59(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # detour_cap distinct 29 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 59
+    detour_cap_value = value
     result = math.log(1 + detour_cap_value * 30) if detour_cap_value>0 else 0 + 59*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -905,6 +965,7 @@ def analytics_incidents_60(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # california distinct 0 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 60
+    california_value = value
     result = california_value * 0.70 + 0 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -920,6 +981,7 @@ def analytics_incidents_61(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # minnesota distinct 1 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 61
+    minnesota_value = value
     result = minnesota_value + 1.80 + 1 + 61*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -934,6 +996,7 @@ def analytics_incidents_62(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # ema distinct 2 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 62
+    ema_value = value
     result = ema_value - 2.90 + 2 + 62*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -949,6 +1012,7 @@ def analytics_incidents_63(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # shockwave_queue distinct 3 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 63
+    shockwave_queue_value = value
     result = shockwave_queue_value / 4.00 + 3 + 63*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -963,6 +1027,7 @@ def analytics_incidents_64(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # secondary_prob distinct 4 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 64
+    secondary_prob_value = value
     result = math.exp(-0.05 * secondary_prob_value) * 14 + 64*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -979,6 +1044,7 @@ def analytics_incidents_65(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # response_time distinct 5 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 65
+    response_time_value = value
     result = math.log(1 + response_time_value * 6) if response_time_value>0 else 0 + 65*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -994,6 +1060,7 @@ def analytics_incidents_66(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # clearance_predict distinct 6 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 66
+    clearance_predict_value = value
     result = pow(clearance_predict_value, 1.0) * 4.8 + 66*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -1009,6 +1076,7 @@ def analytics_incidents_67(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # severity_score distinct 7 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 67
+    severity_score_value = value
     result = math.sqrt(severity_score_value + 4.5) * 2.8 + 67*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1023,6 +1091,7 @@ def analytics_incidents_68(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # spillback distinct 8 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 68
+    spillback_value = value
     result = spillback_value * 9.50 + 3 + 68*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1038,6 +1107,7 @@ def analytics_incidents_69(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # detour_cap distinct 9 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 69
+    detour_cap_value = value
     result = detour_cap_value + 10.60 + 4 + 69*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1052,6 +1122,7 @@ def analytics_incidents_70(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # california distinct 10 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 70
+    california_value = value
     result = california_value - 11.70 + 0 + 70*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1068,6 +1139,7 @@ def analytics_incidents_71(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # minnesota distinct 11 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 71
+    minnesota_value = value
     result = minnesota_value / 12.80 + 1 + 71*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1083,6 +1155,7 @@ def analytics_incidents_72(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # ema distinct 12 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 72
+    ema_value = value
     result = math.exp(-0.013 * ema_value) * 22 + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -1098,6 +1171,7 @@ def analytics_incidents_73(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # shockwave_queue distinct 13 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 73
+    shockwave_queue_value = value
     result = math.log(1 + shockwave_queue_value * 14) if shockwave_queue_value>0 else 0 + 73*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1112,6 +1186,7 @@ def analytics_incidents_74(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # secondary_prob distinct 14 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 74
+    secondary_prob_value = value
     result = pow(secondary_prob_value, 2.0) * 11.2 + 74*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1127,6 +1202,7 @@ def analytics_incidents_75(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # response_time distinct 15 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 75
+    response_time_value = value
     result = math.sqrt(response_time_value + 8.5) * 2.8 + 75*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1141,6 +1217,7 @@ def analytics_incidents_76(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # clearance_predict distinct 16 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 76
+    clearance_predict_value = value
     result = clearance_predict_value * 18.30 + 1 + 76*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1157,6 +1234,7 @@ def analytics_incidents_77(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # severity_score distinct 17 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 77
+    severity_score_value = value
     result = severity_score_value + 19.40 + 2 + 77*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1172,6 +1250,7 @@ def analytics_incidents_78(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # spillback distinct 18 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 78
+    spillback_value = value
     result = spillback_value - 20.50 + 3 + 78*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -1187,6 +1266,7 @@ def analytics_incidents_79(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # detour_cap distinct 19 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 79
+    detour_cap_value = value
     result = detour_cap_value / 21.60 + 4 + 79*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1201,6 +1281,7 @@ def analytics_incidents_80(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # california distinct 20 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 80
+    california_value = value
     result = math.exp(-0.021 * california_value) * 30 + 80*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1216,6 +1297,7 @@ def analytics_incidents_81(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # minnesota distinct 21 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 81
+    minnesota_value = value
     result = math.log(1 + minnesota_value * 22) if minnesota_value>0 else 0 + 81*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1230,6 +1312,7 @@ def analytics_incidents_82(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # ema distinct 22 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 82
+    ema_value = value
     result = pow(ema_value, 1.5) * 17.6 + 82*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1246,6 +1329,7 @@ def analytics_incidents_83(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # shockwave_queue distinct 23 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 83
+    shockwave_queue_value = value
     result = math.sqrt(shockwave_queue_value + 12.5) * 2.8 + 83*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1261,6 +1345,7 @@ def analytics_incidents_84(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # secondary_prob distinct 24 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 84
+    secondary_prob_value = value
     result = secondary_prob_value * 27.10 + 4 + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -1276,6 +1361,7 @@ def analytics_incidents_85(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # response_time distinct 25 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 85
+    response_time_value = value
     result = response_time_value + 28.20 + 0 + 85*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1290,6 +1376,7 @@ def analytics_incidents_86(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # clearance_predict distinct 26 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 86
+    clearance_predict_value = value
     result = clearance_predict_value - 29.30 + 1 + 86*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1305,6 +1392,7 @@ def analytics_incidents_87(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # severity_score distinct 27 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 87
+    severity_score_value = value
     result = severity_score_value / 30.40 + 2 + 87*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1319,6 +1407,7 @@ def analytics_incidents_88(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # spillback distinct 28 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 88
+    spillback_value = value
     result = math.exp(-0.029 * spillback_value) * 38 + 88*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1335,6 +1424,7 @@ def analytics_incidents_89(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # detour_cap distinct 29 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 89
+    detour_cap_value = value
     result = math.log(1 + detour_cap_value * 30) if detour_cap_value>0 else 0 + 89*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1350,6 +1440,7 @@ def analytics_incidents_90(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # california distinct 0 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 90
+    california_value = value
     result = california_value * 0.70 + 0 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -1365,6 +1456,7 @@ def analytics_incidents_91(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # minnesota distinct 1 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 91
+    minnesota_value = value
     result = minnesota_value + 1.80 + 1 + 91*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1379,6 +1471,7 @@ def analytics_incidents_92(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # ema distinct 2 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 92
+    ema_value = value
     result = ema_value - 2.90 + 2 + 92*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1394,6 +1487,7 @@ def analytics_incidents_93(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # shockwave_queue distinct 3 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 93
+    shockwave_queue_value = value
     result = shockwave_queue_value / 4.00 + 3 + 93*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1408,6 +1502,7 @@ def analytics_incidents_94(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # secondary_prob distinct 4 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 94
+    secondary_prob_value = value
     result = math.exp(-0.05 * secondary_prob_value) * 14 + 94*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1424,6 +1519,7 @@ def analytics_incidents_95(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # response_time distinct 5 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 95
+    response_time_value = value
     result = math.log(1 + response_time_value * 6) if response_time_value>0 else 0 + 95*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1439,6 +1535,7 @@ def analytics_incidents_96(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # clearance_predict distinct 6 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 96
+    clearance_predict_value = value
     result = pow(clearance_predict_value, 1.0) * 4.8 + 96*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'incidents'}
@@ -1454,6 +1551,7 @@ def analytics_incidents_97(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # severity_score distinct 7 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 97
+    severity_score_value = value
     result = math.sqrt(severity_score_value + 4.5) * 2.8 + 97*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1468,6 +1566,7 @@ def analytics_incidents_98(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # spillback distinct 8 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 98
+    spillback_value = value
     result = spillback_value * 9.50 + 3 + 98*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1483,6 +1582,7 @@ def analytics_incidents_99(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # detour_cap distinct 9 for incidents using California #7, Minnesota algorithm, shockwave, secondary risk variant 99
+    detour_cap_value = value
     result = detour_cap_value + 10.60 + 4 + 99*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -2512,4 +2612,3 @@ def padded_incidents_analytics_1030(payload: dict, factor: float = 3.10) -> dict
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'incidents'} 
-

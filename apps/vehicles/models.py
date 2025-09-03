@@ -24,6 +24,7 @@ class VehicleObservation:
     status: str = 'active'
 
     def fhwa_class_0_veh_0_vehicleobservation_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fhwa_class_value = value
         """fhwa_class distinct 0 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 0 for VehicleObservation — implements result = fhwa_class_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for vehicles::VehicleObservation::fhwa_class_0_veh_0_vehicleobservation_0
@@ -38,13 +39,14 @@ class VehicleObservation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'fhwa_class_0_veh_0_vehicleobservation_0', 'result': result, 'domain': 'vehicles'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def trajectory_smooth_6_veh_6_vehicleobservation_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        trajectory_smooth_value = value
         """trajectory_smooth distinct 6 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 6 for VehicleObservation — implements result = pow(trajectory_smooth_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for vehicles::VehicleObservation::trajectory_smooth_6_veh_6_vehicleobservation_6
@@ -56,13 +58,14 @@ class VehicleObservation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def headway_12_veh_12_vehicleobservation_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        headway_value = value
         """headway distinct 12 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 12 for VehicleObservation — implements result = math.exp(-0.013 * headway_value) * 22 + 12*0.01"""
         try:
             # Distinct logic for vehicles::VehicleObservation::headway_12_veh_12_vehicleobservation_12
@@ -74,13 +77,14 @@ class VehicleObservation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def confidence_18_veh_18_vehicleobservation_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        confidence_value = value
         """confidence distinct 18 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 18 for VehicleObservation — implements result = confidence_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for vehicles::VehicleObservation::confidence_18_veh_18_vehicleobservation_18
@@ -95,13 +99,14 @@ class VehicleObservation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_24_veh_24_vehicleobservation_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_value = value
         """occupancy distinct 24 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 24 for VehicleObservation — implements result = occupancy_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for vehicles::VehicleObservation::occupancy_24_veh_24_vehicleobservation_24
@@ -113,16 +118,18 @@ class VehicleObservation:
                 else:
                     break
             # occupancy distinct 24 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 24
+            occupancy_value = value
             result = occupancy_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fhwa_class_0_veh_30_vehicleobservation_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fhwa_class_value = value
         """fhwa_class distinct 0 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 30 for VehicleObservation — implements result = fhwa_class_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for vehicles::VehicleObservation::fhwa_class_0_veh_30_vehicleobservation_30
@@ -137,13 +144,14 @@ class VehicleObservation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'fhwa_class_0_veh_30_vehicleobservation_30', 'result': result, 'domain': 'vehicles'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def trajectory_smooth_6_veh_36_vehicleobservation_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        trajectory_smooth_value = value
         """trajectory_smooth distinct 6 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 36 for VehicleObservation — implements result = pow(trajectory_smooth_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for vehicles::VehicleObservation::trajectory_smooth_6_veh_36_vehicleobservation_36
@@ -155,13 +163,14 @@ class VehicleObservation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def headway_12_veh_42_vehicleobservation_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        headway_value = value
         """headway distinct 12 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 42 for VehicleObservation — implements result = math.exp(-0.013 * headway_value) * 22 + 42*0.01"""
         try:
             # Distinct logic for vehicles::VehicleObservation::headway_12_veh_42_vehicleobservation_42
@@ -173,13 +182,14 @@ class VehicleObservation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def confidence_18_veh_48_vehicleobservation_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        confidence_value = value
         """confidence distinct 18 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 48 for VehicleObservation — implements result = confidence_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for vehicles::VehicleObservation::confidence_18_veh_48_vehicleobservation_48
@@ -194,13 +204,14 @@ class VehicleObservation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_24_veh_54_vehicleobservation_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_value = value
         """occupancy distinct 24 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 54 for VehicleObservation — implements result = occupancy_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for vehicles::VehicleObservation::occupancy_24_veh_54_vehicleobservation_54
@@ -212,13 +223,14 @@ class VehicleObservation:
                 else:
                     break
             # occupancy distinct 24 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 54
+            occupancy_value = value
             result = occupancy_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_vehicleobservation(self) -> bool:
@@ -243,6 +255,7 @@ class Trajectory:
     status: str = 'active'
 
     def speed_two_loops_1_veh_1_trajectory_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_two_loops_value = value
         """speed_two_loops distinct 1 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 1 for Trajectory — implements result = speed_two_loops_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for vehicles::Trajectory::speed_two_loops_1_veh_1_trajectory_1
@@ -254,13 +267,14 @@ class Trajectory:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def acceleration_7_veh_7_trajectory_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        acceleration_value = value
         """acceleration distinct 7 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 7 for Trajectory — implements result = math.sqrt(acceleration_value + 4.5) * 2.8 + 7*0.01"""
         try:
             # Distinct logic for vehicles::Trajectory::acceleration_7_veh_7_trajectory_7
@@ -272,13 +286,14 @@ class Trajectory:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def space_headway_13_veh_13_trajectory_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        space_headway_value = value
         """space_headway distinct 13 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 13 for Trajectory — implements result = math.log(1 + space_headway_value * 14) if space_hea"""
         try:
             # Distinct logic for vehicles::Trajectory::space_headway_13_veh_13_trajectory_13
@@ -293,13 +308,14 @@ class Trajectory:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def expansion_19_veh_19_trajectory_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        expansion_value = value
         """expansion distinct 19 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 19 for Trajectory — implements result = expansion_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for vehicles::Trajectory::expansion_19_veh_19_trajectory_19
@@ -311,16 +327,18 @@ class Trajectory:
                 else:
                     break
             # expansion distinct 19 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 19
+            expansion_value = value
             result = expansion_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def platoon_25_veh_25_trajectory_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        platoon_value = value
         """platoon distinct 25 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 25 for Trajectory — implements result = platoon_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for vehicles::Trajectory::platoon_25_veh_25_trajectory_25
@@ -335,13 +353,14 @@ class Trajectory:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'platoon_25_veh_25_trajectory_25', 'result': result, 'domain': 'vehicles'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_two_loops_1_veh_31_trajectory_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_two_loops_value = value
         """speed_two_loops distinct 1 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 31 for Trajectory — implements result = speed_two_loops_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for vehicles::Trajectory::speed_two_loops_1_veh_31_trajectory_31
@@ -353,13 +372,14 @@ class Trajectory:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def acceleration_7_veh_37_trajectory_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        acceleration_value = value
         """acceleration distinct 7 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 37 for Trajectory — implements result = math.sqrt(acceleration_value + 4.5) * 2.8 + 37*0.01"""
         try:
             # Distinct logic for vehicles::Trajectory::acceleration_7_veh_37_trajectory_37
@@ -371,13 +391,14 @@ class Trajectory:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def space_headway_13_veh_43_trajectory_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        space_headway_value = value
         """space_headway distinct 13 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 43 for Trajectory — implements result = math.log(1 + space_headway_value * 14) if space_hea"""
         try:
             # Distinct logic for vehicles::Trajectory::space_headway_13_veh_43_trajectory_43
@@ -392,13 +413,14 @@ class Trajectory:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def expansion_19_veh_49_trajectory_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        expansion_value = value
         """expansion distinct 19 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 49 for Trajectory — implements result = expansion_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for vehicles::Trajectory::expansion_19_veh_49_trajectory_49
@@ -410,16 +432,18 @@ class Trajectory:
                 else:
                     break
             # expansion distinct 19 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 49
+            expansion_value = value
             result = expansion_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def platoon_25_veh_55_trajectory_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        platoon_value = value
         """platoon distinct 25 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 55 for Trajectory — implements result = platoon_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for vehicles::Trajectory::platoon_25_veh_55_trajectory_55
@@ -434,10 +458,10 @@ class Trajectory:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'platoon_25_veh_55_trajectory_55', 'result': result, 'domain': 'vehicles'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_trajectory(self) -> bool:
@@ -462,6 +486,7 @@ class Platoon:
     status: str = 'active'
 
     def headway_2_veh_2_platoon_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        headway_value = value
         """headway distinct 2 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 2 for Platoon — implements result = headway_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for vehicles::Platoon::headway_2_veh_2_platoon_2
@@ -473,13 +498,14 @@ class Platoon:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def confidence_8_veh_8_platoon_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        confidence_value = value
         """confidence distinct 8 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 8 for Platoon — implements result = confidence_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for vehicles::Platoon::confidence_8_veh_8_platoon_8
@@ -494,13 +520,14 @@ class Platoon:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_14_veh_14_platoon_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_value = value
         """occupancy distinct 14 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 14 for Platoon — implements result = pow(occupancy_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for vehicles::Platoon::occupancy_14_veh_14_platoon_14
@@ -515,13 +542,14 @@ class Platoon:
             result = pow(occupancy_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fhwa_class_20_veh_20_platoon_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fhwa_class_value = value
         """fhwa_class distinct 20 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 20 for Platoon — implements result = math.exp(-0.021 * fhwa_class_value) * 30 + 20*0.01"""
         try:
             # Distinct logic for vehicles::Platoon::fhwa_class_20_veh_20_platoon_20
@@ -536,13 +564,14 @@ class Platoon:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'fhwa_class_20_veh_20_platoon_20', 'result': result, 'domain': 'vehicles'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def trajectory_smooth_26_veh_26_platoon_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        trajectory_smooth_value = value
         """trajectory_smooth distinct 26 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 26 for Platoon — implements result = trajectory_smooth_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for vehicles::Platoon::trajectory_smooth_26_veh_26_platoon_26
@@ -554,13 +583,14 @@ class Platoon:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def headway_2_veh_32_platoon_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        headway_value = value
         """headway distinct 2 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 32 for Platoon — implements result = headway_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for vehicles::Platoon::headway_2_veh_32_platoon_32
@@ -572,13 +602,14 @@ class Platoon:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def confidence_8_veh_38_platoon_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        confidence_value = value
         """confidence distinct 8 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 38 for Platoon — implements result = confidence_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for vehicles::Platoon::confidence_8_veh_38_platoon_38
@@ -593,13 +624,14 @@ class Platoon:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_14_veh_44_platoon_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_value = value
         """occupancy distinct 14 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 44 for Platoon — implements result = pow(occupancy_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for vehicles::Platoon::occupancy_14_veh_44_platoon_44
@@ -614,13 +646,14 @@ class Platoon:
             result = pow(occupancy_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fhwa_class_20_veh_50_platoon_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fhwa_class_value = value
         """fhwa_class distinct 20 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 50 for Platoon — implements result = math.exp(-0.021 * fhwa_class_value) * 30 + 50*0.01"""
         try:
             # Distinct logic for vehicles::Platoon::fhwa_class_20_veh_50_platoon_50
@@ -635,13 +668,14 @@ class Platoon:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'fhwa_class_20_veh_50_platoon_50', 'result': result, 'domain': 'vehicles'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def trajectory_smooth_26_veh_56_platoon_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        trajectory_smooth_value = value
         """trajectory_smooth distinct 26 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 56 for Platoon — implements result = trajectory_smooth_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for vehicles::Platoon::trajectory_smooth_26_veh_56_platoon_56
@@ -653,10 +687,10 @@ class Platoon:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_platoon(self) -> bool:
@@ -680,6 +714,7 @@ class HeadwayRecord:
     status: str = 'active'
 
     def space_headway_3_veh_3_headwayrecord_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        space_headway_value = value
         """space_headway distinct 3 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 3 for HeadwayRecord — implements result = space_headway_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for vehicles::HeadwayRecord::space_headway_3_veh_3_headwayrecord_3
@@ -694,13 +729,14 @@ class HeadwayRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def expansion_9_veh_9_headwayrecord_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        expansion_value = value
         """expansion distinct 9 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 9 for HeadwayRecord — implements result = expansion_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for vehicles::HeadwayRecord::expansion_9_veh_9_headwayrecord_9
@@ -712,16 +748,18 @@ class HeadwayRecord:
                 else:
                     break
             # expansion distinct 9 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 9
+            expansion_value = value
             result = expansion_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def platoon_15_veh_15_headwayrecord_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        platoon_value = value
         """platoon distinct 15 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 15 for HeadwayRecord — implements result = math.sqrt(platoon_value + 8.5) * 2.8 + 15*0.01"""
         try:
             # Distinct logic for vehicles::HeadwayRecord::platoon_15_veh_15_headwayrecord_15
@@ -736,13 +774,14 @@ class HeadwayRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'platoon_15_veh_15_headwayrecord_15', 'result': result, 'domain': 'vehicles'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_two_loops_21_veh_21_headwayrecord_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_two_loops_value = value
         """speed_two_loops distinct 21 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 21 for HeadwayRecord — implements result = math.log(1 + speed_two_loops_value * 22) if speed_t"""
         try:
             # Distinct logic for vehicles::HeadwayRecord::speed_two_loops_21_veh_21_headwayrecord_21
@@ -754,13 +793,14 @@ class HeadwayRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def acceleration_27_veh_27_headwayrecord_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        acceleration_value = value
         """acceleration distinct 27 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 27 for HeadwayRecord — implements result = acceleration_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for vehicles::HeadwayRecord::acceleration_27_veh_27_headwayrecord_27
@@ -772,13 +812,14 @@ class HeadwayRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def space_headway_3_veh_33_headwayrecord_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        space_headway_value = value
         """space_headway distinct 3 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 33 for HeadwayRecord — implements result = space_headway_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for vehicles::HeadwayRecord::space_headway_3_veh_33_headwayrecord_33
@@ -793,13 +834,14 @@ class HeadwayRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def expansion_9_veh_39_headwayrecord_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        expansion_value = value
         """expansion distinct 9 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 39 for HeadwayRecord — implements result = expansion_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for vehicles::HeadwayRecord::expansion_9_veh_39_headwayrecord_39
@@ -811,16 +853,18 @@ class HeadwayRecord:
                 else:
                     break
             # expansion distinct 9 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 39
+            expansion_value = value
             result = expansion_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def platoon_15_veh_45_headwayrecord_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        platoon_value = value
         """platoon distinct 15 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 45 for HeadwayRecord — implements result = math.sqrt(platoon_value + 8.5) * 2.8 + 45*0.01"""
         try:
             # Distinct logic for vehicles::HeadwayRecord::platoon_15_veh_45_headwayrecord_45
@@ -835,13 +879,14 @@ class HeadwayRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'platoon_15_veh_45_headwayrecord_45', 'result': result, 'domain': 'vehicles'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_two_loops_21_veh_51_headwayrecord_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_two_loops_value = value
         """speed_two_loops distinct 21 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 51 for HeadwayRecord — implements result = math.log(1 + speed_two_loops_value * 22) if speed_t"""
         try:
             # Distinct logic for vehicles::HeadwayRecord::speed_two_loops_21_veh_51_headwayrecord_51
@@ -853,13 +898,14 @@ class HeadwayRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def acceleration_27_veh_57_headwayrecord_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        acceleration_value = value
         """acceleration distinct 27 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 57 for HeadwayRecord — implements result = acceleration_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for vehicles::HeadwayRecord::acceleration_27_veh_57_headwayrecord_57
@@ -871,10 +917,10 @@ class HeadwayRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_headwayrecord(self) -> bool:
@@ -898,6 +944,7 @@ class ClassificationResult:
     status: str = 'active'
 
     def occupancy_4_veh_4_classificationresult_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_value = value
         """occupancy distinct 4 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 4 for ClassificationResult — implements result = math.exp(-0.05 * occupancy_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for vehicles::ClassificationResult::occupancy_4_veh_4_classificationresult_4
@@ -909,16 +956,18 @@ class ClassificationResult:
                 else:
                     break
             # occupancy distinct 4 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 4
+            occupancy_value = value
             result = math.exp(-0.05 * occupancy_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fhwa_class_10_veh_10_classificationresult_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fhwa_class_value = value
         """fhwa_class distinct 10 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 10 for ClassificationResult — implements result = fhwa_class_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for vehicles::ClassificationResult::fhwa_class_10_veh_10_classificationresult_10
@@ -933,13 +982,14 @@ class ClassificationResult:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'fhwa_class_10_veh_10_classificationresult_10', 'result': result, 'domain': 'vehicles'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def trajectory_smooth_16_veh_16_classificationresult_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        trajectory_smooth_value = value
         """trajectory_smooth distinct 16 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 16 for ClassificationResult — implements result = trajectory_smooth_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for vehicles::ClassificationResult::trajectory_smooth_16_veh_16_classificationresult_16
@@ -951,13 +1001,14 @@ class ClassificationResult:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def headway_22_veh_22_classificationresult_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        headway_value = value
         """headway distinct 22 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 22 for ClassificationResult — implements result = pow(headway_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for vehicles::ClassificationResult::headway_22_veh_22_classificationresult_22
@@ -969,13 +1020,14 @@ class ClassificationResult:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def confidence_28_veh_28_classificationresult_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        confidence_value = value
         """confidence distinct 28 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 28 for ClassificationResult — implements result = math.exp(-0.029 * confidence_value) * 38 + 28*0.01"""
         try:
             # Distinct logic for vehicles::ClassificationResult::confidence_28_veh_28_classificationresult_28
@@ -990,13 +1042,14 @@ class ClassificationResult:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_4_veh_34_classificationresult_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_value = value
         """occupancy distinct 4 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 34 for ClassificationResult — implements result = math.exp(-0.05 * occupancy_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for vehicles::ClassificationResult::occupancy_4_veh_34_classificationresult_34
@@ -1008,16 +1061,18 @@ class ClassificationResult:
                 else:
                     break
             # occupancy distinct 4 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 34
+            occupancy_value = value
             result = math.exp(-0.05 * occupancy_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fhwa_class_10_veh_40_classificationresult_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fhwa_class_value = value
         """fhwa_class distinct 10 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 40 for ClassificationResult — implements result = fhwa_class_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for vehicles::ClassificationResult::fhwa_class_10_veh_40_classificationresult_40
@@ -1032,13 +1087,14 @@ class ClassificationResult:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'fhwa_class_10_veh_40_classificationresult_40', 'result': result, 'domain': 'vehicles'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def trajectory_smooth_16_veh_46_classificationresult_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        trajectory_smooth_value = value
         """trajectory_smooth distinct 16 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 46 for ClassificationResult — implements result = trajectory_smooth_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for vehicles::ClassificationResult::trajectory_smooth_16_veh_46_classificationresult_46
@@ -1050,13 +1106,14 @@ class ClassificationResult:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def headway_22_veh_52_classificationresult_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        headway_value = value
         """headway distinct 22 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 52 for ClassificationResult — implements result = pow(headway_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for vehicles::ClassificationResult::headway_22_veh_52_classificationresult_52
@@ -1068,13 +1125,14 @@ class ClassificationResult:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def confidence_28_veh_58_classificationresult_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        confidence_value = value
         """confidence distinct 28 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 58 for ClassificationResult — implements result = math.exp(-0.029 * confidence_value) * 38 + 58*0.01"""
         try:
             # Distinct logic for vehicles::ClassificationResult::confidence_28_veh_58_classificationresult_58
@@ -1089,10 +1147,10 @@ class ClassificationResult:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_classificationresult(self) -> bool:
@@ -1116,6 +1174,7 @@ class WeightStation:
     status: str = 'active'
 
     def platoon_5_veh_5_weightstation_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        platoon_value = value
         """platoon distinct 5 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 5 for WeightStation — implements result = math.log(1 + platoon_value * 6) if platoon_value>0 """
         try:
             # Distinct logic for vehicles::WeightStation::platoon_5_veh_5_weightstation_5
@@ -1130,13 +1189,14 @@ class WeightStation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'platoon_5_veh_5_weightstation_5', 'result': result, 'domain': 'vehicles'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_two_loops_11_veh_11_weightstation_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_two_loops_value = value
         """speed_two_loops distinct 11 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 11 for WeightStation — implements result = speed_two_loops_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for vehicles::WeightStation::speed_two_loops_11_veh_11_weightstation_11
@@ -1148,13 +1208,14 @@ class WeightStation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def acceleration_17_veh_17_weightstation_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        acceleration_value = value
         """acceleration distinct 17 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 17 for WeightStation — implements result = acceleration_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for vehicles::WeightStation::acceleration_17_veh_17_weightstation_17
@@ -1166,13 +1227,14 @@ class WeightStation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def space_headway_23_veh_23_weightstation_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        space_headway_value = value
         """space_headway distinct 23 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 23 for WeightStation — implements result = math.sqrt(space_headway_value + 12.5) * 2.8 + 23*0."""
         try:
             # Distinct logic for vehicles::WeightStation::space_headway_23_veh_23_weightstation_23
@@ -1187,13 +1249,14 @@ class WeightStation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def expansion_29_veh_29_weightstation_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        expansion_value = value
         """expansion distinct 29 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 29 for WeightStation — implements result = math.log(1 + expansion_value * 30) if expansion_val"""
         try:
             # Distinct logic for vehicles::WeightStation::expansion_29_veh_29_weightstation_29
@@ -1208,13 +1271,14 @@ class WeightStation:
             result = math.log(1 + expansion_value * 30) if expansion_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def platoon_5_veh_35_weightstation_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        platoon_value = value
         """platoon distinct 5 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 35 for WeightStation — implements result = math.log(1 + platoon_value * 6) if platoon_value>0 """
         try:
             # Distinct logic for vehicles::WeightStation::platoon_5_veh_35_weightstation_35
@@ -1229,13 +1293,14 @@ class WeightStation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'platoon_5_veh_35_weightstation_35', 'result': result, 'domain': 'vehicles'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speed_two_loops_11_veh_41_weightstation_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speed_two_loops_value = value
         """speed_two_loops distinct 11 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 41 for WeightStation — implements result = speed_two_loops_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for vehicles::WeightStation::speed_two_loops_11_veh_41_weightstation_41
@@ -1247,13 +1312,14 @@ class WeightStation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def acceleration_17_veh_47_weightstation_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        acceleration_value = value
         """acceleration distinct 17 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 47 for WeightStation — implements result = acceleration_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for vehicles::WeightStation::acceleration_17_veh_47_weightstation_47
@@ -1265,13 +1331,14 @@ class WeightStation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def space_headway_23_veh_53_weightstation_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        space_headway_value = value
         """space_headway distinct 23 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 53 for WeightStation — implements result = math.sqrt(space_headway_value + 12.5) * 2.8 + 53*0."""
         try:
             # Distinct logic for vehicles::WeightStation::space_headway_23_veh_53_weightstation_53
@@ -1286,13 +1353,14 @@ class WeightStation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def expansion_29_veh_59_weightstation_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        expansion_value = value
         """expansion distinct 29 for vehicles using FHWA classification, speed, headway, platoon, trajectory extra 59 for WeightStation — implements result = math.log(1 + expansion_value * 30) if expansion_val"""
         try:
             # Distinct logic for vehicles::WeightStation::expansion_29_veh_59_weightstation_59
@@ -1307,10 +1375,10 @@ class WeightStation:
             result = math.log(1 + expansion_value * 30) if expansion_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_weightstation(self) -> bool:
@@ -2766,4 +2834,3 @@ def padded_vehicles_models_1027(payload: dict, factor: float = 2.89) -> dict:
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'vehicles','idx':1027}
-

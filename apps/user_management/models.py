@@ -24,6 +24,7 @@ class User:
     status: str = 'active'
 
     def rbac_check_0_use_0_user_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        rbac_check_value = value
         """rbac_check distinct 0 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 0 for User — implements result = rbac_check_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for user_management::User::rbac_check_0_use_0_user_0
@@ -38,13 +39,14 @@ class User:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'rbac_check_0_use_0_user_0', 'result': result, 'domain': 'user_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def verification_level_6_use_6_user_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        verification_level_value = value
         """verification_level distinct 6 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 6 for User — implements result = pow(verification_level_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for user_management::User::verification_level_6_use_6_user_6
@@ -56,13 +58,14 @@ class User:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def session_expiry_12_use_12_user_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        session_expiry_value = value
         """session_expiry distinct 12 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 12 for User — implements result = math.exp(-0.013 * session_expiry_value) * 22 + 12*0"""
         try:
             # Distinct logic for user_management::User::session_expiry_12_use_12_user_12
@@ -74,13 +77,14 @@ class User:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def anomaly_detect_18_use_18_user_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        anomaly_detect_value = value
         """anomaly_detect distinct 18 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 18 for User — implements result = anomaly_detect_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for user_management::User::anomaly_detect_18_use_18_user_18
@@ -95,13 +99,14 @@ class User:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lockout_24_use_24_user_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lockout_value = value
         """lockout distinct 24 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 24 for User — implements result = lockout_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for user_management::User::lockout_24_use_24_user_24
@@ -113,16 +118,18 @@ class User:
                 else:
                     break
             # lockout distinct 24 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 24
+            lockout_value = value
             result = lockout_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def rbac_check_0_use_30_user_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        rbac_check_value = value
         """rbac_check distinct 0 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 30 for User — implements result = rbac_check_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for user_management::User::rbac_check_0_use_30_user_30
@@ -137,13 +144,14 @@ class User:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'rbac_check_0_use_30_user_30', 'result': result, 'domain': 'user_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def verification_level_6_use_36_user_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        verification_level_value = value
         """verification_level distinct 6 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 36 for User — implements result = pow(verification_level_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for user_management::User::verification_level_6_use_36_user_36
@@ -155,13 +163,14 @@ class User:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def session_expiry_12_use_42_user_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        session_expiry_value = value
         """session_expiry distinct 12 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 42 for User — implements result = math.exp(-0.013 * session_expiry_value) * 22 + 42*0"""
         try:
             # Distinct logic for user_management::User::session_expiry_12_use_42_user_42
@@ -173,13 +182,14 @@ class User:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def anomaly_detect_18_use_48_user_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        anomaly_detect_value = value
         """anomaly_detect distinct 18 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 48 for User — implements result = anomaly_detect_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for user_management::User::anomaly_detect_18_use_48_user_48
@@ -194,13 +204,14 @@ class User:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lockout_24_use_54_user_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lockout_value = value
         """lockout distinct 24 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 54 for User — implements result = lockout_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for user_management::User::lockout_24_use_54_user_54
@@ -212,13 +223,14 @@ class User:
                 else:
                     break
             # lockout distinct 24 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 54
+            lockout_value = value
             result = lockout_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_user(self) -> bool:
@@ -242,6 +254,7 @@ class Role:
     status: str = 'active'
 
     def password_strength_1_use_1_role_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        password_strength_value = value
         """password_strength distinct 1 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 1 for Role — implements result = password_strength_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for user_management::Role::password_strength_1_use_1_role_1
@@ -253,13 +266,14 @@ class Role:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def permission_inheritance_7_use_7_role_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        permission_inheritance_value = value
         """permission_inheritance distinct 7 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 7 for Role — implements result = math.sqrt(permission_inheritance_value + 4.5) * 2.8"""
         try:
             # Distinct logic for user_management::Role::permission_inheritance_7_use_7_role_7
@@ -271,13 +285,14 @@ class Role:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def hash_chain_13_use_13_role_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        hash_chain_value = value
         """hash_chain distinct 13 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 13 for Role — implements result = math.log(1 + hash_chain_value * 14) if hash_chain_v"""
         try:
             # Distinct logic for user_management::Role::hash_chain_13_use_13_role_13
@@ -292,13 +307,14 @@ class Role:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def retention_policy_19_use_19_role_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        retention_policy_value = value
         """retention_policy distinct 19 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 19 for Role — implements result = retention_policy_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for user_management::Role::retention_policy_19_use_19_role_19
@@ -310,16 +326,18 @@ class Role:
                 else:
                     break
             # retention_policy distinct 19 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 19
+            retention_policy_value = value
             result = retention_policy_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sso_validate_25_use_25_role_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        sso_validate_value = value
         """sso_validate distinct 25 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 25 for Role — implements result = sso_validate_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for user_management::Role::sso_validate_25_use_25_role_25
@@ -334,13 +352,14 @@ class Role:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'sso_validate_25_use_25_role_25', 'result': result, 'domain': 'user_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def password_strength_1_use_31_role_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        password_strength_value = value
         """password_strength distinct 1 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 31 for Role — implements result = password_strength_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for user_management::Role::password_strength_1_use_31_role_31
@@ -352,13 +371,14 @@ class Role:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def permission_inheritance_7_use_37_role_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        permission_inheritance_value = value
         """permission_inheritance distinct 7 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 37 for Role — implements result = math.sqrt(permission_inheritance_value + 4.5) * 2.8"""
         try:
             # Distinct logic for user_management::Role::permission_inheritance_7_use_37_role_37
@@ -370,13 +390,14 @@ class Role:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def hash_chain_13_use_43_role_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        hash_chain_value = value
         """hash_chain distinct 13 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 43 for Role — implements result = math.log(1 + hash_chain_value * 14) if hash_chain_v"""
         try:
             # Distinct logic for user_management::Role::hash_chain_13_use_43_role_43
@@ -391,13 +412,14 @@ class Role:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def retention_policy_19_use_49_role_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        retention_policy_value = value
         """retention_policy distinct 19 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 49 for Role — implements result = retention_policy_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for user_management::Role::retention_policy_19_use_49_role_49
@@ -409,16 +431,18 @@ class Role:
                 else:
                     break
             # retention_policy distinct 19 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 49
+            retention_policy_value = value
             result = retention_policy_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sso_validate_25_use_55_role_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        sso_validate_value = value
         """sso_validate distinct 25 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 55 for Role — implements result = sso_validate_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for user_management::Role::sso_validate_25_use_55_role_55
@@ -433,10 +457,10 @@ class Role:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'sso_validate_25_use_55_role_55', 'result': result, 'domain': 'user_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_role(self) -> bool:
@@ -460,6 +484,7 @@ class Permission:
     status: str = 'active'
 
     def session_expiry_2_use_2_permission_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        session_expiry_value = value
         """session_expiry distinct 2 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 2 for Permission — implements result = session_expiry_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for user_management::Permission::session_expiry_2_use_2_permission_2
@@ -471,13 +496,14 @@ class Permission:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def anomaly_detect_8_use_8_permission_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        anomaly_detect_value = value
         """anomaly_detect distinct 8 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 8 for Permission — implements result = anomaly_detect_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for user_management::Permission::anomaly_detect_8_use_8_permission_8
@@ -492,13 +518,14 @@ class Permission:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lockout_14_use_14_permission_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lockout_value = value
         """lockout distinct 14 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 14 for Permission — implements result = pow(lockout_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for user_management::Permission::lockout_14_use_14_permission_14
@@ -513,13 +540,14 @@ class Permission:
             result = pow(lockout_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def rbac_check_20_use_20_permission_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        rbac_check_value = value
         """rbac_check distinct 20 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 20 for Permission — implements result = math.exp(-0.021 * rbac_check_value) * 30 + 20*0.01"""
         try:
             # Distinct logic for user_management::Permission::rbac_check_20_use_20_permission_20
@@ -534,13 +562,14 @@ class Permission:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'rbac_check_20_use_20_permission_20', 'result': result, 'domain': 'user_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def verification_level_26_use_26_permission_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        verification_level_value = value
         """verification_level distinct 26 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 26 for Permission — implements result = verification_level_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for user_management::Permission::verification_level_26_use_26_permission_26
@@ -552,13 +581,14 @@ class Permission:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def session_expiry_2_use_32_permission_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        session_expiry_value = value
         """session_expiry distinct 2 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 32 for Permission — implements result = session_expiry_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for user_management::Permission::session_expiry_2_use_32_permission_32
@@ -570,13 +600,14 @@ class Permission:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def anomaly_detect_8_use_38_permission_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        anomaly_detect_value = value
         """anomaly_detect distinct 8 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 38 for Permission — implements result = anomaly_detect_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for user_management::Permission::anomaly_detect_8_use_38_permission_38
@@ -591,13 +622,14 @@ class Permission:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lockout_14_use_44_permission_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lockout_value = value
         """lockout distinct 14 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 44 for Permission — implements result = pow(lockout_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for user_management::Permission::lockout_14_use_44_permission_44
@@ -612,13 +644,14 @@ class Permission:
             result = pow(lockout_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def rbac_check_20_use_50_permission_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        rbac_check_value = value
         """rbac_check distinct 20 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 50 for Permission — implements result = math.exp(-0.021 * rbac_check_value) * 30 + 50*0.01"""
         try:
             # Distinct logic for user_management::Permission::rbac_check_20_use_50_permission_50
@@ -633,13 +666,14 @@ class Permission:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'rbac_check_20_use_50_permission_50', 'result': result, 'domain': 'user_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def verification_level_26_use_56_permission_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        verification_level_value = value
         """verification_level distinct 26 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 56 for Permission — implements result = verification_level_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for user_management::Permission::verification_level_26_use_56_permission_56
@@ -651,10 +685,10 @@ class Permission:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_permission(self) -> bool:
@@ -679,6 +713,7 @@ class CitizenProfile:
     status: str = 'active'
 
     def hash_chain_3_use_3_citizenprofile_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        hash_chain_value = value
         """hash_chain distinct 3 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 3 for CitizenProfile — implements result = hash_chain_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for user_management::CitizenProfile::hash_chain_3_use_3_citizenprofile_3
@@ -693,13 +728,14 @@ class CitizenProfile:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def retention_policy_9_use_9_citizenprofile_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        retention_policy_value = value
         """retention_policy distinct 9 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 9 for CitizenProfile — implements result = retention_policy_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for user_management::CitizenProfile::retention_policy_9_use_9_citizenprofile_9
@@ -711,16 +747,18 @@ class CitizenProfile:
                 else:
                     break
             # retention_policy distinct 9 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 9
+            retention_policy_value = value
             result = retention_policy_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sso_validate_15_use_15_citizenprofile_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        sso_validate_value = value
         """sso_validate distinct 15 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 15 for CitizenProfile — implements result = math.sqrt(sso_validate_value + 8.5) * 2.8 + 15*0.01"""
         try:
             # Distinct logic for user_management::CitizenProfile::sso_validate_15_use_15_citizenprofile_15
@@ -735,13 +773,14 @@ class CitizenProfile:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'sso_validate_15_use_15_citizenprofile_15', 'result': result, 'domain': 'user_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def password_strength_21_use_21_citizenprofile_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        password_strength_value = value
         """password_strength distinct 21 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 21 for CitizenProfile — implements result = math.log(1 + password_strength_value * 22) if passw"""
         try:
             # Distinct logic for user_management::CitizenProfile::password_strength_21_use_21_citizenprofile_21
@@ -753,13 +792,14 @@ class CitizenProfile:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def permission_inheritance_27_use_27_citizenprofile_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        permission_inheritance_value = value
         """permission_inheritance distinct 27 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 27 for CitizenProfile — implements result = permission_inheritance_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for user_management::CitizenProfile::permission_inheritance_27_use_27_citizenprofile_27
@@ -771,13 +811,14 @@ class CitizenProfile:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def hash_chain_3_use_33_citizenprofile_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        hash_chain_value = value
         """hash_chain distinct 3 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 33 for CitizenProfile — implements result = hash_chain_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for user_management::CitizenProfile::hash_chain_3_use_33_citizenprofile_33
@@ -792,13 +833,14 @@ class CitizenProfile:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def retention_policy_9_use_39_citizenprofile_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        retention_policy_value = value
         """retention_policy distinct 9 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 39 for CitizenProfile — implements result = retention_policy_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for user_management::CitizenProfile::retention_policy_9_use_39_citizenprofile_39
@@ -810,16 +852,18 @@ class CitizenProfile:
                 else:
                     break
             # retention_policy distinct 9 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 39
+            retention_policy_value = value
             result = retention_policy_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sso_validate_15_use_45_citizenprofile_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        sso_validate_value = value
         """sso_validate distinct 15 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 45 for CitizenProfile — implements result = math.sqrt(sso_validate_value + 8.5) * 2.8 + 45*0.01"""
         try:
             # Distinct logic for user_management::CitizenProfile::sso_validate_15_use_45_citizenprofile_45
@@ -834,13 +878,14 @@ class CitizenProfile:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'sso_validate_15_use_45_citizenprofile_45', 'result': result, 'domain': 'user_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def password_strength_21_use_51_citizenprofile_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        password_strength_value = value
         """password_strength distinct 21 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 51 for CitizenProfile — implements result = math.log(1 + password_strength_value * 22) if passw"""
         try:
             # Distinct logic for user_management::CitizenProfile::password_strength_21_use_51_citizenprofile_51
@@ -852,13 +897,14 @@ class CitizenProfile:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def permission_inheritance_27_use_57_citizenprofile_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        permission_inheritance_value = value
         """permission_inheritance distinct 27 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 57 for CitizenProfile — implements result = permission_inheritance_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for user_management::CitizenProfile::permission_inheritance_27_use_57_citizenprofile_57
@@ -870,10 +916,10 @@ class CitizenProfile:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_citizenprofile(self) -> bool:
@@ -900,6 +946,7 @@ class AuditLog:
     status: str = 'active'
 
     def lockout_4_use_4_auditlog_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lockout_value = value
         """lockout distinct 4 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 4 for AuditLog — implements result = math.exp(-0.05 * lockout_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for user_management::AuditLog::lockout_4_use_4_auditlog_4
@@ -911,16 +958,18 @@ class AuditLog:
                 else:
                     break
             # lockout distinct 4 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 4
+            lockout_value = value
             result = math.exp(-0.05 * lockout_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def rbac_check_10_use_10_auditlog_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        rbac_check_value = value
         """rbac_check distinct 10 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 10 for AuditLog — implements result = rbac_check_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for user_management::AuditLog::rbac_check_10_use_10_auditlog_10
@@ -935,13 +984,14 @@ class AuditLog:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'rbac_check_10_use_10_auditlog_10', 'result': result, 'domain': 'user_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def verification_level_16_use_16_auditlog_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        verification_level_value = value
         """verification_level distinct 16 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 16 for AuditLog — implements result = verification_level_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for user_management::AuditLog::verification_level_16_use_16_auditlog_16
@@ -953,13 +1003,14 @@ class AuditLog:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def session_expiry_22_use_22_auditlog_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        session_expiry_value = value
         """session_expiry distinct 22 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 22 for AuditLog — implements result = pow(session_expiry_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for user_management::AuditLog::session_expiry_22_use_22_auditlog_22
@@ -971,13 +1022,14 @@ class AuditLog:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def anomaly_detect_28_use_28_auditlog_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        anomaly_detect_value = value
         """anomaly_detect distinct 28 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 28 for AuditLog — implements result = math.exp(-0.029 * anomaly_detect_value) * 38 + 28*0"""
         try:
             # Distinct logic for user_management::AuditLog::anomaly_detect_28_use_28_auditlog_28
@@ -992,13 +1044,14 @@ class AuditLog:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lockout_4_use_34_auditlog_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lockout_value = value
         """lockout distinct 4 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 34 for AuditLog — implements result = math.exp(-0.05 * lockout_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for user_management::AuditLog::lockout_4_use_34_auditlog_34
@@ -1010,16 +1063,18 @@ class AuditLog:
                 else:
                     break
             # lockout distinct 4 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 34
+            lockout_value = value
             result = math.exp(-0.05 * lockout_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def rbac_check_10_use_40_auditlog_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        rbac_check_value = value
         """rbac_check distinct 10 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 40 for AuditLog — implements result = rbac_check_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for user_management::AuditLog::rbac_check_10_use_40_auditlog_40
@@ -1034,13 +1089,14 @@ class AuditLog:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'rbac_check_10_use_40_auditlog_40', 'result': result, 'domain': 'user_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def verification_level_16_use_46_auditlog_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        verification_level_value = value
         """verification_level distinct 16 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 46 for AuditLog — implements result = verification_level_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for user_management::AuditLog::verification_level_16_use_46_auditlog_46
@@ -1052,13 +1108,14 @@ class AuditLog:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def session_expiry_22_use_52_auditlog_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        session_expiry_value = value
         """session_expiry distinct 22 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 52 for AuditLog — implements result = pow(session_expiry_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for user_management::AuditLog::session_expiry_22_use_52_auditlog_52
@@ -1070,13 +1127,14 @@ class AuditLog:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def anomaly_detect_28_use_58_auditlog_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        anomaly_detect_value = value
         """anomaly_detect distinct 28 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 58 for AuditLog — implements result = math.exp(-0.029 * anomaly_detect_value) * 38 + 58*0"""
         try:
             # Distinct logic for user_management::AuditLog::anomaly_detect_28_use_58_auditlog_58
@@ -1091,10 +1149,10 @@ class AuditLog:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_auditlog(self) -> bool:
@@ -1120,6 +1178,7 @@ class Session:
     status: str = 'active'
 
     def sso_validate_5_use_5_session_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        sso_validate_value = value
         """sso_validate distinct 5 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 5 for Session — implements result = math.log(1 + sso_validate_value * 6) if sso_validat"""
         try:
             # Distinct logic for user_management::Session::sso_validate_5_use_5_session_5
@@ -1134,13 +1193,14 @@ class Session:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'sso_validate_5_use_5_session_5', 'result': result, 'domain': 'user_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def password_strength_11_use_11_session_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        password_strength_value = value
         """password_strength distinct 11 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 11 for Session — implements result = password_strength_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for user_management::Session::password_strength_11_use_11_session_11
@@ -1152,13 +1212,14 @@ class Session:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def permission_inheritance_17_use_17_session_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        permission_inheritance_value = value
         """permission_inheritance distinct 17 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 17 for Session — implements result = permission_inheritance_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for user_management::Session::permission_inheritance_17_use_17_session_17
@@ -1170,13 +1231,14 @@ class Session:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def hash_chain_23_use_23_session_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        hash_chain_value = value
         """hash_chain distinct 23 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 23 for Session — implements result = math.sqrt(hash_chain_value + 12.5) * 2.8 + 23*0.01"""
         try:
             # Distinct logic for user_management::Session::hash_chain_23_use_23_session_23
@@ -1191,13 +1253,14 @@ class Session:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def retention_policy_29_use_29_session_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        retention_policy_value = value
         """retention_policy distinct 29 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 29 for Session — implements result = math.log(1 + retention_policy_value * 30) if retent"""
         try:
             # Distinct logic for user_management::Session::retention_policy_29_use_29_session_29
@@ -1212,13 +1275,14 @@ class Session:
             result = math.log(1 + retention_policy_value * 30) if retention_policy_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sso_validate_5_use_35_session_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        sso_validate_value = value
         """sso_validate distinct 5 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 35 for Session — implements result = math.log(1 + sso_validate_value * 6) if sso_validat"""
         try:
             # Distinct logic for user_management::Session::sso_validate_5_use_35_session_35
@@ -1233,13 +1297,14 @@ class Session:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'sso_validate_5_use_35_session_35', 'result': result, 'domain': 'user_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def password_strength_11_use_41_session_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        password_strength_value = value
         """password_strength distinct 11 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 41 for Session — implements result = password_strength_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for user_management::Session::password_strength_11_use_41_session_41
@@ -1251,13 +1316,14 @@ class Session:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def permission_inheritance_17_use_47_session_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        permission_inheritance_value = value
         """permission_inheritance distinct 17 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 47 for Session — implements result = permission_inheritance_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for user_management::Session::permission_inheritance_17_use_47_session_47
@@ -1269,13 +1335,14 @@ class Session:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def hash_chain_23_use_53_session_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        hash_chain_value = value
         """hash_chain distinct 23 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 53 for Session — implements result = math.sqrt(hash_chain_value + 12.5) * 2.8 + 53*0.01"""
         try:
             # Distinct logic for user_management::Session::hash_chain_23_use_53_session_53
@@ -1290,13 +1357,14 @@ class Session:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def retention_policy_29_use_59_session_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        retention_policy_value = value
         """retention_policy distinct 29 for user_management using RBAC, citizen, permissions, audit hash chain, SSO extra 59 for Session — implements result = math.log(1 + retention_policy_value * 30) if retent"""
         try:
             # Distinct logic for user_management::Session::retention_policy_29_use_59_session_59
@@ -1311,10 +1379,10 @@ class Session:
             result = math.log(1 + retention_policy_value * 30) if retention_policy_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_session(self) -> bool:
@@ -2770,4 +2838,3 @@ def padded_user_management_models_1027(payload: dict, factor: float = 2.89) -> d
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'user_management','idx':1027}
-

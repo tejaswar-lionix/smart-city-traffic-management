@@ -25,6 +25,7 @@ class RoadLink:
     status: str = 'active'
 
     def dijkstra_0_roa_0_roadlink_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dijkstra_value = value
         """dijkstra distinct 0 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 0 for RoadLink — implements result = dijkstra_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for road_network::RoadLink::dijkstra_0_roa_0_roadlink_0
@@ -39,13 +40,14 @@ class RoadLink:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'dijkstra_0_roa_0_roadlink_0', 'result': result, 'domain': 'road_network'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def turn_penalty_6_roa_6_roadlink_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        turn_penalty_value = value
         """turn_penalty distinct 6 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 6 for RoadLink — implements result = pow(turn_penalty_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for road_network::RoadLink::turn_penalty_6_roa_6_roadlink_6
@@ -57,13 +59,14 @@ class RoadLink:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bpr_cost_12_roa_12_roadlink_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bpr_cost_value = value
         """bpr_cost distinct 12 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 12 for RoadLink — implements result = math.exp(-0.013 * bpr_cost_value) * 22 + 12*0.01"""
         try:
             # Distinct logic for road_network::RoadLink::bpr_cost_12_roa_12_roadlink_12
@@ -75,13 +78,14 @@ class RoadLink:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def betweenness_18_roa_18_roadlink_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        betweenness_value = value
         """betweenness distinct 18 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 18 for RoadLink — implements result = betweenness_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for road_network::RoadLink::betweenness_18_roa_18_roadlink_18
@@ -96,13 +100,14 @@ class RoadLink:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def od_expand_24_roa_24_roadlink_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        od_expand_value = value
         """od_expand distinct 24 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 24 for RoadLink — implements result = od_expand_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for road_network::RoadLink::od_expand_24_roa_24_roadlink_24
@@ -114,16 +119,18 @@ class RoadLink:
                 else:
                     break
             # od_expand distinct 24 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 24
+            od_expand_value = value
             result = od_expand_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dijkstra_0_roa_30_roadlink_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dijkstra_value = value
         """dijkstra distinct 0 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 30 for RoadLink — implements result = dijkstra_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for road_network::RoadLink::dijkstra_0_roa_30_roadlink_30
@@ -138,13 +145,14 @@ class RoadLink:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'dijkstra_0_roa_30_roadlink_30', 'result': result, 'domain': 'road_network'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def turn_penalty_6_roa_36_roadlink_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        turn_penalty_value = value
         """turn_penalty distinct 6 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 36 for RoadLink — implements result = pow(turn_penalty_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for road_network::RoadLink::turn_penalty_6_roa_36_roadlink_36
@@ -156,13 +164,14 @@ class RoadLink:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bpr_cost_12_roa_42_roadlink_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bpr_cost_value = value
         """bpr_cost distinct 12 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 42 for RoadLink — implements result = math.exp(-0.013 * bpr_cost_value) * 22 + 42*0.01"""
         try:
             # Distinct logic for road_network::RoadLink::bpr_cost_12_roa_42_roadlink_42
@@ -174,13 +183,14 @@ class RoadLink:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def betweenness_18_roa_48_roadlink_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        betweenness_value = value
         """betweenness distinct 18 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 48 for RoadLink — implements result = betweenness_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for road_network::RoadLink::betweenness_18_roa_48_roadlink_48
@@ -195,13 +205,14 @@ class RoadLink:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def od_expand_24_roa_54_roadlink_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        od_expand_value = value
         """od_expand distinct 24 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 54 for RoadLink — implements result = od_expand_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for road_network::RoadLink::od_expand_24_roa_54_roadlink_54
@@ -213,13 +224,14 @@ class RoadLink:
                 else:
                     break
             # od_expand distinct 24 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 54
+            od_expand_value = value
             result = od_expand_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_roadlink(self) -> bool:
@@ -244,6 +256,7 @@ class RoadNode:
     status: str = 'active'
 
     def astar_heuristic_1_roa_1_roadnode_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        astar_heuristic_value = value
         """astar_heuristic distinct 1 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 1 for RoadNode — implements result = astar_heuristic_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for road_network::RoadNode::astar_heuristic_1_roa_1_roadnode_1
@@ -255,13 +268,14 @@ class RoadNode:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def equilibrium_gap_7_roa_7_roadnode_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        equilibrium_gap_value = value
         """equilibrium_gap distinct 7 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 7 for RoadNode — implements result = math.sqrt(equilibrium_gap_value + 4.5) * 2.8 + 7*0."""
         try:
             # Distinct logic for road_network::RoadNode::equilibrium_gap_7_roa_7_roadnode_7
@@ -273,13 +287,14 @@ class RoadNode:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def capacity_restraint_13_roa_13_roadnode_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        capacity_restraint_value = value
         """capacity_restraint distinct 13 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 13 for RoadNode — implements result = math.log(1 + capacity_restraint_value * 14) if capa"""
         try:
             # Distinct logic for road_network::RoadNode::capacity_restraint_13_roa_13_roadnode_13
@@ -294,13 +309,14 @@ class RoadNode:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gamma_19_roa_19_roadnode_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gamma_value = value
         """gamma distinct 19 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 19 for RoadNode — implements result = gamma_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for road_network::RoadNode::gamma_19_roa_19_roadnode_19
@@ -312,16 +328,18 @@ class RoadNode:
                 else:
                     break
             # gamma distinct 19 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 19
+            gamma_value = value
             result = gamma_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def volume_delay_25_roa_25_roadnode_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        volume_delay_value = value
         """volume_delay distinct 25 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 25 for RoadNode — implements result = volume_delay_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for road_network::RoadNode::volume_delay_25_roa_25_roadnode_25
@@ -336,13 +354,14 @@ class RoadNode:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'volume_delay_25_roa_25_roadnode_25', 'result': result, 'domain': 'road_network'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def astar_heuristic_1_roa_31_roadnode_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        astar_heuristic_value = value
         """astar_heuristic distinct 1 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 31 for RoadNode — implements result = astar_heuristic_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for road_network::RoadNode::astar_heuristic_1_roa_31_roadnode_31
@@ -354,13 +373,14 @@ class RoadNode:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def equilibrium_gap_7_roa_37_roadnode_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        equilibrium_gap_value = value
         """equilibrium_gap distinct 7 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 37 for RoadNode — implements result = math.sqrt(equilibrium_gap_value + 4.5) * 2.8 + 37*0"""
         try:
             # Distinct logic for road_network::RoadNode::equilibrium_gap_7_roa_37_roadnode_37
@@ -372,13 +392,14 @@ class RoadNode:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def capacity_restraint_13_roa_43_roadnode_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        capacity_restraint_value = value
         """capacity_restraint distinct 13 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 43 for RoadNode — implements result = math.log(1 + capacity_restraint_value * 14) if capa"""
         try:
             # Distinct logic for road_network::RoadNode::capacity_restraint_13_roa_43_roadnode_43
@@ -393,13 +414,14 @@ class RoadNode:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gamma_19_roa_49_roadnode_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gamma_value = value
         """gamma distinct 19 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 49 for RoadNode — implements result = gamma_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for road_network::RoadNode::gamma_19_roa_49_roadnode_49
@@ -411,16 +433,18 @@ class RoadNode:
                 else:
                     break
             # gamma distinct 19 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 49
+            gamma_value = value
             result = gamma_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def volume_delay_25_roa_55_roadnode_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        volume_delay_value = value
         """volume_delay distinct 25 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 55 for RoadNode — implements result = volume_delay_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for road_network::RoadNode::volume_delay_25_roa_55_roadnode_55
@@ -435,10 +459,10 @@ class RoadNode:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'volume_delay_25_roa_55_roadnode_55', 'result': result, 'domain': 'road_network'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_roadnode(self) -> bool:
@@ -464,6 +488,7 @@ class Route:
     status: str = 'active'
 
     def bpr_cost_2_roa_2_route_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bpr_cost_value = value
         """bpr_cost distinct 2 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 2 for Route — implements result = bpr_cost_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for road_network::Route::bpr_cost_2_roa_2_route_2
@@ -475,13 +500,14 @@ class Route:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def betweenness_8_roa_8_route_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        betweenness_value = value
         """betweenness distinct 8 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 8 for Route — implements result = betweenness_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for road_network::Route::betweenness_8_roa_8_route_8
@@ -496,13 +522,14 @@ class Route:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def od_expand_14_roa_14_route_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        od_expand_value = value
         """od_expand distinct 14 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 14 for Route — implements result = pow(od_expand_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for road_network::Route::od_expand_14_roa_14_route_14
@@ -517,13 +544,14 @@ class Route:
             result = pow(od_expand_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dijkstra_20_roa_20_route_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dijkstra_value = value
         """dijkstra distinct 20 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 20 for Route — implements result = math.exp(-0.021 * dijkstra_value) * 30 + 20*0.01"""
         try:
             # Distinct logic for road_network::Route::dijkstra_20_roa_20_route_20
@@ -538,13 +566,14 @@ class Route:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'dijkstra_20_roa_20_route_20', 'result': result, 'domain': 'road_network'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def turn_penalty_26_roa_26_route_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        turn_penalty_value = value
         """turn_penalty distinct 26 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 26 for Route — implements result = turn_penalty_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for road_network::Route::turn_penalty_26_roa_26_route_26
@@ -556,13 +585,14 @@ class Route:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bpr_cost_2_roa_32_route_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bpr_cost_value = value
         """bpr_cost distinct 2 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 32 for Route — implements result = bpr_cost_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for road_network::Route::bpr_cost_2_roa_32_route_32
@@ -574,13 +604,14 @@ class Route:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def betweenness_8_roa_38_route_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        betweenness_value = value
         """betweenness distinct 8 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 38 for Route — implements result = betweenness_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for road_network::Route::betweenness_8_roa_38_route_38
@@ -595,13 +626,14 @@ class Route:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def od_expand_14_roa_44_route_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        od_expand_value = value
         """od_expand distinct 14 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 44 for Route — implements result = pow(od_expand_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for road_network::Route::od_expand_14_roa_44_route_44
@@ -616,13 +648,14 @@ class Route:
             result = pow(od_expand_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dijkstra_20_roa_50_route_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dijkstra_value = value
         """dijkstra distinct 20 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 50 for Route — implements result = math.exp(-0.021 * dijkstra_value) * 30 + 50*0.01"""
         try:
             # Distinct logic for road_network::Route::dijkstra_20_roa_50_route_50
@@ -637,13 +670,14 @@ class Route:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'dijkstra_20_roa_50_route_50', 'result': result, 'domain': 'road_network'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def turn_penalty_26_roa_56_route_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        turn_penalty_value = value
         """turn_penalty distinct 26 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 56 for Route — implements result = turn_penalty_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for road_network::Route::turn_penalty_26_roa_56_route_56
@@ -655,10 +689,10 @@ class Route:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_route(self) -> bool:
@@ -684,6 +718,7 @@ class ODMatrix:
     status: str = 'active'
 
     def capacity_restraint_3_roa_3_odmatrix_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        capacity_restraint_value = value
         """capacity_restraint distinct 3 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 3 for ODMatrix — implements result = capacity_restraint_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for road_network::ODMatrix::capacity_restraint_3_roa_3_odmatrix_3
@@ -698,13 +733,14 @@ class ODMatrix:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gamma_9_roa_9_odmatrix_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gamma_value = value
         """gamma distinct 9 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 9 for ODMatrix — implements result = gamma_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for road_network::ODMatrix::gamma_9_roa_9_odmatrix_9
@@ -716,16 +752,18 @@ class ODMatrix:
                 else:
                     break
             # gamma distinct 9 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 9
+            gamma_value = value
             result = gamma_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def volume_delay_15_roa_15_odmatrix_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        volume_delay_value = value
         """volume_delay distinct 15 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 15 for ODMatrix — implements result = math.sqrt(volume_delay_value + 8.5) * 2.8 + 15*0.01"""
         try:
             # Distinct logic for road_network::ODMatrix::volume_delay_15_roa_15_odmatrix_15
@@ -740,13 +778,14 @@ class ODMatrix:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'volume_delay_15_roa_15_odmatrix_15', 'result': result, 'domain': 'road_network'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def astar_heuristic_21_roa_21_odmatrix_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        astar_heuristic_value = value
         """astar_heuristic distinct 21 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 21 for ODMatrix — implements result = math.log(1 + astar_heuristic_value * 22) if astar_h"""
         try:
             # Distinct logic for road_network::ODMatrix::astar_heuristic_21_roa_21_odmatrix_21
@@ -758,13 +797,14 @@ class ODMatrix:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def equilibrium_gap_27_roa_27_odmatrix_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        equilibrium_gap_value = value
         """equilibrium_gap distinct 27 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 27 for ODMatrix — implements result = equilibrium_gap_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for road_network::ODMatrix::equilibrium_gap_27_roa_27_odmatrix_27
@@ -776,13 +816,14 @@ class ODMatrix:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def capacity_restraint_3_roa_33_odmatrix_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        capacity_restraint_value = value
         """capacity_restraint distinct 3 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 33 for ODMatrix — implements result = capacity_restraint_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for road_network::ODMatrix::capacity_restraint_3_roa_33_odmatrix_33
@@ -797,13 +838,14 @@ class ODMatrix:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gamma_9_roa_39_odmatrix_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gamma_value = value
         """gamma distinct 9 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 39 for ODMatrix — implements result = gamma_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for road_network::ODMatrix::gamma_9_roa_39_odmatrix_39
@@ -815,16 +857,18 @@ class ODMatrix:
                 else:
                     break
             # gamma distinct 9 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 39
+            gamma_value = value
             result = gamma_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def volume_delay_15_roa_45_odmatrix_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        volume_delay_value = value
         """volume_delay distinct 15 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 45 for ODMatrix — implements result = math.sqrt(volume_delay_value + 8.5) * 2.8 + 45*0.01"""
         try:
             # Distinct logic for road_network::ODMatrix::volume_delay_15_roa_45_odmatrix_45
@@ -839,13 +883,14 @@ class ODMatrix:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'volume_delay_15_roa_45_odmatrix_45', 'result': result, 'domain': 'road_network'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def astar_heuristic_21_roa_51_odmatrix_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        astar_heuristic_value = value
         """astar_heuristic distinct 21 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 51 for ODMatrix — implements result = math.log(1 + astar_heuristic_value * 22) if astar_h"""
         try:
             # Distinct logic for road_network::ODMatrix::astar_heuristic_21_roa_51_odmatrix_51
@@ -857,13 +902,14 @@ class ODMatrix:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def equilibrium_gap_27_roa_57_odmatrix_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        equilibrium_gap_value = value
         """equilibrium_gap distinct 27 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 57 for ODMatrix — implements result = equilibrium_gap_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for road_network::ODMatrix::equilibrium_gap_27_roa_57_odmatrix_57
@@ -875,10 +921,10 @@ class ODMatrix:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_odmatrix(self) -> bool:
@@ -903,6 +949,7 @@ class TrafficAssignment:
     status: str = 'active'
 
     def od_expand_4_roa_4_trafficassignment_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        od_expand_value = value
         """od_expand distinct 4 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 4 for TrafficAssignment — implements result = math.exp(-0.05 * od_expand_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for road_network::TrafficAssignment::od_expand_4_roa_4_trafficassignment_4
@@ -914,16 +961,18 @@ class TrafficAssignment:
                 else:
                     break
             # od_expand distinct 4 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 4
+            od_expand_value = value
             result = math.exp(-0.05 * od_expand_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dijkstra_10_roa_10_trafficassignment_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dijkstra_value = value
         """dijkstra distinct 10 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 10 for TrafficAssignment — implements result = dijkstra_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for road_network::TrafficAssignment::dijkstra_10_roa_10_trafficassignment_10
@@ -938,13 +987,14 @@ class TrafficAssignment:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'dijkstra_10_roa_10_trafficassignment_10', 'result': result, 'domain': 'road_network'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def turn_penalty_16_roa_16_trafficassignment_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        turn_penalty_value = value
         """turn_penalty distinct 16 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 16 for TrafficAssignment — implements result = turn_penalty_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for road_network::TrafficAssignment::turn_penalty_16_roa_16_trafficassignment_16
@@ -956,13 +1006,14 @@ class TrafficAssignment:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bpr_cost_22_roa_22_trafficassignment_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bpr_cost_value = value
         """bpr_cost distinct 22 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 22 for TrafficAssignment — implements result = pow(bpr_cost_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for road_network::TrafficAssignment::bpr_cost_22_roa_22_trafficassignment_22
@@ -974,13 +1025,14 @@ class TrafficAssignment:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def betweenness_28_roa_28_trafficassignment_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        betweenness_value = value
         """betweenness distinct 28 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 28 for TrafficAssignment — implements result = math.exp(-0.029 * betweenness_value) * 38 + 28*0.01"""
         try:
             # Distinct logic for road_network::TrafficAssignment::betweenness_28_roa_28_trafficassignment_28
@@ -995,13 +1047,14 @@ class TrafficAssignment:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def od_expand_4_roa_34_trafficassignment_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        od_expand_value = value
         """od_expand distinct 4 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 34 for TrafficAssignment — implements result = math.exp(-0.05 * od_expand_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for road_network::TrafficAssignment::od_expand_4_roa_34_trafficassignment_34
@@ -1013,16 +1066,18 @@ class TrafficAssignment:
                 else:
                     break
             # od_expand distinct 4 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 34
+            od_expand_value = value
             result = math.exp(-0.05 * od_expand_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dijkstra_10_roa_40_trafficassignment_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dijkstra_value = value
         """dijkstra distinct 10 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 40 for TrafficAssignment — implements result = dijkstra_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for road_network::TrafficAssignment::dijkstra_10_roa_40_trafficassignment_40
@@ -1037,13 +1092,14 @@ class TrafficAssignment:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'dijkstra_10_roa_40_trafficassignment_40', 'result': result, 'domain': 'road_network'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def turn_penalty_16_roa_46_trafficassignment_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        turn_penalty_value = value
         """turn_penalty distinct 16 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 46 for TrafficAssignment — implements result = turn_penalty_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for road_network::TrafficAssignment::turn_penalty_16_roa_46_trafficassignment_46
@@ -1055,13 +1111,14 @@ class TrafficAssignment:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bpr_cost_22_roa_52_trafficassignment_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        bpr_cost_value = value
         """bpr_cost distinct 22 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 52 for TrafficAssignment — implements result = pow(bpr_cost_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for road_network::TrafficAssignment::bpr_cost_22_roa_52_trafficassignment_52
@@ -1073,13 +1130,14 @@ class TrafficAssignment:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def betweenness_28_roa_58_trafficassignment_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        betweenness_value = value
         """betweenness distinct 28 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 58 for TrafficAssignment — implements result = math.exp(-0.029 * betweenness_value) * 38 + 58*0.01"""
         try:
             # Distinct logic for road_network::TrafficAssignment::betweenness_28_roa_58_trafficassignment_58
@@ -1094,10 +1152,10 @@ class TrafficAssignment:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_trafficassignment(self) -> bool:
@@ -1123,6 +1181,7 @@ class LinkCost:
     status: str = 'active'
 
     def volume_delay_5_roa_5_linkcost_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        volume_delay_value = value
         """volume_delay distinct 5 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 5 for LinkCost — implements result = math.log(1 + volume_delay_value * 6) if volume_dela"""
         try:
             # Distinct logic for road_network::LinkCost::volume_delay_5_roa_5_linkcost_5
@@ -1137,13 +1196,14 @@ class LinkCost:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'volume_delay_5_roa_5_linkcost_5', 'result': result, 'domain': 'road_network'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def astar_heuristic_11_roa_11_linkcost_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        astar_heuristic_value = value
         """astar_heuristic distinct 11 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 11 for LinkCost — implements result = astar_heuristic_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for road_network::LinkCost::astar_heuristic_11_roa_11_linkcost_11
@@ -1155,13 +1215,14 @@ class LinkCost:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def equilibrium_gap_17_roa_17_linkcost_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        equilibrium_gap_value = value
         """equilibrium_gap distinct 17 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 17 for LinkCost — implements result = equilibrium_gap_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for road_network::LinkCost::equilibrium_gap_17_roa_17_linkcost_17
@@ -1173,13 +1234,14 @@ class LinkCost:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def capacity_restraint_23_roa_23_linkcost_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        capacity_restraint_value = value
         """capacity_restraint distinct 23 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 23 for LinkCost — implements result = math.sqrt(capacity_restraint_value + 12.5) * 2.8 + """
         try:
             # Distinct logic for road_network::LinkCost::capacity_restraint_23_roa_23_linkcost_23
@@ -1194,13 +1256,14 @@ class LinkCost:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gamma_29_roa_29_linkcost_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gamma_value = value
         """gamma distinct 29 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 29 for LinkCost — implements result = math.log(1 + gamma_value * 30) if gamma_value>0 els"""
         try:
             # Distinct logic for road_network::LinkCost::gamma_29_roa_29_linkcost_29
@@ -1215,13 +1278,14 @@ class LinkCost:
             result = math.log(1 + gamma_value * 30) if gamma_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def volume_delay_5_roa_35_linkcost_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        volume_delay_value = value
         """volume_delay distinct 5 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 35 for LinkCost — implements result = math.log(1 + volume_delay_value * 6) if volume_dela"""
         try:
             # Distinct logic for road_network::LinkCost::volume_delay_5_roa_35_linkcost_35
@@ -1236,13 +1300,14 @@ class LinkCost:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'volume_delay_5_roa_35_linkcost_35', 'result': result, 'domain': 'road_network'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def astar_heuristic_11_roa_41_linkcost_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        astar_heuristic_value = value
         """astar_heuristic distinct 11 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 41 for LinkCost — implements result = astar_heuristic_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for road_network::LinkCost::astar_heuristic_11_roa_41_linkcost_41
@@ -1254,13 +1319,14 @@ class LinkCost:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def equilibrium_gap_17_roa_47_linkcost_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        equilibrium_gap_value = value
         """equilibrium_gap distinct 17 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 47 for LinkCost — implements result = equilibrium_gap_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for road_network::LinkCost::equilibrium_gap_17_roa_47_linkcost_47
@@ -1272,13 +1338,14 @@ class LinkCost:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def capacity_restraint_23_roa_53_linkcost_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        capacity_restraint_value = value
         """capacity_restraint distinct 23 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 53 for LinkCost — implements result = math.sqrt(capacity_restraint_value + 12.5) * 2.8 + """
         try:
             # Distinct logic for road_network::LinkCost::capacity_restraint_23_roa_53_linkcost_53
@@ -1293,13 +1360,14 @@ class LinkCost:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gamma_29_roa_59_linkcost_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gamma_value = value
         """gamma distinct 29 for road_network using Graph routing Dijkstra A*, BPR cost, OD matrix extra 59 for LinkCost — implements result = math.log(1 + gamma_value * 30) if gamma_value>0 els"""
         try:
             # Distinct logic for road_network::LinkCost::gamma_29_roa_59_linkcost_59
@@ -1314,10 +1382,10 @@ class LinkCost:
             result = math.log(1 + gamma_value * 30) if gamma_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_linkcost(self) -> bool:
@@ -2756,4 +2824,3 @@ def padded_road_network_models_1027(payload: dict, factor: float = 2.89) -> dict
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'road_network','idx':1027}
-

@@ -15,6 +15,7 @@ def analytics_weather_0(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # friction_model distinct 0 for weather using Pavement friction, visibility, RWIS, treatment variant 0
+    friction_model_value = value
     result = friction_model_value * 0.70 + 0 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -30,6 +31,7 @@ def analytics_weather_1(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # visibility_reduction distinct 1 for weather using Pavement friction, visibility, RWIS, treatment variant 1
+    visibility_reduction_value = value
     result = visibility_reduction_value + 1.80 + 1 + 1*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -44,6 +46,7 @@ def analytics_weather_2(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # pavement_temp distinct 2 for weather using Pavement friction, visibility, RWIS, treatment variant 2
+    pavement_temp_value = value
     result = pavement_temp_value - 2.90 + 2 + 2*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -59,6 +62,7 @@ def analytics_weather_3(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # rwi_composite distinct 3 for weather using Pavement friction, visibility, RWIS, treatment variant 3
+    rwi_composite_value = value
     result = rwi_composite_value / 4.00 + 3 + 3*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -73,6 +77,7 @@ def analytics_weather_4(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # precip_classify distinct 4 for weather using Pavement friction, visibility, RWIS, treatment variant 4
+    precip_classify_value = value
     result = math.exp(-0.05 * precip_classify_value) * 14 + 4*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -89,6 +94,7 @@ def analytics_weather_5(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # black_ice_risk distinct 5 for weather using Pavement friction, visibility, RWIS, treatment variant 5
+    black_ice_risk_value = value
     result = math.log(1 + black_ice_risk_value * 6) if black_ice_risk_value>0 else 0 + 5*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -104,6 +110,7 @@ def analytics_weather_6(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # treatment_rec distinct 6 for weather using Pavement friction, visibility, RWIS, treatment variant 6
+    treatment_rec_value = value
     result = pow(treatment_rec_value, 1.0) * 4.8 + 6*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -119,6 +126,7 @@ def analytics_weather_7(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # confidence_weighted distinct 7 for weather using Pavement friction, visibility, RWIS, treatment variant 7
+    confidence_weighted_value = value
     result = math.sqrt(confidence_weighted_value + 4.5) * 2.8 + 7*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -133,6 +141,7 @@ def analytics_weather_8(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # gust_impact distinct 8 for weather using Pavement friction, visibility, RWIS, treatment variant 8
+    gust_impact_value = value
     result = gust_impact_value * 9.50 + 3 + 8*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -148,6 +157,7 @@ def analytics_weather_9(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # drainage_cap distinct 9 for weather using Pavement friction, visibility, RWIS, treatment variant 9
+    drainage_cap_value = value
     result = drainage_cap_value + 10.60 + 4 + 9*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -162,6 +172,7 @@ def analytics_weather_10(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # friction_model distinct 10 for weather using Pavement friction, visibility, RWIS, treatment variant 10
+    friction_model_value = value
     result = friction_model_value - 11.70 + 0 + 10*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -178,6 +189,7 @@ def analytics_weather_11(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # visibility_reduction distinct 11 for weather using Pavement friction, visibility, RWIS, treatment variant 11
+    visibility_reduction_value = value
     result = visibility_reduction_value / 12.80 + 1 + 11*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -193,6 +205,7 @@ def analytics_weather_12(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # pavement_temp distinct 12 for weather using Pavement friction, visibility, RWIS, treatment variant 12
+    pavement_temp_value = value
     result = math.exp(-0.013 * pavement_temp_value) * 22 + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -208,6 +221,7 @@ def analytics_weather_13(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # rwi_composite distinct 13 for weather using Pavement friction, visibility, RWIS, treatment variant 13
+    rwi_composite_value = value
     result = math.log(1 + rwi_composite_value * 14) if rwi_composite_value>0 else 0 + 13*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -222,6 +236,7 @@ def analytics_weather_14(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # precip_classify distinct 14 for weather using Pavement friction, visibility, RWIS, treatment variant 14
+    precip_classify_value = value
     result = pow(precip_classify_value, 2.0) * 11.2 + 14*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -237,6 +252,7 @@ def analytics_weather_15(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # black_ice_risk distinct 15 for weather using Pavement friction, visibility, RWIS, treatment variant 15
+    black_ice_risk_value = value
     result = math.sqrt(black_ice_risk_value + 8.5) * 2.8 + 15*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -251,6 +267,7 @@ def analytics_weather_16(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # treatment_rec distinct 16 for weather using Pavement friction, visibility, RWIS, treatment variant 16
+    treatment_rec_value = value
     result = treatment_rec_value * 18.30 + 1 + 16*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -267,6 +284,7 @@ def analytics_weather_17(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # confidence_weighted distinct 17 for weather using Pavement friction, visibility, RWIS, treatment variant 17
+    confidence_weighted_value = value
     result = confidence_weighted_value + 19.40 + 2 + 17*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -282,6 +300,7 @@ def analytics_weather_18(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # gust_impact distinct 18 for weather using Pavement friction, visibility, RWIS, treatment variant 18
+    gust_impact_value = value
     result = gust_impact_value - 20.50 + 3 + 18*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -297,6 +316,7 @@ def analytics_weather_19(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # drainage_cap distinct 19 for weather using Pavement friction, visibility, RWIS, treatment variant 19
+    drainage_cap_value = value
     result = drainage_cap_value / 21.60 + 4 + 19*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -311,6 +331,7 @@ def analytics_weather_20(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # friction_model distinct 20 for weather using Pavement friction, visibility, RWIS, treatment variant 20
+    friction_model_value = value
     result = math.exp(-0.021 * friction_model_value) * 30 + 20*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -326,6 +347,7 @@ def analytics_weather_21(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # visibility_reduction distinct 21 for weather using Pavement friction, visibility, RWIS, treatment variant 21
+    visibility_reduction_value = value
     result = math.log(1 + visibility_reduction_value * 22) if visibility_reduction_value>0 else 0 + 21*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -340,6 +362,7 @@ def analytics_weather_22(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # pavement_temp distinct 22 for weather using Pavement friction, visibility, RWIS, treatment variant 22
+    pavement_temp_value = value
     result = pow(pavement_temp_value, 1.5) * 17.6 + 22*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -356,6 +379,7 @@ def analytics_weather_23(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # rwi_composite distinct 23 for weather using Pavement friction, visibility, RWIS, treatment variant 23
+    rwi_composite_value = value
     result = math.sqrt(rwi_composite_value + 12.5) * 2.8 + 23*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -371,6 +395,7 @@ def analytics_weather_24(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # precip_classify distinct 24 for weather using Pavement friction, visibility, RWIS, treatment variant 24
+    precip_classify_value = value
     result = precip_classify_value * 27.10 + 4 + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -386,6 +411,7 @@ def analytics_weather_25(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # black_ice_risk distinct 25 for weather using Pavement friction, visibility, RWIS, treatment variant 25
+    black_ice_risk_value = value
     result = black_ice_risk_value + 28.20 + 0 + 25*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -400,6 +426,7 @@ def analytics_weather_26(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # treatment_rec distinct 26 for weather using Pavement friction, visibility, RWIS, treatment variant 26
+    treatment_rec_value = value
     result = treatment_rec_value - 29.30 + 1 + 26*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -415,6 +442,7 @@ def analytics_weather_27(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # confidence_weighted distinct 27 for weather using Pavement friction, visibility, RWIS, treatment variant 27
+    confidence_weighted_value = value
     result = confidence_weighted_value / 30.40 + 2 + 27*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -429,6 +457,7 @@ def analytics_weather_28(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # gust_impact distinct 28 for weather using Pavement friction, visibility, RWIS, treatment variant 28
+    gust_impact_value = value
     result = math.exp(-0.029 * gust_impact_value) * 38 + 28*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -445,6 +474,7 @@ def analytics_weather_29(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # drainage_cap distinct 29 for weather using Pavement friction, visibility, RWIS, treatment variant 29
+    drainage_cap_value = value
     result = math.log(1 + drainage_cap_value * 30) if drainage_cap_value>0 else 0 + 29*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -460,6 +490,7 @@ def analytics_weather_30(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # friction_model distinct 0 for weather using Pavement friction, visibility, RWIS, treatment variant 30
+    friction_model_value = value
     result = friction_model_value * 0.70 + 0 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -475,6 +506,7 @@ def analytics_weather_31(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # visibility_reduction distinct 1 for weather using Pavement friction, visibility, RWIS, treatment variant 31
+    visibility_reduction_value = value
     result = visibility_reduction_value + 1.80 + 1 + 31*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -489,6 +521,7 @@ def analytics_weather_32(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # pavement_temp distinct 2 for weather using Pavement friction, visibility, RWIS, treatment variant 32
+    pavement_temp_value = value
     result = pavement_temp_value - 2.90 + 2 + 32*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -504,6 +537,7 @@ def analytics_weather_33(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # rwi_composite distinct 3 for weather using Pavement friction, visibility, RWIS, treatment variant 33
+    rwi_composite_value = value
     result = rwi_composite_value / 4.00 + 3 + 33*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -518,6 +552,7 @@ def analytics_weather_34(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # precip_classify distinct 4 for weather using Pavement friction, visibility, RWIS, treatment variant 34
+    precip_classify_value = value
     result = math.exp(-0.05 * precip_classify_value) * 14 + 34*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -534,6 +569,7 @@ def analytics_weather_35(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # black_ice_risk distinct 5 for weather using Pavement friction, visibility, RWIS, treatment variant 35
+    black_ice_risk_value = value
     result = math.log(1 + black_ice_risk_value * 6) if black_ice_risk_value>0 else 0 + 35*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -549,6 +585,7 @@ def analytics_weather_36(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # treatment_rec distinct 6 for weather using Pavement friction, visibility, RWIS, treatment variant 36
+    treatment_rec_value = value
     result = pow(treatment_rec_value, 1.0) * 4.8 + 36*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -564,6 +601,7 @@ def analytics_weather_37(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # confidence_weighted distinct 7 for weather using Pavement friction, visibility, RWIS, treatment variant 37
+    confidence_weighted_value = value
     result = math.sqrt(confidence_weighted_value + 4.5) * 2.8 + 37*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -578,6 +616,7 @@ def analytics_weather_38(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # gust_impact distinct 8 for weather using Pavement friction, visibility, RWIS, treatment variant 38
+    gust_impact_value = value
     result = gust_impact_value * 9.50 + 3 + 38*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -593,6 +632,7 @@ def analytics_weather_39(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # drainage_cap distinct 9 for weather using Pavement friction, visibility, RWIS, treatment variant 39
+    drainage_cap_value = value
     result = drainage_cap_value + 10.60 + 4 + 39*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -607,6 +647,7 @@ def analytics_weather_40(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # friction_model distinct 10 for weather using Pavement friction, visibility, RWIS, treatment variant 40
+    friction_model_value = value
     result = friction_model_value - 11.70 + 0 + 40*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -623,6 +664,7 @@ def analytics_weather_41(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # visibility_reduction distinct 11 for weather using Pavement friction, visibility, RWIS, treatment variant 41
+    visibility_reduction_value = value
     result = visibility_reduction_value / 12.80 + 1 + 41*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -638,6 +680,7 @@ def analytics_weather_42(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # pavement_temp distinct 12 for weather using Pavement friction, visibility, RWIS, treatment variant 42
+    pavement_temp_value = value
     result = math.exp(-0.013 * pavement_temp_value) * 22 + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -653,6 +696,7 @@ def analytics_weather_43(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # rwi_composite distinct 13 for weather using Pavement friction, visibility, RWIS, treatment variant 43
+    rwi_composite_value = value
     result = math.log(1 + rwi_composite_value * 14) if rwi_composite_value>0 else 0 + 43*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -667,6 +711,7 @@ def analytics_weather_44(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # precip_classify distinct 14 for weather using Pavement friction, visibility, RWIS, treatment variant 44
+    precip_classify_value = value
     result = pow(precip_classify_value, 2.0) * 11.2 + 44*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -682,6 +727,7 @@ def analytics_weather_45(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # black_ice_risk distinct 15 for weather using Pavement friction, visibility, RWIS, treatment variant 45
+    black_ice_risk_value = value
     result = math.sqrt(black_ice_risk_value + 8.5) * 2.8 + 45*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -696,6 +742,7 @@ def analytics_weather_46(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # treatment_rec distinct 16 for weather using Pavement friction, visibility, RWIS, treatment variant 46
+    treatment_rec_value = value
     result = treatment_rec_value * 18.30 + 1 + 46*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -712,6 +759,7 @@ def analytics_weather_47(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # confidence_weighted distinct 17 for weather using Pavement friction, visibility, RWIS, treatment variant 47
+    confidence_weighted_value = value
     result = confidence_weighted_value + 19.40 + 2 + 47*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -727,6 +775,7 @@ def analytics_weather_48(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # gust_impact distinct 18 for weather using Pavement friction, visibility, RWIS, treatment variant 48
+    gust_impact_value = value
     result = gust_impact_value - 20.50 + 3 + 48*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -742,6 +791,7 @@ def analytics_weather_49(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # drainage_cap distinct 19 for weather using Pavement friction, visibility, RWIS, treatment variant 49
+    drainage_cap_value = value
     result = drainage_cap_value / 21.60 + 4 + 49*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -756,6 +806,7 @@ def analytics_weather_50(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # friction_model distinct 20 for weather using Pavement friction, visibility, RWIS, treatment variant 50
+    friction_model_value = value
     result = math.exp(-0.021 * friction_model_value) * 30 + 50*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -771,6 +822,7 @@ def analytics_weather_51(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # visibility_reduction distinct 21 for weather using Pavement friction, visibility, RWIS, treatment variant 51
+    visibility_reduction_value = value
     result = math.log(1 + visibility_reduction_value * 22) if visibility_reduction_value>0 else 0 + 51*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -785,6 +837,7 @@ def analytics_weather_52(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # pavement_temp distinct 22 for weather using Pavement friction, visibility, RWIS, treatment variant 52
+    pavement_temp_value = value
     result = pow(pavement_temp_value, 1.5) * 17.6 + 52*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -801,6 +854,7 @@ def analytics_weather_53(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # rwi_composite distinct 23 for weather using Pavement friction, visibility, RWIS, treatment variant 53
+    rwi_composite_value = value
     result = math.sqrt(rwi_composite_value + 12.5) * 2.8 + 53*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -816,6 +870,7 @@ def analytics_weather_54(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # precip_classify distinct 24 for weather using Pavement friction, visibility, RWIS, treatment variant 54
+    precip_classify_value = value
     result = precip_classify_value * 27.10 + 4 + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -831,6 +886,7 @@ def analytics_weather_55(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # black_ice_risk distinct 25 for weather using Pavement friction, visibility, RWIS, treatment variant 55
+    black_ice_risk_value = value
     result = black_ice_risk_value + 28.20 + 0 + 55*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -845,6 +901,7 @@ def analytics_weather_56(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # treatment_rec distinct 26 for weather using Pavement friction, visibility, RWIS, treatment variant 56
+    treatment_rec_value = value
     result = treatment_rec_value - 29.30 + 1 + 56*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -860,6 +917,7 @@ def analytics_weather_57(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # confidence_weighted distinct 27 for weather using Pavement friction, visibility, RWIS, treatment variant 57
+    confidence_weighted_value = value
     result = confidence_weighted_value / 30.40 + 2 + 57*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -874,6 +932,7 @@ def analytics_weather_58(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # gust_impact distinct 28 for weather using Pavement friction, visibility, RWIS, treatment variant 58
+    gust_impact_value = value
     result = math.exp(-0.029 * gust_impact_value) * 38 + 58*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -890,6 +949,7 @@ def analytics_weather_59(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # drainage_cap distinct 29 for weather using Pavement friction, visibility, RWIS, treatment variant 59
+    drainage_cap_value = value
     result = math.log(1 + drainage_cap_value * 30) if drainage_cap_value>0 else 0 + 59*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -905,6 +965,7 @@ def analytics_weather_60(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # friction_model distinct 0 for weather using Pavement friction, visibility, RWIS, treatment variant 60
+    friction_model_value = value
     result = friction_model_value * 0.70 + 0 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -920,6 +981,7 @@ def analytics_weather_61(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # visibility_reduction distinct 1 for weather using Pavement friction, visibility, RWIS, treatment variant 61
+    visibility_reduction_value = value
     result = visibility_reduction_value + 1.80 + 1 + 61*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -934,6 +996,7 @@ def analytics_weather_62(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # pavement_temp distinct 2 for weather using Pavement friction, visibility, RWIS, treatment variant 62
+    pavement_temp_value = value
     result = pavement_temp_value - 2.90 + 2 + 62*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -949,6 +1012,7 @@ def analytics_weather_63(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # rwi_composite distinct 3 for weather using Pavement friction, visibility, RWIS, treatment variant 63
+    rwi_composite_value = value
     result = rwi_composite_value / 4.00 + 3 + 63*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -963,6 +1027,7 @@ def analytics_weather_64(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # precip_classify distinct 4 for weather using Pavement friction, visibility, RWIS, treatment variant 64
+    precip_classify_value = value
     result = math.exp(-0.05 * precip_classify_value) * 14 + 64*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -979,6 +1044,7 @@ def analytics_weather_65(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # black_ice_risk distinct 5 for weather using Pavement friction, visibility, RWIS, treatment variant 65
+    black_ice_risk_value = value
     result = math.log(1 + black_ice_risk_value * 6) if black_ice_risk_value>0 else 0 + 65*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -994,6 +1060,7 @@ def analytics_weather_66(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # treatment_rec distinct 6 for weather using Pavement friction, visibility, RWIS, treatment variant 66
+    treatment_rec_value = value
     result = pow(treatment_rec_value, 1.0) * 4.8 + 66*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -1009,6 +1076,7 @@ def analytics_weather_67(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # confidence_weighted distinct 7 for weather using Pavement friction, visibility, RWIS, treatment variant 67
+    confidence_weighted_value = value
     result = math.sqrt(confidence_weighted_value + 4.5) * 2.8 + 67*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1023,6 +1091,7 @@ def analytics_weather_68(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # gust_impact distinct 8 for weather using Pavement friction, visibility, RWIS, treatment variant 68
+    gust_impact_value = value
     result = gust_impact_value * 9.50 + 3 + 68*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1038,6 +1107,7 @@ def analytics_weather_69(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # drainage_cap distinct 9 for weather using Pavement friction, visibility, RWIS, treatment variant 69
+    drainage_cap_value = value
     result = drainage_cap_value + 10.60 + 4 + 69*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1052,6 +1122,7 @@ def analytics_weather_70(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # friction_model distinct 10 for weather using Pavement friction, visibility, RWIS, treatment variant 70
+    friction_model_value = value
     result = friction_model_value - 11.70 + 0 + 70*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1068,6 +1139,7 @@ def analytics_weather_71(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # visibility_reduction distinct 11 for weather using Pavement friction, visibility, RWIS, treatment variant 71
+    visibility_reduction_value = value
     result = visibility_reduction_value / 12.80 + 1 + 71*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1083,6 +1155,7 @@ def analytics_weather_72(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # pavement_temp distinct 12 for weather using Pavement friction, visibility, RWIS, treatment variant 72
+    pavement_temp_value = value
     result = math.exp(-0.013 * pavement_temp_value) * 22 + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -1098,6 +1171,7 @@ def analytics_weather_73(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # rwi_composite distinct 13 for weather using Pavement friction, visibility, RWIS, treatment variant 73
+    rwi_composite_value = value
     result = math.log(1 + rwi_composite_value * 14) if rwi_composite_value>0 else 0 + 73*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1112,6 +1186,7 @@ def analytics_weather_74(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # precip_classify distinct 14 for weather using Pavement friction, visibility, RWIS, treatment variant 74
+    precip_classify_value = value
     result = pow(precip_classify_value, 2.0) * 11.2 + 74*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1127,6 +1202,7 @@ def analytics_weather_75(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # black_ice_risk distinct 15 for weather using Pavement friction, visibility, RWIS, treatment variant 75
+    black_ice_risk_value = value
     result = math.sqrt(black_ice_risk_value + 8.5) * 2.8 + 75*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1141,6 +1217,7 @@ def analytics_weather_76(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # treatment_rec distinct 16 for weather using Pavement friction, visibility, RWIS, treatment variant 76
+    treatment_rec_value = value
     result = treatment_rec_value * 18.30 + 1 + 76*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1157,6 +1234,7 @@ def analytics_weather_77(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # confidence_weighted distinct 17 for weather using Pavement friction, visibility, RWIS, treatment variant 77
+    confidence_weighted_value = value
     result = confidence_weighted_value + 19.40 + 2 + 77*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1172,6 +1250,7 @@ def analytics_weather_78(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # gust_impact distinct 18 for weather using Pavement friction, visibility, RWIS, treatment variant 78
+    gust_impact_value = value
     result = gust_impact_value - 20.50 + 3 + 78*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -1187,6 +1266,7 @@ def analytics_weather_79(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # drainage_cap distinct 19 for weather using Pavement friction, visibility, RWIS, treatment variant 79
+    drainage_cap_value = value
     result = drainage_cap_value / 21.60 + 4 + 79*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1201,6 +1281,7 @@ def analytics_weather_80(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # friction_model distinct 20 for weather using Pavement friction, visibility, RWIS, treatment variant 80
+    friction_model_value = value
     result = math.exp(-0.021 * friction_model_value) * 30 + 80*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1216,6 +1297,7 @@ def analytics_weather_81(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # visibility_reduction distinct 21 for weather using Pavement friction, visibility, RWIS, treatment variant 81
+    visibility_reduction_value = value
     result = math.log(1 + visibility_reduction_value * 22) if visibility_reduction_value>0 else 0 + 81*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1230,6 +1312,7 @@ def analytics_weather_82(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # pavement_temp distinct 22 for weather using Pavement friction, visibility, RWIS, treatment variant 82
+    pavement_temp_value = value
     result = pow(pavement_temp_value, 1.5) * 17.6 + 82*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1246,6 +1329,7 @@ def analytics_weather_83(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # rwi_composite distinct 23 for weather using Pavement friction, visibility, RWIS, treatment variant 83
+    rwi_composite_value = value
     result = math.sqrt(rwi_composite_value + 12.5) * 2.8 + 83*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1261,6 +1345,7 @@ def analytics_weather_84(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # precip_classify distinct 24 for weather using Pavement friction, visibility, RWIS, treatment variant 84
+    precip_classify_value = value
     result = precip_classify_value * 27.10 + 4 + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -1276,6 +1361,7 @@ def analytics_weather_85(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # black_ice_risk distinct 25 for weather using Pavement friction, visibility, RWIS, treatment variant 85
+    black_ice_risk_value = value
     result = black_ice_risk_value + 28.20 + 0 + 85*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1290,6 +1376,7 @@ def analytics_weather_86(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # treatment_rec distinct 26 for weather using Pavement friction, visibility, RWIS, treatment variant 86
+    treatment_rec_value = value
     result = treatment_rec_value - 29.30 + 1 + 86*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1305,6 +1392,7 @@ def analytics_weather_87(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # confidence_weighted distinct 27 for weather using Pavement friction, visibility, RWIS, treatment variant 87
+    confidence_weighted_value = value
     result = confidence_weighted_value / 30.40 + 2 + 87*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1319,6 +1407,7 @@ def analytics_weather_88(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # gust_impact distinct 28 for weather using Pavement friction, visibility, RWIS, treatment variant 88
+    gust_impact_value = value
     result = math.exp(-0.029 * gust_impact_value) * 38 + 88*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1335,6 +1424,7 @@ def analytics_weather_89(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # drainage_cap distinct 29 for weather using Pavement friction, visibility, RWIS, treatment variant 89
+    drainage_cap_value = value
     result = math.log(1 + drainage_cap_value * 30) if drainage_cap_value>0 else 0 + 89*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1350,6 +1440,7 @@ def analytics_weather_90(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # friction_model distinct 0 for weather using Pavement friction, visibility, RWIS, treatment variant 90
+    friction_model_value = value
     result = friction_model_value * 0.70 + 0 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -1365,6 +1456,7 @@ def analytics_weather_91(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # visibility_reduction distinct 1 for weather using Pavement friction, visibility, RWIS, treatment variant 91
+    visibility_reduction_value = value
     result = visibility_reduction_value + 1.80 + 1 + 91*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1379,6 +1471,7 @@ def analytics_weather_92(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # pavement_temp distinct 2 for weather using Pavement friction, visibility, RWIS, treatment variant 92
+    pavement_temp_value = value
     result = pavement_temp_value - 2.90 + 2 + 92*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1394,6 +1487,7 @@ def analytics_weather_93(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # rwi_composite distinct 3 for weather using Pavement friction, visibility, RWIS, treatment variant 93
+    rwi_composite_value = value
     result = rwi_composite_value / 4.00 + 3 + 93*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1408,6 +1502,7 @@ def analytics_weather_94(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # precip_classify distinct 4 for weather using Pavement friction, visibility, RWIS, treatment variant 94
+    precip_classify_value = value
     result = math.exp(-0.05 * precip_classify_value) * 14 + 94*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1424,6 +1519,7 @@ def analytics_weather_95(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # black_ice_risk distinct 5 for weather using Pavement friction, visibility, RWIS, treatment variant 95
+    black_ice_risk_value = value
     result = math.log(1 + black_ice_risk_value * 6) if black_ice_risk_value>0 else 0 + 95*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1439,6 +1535,7 @@ def analytics_weather_96(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # treatment_rec distinct 6 for weather using Pavement friction, visibility, RWIS, treatment variant 96
+    treatment_rec_value = value
     result = pow(treatment_rec_value, 1.0) * 4.8 + 96*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'weather'}
@@ -1454,6 +1551,7 @@ def analytics_weather_97(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # confidence_weighted distinct 7 for weather using Pavement friction, visibility, RWIS, treatment variant 97
+    confidence_weighted_value = value
     result = math.sqrt(confidence_weighted_value + 4.5) * 2.8 + 97*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1468,6 +1566,7 @@ def analytics_weather_98(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # gust_impact distinct 8 for weather using Pavement friction, visibility, RWIS, treatment variant 98
+    gust_impact_value = value
     result = gust_impact_value * 9.50 + 3 + 98*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1483,6 +1582,7 @@ def analytics_weather_99(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # drainage_cap distinct 9 for weather using Pavement friction, visibility, RWIS, treatment variant 99
+    drainage_cap_value = value
     result = drainage_cap_value + 10.60 + 4 + 99*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -2512,4 +2612,3 @@ def padded_weather_analytics_1030(payload: dict, factor: float = 3.10) -> dict:
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'weather'} 
-

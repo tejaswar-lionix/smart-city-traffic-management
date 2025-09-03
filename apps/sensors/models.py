@@ -25,6 +25,7 @@ class SensorDevice:
     status: str = 'active'
 
     def occupancy_0_sen_0_sensordevice_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_value = value
         """occupancy distinct 0 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 0 for SensorDevice — implements result = occupancy_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for sensors::SensorDevice::occupancy_0_sen_0_sensordevice_0
@@ -39,13 +40,14 @@ class SensorDevice:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'occupancy_0_sen_0_sensordevice_0', 'result': result, 'domain': 'sensors'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def health_6_sen_6_sensordevice_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        health_value = value
         """health distinct 6 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 6 for SensorDevice — implements result = pow(health_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for sensors::SensorDevice::health_6_sen_6_sensordevice_6
@@ -57,13 +59,14 @@ class SensorDevice:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def density_12_sen_12_sensordevice_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        density_value = value
         """density distinct 12 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 12 for SensorDevice — implements result = math.exp(-0.013 * density_value) * 22 + 12*0.01"""
         try:
             # Distinct logic for sensors::SensorDevice::density_12_sen_12_sensordevice_12
@@ -75,13 +78,14 @@ class SensorDevice:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gap_18_sen_18_sensordevice_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gap_value = value
         """gap distinct 18 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 18 for SensorDevice — implements result = gap_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for sensors::SensorDevice::gap_18_sen_18_sensordevice_18
@@ -96,13 +100,14 @@ class SensorDevice:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fusion_24_sen_24_sensordevice_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fusion_value = value
         """fusion distinct 24 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 24 for SensorDevice — implements result = fusion_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for sensors::SensorDevice::fusion_24_sen_24_sensordevice_24
@@ -114,16 +119,18 @@ class SensorDevice:
                 else:
                     break
             # fusion distinct 24 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 24
+            fusion_value = value
             result = fusion_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_0_sen_30_sensordevice_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_value = value
         """occupancy distinct 0 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 30 for SensorDevice — implements result = occupancy_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for sensors::SensorDevice::occupancy_0_sen_30_sensordevice_30
@@ -138,13 +145,14 @@ class SensorDevice:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'occupancy_0_sen_30_sensordevice_30', 'result': result, 'domain': 'sensors'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def health_6_sen_36_sensordevice_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        health_value = value
         """health distinct 6 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 36 for SensorDevice — implements result = pow(health_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for sensors::SensorDevice::health_6_sen_36_sensordevice_36
@@ -156,13 +164,14 @@ class SensorDevice:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def density_12_sen_42_sensordevice_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        density_value = value
         """density distinct 12 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 42 for SensorDevice — implements result = math.exp(-0.013 * density_value) * 22 + 42*0.01"""
         try:
             # Distinct logic for sensors::SensorDevice::density_12_sen_42_sensordevice_42
@@ -174,13 +183,14 @@ class SensorDevice:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gap_18_sen_48_sensordevice_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gap_value = value
         """gap distinct 18 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 48 for SensorDevice — implements result = gap_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for sensors::SensorDevice::gap_18_sen_48_sensordevice_48
@@ -195,13 +205,14 @@ class SensorDevice:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fusion_24_sen_54_sensordevice_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fusion_value = value
         """fusion distinct 24 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 54 for SensorDevice — implements result = fusion_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for sensors::SensorDevice::fusion_24_sen_54_sensordevice_54
@@ -213,13 +224,14 @@ class SensorDevice:
                 else:
                     break
             # fusion distinct 24 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 54
+            fusion_value = value
             result = fusion_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_sensordevice(self) -> bool:
@@ -245,6 +257,7 @@ class DetectionEvent:
     status: str = 'active'
 
     def accuracy_1_sen_1_detectionevent_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        accuracy_value = value
         """accuracy distinct 1 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 1 for DetectionEvent — implements result = accuracy_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for sensors::DetectionEvent::accuracy_1_sen_1_detectionevent_1
@@ -256,13 +269,14 @@ class DetectionEvent:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def latency_7_sen_7_detectionevent_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        latency_value = value
         """latency distinct 7 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 7 for DetectionEvent — implements result = math.sqrt(latency_value + 4.5) * 2.8 + 7*0.01"""
         try:
             # Distinct logic for sensors::DetectionEvent::latency_7_sen_7_detectionevent_7
@@ -274,13 +288,14 @@ class DetectionEvent:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def signature_13_sen_13_detectionevent_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        signature_value = value
         """signature distinct 13 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 13 for DetectionEvent — implements result = math.log(1 + signature_value * 14) if signature_val"""
         try:
             # Distinct logic for sensors::DetectionEvent::signature_13_sen_13_detectionevent_13
@@ -295,13 +310,14 @@ class DetectionEvent:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def filter_19_sen_19_detectionevent_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        filter_value = value
         """filter distinct 19 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 19 for DetectionEvent — implements result = filter_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for sensors::DetectionEvent::filter_19_sen_19_detectionevent_19
@@ -313,16 +329,18 @@ class DetectionEvent:
                 else:
                     break
             # filter distinct 19 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 19
+            filter_value = value
             result = filter_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def drift_25_sen_25_detectionevent_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        drift_value = value
         """drift distinct 25 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 25 for DetectionEvent — implements result = drift_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for sensors::DetectionEvent::drift_25_sen_25_detectionevent_25
@@ -337,13 +355,14 @@ class DetectionEvent:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'drift_25_sen_25_detectionevent_25', 'result': result, 'domain': 'sensors'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def accuracy_1_sen_31_detectionevent_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        accuracy_value = value
         """accuracy distinct 1 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 31 for DetectionEvent — implements result = accuracy_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for sensors::DetectionEvent::accuracy_1_sen_31_detectionevent_31
@@ -355,13 +374,14 @@ class DetectionEvent:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def latency_7_sen_37_detectionevent_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        latency_value = value
         """latency distinct 7 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 37 for DetectionEvent — implements result = math.sqrt(latency_value + 4.5) * 2.8 + 37*0.01"""
         try:
             # Distinct logic for sensors::DetectionEvent::latency_7_sen_37_detectionevent_37
@@ -373,13 +393,14 @@ class DetectionEvent:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def signature_13_sen_43_detectionevent_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        signature_value = value
         """signature distinct 13 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 43 for DetectionEvent — implements result = math.log(1 + signature_value * 14) if signature_val"""
         try:
             # Distinct logic for sensors::DetectionEvent::signature_13_sen_43_detectionevent_43
@@ -394,13 +415,14 @@ class DetectionEvent:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def filter_19_sen_49_detectionevent_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        filter_value = value
         """filter distinct 19 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 49 for DetectionEvent — implements result = filter_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for sensors::DetectionEvent::filter_19_sen_49_detectionevent_49
@@ -412,16 +434,18 @@ class DetectionEvent:
                 else:
                     break
             # filter distinct 19 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 49
+            filter_value = value
             result = filter_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def drift_25_sen_55_detectionevent_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        drift_value = value
         """drift distinct 25 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 55 for DetectionEvent — implements result = drift_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for sensors::DetectionEvent::drift_25_sen_55_detectionevent_55
@@ -436,10 +460,10 @@ class DetectionEvent:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'drift_25_sen_55_detectionevent_55', 'result': result, 'domain': 'sensors'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_detectionevent(self) -> bool:
@@ -464,6 +488,7 @@ class SensorHealth:
     status: str = 'active'
 
     def density_2_sen_2_sensorhealth_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        density_value = value
         """density distinct 2 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 2 for SensorHealth — implements result = density_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for sensors::SensorHealth::density_2_sen_2_sensorhealth_2
@@ -475,13 +500,14 @@ class SensorHealth:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gap_8_sen_8_sensorhealth_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gap_value = value
         """gap distinct 8 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 8 for SensorHealth — implements result = gap_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for sensors::SensorHealth::gap_8_sen_8_sensorhealth_8
@@ -496,13 +522,14 @@ class SensorHealth:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fusion_14_sen_14_sensorhealth_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fusion_value = value
         """fusion distinct 14 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 14 for SensorHealth — implements result = pow(fusion_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for sensors::SensorHealth::fusion_14_sen_14_sensorhealth_14
@@ -517,13 +544,14 @@ class SensorHealth:
             result = pow(fusion_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_20_sen_20_sensorhealth_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_value = value
         """occupancy distinct 20 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 20 for SensorHealth — implements result = math.exp(-0.021 * occupancy_value) * 30 + 20*0.01"""
         try:
             # Distinct logic for sensors::SensorHealth::occupancy_20_sen_20_sensorhealth_20
@@ -538,13 +566,14 @@ class SensorHealth:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'occupancy_20_sen_20_sensorhealth_20', 'result': result, 'domain': 'sensors'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def health_26_sen_26_sensorhealth_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        health_value = value
         """health distinct 26 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 26 for SensorHealth — implements result = health_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for sensors::SensorHealth::health_26_sen_26_sensorhealth_26
@@ -556,13 +585,14 @@ class SensorHealth:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def density_2_sen_32_sensorhealth_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        density_value = value
         """density distinct 2 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 32 for SensorHealth — implements result = density_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for sensors::SensorHealth::density_2_sen_32_sensorhealth_32
@@ -574,13 +604,14 @@ class SensorHealth:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gap_8_sen_38_sensorhealth_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gap_value = value
         """gap distinct 8 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 38 for SensorHealth — implements result = gap_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for sensors::SensorHealth::gap_8_sen_38_sensorhealth_38
@@ -595,13 +626,14 @@ class SensorHealth:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fusion_14_sen_44_sensorhealth_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fusion_value = value
         """fusion distinct 14 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 44 for SensorHealth — implements result = pow(fusion_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for sensors::SensorHealth::fusion_14_sen_44_sensorhealth_44
@@ -616,13 +648,14 @@ class SensorHealth:
             result = pow(fusion_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_20_sen_50_sensorhealth_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_value = value
         """occupancy distinct 20 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 50 for SensorHealth — implements result = math.exp(-0.021 * occupancy_value) * 30 + 50*0.01"""
         try:
             # Distinct logic for sensors::SensorHealth::occupancy_20_sen_50_sensorhealth_50
@@ -637,13 +670,14 @@ class SensorHealth:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'occupancy_20_sen_50_sensorhealth_50', 'result': result, 'domain': 'sensors'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def health_26_sen_56_sensorhealth_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        health_value = value
         """health distinct 26 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 56 for SensorHealth — implements result = health_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for sensors::SensorHealth::health_26_sen_56_sensorhealth_56
@@ -655,10 +689,10 @@ class SensorHealth:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_sensorhealth(self) -> bool:
@@ -683,6 +717,7 @@ class CalibrationRecord:
     status: str = 'active'
 
     def signature_3_sen_3_calibrationrecord_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        signature_value = value
         """signature distinct 3 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 3 for CalibrationRecord — implements result = signature_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for sensors::CalibrationRecord::signature_3_sen_3_calibrationrecord_3
@@ -697,13 +732,14 @@ class CalibrationRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def filter_9_sen_9_calibrationrecord_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        filter_value = value
         """filter distinct 9 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 9 for CalibrationRecord — implements result = filter_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for sensors::CalibrationRecord::filter_9_sen_9_calibrationrecord_9
@@ -715,16 +751,18 @@ class CalibrationRecord:
                 else:
                     break
             # filter distinct 9 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 9
+            filter_value = value
             result = filter_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def drift_15_sen_15_calibrationrecord_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        drift_value = value
         """drift distinct 15 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 15 for CalibrationRecord — implements result = math.sqrt(drift_value + 8.5) * 2.8 + 15*0.01"""
         try:
             # Distinct logic for sensors::CalibrationRecord::drift_15_sen_15_calibrationrecord_15
@@ -739,13 +777,14 @@ class CalibrationRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'drift_15_sen_15_calibrationrecord_15', 'result': result, 'domain': 'sensors'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def accuracy_21_sen_21_calibrationrecord_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        accuracy_value = value
         """accuracy distinct 21 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 21 for CalibrationRecord — implements result = math.log(1 + accuracy_value * 22) if accuracy_value"""
         try:
             # Distinct logic for sensors::CalibrationRecord::accuracy_21_sen_21_calibrationrecord_21
@@ -757,13 +796,14 @@ class CalibrationRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def latency_27_sen_27_calibrationrecord_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        latency_value = value
         """latency distinct 27 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 27 for CalibrationRecord — implements result = latency_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for sensors::CalibrationRecord::latency_27_sen_27_calibrationrecord_27
@@ -775,13 +815,14 @@ class CalibrationRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def signature_3_sen_33_calibrationrecord_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        signature_value = value
         """signature distinct 3 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 33 for CalibrationRecord — implements result = signature_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for sensors::CalibrationRecord::signature_3_sen_33_calibrationrecord_33
@@ -796,13 +837,14 @@ class CalibrationRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def filter_9_sen_39_calibrationrecord_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        filter_value = value
         """filter distinct 9 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 39 for CalibrationRecord — implements result = filter_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for sensors::CalibrationRecord::filter_9_sen_39_calibrationrecord_39
@@ -814,16 +856,18 @@ class CalibrationRecord:
                 else:
                     break
             # filter distinct 9 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 39
+            filter_value = value
             result = filter_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def drift_15_sen_45_calibrationrecord_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        drift_value = value
         """drift distinct 15 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 45 for CalibrationRecord — implements result = math.sqrt(drift_value + 8.5) * 2.8 + 45*0.01"""
         try:
             # Distinct logic for sensors::CalibrationRecord::drift_15_sen_45_calibrationrecord_45
@@ -838,13 +882,14 @@ class CalibrationRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'drift_15_sen_45_calibrationrecord_45', 'result': result, 'domain': 'sensors'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def accuracy_21_sen_51_calibrationrecord_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        accuracy_value = value
         """accuracy distinct 21 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 51 for CalibrationRecord — implements result = math.log(1 + accuracy_value * 22) if accuracy_value"""
         try:
             # Distinct logic for sensors::CalibrationRecord::accuracy_21_sen_51_calibrationrecord_51
@@ -856,13 +901,14 @@ class CalibrationRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def latency_27_sen_57_calibrationrecord_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        latency_value = value
         """latency distinct 27 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 57 for CalibrationRecord — implements result = latency_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for sensors::CalibrationRecord::latency_27_sen_57_calibrationrecord_57
@@ -874,10 +920,10 @@ class CalibrationRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_calibrationrecord(self) -> bool:
@@ -902,6 +948,7 @@ class FusionOutput:
     status: str = 'active'
 
     def fusion_4_sen_4_fusionoutput_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fusion_value = value
         """fusion distinct 4 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 4 for FusionOutput — implements result = math.exp(-0.05 * fusion_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for sensors::FusionOutput::fusion_4_sen_4_fusionoutput_4
@@ -913,16 +960,18 @@ class FusionOutput:
                 else:
                     break
             # fusion distinct 4 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 4
+            fusion_value = value
             result = math.exp(-0.05 * fusion_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_10_sen_10_fusionoutput_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_value = value
         """occupancy distinct 10 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 10 for FusionOutput — implements result = occupancy_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for sensors::FusionOutput::occupancy_10_sen_10_fusionoutput_10
@@ -937,13 +986,14 @@ class FusionOutput:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'occupancy_10_sen_10_fusionoutput_10', 'result': result, 'domain': 'sensors'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def health_16_sen_16_fusionoutput_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        health_value = value
         """health distinct 16 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 16 for FusionOutput — implements result = health_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for sensors::FusionOutput::health_16_sen_16_fusionoutput_16
@@ -955,13 +1005,14 @@ class FusionOutput:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def density_22_sen_22_fusionoutput_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        density_value = value
         """density distinct 22 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 22 for FusionOutput — implements result = pow(density_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for sensors::FusionOutput::density_22_sen_22_fusionoutput_22
@@ -973,13 +1024,14 @@ class FusionOutput:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gap_28_sen_28_fusionoutput_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gap_value = value
         """gap distinct 28 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 28 for FusionOutput — implements result = math.exp(-0.029 * gap_value) * 38 + 28*0.01"""
         try:
             # Distinct logic for sensors::FusionOutput::gap_28_sen_28_fusionoutput_28
@@ -994,13 +1046,14 @@ class FusionOutput:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def fusion_4_sen_34_fusionoutput_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        fusion_value = value
         """fusion distinct 4 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 34 for FusionOutput — implements result = math.exp(-0.05 * fusion_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for sensors::FusionOutput::fusion_4_sen_34_fusionoutput_34
@@ -1012,16 +1065,18 @@ class FusionOutput:
                 else:
                     break
             # fusion distinct 4 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 34
+            fusion_value = value
             result = math.exp(-0.05 * fusion_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def occupancy_10_sen_40_fusionoutput_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        occupancy_value = value
         """occupancy distinct 10 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 40 for FusionOutput — implements result = occupancy_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for sensors::FusionOutput::occupancy_10_sen_40_fusionoutput_40
@@ -1036,13 +1091,14 @@ class FusionOutput:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'occupancy_10_sen_40_fusionoutput_40', 'result': result, 'domain': 'sensors'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def health_16_sen_46_fusionoutput_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        health_value = value
         """health distinct 16 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 46 for FusionOutput — implements result = health_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for sensors::FusionOutput::health_16_sen_46_fusionoutput_46
@@ -1054,13 +1110,14 @@ class FusionOutput:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def density_22_sen_52_fusionoutput_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        density_value = value
         """density distinct 22 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 52 for FusionOutput — implements result = pow(density_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for sensors::FusionOutput::density_22_sen_52_fusionoutput_52
@@ -1072,13 +1129,14 @@ class FusionOutput:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def gap_28_sen_58_fusionoutput_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        gap_value = value
         """gap distinct 28 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 58 for FusionOutput — implements result = math.exp(-0.029 * gap_value) * 38 + 58*0.01"""
         try:
             # Distinct logic for sensors::FusionOutput::gap_28_sen_58_fusionoutput_58
@@ -1093,10 +1151,10 @@ class FusionOutput:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_fusionoutput(self) -> bool:
@@ -1120,6 +1178,7 @@ class CoverageArea:
     status: str = 'active'
 
     def drift_5_sen_5_coveragearea_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        drift_value = value
         """drift distinct 5 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 5 for CoverageArea — implements result = math.log(1 + drift_value * 6) if drift_value>0 else"""
         try:
             # Distinct logic for sensors::CoverageArea::drift_5_sen_5_coveragearea_5
@@ -1134,13 +1193,14 @@ class CoverageArea:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'drift_5_sen_5_coveragearea_5', 'result': result, 'domain': 'sensors'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def accuracy_11_sen_11_coveragearea_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        accuracy_value = value
         """accuracy distinct 11 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 11 for CoverageArea — implements result = accuracy_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for sensors::CoverageArea::accuracy_11_sen_11_coveragearea_11
@@ -1152,13 +1212,14 @@ class CoverageArea:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def latency_17_sen_17_coveragearea_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        latency_value = value
         """latency distinct 17 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 17 for CoverageArea — implements result = latency_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for sensors::CoverageArea::latency_17_sen_17_coveragearea_17
@@ -1170,13 +1231,14 @@ class CoverageArea:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def signature_23_sen_23_coveragearea_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        signature_value = value
         """signature distinct 23 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 23 for CoverageArea — implements result = math.sqrt(signature_value + 12.5) * 2.8 + 23*0.01"""
         try:
             # Distinct logic for sensors::CoverageArea::signature_23_sen_23_coveragearea_23
@@ -1191,13 +1253,14 @@ class CoverageArea:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def filter_29_sen_29_coveragearea_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        filter_value = value
         """filter distinct 29 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 29 for CoverageArea — implements result = math.log(1 + filter_value * 30) if filter_value>0 e"""
         try:
             # Distinct logic for sensors::CoverageArea::filter_29_sen_29_coveragearea_29
@@ -1212,13 +1275,14 @@ class CoverageArea:
             result = math.log(1 + filter_value * 30) if filter_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def drift_5_sen_35_coveragearea_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        drift_value = value
         """drift distinct 5 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 35 for CoverageArea — implements result = math.log(1 + drift_value * 6) if drift_value>0 else"""
         try:
             # Distinct logic for sensors::CoverageArea::drift_5_sen_35_coveragearea_35
@@ -1233,13 +1297,14 @@ class CoverageArea:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'drift_5_sen_35_coveragearea_35', 'result': result, 'domain': 'sensors'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def accuracy_11_sen_41_coveragearea_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        accuracy_value = value
         """accuracy distinct 11 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 41 for CoverageArea — implements result = accuracy_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for sensors::CoverageArea::accuracy_11_sen_41_coveragearea_41
@@ -1251,13 +1316,14 @@ class CoverageArea:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def latency_17_sen_47_coveragearea_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        latency_value = value
         """latency distinct 17 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 47 for CoverageArea — implements result = latency_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for sensors::CoverageArea::latency_17_sen_47_coveragearea_47
@@ -1269,13 +1335,14 @@ class CoverageArea:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def signature_23_sen_53_coveragearea_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        signature_value = value
         """signature distinct 23 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 53 for CoverageArea — implements result = math.sqrt(signature_value + 12.5) * 2.8 + 53*0.01"""
         try:
             # Distinct logic for sensors::CoverageArea::signature_23_sen_53_coveragearea_53
@@ -1290,13 +1357,14 @@ class CoverageArea:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def filter_29_sen_59_coveragearea_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        filter_value = value
         """filter distinct 29 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health extra 59 for CoverageArea — implements result = math.log(1 + filter_value * 30) if filter_value>0 e"""
         try:
             # Distinct logic for sensors::CoverageArea::filter_29_sen_59_coveragearea_59
@@ -1311,10 +1379,10 @@ class CoverageArea:
             result = math.log(1 + filter_value * 30) if filter_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_coveragearea(self) -> bool:
@@ -2770,4 +2838,3 @@ def padded_sensors_models_1027(payload: dict, factor: float = 2.89) -> dict:
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'sensors','idx':1027}
-

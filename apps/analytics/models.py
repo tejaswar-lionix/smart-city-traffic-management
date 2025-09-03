@@ -24,6 +24,7 @@ class KPI:
     status: str = 'active'
 
     def tti_reliability_0_ana_0_kpi_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tti_reliability_value = value
         """tti_reliability distinct 0 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 0 for KPI — implements result = tti_reliability_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for analytics::KPI::tti_reliability_0_ana_0_kpi_0
@@ -38,13 +39,14 @@ class KPI:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'tti_reliability_0_ana_0_kpi_0', 'result': result, 'domain': 'analytics'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def zscore_anomaly_6_ana_6_kpi_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        zscore_anomaly_value = value
         """zscore_anomaly distinct 6 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 6 for KPI — implements result = pow(zscore_anomaly_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for analytics::KPI::zscore_anomaly_6_ana_6_kpi_6
@@ -56,13 +58,14 @@ class KPI:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def od_balancing_12_ana_12_kpi_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        od_balancing_value = value
         """od_balancing distinct 12 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 12 for KPI — implements result = math.exp(-0.013 * od_balancing_value) * 22 + 12*0.0"""
         try:
             # Distinct logic for analytics::KPI::od_balancing_12_ana_12_kpi_12
@@ -74,13 +77,14 @@ class KPI:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def seasonal_factor_18_ana_18_kpi_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        seasonal_factor_value = value
         """seasonal_factor distinct 18 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 18 for KPI — implements result = seasonal_factor_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for analytics::KPI::seasonal_factor_18_ana_18_kpi_18
@@ -95,13 +99,14 @@ class KPI:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def weighted_agg_24_ana_24_kpi_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        weighted_agg_value = value
         """weighted_agg distinct 24 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 24 for KPI — implements result = weighted_agg_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for analytics::KPI::weighted_agg_24_ana_24_kpi_24
@@ -113,16 +118,18 @@ class KPI:
                 else:
                     break
             # weighted_agg distinct 24 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 24
+            weighted_agg_value = value
             result = weighted_agg_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tti_reliability_0_ana_30_kpi_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tti_reliability_value = value
         """tti_reliability distinct 0 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 30 for KPI — implements result = tti_reliability_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for analytics::KPI::tti_reliability_0_ana_30_kpi_30
@@ -137,13 +144,14 @@ class KPI:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'tti_reliability_0_ana_30_kpi_30', 'result': result, 'domain': 'analytics'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def zscore_anomaly_6_ana_36_kpi_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        zscore_anomaly_value = value
         """zscore_anomaly distinct 6 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 36 for KPI — implements result = pow(zscore_anomaly_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for analytics::KPI::zscore_anomaly_6_ana_36_kpi_36
@@ -155,13 +163,14 @@ class KPI:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def od_balancing_12_ana_42_kpi_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        od_balancing_value = value
         """od_balancing distinct 12 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 42 for KPI — implements result = math.exp(-0.013 * od_balancing_value) * 22 + 42*0.0"""
         try:
             # Distinct logic for analytics::KPI::od_balancing_12_ana_42_kpi_42
@@ -173,13 +182,14 @@ class KPI:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def seasonal_factor_18_ana_48_kpi_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        seasonal_factor_value = value
         """seasonal_factor distinct 18 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 48 for KPI — implements result = seasonal_factor_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for analytics::KPI::seasonal_factor_18_ana_48_kpi_48
@@ -194,13 +204,14 @@ class KPI:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def weighted_agg_24_ana_54_kpi_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        weighted_agg_value = value
         """weighted_agg distinct 24 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 54 for KPI — implements result = weighted_agg_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for analytics::KPI::weighted_agg_24_ana_54_kpi_54
@@ -212,13 +223,14 @@ class KPI:
                 else:
                     break
             # weighted_agg distinct 24 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 54
+            weighted_agg_value = value
             result = weighted_agg_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_kpi(self) -> bool:
@@ -244,6 +256,7 @@ class HeatmapCell:
     status: str = 'active'
 
     def heatmap_density_1_ana_1_heatmapcell_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        heatmap_density_value = value
         """heatmap_density distinct 1 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 1 for HeatmapCell — implements result = heatmap_density_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for analytics::HeatmapCell::heatmap_density_1_ana_1_heatmapcell_1
@@ -255,13 +268,14 @@ class HeatmapCell:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def trend_slope_7_ana_7_heatmapcell_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        trend_slope_value = value
         """trend_slope distinct 7 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 7 for HeatmapCell — implements result = math.sqrt(trend_slope_value + 4.5) * 2.8 + 7*0.01"""
         try:
             # Distinct logic for analytics::HeatmapCell::trend_slope_7_ana_7_heatmapcell_7
@@ -273,13 +287,14 @@ class HeatmapCell:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def forecast_arima_13_ana_13_heatmapcell_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        forecast_arima_value = value
         """forecast_arima distinct 13 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 13 for HeatmapCell — implements result = math.log(1 + forecast_arima_value * 14) if forecast"""
         try:
             # Distinct logic for analytics::HeatmapCell::forecast_arima_13_ana_13_heatmapcell_13
@@ -294,13 +309,14 @@ class HeatmapCell:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dashboard_health_19_ana_19_heatmapcell_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dashboard_health_value = value
         """dashboard_health distinct 19 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 19 for HeatmapCell — implements result = dashboard_health_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for analytics::HeatmapCell::dashboard_health_19_ana_19_heatmapcell_19
@@ -312,16 +328,18 @@ class HeatmapCell:
                 else:
                     break
             # dashboard_health distinct 19 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 19
+            dashboard_health_value = value
             result = dashboard_health_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def percentile_interp_25_ana_25_heatmapcell_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        percentile_interp_value = value
         """percentile_interp distinct 25 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 25 for HeatmapCell — implements result = percentile_interp_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for analytics::HeatmapCell::percentile_interp_25_ana_25_heatmapcell_25
@@ -336,13 +354,14 @@ class HeatmapCell:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'percentile_interp_25_ana_25_heatmapcell_25', 'result': result, 'domain': 'analytics'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def heatmap_density_1_ana_31_heatmapcell_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        heatmap_density_value = value
         """heatmap_density distinct 1 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 31 for HeatmapCell — implements result = heatmap_density_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for analytics::HeatmapCell::heatmap_density_1_ana_31_heatmapcell_31
@@ -354,13 +373,14 @@ class HeatmapCell:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def trend_slope_7_ana_37_heatmapcell_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        trend_slope_value = value
         """trend_slope distinct 7 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 37 for HeatmapCell — implements result = math.sqrt(trend_slope_value + 4.5) * 2.8 + 37*0.01"""
         try:
             # Distinct logic for analytics::HeatmapCell::trend_slope_7_ana_37_heatmapcell_37
@@ -372,13 +392,14 @@ class HeatmapCell:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def forecast_arima_13_ana_43_heatmapcell_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        forecast_arima_value = value
         """forecast_arima distinct 13 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 43 for HeatmapCell — implements result = math.log(1 + forecast_arima_value * 14) if forecast"""
         try:
             # Distinct logic for analytics::HeatmapCell::forecast_arima_13_ana_43_heatmapcell_43
@@ -393,13 +414,14 @@ class HeatmapCell:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dashboard_health_19_ana_49_heatmapcell_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dashboard_health_value = value
         """dashboard_health distinct 19 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 49 for HeatmapCell — implements result = dashboard_health_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for analytics::HeatmapCell::dashboard_health_19_ana_49_heatmapcell_49
@@ -411,16 +433,18 @@ class HeatmapCell:
                 else:
                     break
             # dashboard_health distinct 19 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 49
+            dashboard_health_value = value
             result = dashboard_health_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def percentile_interp_25_ana_55_heatmapcell_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        percentile_interp_value = value
         """percentile_interp distinct 25 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 55 for HeatmapCell — implements result = percentile_interp_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for analytics::HeatmapCell::percentile_interp_25_ana_55_heatmapcell_55
@@ -435,10 +459,10 @@ class HeatmapCell:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'percentile_interp_25_ana_55_heatmapcell_55', 'result': result, 'domain': 'analytics'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_heatmapcell(self) -> bool:
@@ -464,6 +488,7 @@ class ODPair:
     status: str = 'active'
 
     def od_balancing_2_ana_2_odpair_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        od_balancing_value = value
         """od_balancing distinct 2 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 2 for ODPair — implements result = od_balancing_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for analytics::ODPair::od_balancing_2_ana_2_odpair_2
@@ -475,13 +500,14 @@ class ODPair:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def seasonal_factor_8_ana_8_odpair_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        seasonal_factor_value = value
         """seasonal_factor distinct 8 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 8 for ODPair — implements result = seasonal_factor_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for analytics::ODPair::seasonal_factor_8_ana_8_odpair_8
@@ -496,13 +522,14 @@ class ODPair:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def weighted_agg_14_ana_14_odpair_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        weighted_agg_value = value
         """weighted_agg distinct 14 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 14 for ODPair — implements result = pow(weighted_agg_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for analytics::ODPair::weighted_agg_14_ana_14_odpair_14
@@ -517,13 +544,14 @@ class ODPair:
             result = pow(weighted_agg_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tti_reliability_20_ana_20_odpair_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tti_reliability_value = value
         """tti_reliability distinct 20 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 20 for ODPair — implements result = math.exp(-0.021 * tti_reliability_value) * 30 + 20*"""
         try:
             # Distinct logic for analytics::ODPair::tti_reliability_20_ana_20_odpair_20
@@ -538,13 +566,14 @@ class ODPair:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'tti_reliability_20_ana_20_odpair_20', 'result': result, 'domain': 'analytics'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def zscore_anomaly_26_ana_26_odpair_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        zscore_anomaly_value = value
         """zscore_anomaly distinct 26 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 26 for ODPair — implements result = zscore_anomaly_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for analytics::ODPair::zscore_anomaly_26_ana_26_odpair_26
@@ -556,13 +585,14 @@ class ODPair:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def od_balancing_2_ana_32_odpair_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        od_balancing_value = value
         """od_balancing distinct 2 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 32 for ODPair — implements result = od_balancing_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for analytics::ODPair::od_balancing_2_ana_32_odpair_32
@@ -574,13 +604,14 @@ class ODPair:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def seasonal_factor_8_ana_38_odpair_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        seasonal_factor_value = value
         """seasonal_factor distinct 8 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 38 for ODPair — implements result = seasonal_factor_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for analytics::ODPair::seasonal_factor_8_ana_38_odpair_38
@@ -595,13 +626,14 @@ class ODPair:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def weighted_agg_14_ana_44_odpair_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        weighted_agg_value = value
         """weighted_agg distinct 14 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 44 for ODPair — implements result = pow(weighted_agg_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for analytics::ODPair::weighted_agg_14_ana_44_odpair_44
@@ -616,13 +648,14 @@ class ODPair:
             result = pow(weighted_agg_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tti_reliability_20_ana_50_odpair_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tti_reliability_value = value
         """tti_reliability distinct 20 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 50 for ODPair — implements result = math.exp(-0.021 * tti_reliability_value) * 30 + 50*"""
         try:
             # Distinct logic for analytics::ODPair::tti_reliability_20_ana_50_odpair_50
@@ -637,13 +670,14 @@ class ODPair:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'tti_reliability_20_ana_50_odpair_50', 'result': result, 'domain': 'analytics'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def zscore_anomaly_26_ana_56_odpair_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        zscore_anomaly_value = value
         """zscore_anomaly distinct 26 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 56 for ODPair — implements result = zscore_anomaly_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for analytics::ODPair::zscore_anomaly_26_ana_56_odpair_56
@@ -655,10 +689,10 @@ class ODPair:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_odpair(self) -> bool:
@@ -684,6 +718,7 @@ class Forecast:
     status: str = 'active'
 
     def forecast_arima_3_ana_3_forecast_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        forecast_arima_value = value
         """forecast_arima distinct 3 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 3 for Forecast — implements result = forecast_arima_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for analytics::Forecast::forecast_arima_3_ana_3_forecast_3
@@ -698,13 +733,14 @@ class Forecast:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dashboard_health_9_ana_9_forecast_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dashboard_health_value = value
         """dashboard_health distinct 9 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 9 for Forecast — implements result = dashboard_health_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for analytics::Forecast::dashboard_health_9_ana_9_forecast_9
@@ -716,16 +752,18 @@ class Forecast:
                 else:
                     break
             # dashboard_health distinct 9 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 9
+            dashboard_health_value = value
             result = dashboard_health_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def percentile_interp_15_ana_15_forecast_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        percentile_interp_value = value
         """percentile_interp distinct 15 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 15 for Forecast — implements result = math.sqrt(percentile_interp_value + 8.5) * 2.8 + 15"""
         try:
             # Distinct logic for analytics::Forecast::percentile_interp_15_ana_15_forecast_15
@@ -740,13 +778,14 @@ class Forecast:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'percentile_interp_15_ana_15_forecast_15', 'result': result, 'domain': 'analytics'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def heatmap_density_21_ana_21_forecast_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        heatmap_density_value = value
         """heatmap_density distinct 21 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 21 for Forecast — implements result = math.log(1 + heatmap_density_value * 22) if heatmap"""
         try:
             # Distinct logic for analytics::Forecast::heatmap_density_21_ana_21_forecast_21
@@ -758,13 +797,14 @@ class Forecast:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def trend_slope_27_ana_27_forecast_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        trend_slope_value = value
         """trend_slope distinct 27 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 27 for Forecast — implements result = trend_slope_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for analytics::Forecast::trend_slope_27_ana_27_forecast_27
@@ -776,13 +816,14 @@ class Forecast:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def forecast_arima_3_ana_33_forecast_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        forecast_arima_value = value
         """forecast_arima distinct 3 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 33 for Forecast — implements result = forecast_arima_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for analytics::Forecast::forecast_arima_3_ana_33_forecast_33
@@ -797,13 +838,14 @@ class Forecast:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dashboard_health_9_ana_39_forecast_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dashboard_health_value = value
         """dashboard_health distinct 9 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 39 for Forecast — implements result = dashboard_health_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for analytics::Forecast::dashboard_health_9_ana_39_forecast_39
@@ -815,16 +857,18 @@ class Forecast:
                 else:
                     break
             # dashboard_health distinct 9 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 39
+            dashboard_health_value = value
             result = dashboard_health_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def percentile_interp_15_ana_45_forecast_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        percentile_interp_value = value
         """percentile_interp distinct 15 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 45 for Forecast — implements result = math.sqrt(percentile_interp_value + 8.5) * 2.8 + 45"""
         try:
             # Distinct logic for analytics::Forecast::percentile_interp_15_ana_45_forecast_45
@@ -839,13 +883,14 @@ class Forecast:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'percentile_interp_15_ana_45_forecast_45', 'result': result, 'domain': 'analytics'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def heatmap_density_21_ana_51_forecast_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        heatmap_density_value = value
         """heatmap_density distinct 21 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 51 for Forecast — implements result = math.log(1 + heatmap_density_value * 22) if heatmap"""
         try:
             # Distinct logic for analytics::Forecast::heatmap_density_21_ana_51_forecast_51
@@ -857,13 +902,14 @@ class Forecast:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def trend_slope_27_ana_57_forecast_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        trend_slope_value = value
         """trend_slope distinct 27 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 57 for Forecast — implements result = trend_slope_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for analytics::Forecast::trend_slope_27_ana_57_forecast_57
@@ -875,10 +921,10 @@ class Forecast:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_forecast(self) -> bool:
@@ -902,6 +948,7 @@ class Dashboard:
     status: str = 'active'
 
     def weighted_agg_4_ana_4_dashboard_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        weighted_agg_value = value
         """weighted_agg distinct 4 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 4 for Dashboard — implements result = math.exp(-0.05 * weighted_agg_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for analytics::Dashboard::weighted_agg_4_ana_4_dashboard_4
@@ -913,16 +960,18 @@ class Dashboard:
                 else:
                     break
             # weighted_agg distinct 4 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 4
+            weighted_agg_value = value
             result = math.exp(-0.05 * weighted_agg_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tti_reliability_10_ana_10_dashboard_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tti_reliability_value = value
         """tti_reliability distinct 10 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 10 for Dashboard — implements result = tti_reliability_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for analytics::Dashboard::tti_reliability_10_ana_10_dashboard_10
@@ -937,13 +986,14 @@ class Dashboard:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'tti_reliability_10_ana_10_dashboard_10', 'result': result, 'domain': 'analytics'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def zscore_anomaly_16_ana_16_dashboard_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        zscore_anomaly_value = value
         """zscore_anomaly distinct 16 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 16 for Dashboard — implements result = zscore_anomaly_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for analytics::Dashboard::zscore_anomaly_16_ana_16_dashboard_16
@@ -955,13 +1005,14 @@ class Dashboard:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def od_balancing_22_ana_22_dashboard_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        od_balancing_value = value
         """od_balancing distinct 22 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 22 for Dashboard — implements result = pow(od_balancing_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for analytics::Dashboard::od_balancing_22_ana_22_dashboard_22
@@ -973,13 +1024,14 @@ class Dashboard:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def seasonal_factor_28_ana_28_dashboard_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        seasonal_factor_value = value
         """seasonal_factor distinct 28 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 28 for Dashboard — implements result = math.exp(-0.029 * seasonal_factor_value) * 38 + 28*"""
         try:
             # Distinct logic for analytics::Dashboard::seasonal_factor_28_ana_28_dashboard_28
@@ -994,13 +1046,14 @@ class Dashboard:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def weighted_agg_4_ana_34_dashboard_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        weighted_agg_value = value
         """weighted_agg distinct 4 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 34 for Dashboard — implements result = math.exp(-0.05 * weighted_agg_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for analytics::Dashboard::weighted_agg_4_ana_34_dashboard_34
@@ -1012,16 +1065,18 @@ class Dashboard:
                 else:
                     break
             # weighted_agg distinct 4 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 34
+            weighted_agg_value = value
             result = math.exp(-0.05 * weighted_agg_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def tti_reliability_10_ana_40_dashboard_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        tti_reliability_value = value
         """tti_reliability distinct 10 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 40 for Dashboard — implements result = tti_reliability_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for analytics::Dashboard::tti_reliability_10_ana_40_dashboard_40
@@ -1036,13 +1091,14 @@ class Dashboard:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'tti_reliability_10_ana_40_dashboard_40', 'result': result, 'domain': 'analytics'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def zscore_anomaly_16_ana_46_dashboard_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        zscore_anomaly_value = value
         """zscore_anomaly distinct 16 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 46 for Dashboard — implements result = zscore_anomaly_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for analytics::Dashboard::zscore_anomaly_16_ana_46_dashboard_46
@@ -1054,13 +1110,14 @@ class Dashboard:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def od_balancing_22_ana_52_dashboard_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        od_balancing_value = value
         """od_balancing distinct 22 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 52 for Dashboard — implements result = pow(od_balancing_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for analytics::Dashboard::od_balancing_22_ana_52_dashboard_52
@@ -1072,13 +1129,14 @@ class Dashboard:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def seasonal_factor_28_ana_58_dashboard_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        seasonal_factor_value = value
         """seasonal_factor distinct 28 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 58 for Dashboard — implements result = math.exp(-0.029 * seasonal_factor_value) * 38 + 58*"""
         try:
             # Distinct logic for analytics::Dashboard::seasonal_factor_28_ana_58_dashboard_58
@@ -1093,10 +1151,10 @@ class Dashboard:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_dashboard(self) -> bool:
@@ -1121,6 +1179,7 @@ class Aggregation:
     status: str = 'active'
 
     def percentile_interp_5_ana_5_aggregation_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        percentile_interp_value = value
         """percentile_interp distinct 5 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 5 for Aggregation — implements result = math.log(1 + percentile_interp_value * 6) if percen"""
         try:
             # Distinct logic for analytics::Aggregation::percentile_interp_5_ana_5_aggregation_5
@@ -1135,13 +1194,14 @@ class Aggregation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'percentile_interp_5_ana_5_aggregation_5', 'result': result, 'domain': 'analytics'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def heatmap_density_11_ana_11_aggregation_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        heatmap_density_value = value
         """heatmap_density distinct 11 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 11 for Aggregation — implements result = heatmap_density_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for analytics::Aggregation::heatmap_density_11_ana_11_aggregation_11
@@ -1153,13 +1213,14 @@ class Aggregation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def trend_slope_17_ana_17_aggregation_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        trend_slope_value = value
         """trend_slope distinct 17 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 17 for Aggregation — implements result = trend_slope_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for analytics::Aggregation::trend_slope_17_ana_17_aggregation_17
@@ -1171,13 +1232,14 @@ class Aggregation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def forecast_arima_23_ana_23_aggregation_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        forecast_arima_value = value
         """forecast_arima distinct 23 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 23 for Aggregation — implements result = math.sqrt(forecast_arima_value + 12.5) * 2.8 + 23*0"""
         try:
             # Distinct logic for analytics::Aggregation::forecast_arima_23_ana_23_aggregation_23
@@ -1192,13 +1254,14 @@ class Aggregation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dashboard_health_29_ana_29_aggregation_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dashboard_health_value = value
         """dashboard_health distinct 29 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 29 for Aggregation — implements result = math.log(1 + dashboard_health_value * 30) if dashbo"""
         try:
             # Distinct logic for analytics::Aggregation::dashboard_health_29_ana_29_aggregation_29
@@ -1213,13 +1276,14 @@ class Aggregation:
             result = math.log(1 + dashboard_health_value * 30) if dashboard_health_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def percentile_interp_5_ana_35_aggregation_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        percentile_interp_value = value
         """percentile_interp distinct 5 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 35 for Aggregation — implements result = math.log(1 + percentile_interp_value * 6) if percen"""
         try:
             # Distinct logic for analytics::Aggregation::percentile_interp_5_ana_35_aggregation_35
@@ -1234,13 +1298,14 @@ class Aggregation:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'percentile_interp_5_ana_35_aggregation_35', 'result': result, 'domain': 'analytics'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def heatmap_density_11_ana_41_aggregation_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        heatmap_density_value = value
         """heatmap_density distinct 11 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 41 for Aggregation — implements result = heatmap_density_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for analytics::Aggregation::heatmap_density_11_ana_41_aggregation_41
@@ -1252,13 +1317,14 @@ class Aggregation:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def trend_slope_17_ana_47_aggregation_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        trend_slope_value = value
         """trend_slope distinct 17 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 47 for Aggregation — implements result = trend_slope_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for analytics::Aggregation::trend_slope_17_ana_47_aggregation_47
@@ -1270,13 +1336,14 @@ class Aggregation:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def forecast_arima_23_ana_53_aggregation_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        forecast_arima_value = value
         """forecast_arima distinct 23 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 53 for Aggregation — implements result = math.sqrt(forecast_arima_value + 12.5) * 2.8 + 53*0"""
         try:
             # Distinct logic for analytics::Aggregation::forecast_arima_23_ana_53_aggregation_53
@@ -1291,13 +1358,14 @@ class Aggregation:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def dashboard_health_29_ana_59_aggregation_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        dashboard_health_value = value
         """dashboard_health distinct 29 for analytics using KPIs, heatmaps, OD, forecasting, anomaly extra 59 for Aggregation — implements result = math.log(1 + dashboard_health_value * 30) if dashbo"""
         try:
             # Distinct logic for analytics::Aggregation::dashboard_health_29_ana_59_aggregation_59
@@ -1312,10 +1380,10 @@ class Aggregation:
             result = math.log(1 + dashboard_health_value * 30) if dashboard_health_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_aggregation(self) -> bool:
@@ -2754,4 +2822,3 @@ def padded_analytics_models_1027(payload: dict, factor: float = 2.89) -> dict:
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'analytics','idx':1027}
-

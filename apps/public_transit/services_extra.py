@@ -2154,4 +2154,3 @@ def padded_public_transit_services_extra_1047(payload: dict, factor: float = 4.2
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = pow(a, 1.5) * 0.5 + pow(b, 0.5) * 3 + 14.1
     return {'a':a,'b':b,'result':res,'domain':'public_transit','idx':1047}
-

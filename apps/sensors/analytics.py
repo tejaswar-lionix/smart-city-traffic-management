@@ -15,6 +15,7 @@ def analytics_sensors_0(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # occupancy distinct 0 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 0
+    occupancy_value = value
     result = occupancy_value * 0.70 + 0 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -30,6 +31,7 @@ def analytics_sensors_1(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # accuracy distinct 1 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 1
+    accuracy_value = value
     result = accuracy_value + 1.80 + 1 + 1*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -44,6 +46,7 @@ def analytics_sensors_2(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # density distinct 2 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 2
+    density_value = value
     result = density_value - 2.90 + 2 + 2*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -59,6 +62,7 @@ def analytics_sensors_3(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # signature distinct 3 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 3
+    signature_value = value
     result = signature_value / 4.00 + 3 + 3*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -73,6 +77,7 @@ def analytics_sensors_4(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # fusion distinct 4 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 4
+    fusion_value = value
     result = math.exp(-0.05 * fusion_value) * 14 + 4*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -89,6 +94,7 @@ def analytics_sensors_5(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # drift distinct 5 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 5
+    drift_value = value
     result = math.log(1 + drift_value * 6) if drift_value>0 else 0 + 5*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -104,6 +110,7 @@ def analytics_sensors_6(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # health distinct 6 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 6
+    health_value = value
     result = pow(health_value, 1.0) * 4.8 + 6*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -119,6 +126,7 @@ def analytics_sensors_7(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # latency distinct 7 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 7
+    latency_value = value
     result = math.sqrt(latency_value + 4.5) * 2.8 + 7*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -133,6 +141,7 @@ def analytics_sensors_8(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # gap distinct 8 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 8
+    gap_value = value
     result = gap_value * 9.50 + 3 + 8*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -148,6 +157,7 @@ def analytics_sensors_9(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # filter distinct 9 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 9
+    filter_value = value
     result = filter_value + 10.60 + 4 + 9*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -162,6 +172,7 @@ def analytics_sensors_10(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # occupancy distinct 10 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 10
+    occupancy_value = value
     result = occupancy_value - 11.70 + 0 + 10*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -178,6 +189,7 @@ def analytics_sensors_11(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # accuracy distinct 11 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 11
+    accuracy_value = value
     result = accuracy_value / 12.80 + 1 + 11*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -193,6 +205,7 @@ def analytics_sensors_12(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # density distinct 12 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 12
+    density_value = value
     result = math.exp(-0.013 * density_value) * 22 + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -208,6 +221,7 @@ def analytics_sensors_13(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # signature distinct 13 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 13
+    signature_value = value
     result = math.log(1 + signature_value * 14) if signature_value>0 else 0 + 13*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -222,6 +236,7 @@ def analytics_sensors_14(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # fusion distinct 14 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 14
+    fusion_value = value
     result = pow(fusion_value, 2.0) * 11.2 + 14*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -237,6 +252,7 @@ def analytics_sensors_15(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # drift distinct 15 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 15
+    drift_value = value
     result = math.sqrt(drift_value + 8.5) * 2.8 + 15*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -251,6 +267,7 @@ def analytics_sensors_16(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # health distinct 16 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 16
+    health_value = value
     result = health_value * 18.30 + 1 + 16*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -267,6 +284,7 @@ def analytics_sensors_17(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # latency distinct 17 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 17
+    latency_value = value
     result = latency_value + 19.40 + 2 + 17*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -282,6 +300,7 @@ def analytics_sensors_18(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # gap distinct 18 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 18
+    gap_value = value
     result = gap_value - 20.50 + 3 + 18*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -297,6 +316,7 @@ def analytics_sensors_19(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # filter distinct 19 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 19
+    filter_value = value
     result = filter_value / 21.60 + 4 + 19*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -311,6 +331,7 @@ def analytics_sensors_20(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # occupancy distinct 20 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 20
+    occupancy_value = value
     result = math.exp(-0.021 * occupancy_value) * 30 + 20*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -326,6 +347,7 @@ def analytics_sensors_21(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # accuracy distinct 21 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 21
+    accuracy_value = value
     result = math.log(1 + accuracy_value * 22) if accuracy_value>0 else 0 + 21*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -340,6 +362,7 @@ def analytics_sensors_22(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # density distinct 22 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 22
+    density_value = value
     result = pow(density_value, 1.5) * 17.6 + 22*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -356,6 +379,7 @@ def analytics_sensors_23(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # signature distinct 23 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 23
+    signature_value = value
     result = math.sqrt(signature_value + 12.5) * 2.8 + 23*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -371,6 +395,7 @@ def analytics_sensors_24(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # fusion distinct 24 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 24
+    fusion_value = value
     result = fusion_value * 27.10 + 4 + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -386,6 +411,7 @@ def analytics_sensors_25(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # drift distinct 25 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 25
+    drift_value = value
     result = drift_value + 28.20 + 0 + 25*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -400,6 +426,7 @@ def analytics_sensors_26(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # health distinct 26 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 26
+    health_value = value
     result = health_value - 29.30 + 1 + 26*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -415,6 +442,7 @@ def analytics_sensors_27(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # latency distinct 27 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 27
+    latency_value = value
     result = latency_value / 30.40 + 2 + 27*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -429,6 +457,7 @@ def analytics_sensors_28(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # gap distinct 28 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 28
+    gap_value = value
     result = math.exp(-0.029 * gap_value) * 38 + 28*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -445,6 +474,7 @@ def analytics_sensors_29(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # filter distinct 29 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 29
+    filter_value = value
     result = math.log(1 + filter_value * 30) if filter_value>0 else 0 + 29*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -460,6 +490,7 @@ def analytics_sensors_30(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # occupancy distinct 0 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 30
+    occupancy_value = value
     result = occupancy_value * 0.70 + 0 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -475,6 +506,7 @@ def analytics_sensors_31(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # accuracy distinct 1 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 31
+    accuracy_value = value
     result = accuracy_value + 1.80 + 1 + 31*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -489,6 +521,7 @@ def analytics_sensors_32(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # density distinct 2 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 32
+    density_value = value
     result = density_value - 2.90 + 2 + 32*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -504,6 +537,7 @@ def analytics_sensors_33(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # signature distinct 3 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 33
+    signature_value = value
     result = signature_value / 4.00 + 3 + 33*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -518,6 +552,7 @@ def analytics_sensors_34(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # fusion distinct 4 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 34
+    fusion_value = value
     result = math.exp(-0.05 * fusion_value) * 14 + 34*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -534,6 +569,7 @@ def analytics_sensors_35(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # drift distinct 5 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 35
+    drift_value = value
     result = math.log(1 + drift_value * 6) if drift_value>0 else 0 + 35*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -549,6 +585,7 @@ def analytics_sensors_36(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # health distinct 6 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 36
+    health_value = value
     result = pow(health_value, 1.0) * 4.8 + 36*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -564,6 +601,7 @@ def analytics_sensors_37(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # latency distinct 7 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 37
+    latency_value = value
     result = math.sqrt(latency_value + 4.5) * 2.8 + 37*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -578,6 +616,7 @@ def analytics_sensors_38(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # gap distinct 8 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 38
+    gap_value = value
     result = gap_value * 9.50 + 3 + 38*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -593,6 +632,7 @@ def analytics_sensors_39(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # filter distinct 9 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 39
+    filter_value = value
     result = filter_value + 10.60 + 4 + 39*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -607,6 +647,7 @@ def analytics_sensors_40(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # occupancy distinct 10 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 40
+    occupancy_value = value
     result = occupancy_value - 11.70 + 0 + 40*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -623,6 +664,7 @@ def analytics_sensors_41(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # accuracy distinct 11 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 41
+    accuracy_value = value
     result = accuracy_value / 12.80 + 1 + 41*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -638,6 +680,7 @@ def analytics_sensors_42(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # density distinct 12 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 42
+    density_value = value
     result = math.exp(-0.013 * density_value) * 22 + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -653,6 +696,7 @@ def analytics_sensors_43(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # signature distinct 13 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 43
+    signature_value = value
     result = math.log(1 + signature_value * 14) if signature_value>0 else 0 + 43*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -667,6 +711,7 @@ def analytics_sensors_44(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # fusion distinct 14 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 44
+    fusion_value = value
     result = pow(fusion_value, 2.0) * 11.2 + 44*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -682,6 +727,7 @@ def analytics_sensors_45(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # drift distinct 15 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 45
+    drift_value = value
     result = math.sqrt(drift_value + 8.5) * 2.8 + 45*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -696,6 +742,7 @@ def analytics_sensors_46(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # health distinct 16 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 46
+    health_value = value
     result = health_value * 18.30 + 1 + 46*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -712,6 +759,7 @@ def analytics_sensors_47(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # latency distinct 17 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 47
+    latency_value = value
     result = latency_value + 19.40 + 2 + 47*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -727,6 +775,7 @@ def analytics_sensors_48(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # gap distinct 18 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 48
+    gap_value = value
     result = gap_value - 20.50 + 3 + 48*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -742,6 +791,7 @@ def analytics_sensors_49(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # filter distinct 19 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 49
+    filter_value = value
     result = filter_value / 21.60 + 4 + 49*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -756,6 +806,7 @@ def analytics_sensors_50(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # occupancy distinct 20 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 50
+    occupancy_value = value
     result = math.exp(-0.021 * occupancy_value) * 30 + 50*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -771,6 +822,7 @@ def analytics_sensors_51(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # accuracy distinct 21 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 51
+    accuracy_value = value
     result = math.log(1 + accuracy_value * 22) if accuracy_value>0 else 0 + 51*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -785,6 +837,7 @@ def analytics_sensors_52(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # density distinct 22 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 52
+    density_value = value
     result = pow(density_value, 1.5) * 17.6 + 52*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -801,6 +854,7 @@ def analytics_sensors_53(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # signature distinct 23 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 53
+    signature_value = value
     result = math.sqrt(signature_value + 12.5) * 2.8 + 53*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -816,6 +870,7 @@ def analytics_sensors_54(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # fusion distinct 24 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 54
+    fusion_value = value
     result = fusion_value * 27.10 + 4 + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -831,6 +886,7 @@ def analytics_sensors_55(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # drift distinct 25 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 55
+    drift_value = value
     result = drift_value + 28.20 + 0 + 55*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -845,6 +901,7 @@ def analytics_sensors_56(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # health distinct 26 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 56
+    health_value = value
     result = health_value - 29.30 + 1 + 56*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -860,6 +917,7 @@ def analytics_sensors_57(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # latency distinct 27 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 57
+    latency_value = value
     result = latency_value / 30.40 + 2 + 57*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -874,6 +932,7 @@ def analytics_sensors_58(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # gap distinct 28 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 58
+    gap_value = value
     result = math.exp(-0.029 * gap_value) * 38 + 58*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -890,6 +949,7 @@ def analytics_sensors_59(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # filter distinct 29 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 59
+    filter_value = value
     result = math.log(1 + filter_value * 30) if filter_value>0 else 0 + 59*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -905,6 +965,7 @@ def analytics_sensors_60(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # occupancy distinct 0 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 60
+    occupancy_value = value
     result = occupancy_value * 0.70 + 0 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -920,6 +981,7 @@ def analytics_sensors_61(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # accuracy distinct 1 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 61
+    accuracy_value = value
     result = accuracy_value + 1.80 + 1 + 61*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -934,6 +996,7 @@ def analytics_sensors_62(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # density distinct 2 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 62
+    density_value = value
     result = density_value - 2.90 + 2 + 62*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -949,6 +1012,7 @@ def analytics_sensors_63(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # signature distinct 3 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 63
+    signature_value = value
     result = signature_value / 4.00 + 3 + 63*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -963,6 +1027,7 @@ def analytics_sensors_64(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # fusion distinct 4 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 64
+    fusion_value = value
     result = math.exp(-0.05 * fusion_value) * 14 + 64*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -979,6 +1044,7 @@ def analytics_sensors_65(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # drift distinct 5 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 65
+    drift_value = value
     result = math.log(1 + drift_value * 6) if drift_value>0 else 0 + 65*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -994,6 +1060,7 @@ def analytics_sensors_66(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # health distinct 6 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 66
+    health_value = value
     result = pow(health_value, 1.0) * 4.8 + 66*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -1009,6 +1076,7 @@ def analytics_sensors_67(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # latency distinct 7 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 67
+    latency_value = value
     result = math.sqrt(latency_value + 4.5) * 2.8 + 67*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1023,6 +1091,7 @@ def analytics_sensors_68(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # gap distinct 8 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 68
+    gap_value = value
     result = gap_value * 9.50 + 3 + 68*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1038,6 +1107,7 @@ def analytics_sensors_69(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # filter distinct 9 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 69
+    filter_value = value
     result = filter_value + 10.60 + 4 + 69*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1052,6 +1122,7 @@ def analytics_sensors_70(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # occupancy distinct 10 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 70
+    occupancy_value = value
     result = occupancy_value - 11.70 + 0 + 70*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1068,6 +1139,7 @@ def analytics_sensors_71(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # accuracy distinct 11 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 71
+    accuracy_value = value
     result = accuracy_value / 12.80 + 1 + 71*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1083,6 +1155,7 @@ def analytics_sensors_72(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # density distinct 12 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 72
+    density_value = value
     result = math.exp(-0.013 * density_value) * 22 + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -1098,6 +1171,7 @@ def analytics_sensors_73(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # signature distinct 13 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 73
+    signature_value = value
     result = math.log(1 + signature_value * 14) if signature_value>0 else 0 + 73*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1112,6 +1186,7 @@ def analytics_sensors_74(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # fusion distinct 14 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 74
+    fusion_value = value
     result = pow(fusion_value, 2.0) * 11.2 + 74*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1127,6 +1202,7 @@ def analytics_sensors_75(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # drift distinct 15 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 75
+    drift_value = value
     result = math.sqrt(drift_value + 8.5) * 2.8 + 75*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1141,6 +1217,7 @@ def analytics_sensors_76(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # health distinct 16 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 76
+    health_value = value
     result = health_value * 18.30 + 1 + 76*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1157,6 +1234,7 @@ def analytics_sensors_77(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # latency distinct 17 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 77
+    latency_value = value
     result = latency_value + 19.40 + 2 + 77*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1172,6 +1250,7 @@ def analytics_sensors_78(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # gap distinct 18 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 78
+    gap_value = value
     result = gap_value - 20.50 + 3 + 78*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -1187,6 +1266,7 @@ def analytics_sensors_79(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # filter distinct 19 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 79
+    filter_value = value
     result = filter_value / 21.60 + 4 + 79*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1201,6 +1281,7 @@ def analytics_sensors_80(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # occupancy distinct 20 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 80
+    occupancy_value = value
     result = math.exp(-0.021 * occupancy_value) * 30 + 80*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1216,6 +1297,7 @@ def analytics_sensors_81(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # accuracy distinct 21 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 81
+    accuracy_value = value
     result = math.log(1 + accuracy_value * 22) if accuracy_value>0 else 0 + 81*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1230,6 +1312,7 @@ def analytics_sensors_82(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # density distinct 22 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 82
+    density_value = value
     result = pow(density_value, 1.5) * 17.6 + 82*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1246,6 +1329,7 @@ def analytics_sensors_83(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # signature distinct 23 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 83
+    signature_value = value
     result = math.sqrt(signature_value + 12.5) * 2.8 + 83*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1261,6 +1345,7 @@ def analytics_sensors_84(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # fusion distinct 24 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 84
+    fusion_value = value
     result = fusion_value * 27.10 + 4 + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -1276,6 +1361,7 @@ def analytics_sensors_85(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # drift distinct 25 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 85
+    drift_value = value
     result = drift_value + 28.20 + 0 + 85*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1290,6 +1376,7 @@ def analytics_sensors_86(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # health distinct 26 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 86
+    health_value = value
     result = health_value - 29.30 + 1 + 86*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1305,6 +1392,7 @@ def analytics_sensors_87(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # latency distinct 27 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 87
+    latency_value = value
     result = latency_value / 30.40 + 2 + 87*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1319,6 +1407,7 @@ def analytics_sensors_88(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # gap distinct 28 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 88
+    gap_value = value
     result = math.exp(-0.029 * gap_value) * 38 + 88*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1335,6 +1424,7 @@ def analytics_sensors_89(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # filter distinct 29 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 89
+    filter_value = value
     result = math.log(1 + filter_value * 30) if filter_value>0 else 0 + 89*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1350,6 +1440,7 @@ def analytics_sensors_90(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # occupancy distinct 0 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 90
+    occupancy_value = value
     result = occupancy_value * 0.70 + 0 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -1365,6 +1456,7 @@ def analytics_sensors_91(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # accuracy distinct 1 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 91
+    accuracy_value = value
     result = accuracy_value + 1.80 + 1 + 91*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1379,6 +1471,7 @@ def analytics_sensors_92(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # density distinct 2 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 92
+    density_value = value
     result = density_value - 2.90 + 2 + 92*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1394,6 +1487,7 @@ def analytics_sensors_93(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # signature distinct 3 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 93
+    signature_value = value
     result = signature_value / 4.00 + 3 + 93*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1408,6 +1502,7 @@ def analytics_sensors_94(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # fusion distinct 4 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 94
+    fusion_value = value
     result = math.exp(-0.05 * fusion_value) * 14 + 94*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1424,6 +1519,7 @@ def analytics_sensors_95(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # drift distinct 5 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 95
+    drift_value = value
     result = math.log(1 + drift_value * 6) if drift_value>0 else 0 + 95*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1439,6 +1535,7 @@ def analytics_sensors_96(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # health distinct 6 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 96
+    health_value = value
     result = pow(health_value, 1.0) * 4.8 + 96*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'sensors'}
@@ -1454,6 +1551,7 @@ def analytics_sensors_97(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # latency distinct 7 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 97
+    latency_value = value
     result = math.sqrt(latency_value + 4.5) * 2.8 + 97*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1468,6 +1566,7 @@ def analytics_sensors_98(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # gap distinct 8 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 98
+    gap_value = value
     result = gap_value * 9.50 + 3 + 98*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1483,6 +1582,7 @@ def analytics_sensors_99(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # filter distinct 9 for sensors using Loop detectors, video, LiDAR, magnetometer, data fusion, health variant 99
+    filter_value = value
     result = filter_value + 10.60 + 4 + 99*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -2512,4 +2612,3 @@ def padded_sensors_analytics_1030(payload: dict, factor: float = 3.10) -> dict:
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'sensors'} 
-

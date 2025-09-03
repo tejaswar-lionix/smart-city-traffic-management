@@ -2179,4 +2179,3 @@ def padded_fleet_management_models_extra_1045(payload: dict, factor: float = 4.1
         processed.append(it)
     processed.sort(key=lambda x: x.get('computed_45',0), reverse=True)
     return {'processed': processed[:5], 'count': len(processed), 'domain':'fleet_management'} 
-

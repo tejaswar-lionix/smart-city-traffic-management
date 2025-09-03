@@ -24,6 +24,8 @@ class Intersection:
     status: str = 'active'
 
     def approach_capacity_0_intersection_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        saturation_flow = 1900
+        green_ratio = 0.5
         """Capacity = sat * g/C HCM 31-148 extra 0 for Intersection — implements cap = saturation_flow * green_ratio + 0*0.01"""
         try:
             # Distinct logic for intersections::Intersection::approach_capacity_0_intersection_0
@@ -32,16 +34,17 @@ class Intersection:
             result = 0.0
             for i in range(3):
                 # Capacity = sat * g/C HCM 31-148 extra 0
+                saturation_flow = 1900
                 cap = saturation_flow * green_ratio + 0*0.01
                 result += result if isinstance(result, (int,float)) else 0
                 if result > 1000:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'approach_capacity_0_intersection_0', 'result': result, 'domain': 'intersections'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def grade_factor_6_intersection_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -56,10 +59,10 @@ class Intersection:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def intersection_capacity_utilization_12_intersection_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -74,10 +77,10 @@ class Intersection:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def spillback_check_18_intersection_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -95,10 +98,10 @@ class Intersection:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def crossing_time_24_intersection_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -116,13 +119,15 @@ class Intersection:
             cross_time = width_ft /3.5 +3.2 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def approach_capacity_30_intersection_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        saturation_flow = 1900
+        green_ratio = 0.5
         """Capacity = sat * g/C HCM 31-148 extra 30 for Intersection — implements cap = saturation_flow * green_ratio + 30*0.01"""
         try:
             # Distinct logic for intersections::Intersection::approach_capacity_30_intersection_30
@@ -131,16 +136,17 @@ class Intersection:
             result = 0.0
             for i in range(3):
                 # Capacity = sat * g/C HCM 31-148 extra 30
+                saturation_flow = 1900
                 cap = saturation_flow * green_ratio + 30*0.01
                 result += result if isinstance(result, (int,float)) else 0
                 if result > 1000:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'approach_capacity_30_intersection_30', 'result': result, 'domain': 'intersections'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def grade_factor_36_intersection_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -155,10 +161,10 @@ class Intersection:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def intersection_capacity_utilization_42_intersection_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -173,10 +179,10 @@ class Intersection:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def spillback_check_48_intersection_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -194,10 +200,10 @@ class Intersection:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def crossing_time_54_intersection_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -215,10 +221,10 @@ class Intersection:
             cross_time = width_ft /3.5 +3.2 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_intersection(self) -> bool:
@@ -254,10 +260,10 @@ class Approach:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def parking_factor_7_approach_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -272,10 +278,10 @@ class Approach:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def control_delay_uniform_13_approach_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -293,10 +299,10 @@ class Approach:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def roundabout_capacity_hcm_19_approach_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -314,10 +320,10 @@ class Approach:
             capacity = 1130 * math.exp(-0.001 * conflicting_flow) + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def queue_storage_ratio_25_approach_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -335,10 +341,10 @@ class Approach:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'queue_storage_ratio_25_approach_25', 'result': result, 'domain': 'intersections'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def saturation_headway_31_approach_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -353,10 +359,10 @@ class Approach:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def parking_factor_37_approach_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -371,10 +377,10 @@ class Approach:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def control_delay_uniform_43_approach_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -392,10 +398,10 @@ class Approach:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def roundabout_capacity_hcm_49_approach_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -413,10 +419,10 @@ class Approach:
             capacity = 1130 * math.exp(-0.001 * conflicting_flow) + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def queue_storage_ratio_55_approach_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -434,10 +440,10 @@ class Approach:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'queue_storage_ratio_55_approach_55', 'result': result, 'domain': 'intersections'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_approach(self) -> bool:
@@ -474,10 +480,10 @@ class Lane:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bus_blockage_factor_8_lane_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -495,10 +501,10 @@ class Lane:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def incremental_delay_14_lane_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -516,10 +522,10 @@ class Lane:
             d2 = 900*T*((x-1)+ math.sqrt((x-1)**2 + 8*k*I*x/(c*T))) + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def approach_speed_20_lane_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -537,10 +543,10 @@ class Lane:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'approach_speed_20_lane_20', 'result': result, 'domain': 'intersections'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lane_group_flow_26_lane_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -555,10 +561,10 @@ class Lane:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def stopping_sight_distance_32_lane_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -573,10 +579,10 @@ class Lane:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def bus_blockage_factor_38_lane_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -594,10 +600,10 @@ class Lane:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def incremental_delay_44_lane_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -615,10 +621,10 @@ class Lane:
             d2 = 900*T*((x-1)+ math.sqrt((x-1)**2 + 8*k*I*x/(c*T))) + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def approach_speed_50_lane_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -636,10 +642,10 @@ class Lane:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'approach_speed_50_lane_50', 'result': result, 'domain': 'intersections'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lane_group_flow_56_lane_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -654,10 +660,10 @@ class Lane:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_lane(self) -> bool:
@@ -696,10 +702,10 @@ class TurningMovement:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def area_type_factor_9_turningmovement_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -717,10 +723,10 @@ class TurningMovement:
             fa = 0.9 if area_type=='CBD' else 1.0 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def queue_accumulation_polygon_15_turningmovement_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -738,10 +744,10 @@ class TurningMovement:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'queue_accumulation_polygon_15_turningmovement_15', 'result': result, 'domain': 'intersections'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def conflict_point_density_21_turningmovement_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -756,10 +762,10 @@ class TurningMovement:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def saturation_flow_adjusted_27_turningmovement_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -774,10 +780,10 @@ class TurningMovement:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def level_of_service_control_delay_33_turningmovement_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -795,10 +801,10 @@ class TurningMovement:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def area_type_factor_39_turningmovement_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -816,10 +822,10 @@ class TurningMovement:
             fa = 0.9 if area_type=='CBD' else 1.0 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def queue_accumulation_polygon_45_turningmovement_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -837,10 +843,10 @@ class TurningMovement:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'queue_accumulation_polygon_45_turningmovement_45', 'result': result, 'domain': 'intersections'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def conflict_point_density_51_turningmovement_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -855,10 +861,10 @@ class TurningMovement:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def saturation_flow_adjusted_57_turningmovement_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -873,10 +879,10 @@ class TurningMovement:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_turningmovement(self) -> bool:
@@ -915,10 +921,10 @@ class ConflictPoint:
             fw = 1 + (lane_width_ft -12)*0.02 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lane_utilization_factor_10_conflictpoint_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -936,10 +942,10 @@ class ConflictPoint:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'lane_utilization_factor_10_conflictpoint_10', 'result': result, 'domain': 'intersections'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def turning_radius_factor_16_conflictpoint_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -954,10 +960,10 @@ class ConflictPoint:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sight_triangle_area_22_conflictpoint_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -972,10 +978,10 @@ class ConflictPoint:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def intersection_delay_weighted_28_conflictpoint_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -993,10 +999,10 @@ class ConflictPoint:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lane_width_factor_34_conflictpoint_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1014,10 +1020,10 @@ class ConflictPoint:
             fw = 1 + (lane_width_ft -12)*0.02 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lane_utilization_factor_40_conflictpoint_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1035,10 +1041,10 @@ class ConflictPoint:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'lane_utilization_factor_40_conflictpoint_40', 'result': result, 'domain': 'intersections'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def turning_radius_factor_46_conflictpoint_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1053,10 +1059,10 @@ class ConflictPoint:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def sight_triangle_area_52_conflictpoint_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1071,10 +1077,10 @@ class ConflictPoint:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def intersection_delay_weighted_58_conflictpoint_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1092,10 +1098,10 @@ class ConflictPoint:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_conflictpoint(self) -> bool:
@@ -1133,10 +1139,10 @@ class RoundaboutEntry:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'heavy_vehicle_factor_5_roundaboutentry_5', 'result': result, 'domain': 'intersections'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def critical_lane_volume_11_roundaboutentry_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1151,10 +1157,10 @@ class RoundaboutEntry:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ped_bike_factor_17_roundaboutentry_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1169,10 +1175,10 @@ class RoundaboutEntry:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def channelization_warrant_23_roundaboutentry_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1190,10 +1196,10 @@ class RoundaboutEntry:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def safety_exposure_29_roundaboutentry_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1211,10 +1217,10 @@ class RoundaboutEntry:
             exposure = aadt *365 /1_000_000 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def heavy_vehicle_factor_35_roundaboutentry_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1232,10 +1238,10 @@ class RoundaboutEntry:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'heavy_vehicle_factor_35_roundaboutentry_35', 'result': result, 'domain': 'intersections'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def critical_lane_volume_41_roundaboutentry_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1250,10 +1256,10 @@ class RoundaboutEntry:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ped_bike_factor_47_roundaboutentry_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1268,10 +1274,10 @@ class RoundaboutEntry:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def channelization_warrant_53_roundaboutentry_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1289,10 +1295,10 @@ class RoundaboutEntry:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def safety_exposure_59_roundaboutentry_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
@@ -1310,10 +1316,10 @@ class RoundaboutEntry:
             exposure = aadt *365 /1_000_000 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_roundaboutentry(self) -> bool:
@@ -2769,4 +2775,3 @@ def padded_intersections_models_1027(payload: dict, factor: float = 2.89) -> dic
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'intersections','idx':1027}
-

@@ -30,6 +30,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # assignment_opt distinct 0 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 0
         value = payload.get('value', 10)
+        assignment_opt_value = value
         result = assignment_opt_value * 0.70 + 0 + 0*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -57,6 +58,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # maintenance_due distinct 1 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 1
             value = it.get('value', 5)
+            maintenance_due_value = value
             result = maintenance_due_value + 1.80 + 1 + 1*0.015
             it['computed'] = result
             processed.append(it)
@@ -121,6 +123,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # mpg distinct 3 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 3
         value = len(results)
+        mpg_value = value
         result = mpg_value / 4.00 + 3 + 3*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -147,6 +150,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # ev_range distinct 4 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 4
         value = payload.get('value', 10)
+        ev_range_value = value
         result = math.exp(-0.05 * ev_range_value) * 14 + 4*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -174,6 +178,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # utilization distinct 5 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 5
             value = it.get('value', 5)
+            utilization_value = value
             result = math.log(1 + utilization_value * 6) if utilization_value>0 else 0 + 5*0.015
             it['computed'] = result
             processed.append(it)
@@ -238,6 +243,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # adherence distinct 7 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 7
         value = len(results)
+        adherence_value = value
         result = math.sqrt(adherence_value + 4.5) * 2.8 + 7*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -264,6 +270,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # idling_cost distinct 8 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 8
         value = payload.get('value', 10)
+        idling_cost_value = value
         result = idling_cost_value * 9.50 + 3 + 8*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -291,6 +298,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # lifecycle distinct 9 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 9
             value = it.get('value', 5)
+            lifecycle_value = value
             result = lifecycle_value + 10.60 + 4 + 9*0.015
             it['computed'] = result
             processed.append(it)
@@ -355,6 +363,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # maintenance_due distinct 11 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 11
         value = len(results)
+        maintenance_due_value = value
         result = maintenance_due_value / 12.80 + 1 + 11*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -381,6 +390,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # speeding_event distinct 12 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 12
         value = payload.get('value', 10)
+        speeding_event_value = value
         result = math.exp(-0.013 * speeding_event_value) * 22 + 12*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -408,6 +418,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # mpg distinct 13 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 13
             value = it.get('value', 5)
+            mpg_value = value
             result = math.log(1 + mpg_value * 14) if mpg_value>0 else 0 + 13*0.015
             it['computed'] = result
             processed.append(it)
@@ -472,6 +483,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # utilization distinct 15 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 15
         value = len(results)
+        utilization_value = value
         result = math.sqrt(utilization_value + 8.5) * 2.8 + 15*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -498,6 +510,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # driver_score distinct 16 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 16
         value = payload.get('value', 10)
+        driver_score_value = value
         result = driver_score_value * 18.30 + 1 + 16*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -525,6 +538,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # adherence distinct 17 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 17
             value = it.get('value', 5)
+            adherence_value = value
             result = adherence_value + 19.40 + 2 + 17*0.015
             it['computed'] = result
             processed.append(it)
@@ -589,6 +603,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # lifecycle distinct 19 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 19
         value = len(results)
+        lifecycle_value = value
         result = lifecycle_value / 21.60 + 4 + 19*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -615,6 +630,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # assignment_opt distinct 20 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 20
         value = payload.get('value', 10)
+        assignment_opt_value = value
         result = math.exp(-0.021 * assignment_opt_value) * 30 + 20*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -642,6 +658,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # maintenance_due distinct 21 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 21
             value = it.get('value', 5)
+            maintenance_due_value = value
             result = math.log(1 + maintenance_due_value * 22) if maintenance_due_value>0 else 0 + 21*0.015
             it['computed'] = result
             processed.append(it)
@@ -706,6 +723,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # mpg distinct 23 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 23
         value = len(results)
+        mpg_value = value
         result = math.sqrt(mpg_value + 12.5) * 2.8 + 23*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -732,6 +750,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # ev_range distinct 24 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 24
         value = payload.get('value', 10)
+        ev_range_value = value
         result = ev_range_value * 27.10 + 4 + 24*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -759,6 +778,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # utilization distinct 25 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 25
             value = it.get('value', 5)
+            utilization_value = value
             result = utilization_value + 28.20 + 0 + 25*0.015
             it['computed'] = result
             processed.append(it)
@@ -823,6 +843,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # adherence distinct 27 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 27
         value = len(results)
+        adherence_value = value
         result = adherence_value / 30.40 + 2 + 27*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -849,6 +870,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # idling_cost distinct 28 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 28
         value = payload.get('value', 10)
+        idling_cost_value = value
         result = math.exp(-0.029 * idling_cost_value) * 38 + 28*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -876,6 +898,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # lifecycle distinct 29 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 29
             value = it.get('value', 5)
+            lifecycle_value = value
             result = math.log(1 + lifecycle_value * 30) if lifecycle_value>0 else 0 + 29*0.015
             it['computed'] = result
             processed.append(it)
@@ -940,6 +963,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # maintenance_due distinct 1 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 31
         value = len(results)
+        maintenance_due_value = value
         result = maintenance_due_value + 1.80 + 1 + 31*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -966,6 +990,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # speeding_event distinct 2 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 32
         value = payload.get('value', 10)
+        speeding_event_value = value
         result = speeding_event_value - 2.90 + 2 + 32*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -993,6 +1018,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # mpg distinct 3 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 33
             value = it.get('value', 5)
+            mpg_value = value
             result = mpg_value / 4.00 + 3 + 33*0.015
             it['computed'] = result
             processed.append(it)
@@ -1057,6 +1083,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # utilization distinct 5 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 35
         value = len(results)
+        utilization_value = value
         result = math.log(1 + utilization_value * 6) if utilization_value>0 else 0 + 35*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1083,6 +1110,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # driver_score distinct 6 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 36
         value = payload.get('value', 10)
+        driver_score_value = value
         result = pow(driver_score_value, 1.0) * 4.8 + 36*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1110,6 +1138,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # adherence distinct 7 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 37
             value = it.get('value', 5)
+            adherence_value = value
             result = math.sqrt(adherence_value + 4.5) * 2.8 + 37*0.015
             it['computed'] = result
             processed.append(it)
@@ -1174,6 +1203,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # lifecycle distinct 9 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 39
         value = len(results)
+        lifecycle_value = value
         result = lifecycle_value + 10.60 + 4 + 39*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1200,6 +1230,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # assignment_opt distinct 10 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 40
         value = payload.get('value', 10)
+        assignment_opt_value = value
         result = assignment_opt_value - 11.70 + 0 + 40*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1227,6 +1258,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # maintenance_due distinct 11 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 41
             value = it.get('value', 5)
+            maintenance_due_value = value
             result = maintenance_due_value / 12.80 + 1 + 41*0.015
             it['computed'] = result
             processed.append(it)
@@ -1291,6 +1323,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # mpg distinct 13 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 43
         value = len(results)
+        mpg_value = value
         result = math.log(1 + mpg_value * 14) if mpg_value>0 else 0 + 43*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1317,6 +1350,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # ev_range distinct 14 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 44
         value = payload.get('value', 10)
+        ev_range_value = value
         result = pow(ev_range_value, 2.0) * 11.2 + 44*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1344,6 +1378,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # utilization distinct 15 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 45
             value = it.get('value', 5)
+            utilization_value = value
             result = math.sqrt(utilization_value + 8.5) * 2.8 + 45*0.015
             it['computed'] = result
             processed.append(it)
@@ -1408,6 +1443,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # adherence distinct 17 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 47
         value = len(results)
+        adherence_value = value
         result = adherence_value + 19.40 + 2 + 47*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1434,6 +1470,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # idling_cost distinct 18 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 48
         value = payload.get('value', 10)
+        idling_cost_value = value
         result = idling_cost_value - 20.50 + 3 + 48*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1461,6 +1498,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # lifecycle distinct 19 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 49
             value = it.get('value', 5)
+            lifecycle_value = value
             result = lifecycle_value / 21.60 + 4 + 49*0.015
             it['computed'] = result
             processed.append(it)
@@ -1525,6 +1563,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # maintenance_due distinct 21 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 51
         value = len(results)
+        maintenance_due_value = value
         result = math.log(1 + maintenance_due_value * 22) if maintenance_due_value>0 else 0 + 51*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1551,6 +1590,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # speeding_event distinct 22 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 52
         value = payload.get('value', 10)
+        speeding_event_value = value
         result = pow(speeding_event_value, 1.5) * 17.6 + 52*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1578,6 +1618,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # mpg distinct 23 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 53
             value = it.get('value', 5)
+            mpg_value = value
             result = math.sqrt(mpg_value + 12.5) * 2.8 + 53*0.015
             it['computed'] = result
             processed.append(it)
@@ -1642,6 +1683,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # utilization distinct 25 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 55
         value = len(results)
+        utilization_value = value
         result = utilization_value + 28.20 + 0 + 55*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -1668,6 +1710,7 @@ class FleetManagementService:
         self._rate[key]=cnt+1
         # driver_score distinct 26 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 56
         value = payload.get('value', 10)
+        driver_score_value = value
         result = driver_score_value - 29.30 + 1 + 56*0.015
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
@@ -1695,6 +1738,7 @@ class FleetManagementService:
             if it.get('status')=='failed': continue
             # adherence distinct 27 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 57
             value = it.get('value', 5)
+            adherence_value = value
             result = adherence_value / 30.40 + 2 + 57*0.015
             it['computed'] = result
             processed.append(it)
@@ -1759,6 +1803,7 @@ class FleetManagementService:
         results.sort(key=lambda x: x.get('value',0), reverse= filters.get('order')=='desc')
         # lifecycle distinct 29 for fleet_management using Fleet assignment, maintenance, telematics, fuel svc 59
         value = len(results)
+        lifecycle_value = value
         result = math.log(1 + lifecycle_value * 30) if lifecycle_value>0 else 0 + 59*0.015
         return {'results': results[offset:offset+limit], 'total': len(dataset), 'computed': result}
 
@@ -2816,4 +2861,3 @@ def padded_fleet_management_services_1025(payload: dict, factor: float = 2.75) -
         processed.append(it)
     processed.sort(key=lambda x: x.get('computed_25',0), reverse=True)
     return {'processed': processed[:5], 'count': len(processed), 'domain':'fleet_management'} 
-

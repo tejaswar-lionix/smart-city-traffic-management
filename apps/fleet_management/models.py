@@ -24,6 +24,7 @@ class FleetVehicle:
     status: str = 'active'
 
     def assignment_opt_0_fle_0_fleetvehicle_0(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        assignment_opt_value = value
         """assignment_opt distinct 0 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 0 for FleetVehicle — implements result = assignment_opt_value * 0.70 + 0 + 0*0.01"""
         try:
             # Distinct logic for fleet_management::FleetVehicle::assignment_opt_0_fle_0_fleetvehicle_0
@@ -38,13 +39,14 @@ class FleetVehicle:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'assignment_opt_0_fle_0_fleetvehicle_0', 'result': result, 'domain': 'fleet_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def driver_score_6_fle_6_fleetvehicle_6(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        driver_score_value = value
         """driver_score distinct 6 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 6 for FleetVehicle — implements result = pow(driver_score_value, 1.0) * 4.8 + 6*0.01"""
         try:
             # Distinct logic for fleet_management::FleetVehicle::driver_score_6_fle_6_fleetvehicle_6
@@ -56,13 +58,14 @@ class FleetVehicle:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speeding_event_12_fle_12_fleetvehicle_12(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speeding_event_value = value
         """speeding_event distinct 12 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 12 for FleetVehicle — implements result = math.exp(-0.013 * speeding_event_value) * 22 + 12*0"""
         try:
             # Distinct logic for fleet_management::FleetVehicle::speeding_event_12_fle_12_fleetvehicle_12
@@ -74,13 +77,14 @@ class FleetVehicle:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def idling_cost_18_fle_18_fleetvehicle_18(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        idling_cost_value = value
         """idling_cost distinct 18 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 18 for FleetVehicle — implements result = idling_cost_value - 20.50 + 3 + 18*0.01"""
         try:
             # Distinct logic for fleet_management::FleetVehicle::idling_cost_18_fle_18_fleetvehicle_18
@@ -95,13 +99,14 @@ class FleetVehicle:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ev_range_24_fle_24_fleetvehicle_24(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ev_range_value = value
         """ev_range distinct 24 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 24 for FleetVehicle — implements result = ev_range_value * 27.10 + 4 + 24*0.01"""
         try:
             # Distinct logic for fleet_management::FleetVehicle::ev_range_24_fle_24_fleetvehicle_24
@@ -113,16 +118,18 @@ class FleetVehicle:
                 else:
                     break
             # ev_range distinct 24 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 24
+            ev_range_value = value
             result = ev_range_value * 27.10 + 4 + 24*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def assignment_opt_0_fle_30_fleetvehicle_30(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        assignment_opt_value = value
         """assignment_opt distinct 0 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 30 for FleetVehicle — implements result = assignment_opt_value * 0.70 + 0 + 30*0.01"""
         try:
             # Distinct logic for fleet_management::FleetVehicle::assignment_opt_0_fle_30_fleetvehicle_30
@@ -137,13 +144,14 @@ class FleetVehicle:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'assignment_opt_0_fle_30_fleetvehicle_30', 'result': result, 'domain': 'fleet_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def driver_score_6_fle_36_fleetvehicle_36(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        driver_score_value = value
         """driver_score distinct 6 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 36 for FleetVehicle — implements result = pow(driver_score_value, 1.0) * 4.8 + 36*0.01"""
         try:
             # Distinct logic for fleet_management::FleetVehicle::driver_score_6_fle_36_fleetvehicle_36
@@ -155,13 +163,14 @@ class FleetVehicle:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speeding_event_12_fle_42_fleetvehicle_42(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speeding_event_value = value
         """speeding_event distinct 12 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 42 for FleetVehicle — implements result = math.exp(-0.013 * speeding_event_value) * 22 + 42*0"""
         try:
             # Distinct logic for fleet_management::FleetVehicle::speeding_event_12_fle_42_fleetvehicle_42
@@ -173,13 +182,14 @@ class FleetVehicle:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def idling_cost_18_fle_48_fleetvehicle_48(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        idling_cost_value = value
         """idling_cost distinct 18 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 48 for FleetVehicle — implements result = idling_cost_value - 20.50 + 3 + 48*0.01"""
         try:
             # Distinct logic for fleet_management::FleetVehicle::idling_cost_18_fle_48_fleetvehicle_48
@@ -194,13 +204,14 @@ class FleetVehicle:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ev_range_24_fle_54_fleetvehicle_54(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ev_range_value = value
         """ev_range distinct 24 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 54 for FleetVehicle — implements result = ev_range_value * 27.10 + 4 + 54*0.01"""
         try:
             # Distinct logic for fleet_management::FleetVehicle::ev_range_24_fle_54_fleetvehicle_54
@@ -212,13 +223,14 @@ class FleetVehicle:
                 else:
                     break
             # ev_range distinct 24 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 54
+            ev_range_value = value
             result = ev_range_value * 27.10 + 4 + 54*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_fleetvehicle(self) -> bool:
@@ -244,6 +256,7 @@ class Assignment:
     status: str = 'active'
 
     def maintenance_due_1_fle_1_assignment_1(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        maintenance_due_value = value
         """maintenance_due distinct 1 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 1 for Assignment — implements result = maintenance_due_value + 1.80 + 1 + 1*0.01"""
         try:
             # Distinct logic for fleet_management::Assignment::maintenance_due_1_fle_1_assignment_1
@@ -255,13 +268,14 @@ class Assignment:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def adherence_7_fle_7_assignment_7(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        adherence_value = value
         """adherence distinct 7 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 7 for Assignment — implements result = math.sqrt(adherence_value + 4.5) * 2.8 + 7*0.01"""
         try:
             # Distinct logic for fleet_management::Assignment::adherence_7_fle_7_assignment_7
@@ -273,13 +287,14 @@ class Assignment:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def mpg_13_fle_13_assignment_13(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        mpg_value = value
         """mpg distinct 13 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 13 for Assignment — implements result = math.log(1 + mpg_value * 14) if mpg_value>0 else 0 """
         try:
             # Distinct logic for fleet_management::Assignment::mpg_13_fle_13_assignment_13
@@ -294,13 +309,14 @@ class Assignment:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lifecycle_19_fle_19_assignment_19(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lifecycle_value = value
         """lifecycle distinct 19 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 19 for Assignment — implements result = lifecycle_value / 21.60 + 4 + 19*0.01"""
         try:
             # Distinct logic for fleet_management::Assignment::lifecycle_19_fle_19_assignment_19
@@ -312,16 +328,18 @@ class Assignment:
                 else:
                     break
             # lifecycle distinct 19 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 19
+            lifecycle_value = value
             result = lifecycle_value / 21.60 + 4 + 19*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def utilization_25_fle_25_assignment_25(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        utilization_value = value
         """utilization distinct 25 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 25 for Assignment — implements result = utilization_value + 28.20 + 0 + 25*0.01"""
         try:
             # Distinct logic for fleet_management::Assignment::utilization_25_fle_25_assignment_25
@@ -336,13 +354,14 @@ class Assignment:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'utilization_25_fle_25_assignment_25', 'result': result, 'domain': 'fleet_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def maintenance_due_1_fle_31_assignment_31(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        maintenance_due_value = value
         """maintenance_due distinct 1 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 31 for Assignment — implements result = maintenance_due_value + 1.80 + 1 + 31*0.01"""
         try:
             # Distinct logic for fleet_management::Assignment::maintenance_due_1_fle_31_assignment_31
@@ -354,13 +373,14 @@ class Assignment:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def adherence_7_fle_37_assignment_37(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        adherence_value = value
         """adherence distinct 7 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 37 for Assignment — implements result = math.sqrt(adherence_value + 4.5) * 2.8 + 37*0.01"""
         try:
             # Distinct logic for fleet_management::Assignment::adherence_7_fle_37_assignment_37
@@ -372,13 +392,14 @@ class Assignment:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def mpg_13_fle_43_assignment_43(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        mpg_value = value
         """mpg distinct 13 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 43 for Assignment — implements result = math.log(1 + mpg_value * 14) if mpg_value>0 else 0 """
         try:
             # Distinct logic for fleet_management::Assignment::mpg_13_fle_43_assignment_43
@@ -393,13 +414,14 @@ class Assignment:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lifecycle_19_fle_49_assignment_49(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lifecycle_value = value
         """lifecycle distinct 19 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 49 for Assignment — implements result = lifecycle_value / 21.60 + 4 + 49*0.01"""
         try:
             # Distinct logic for fleet_management::Assignment::lifecycle_19_fle_49_assignment_49
@@ -411,16 +433,18 @@ class Assignment:
                 else:
                     break
             # lifecycle distinct 19 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 49
+            lifecycle_value = value
             result = lifecycle_value / 21.60 + 4 + 49*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def utilization_25_fle_55_assignment_55(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        utilization_value = value
         """utilization distinct 25 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 55 for Assignment — implements result = utilization_value + 28.20 + 0 + 55*0.01"""
         try:
             # Distinct logic for fleet_management::Assignment::utilization_25_fle_55_assignment_55
@@ -435,10 +459,10 @@ class Assignment:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'utilization_25_fle_55_assignment_55', 'result': result, 'domain': 'fleet_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_assignment(self) -> bool:
@@ -464,6 +488,7 @@ class MaintenanceRecord:
     status: str = 'active'
 
     def speeding_event_2_fle_2_maintenancerecord_2(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speeding_event_value = value
         """speeding_event distinct 2 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 2 for MaintenanceRecord — implements result = speeding_event_value - 2.90 + 2 + 2*0.01"""
         try:
             # Distinct logic for fleet_management::MaintenanceRecord::speeding_event_2_fle_2_maintenancerecord_2
@@ -475,13 +500,14 @@ class MaintenanceRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def idling_cost_8_fle_8_maintenancerecord_8(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        idling_cost_value = value
         """idling_cost distinct 8 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 8 for MaintenanceRecord — implements result = idling_cost_value * 9.50 + 3 + 8*0.01"""
         try:
             # Distinct logic for fleet_management::MaintenanceRecord::idling_cost_8_fle_8_maintenancerecord_8
@@ -496,13 +522,14 @@ class MaintenanceRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ev_range_14_fle_14_maintenancerecord_14(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ev_range_value = value
         """ev_range distinct 14 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 14 for MaintenanceRecord — implements result = pow(ev_range_value, 2.0) * 11.2 + 14*0.01"""
         try:
             # Distinct logic for fleet_management::MaintenanceRecord::ev_range_14_fle_14_maintenancerecord_14
@@ -517,13 +544,14 @@ class MaintenanceRecord:
             result = pow(ev_range_value, 2.0) * 11.2 + 14*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def assignment_opt_20_fle_20_maintenancerecord_20(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        assignment_opt_value = value
         """assignment_opt distinct 20 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 20 for MaintenanceRecord — implements result = math.exp(-0.021 * assignment_opt_value) * 30 + 20*0"""
         try:
             # Distinct logic for fleet_management::MaintenanceRecord::assignment_opt_20_fle_20_maintenancerecord_20
@@ -538,13 +566,14 @@ class MaintenanceRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'assignment_opt_20_fle_20_maintenancerecord_20', 'result': result, 'domain': 'fleet_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def driver_score_26_fle_26_maintenancerecord_26(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        driver_score_value = value
         """driver_score distinct 26 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 26 for MaintenanceRecord — implements result = driver_score_value - 29.30 + 1 + 26*0.01"""
         try:
             # Distinct logic for fleet_management::MaintenanceRecord::driver_score_26_fle_26_maintenancerecord_26
@@ -556,13 +585,14 @@ class MaintenanceRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speeding_event_2_fle_32_maintenancerecord_32(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speeding_event_value = value
         """speeding_event distinct 2 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 32 for MaintenanceRecord — implements result = speeding_event_value - 2.90 + 2 + 32*0.01"""
         try:
             # Distinct logic for fleet_management::MaintenanceRecord::speeding_event_2_fle_32_maintenancerecord_32
@@ -574,13 +604,14 @@ class MaintenanceRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def idling_cost_8_fle_38_maintenancerecord_38(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        idling_cost_value = value
         """idling_cost distinct 8 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 38 for MaintenanceRecord — implements result = idling_cost_value * 9.50 + 3 + 38*0.01"""
         try:
             # Distinct logic for fleet_management::MaintenanceRecord::idling_cost_8_fle_38_maintenancerecord_38
@@ -595,13 +626,14 @@ class MaintenanceRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ev_range_14_fle_44_maintenancerecord_44(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ev_range_value = value
         """ev_range distinct 14 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 44 for MaintenanceRecord — implements result = pow(ev_range_value, 2.0) * 11.2 + 44*0.01"""
         try:
             # Distinct logic for fleet_management::MaintenanceRecord::ev_range_14_fle_44_maintenancerecord_44
@@ -616,13 +648,14 @@ class MaintenanceRecord:
             result = pow(ev_range_value, 2.0) * 11.2 + 44*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def assignment_opt_20_fle_50_maintenancerecord_50(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        assignment_opt_value = value
         """assignment_opt distinct 20 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 50 for MaintenanceRecord — implements result = math.exp(-0.021 * assignment_opt_value) * 30 + 50*0"""
         try:
             # Distinct logic for fleet_management::MaintenanceRecord::assignment_opt_20_fle_50_maintenancerecord_50
@@ -637,13 +670,14 @@ class MaintenanceRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'assignment_opt_20_fle_50_maintenancerecord_50', 'result': result, 'domain': 'fleet_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def driver_score_26_fle_56_maintenancerecord_56(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        driver_score_value = value
         """driver_score distinct 26 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 56 for MaintenanceRecord — implements result = driver_score_value - 29.30 + 1 + 56*0.01"""
         try:
             # Distinct logic for fleet_management::MaintenanceRecord::driver_score_26_fle_56_maintenancerecord_56
@@ -655,10 +689,10 @@ class MaintenanceRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_maintenancerecord(self) -> bool:
@@ -684,6 +718,7 @@ class TelematicsPoint:
     status: str = 'active'
 
     def mpg_3_fle_3_telematicspoint_3(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        mpg_value = value
         """mpg distinct 3 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 3 for TelematicsPoint — implements result = mpg_value / 4.00 + 3 + 3*0.01"""
         try:
             # Distinct logic for fleet_management::TelematicsPoint::mpg_3_fle_3_telematicspoint_3
@@ -698,13 +733,14 @@ class TelematicsPoint:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lifecycle_9_fle_9_telematicspoint_9(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lifecycle_value = value
         """lifecycle distinct 9 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 9 for TelematicsPoint — implements result = lifecycle_value + 10.60 + 4 + 9*0.01"""
         try:
             # Distinct logic for fleet_management::TelematicsPoint::lifecycle_9_fle_9_telematicspoint_9
@@ -716,16 +752,18 @@ class TelematicsPoint:
                 else:
                     break
             # lifecycle distinct 9 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 9
+            lifecycle_value = value
             result = lifecycle_value + 10.60 + 4 + 9*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def utilization_15_fle_15_telematicspoint_15(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        utilization_value = value
         """utilization distinct 15 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 15 for TelematicsPoint — implements result = math.sqrt(utilization_value + 8.5) * 2.8 + 15*0.01"""
         try:
             # Distinct logic for fleet_management::TelematicsPoint::utilization_15_fle_15_telematicspoint_15
@@ -740,13 +778,14 @@ class TelematicsPoint:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'utilization_15_fle_15_telematicspoint_15', 'result': result, 'domain': 'fleet_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def maintenance_due_21_fle_21_telematicspoint_21(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        maintenance_due_value = value
         """maintenance_due distinct 21 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 21 for TelematicsPoint — implements result = math.log(1 + maintenance_due_value * 22) if mainten"""
         try:
             # Distinct logic for fleet_management::TelematicsPoint::maintenance_due_21_fle_21_telematicspoint_21
@@ -758,13 +797,14 @@ class TelematicsPoint:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def adherence_27_fle_27_telematicspoint_27(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        adherence_value = value
         """adherence distinct 27 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 27 for TelematicsPoint — implements result = adherence_value / 30.40 + 2 + 27*0.01"""
         try:
             # Distinct logic for fleet_management::TelematicsPoint::adherence_27_fle_27_telematicspoint_27
@@ -776,13 +816,14 @@ class TelematicsPoint:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def mpg_3_fle_33_telematicspoint_33(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        mpg_value = value
         """mpg distinct 3 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 33 for TelematicsPoint — implements result = mpg_value / 4.00 + 3 + 33*0.01"""
         try:
             # Distinct logic for fleet_management::TelematicsPoint::mpg_3_fle_33_telematicspoint_33
@@ -797,13 +838,14 @@ class TelematicsPoint:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lifecycle_9_fle_39_telematicspoint_39(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lifecycle_value = value
         """lifecycle distinct 9 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 39 for TelematicsPoint — implements result = lifecycle_value + 10.60 + 4 + 39*0.01"""
         try:
             # Distinct logic for fleet_management::TelematicsPoint::lifecycle_9_fle_39_telematicspoint_39
@@ -815,16 +857,18 @@ class TelematicsPoint:
                 else:
                     break
             # lifecycle distinct 9 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 39
+            lifecycle_value = value
             result = lifecycle_value + 10.60 + 4 + 39*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def utilization_15_fle_45_telematicspoint_45(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        utilization_value = value
         """utilization distinct 15 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 45 for TelematicsPoint — implements result = math.sqrt(utilization_value + 8.5) * 2.8 + 45*0.01"""
         try:
             # Distinct logic for fleet_management::TelematicsPoint::utilization_15_fle_45_telematicspoint_45
@@ -839,13 +883,14 @@ class TelematicsPoint:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'utilization_15_fle_45_telematicspoint_45', 'result': result, 'domain': 'fleet_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def maintenance_due_21_fle_51_telematicspoint_51(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        maintenance_due_value = value
         """maintenance_due distinct 21 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 51 for TelematicsPoint — implements result = math.log(1 + maintenance_due_value * 22) if mainten"""
         try:
             # Distinct logic for fleet_management::TelematicsPoint::maintenance_due_21_fle_51_telematicspoint_51
@@ -857,13 +902,14 @@ class TelematicsPoint:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def adherence_27_fle_57_telematicspoint_57(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        adherence_value = value
         """adherence distinct 27 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 57 for TelematicsPoint — implements result = adherence_value / 30.40 + 2 + 57*0.01"""
         try:
             # Distinct logic for fleet_management::TelematicsPoint::adherence_27_fle_57_telematicspoint_57
@@ -875,10 +921,10 @@ class TelematicsPoint:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_telematicspoint(self) -> bool:
@@ -904,6 +950,7 @@ class FuelRecord:
     status: str = 'active'
 
     def ev_range_4_fle_4_fuelrecord_4(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ev_range_value = value
         """ev_range distinct 4 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 4 for FuelRecord — implements result = math.exp(-0.05 * ev_range_value) * 14 + 4*0.01"""
         try:
             # Distinct logic for fleet_management::FuelRecord::ev_range_4_fle_4_fuelrecord_4
@@ -915,16 +962,18 @@ class FuelRecord:
                 else:
                     break
             # ev_range distinct 4 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 4
+            ev_range_value = value
             result = math.exp(-0.05 * ev_range_value) * 14 + 4*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def assignment_opt_10_fle_10_fuelrecord_10(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        assignment_opt_value = value
         """assignment_opt distinct 10 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 10 for FuelRecord — implements result = assignment_opt_value - 11.70 + 0 + 10*0.01"""
         try:
             # Distinct logic for fleet_management::FuelRecord::assignment_opt_10_fle_10_fuelrecord_10
@@ -939,13 +988,14 @@ class FuelRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'assignment_opt_10_fle_10_fuelrecord_10', 'result': result, 'domain': 'fleet_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def driver_score_16_fle_16_fuelrecord_16(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        driver_score_value = value
         """driver_score distinct 16 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 16 for FuelRecord — implements result = driver_score_value * 18.30 + 1 + 16*0.01"""
         try:
             # Distinct logic for fleet_management::FuelRecord::driver_score_16_fle_16_fuelrecord_16
@@ -957,13 +1007,14 @@ class FuelRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speeding_event_22_fle_22_fuelrecord_22(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speeding_event_value = value
         """speeding_event distinct 22 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 22 for FuelRecord — implements result = pow(speeding_event_value, 1.5) * 17.6 + 22*0.01"""
         try:
             # Distinct logic for fleet_management::FuelRecord::speeding_event_22_fle_22_fuelrecord_22
@@ -975,13 +1026,14 @@ class FuelRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def idling_cost_28_fle_28_fuelrecord_28(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        idling_cost_value = value
         """idling_cost distinct 28 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 28 for FuelRecord — implements result = math.exp(-0.029 * idling_cost_value) * 38 + 28*0.01"""
         try:
             # Distinct logic for fleet_management::FuelRecord::idling_cost_28_fle_28_fuelrecord_28
@@ -996,13 +1048,14 @@ class FuelRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def ev_range_4_fle_34_fuelrecord_34(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        ev_range_value = value
         """ev_range distinct 4 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 34 for FuelRecord — implements result = math.exp(-0.05 * ev_range_value) * 14 + 34*0.01"""
         try:
             # Distinct logic for fleet_management::FuelRecord::ev_range_4_fle_34_fuelrecord_34
@@ -1014,16 +1067,18 @@ class FuelRecord:
                 else:
                     break
             # ev_range distinct 4 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 34
+            ev_range_value = value
             result = math.exp(-0.05 * ev_range_value) * 14 + 34*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def assignment_opt_10_fle_40_fuelrecord_40(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        assignment_opt_value = value
         """assignment_opt distinct 10 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 40 for FuelRecord — implements result = assignment_opt_value - 11.70 + 0 + 40*0.01"""
         try:
             # Distinct logic for fleet_management::FuelRecord::assignment_opt_10_fle_40_fuelrecord_40
@@ -1038,13 +1093,14 @@ class FuelRecord:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'assignment_opt_10_fle_40_fuelrecord_40', 'result': result, 'domain': 'fleet_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def driver_score_16_fle_46_fuelrecord_46(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        driver_score_value = value
         """driver_score distinct 16 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 46 for FuelRecord — implements result = driver_score_value * 18.30 + 1 + 46*0.01"""
         try:
             # Distinct logic for fleet_management::FuelRecord::driver_score_16_fle_46_fuelrecord_46
@@ -1056,13 +1112,14 @@ class FuelRecord:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def speeding_event_22_fle_52_fuelrecord_52(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        speeding_event_value = value
         """speeding_event distinct 22 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 52 for FuelRecord — implements result = pow(speeding_event_value, 1.5) * 17.6 + 52*0.01"""
         try:
             # Distinct logic for fleet_management::FuelRecord::speeding_event_22_fle_52_fuelrecord_52
@@ -1074,13 +1131,14 @@ class FuelRecord:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def idling_cost_28_fle_58_fuelrecord_58(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        idling_cost_value = value
         """idling_cost distinct 28 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 58 for FuelRecord — implements result = math.exp(-0.029 * idling_cost_value) * 38 + 58*0.01"""
         try:
             # Distinct logic for fleet_management::FuelRecord::idling_cost_28_fle_58_fuelrecord_58
@@ -1095,10 +1153,10 @@ class FuelRecord:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_fuelrecord(self) -> bool:
@@ -1123,6 +1181,7 @@ class Utilization:
     status: str = 'active'
 
     def utilization_5_fle_5_utilization_5(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        utilization_value = value
         """utilization distinct 5 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 5 for Utilization — implements result = math.log(1 + utilization_value * 6) if utilization_"""
         try:
             # Distinct logic for fleet_management::Utilization::utilization_5_fle_5_utilization_5
@@ -1137,13 +1196,14 @@ class Utilization:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'utilization_5_fle_5_utilization_5', 'result': result, 'domain': 'fleet_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def maintenance_due_11_fle_11_utilization_11(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        maintenance_due_value = value
         """maintenance_due distinct 11 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 11 for Utilization — implements result = maintenance_due_value / 12.80 + 1 + 11*0.01"""
         try:
             # Distinct logic for fleet_management::Utilization::maintenance_due_11_fle_11_utilization_11
@@ -1155,13 +1215,14 @@ class Utilization:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def adherence_17_fle_17_utilization_17(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        adherence_value = value
         """adherence distinct 17 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 17 for Utilization — implements result = adherence_value + 19.40 + 2 + 17*0.01"""
         try:
             # Distinct logic for fleet_management::Utilization::adherence_17_fle_17_utilization_17
@@ -1173,13 +1234,14 @@ class Utilization:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def mpg_23_fle_23_utilization_23(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        mpg_value = value
         """mpg distinct 23 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 23 for Utilization — implements result = math.sqrt(mpg_value + 12.5) * 2.8 + 23*0.01"""
         try:
             # Distinct logic for fleet_management::Utilization::mpg_23_fle_23_utilization_23
@@ -1194,13 +1256,14 @@ class Utilization:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lifecycle_29_fle_29_utilization_29(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lifecycle_value = value
         """lifecycle distinct 29 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 29 for Utilization — implements result = math.log(1 + lifecycle_value * 30) if lifecycle_val"""
         try:
             # Distinct logic for fleet_management::Utilization::lifecycle_29_fle_29_utilization_29
@@ -1215,13 +1278,14 @@ class Utilization:
             result = math.log(1 + lifecycle_value * 30) if lifecycle_value>0 else 0 + 29*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def utilization_5_fle_35_utilization_35(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        utilization_value = value
         """utilization distinct 5 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 35 for Utilization — implements result = math.log(1 + utilization_value * 6) if utilization_"""
         try:
             # Distinct logic for fleet_management::Utilization::utilization_5_fle_35_utilization_35
@@ -1236,13 +1300,14 @@ class Utilization:
                     result = math.log(result) * 10
             return {'model': self.__class__.__name__, 'method': 'utilization_5_fle_35_utilization_35', 'result': result, 'domain': 'fleet_management'}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def maintenance_due_11_fle_41_utilization_41(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        maintenance_due_value = value
         """maintenance_due distinct 11 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 41 for Utilization — implements result = maintenance_due_value / 12.80 + 1 + 41*0.01"""
         try:
             # Distinct logic for fleet_management::Utilization::maintenance_due_11_fle_41_utilization_41
@@ -1254,13 +1319,14 @@ class Utilization:
             validated = re.match(r'^[a-zA-Z0-9_-]+$', str(data['id'])) is not None
             return {'validated': validated, 'result': result, 'hash': hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def adherence_17_fle_47_utilization_47(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        adherence_value = value
         """adherence distinct 17 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 47 for Utilization — implements result = adherence_value + 19.40 + 2 + 47*0.01"""
         try:
             # Distinct logic for fleet_management::Utilization::adherence_17_fle_47_utilization_47
@@ -1272,13 +1338,14 @@ class Utilization:
             std = math.sqrt(sum((x-avg)**2 for x in filtered)/len(filtered)) if filtered else 0
             return {'avg': avg, 'std': std, 'result': result, 'samples': filtered[:3]}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def mpg_23_fle_53_utilization_53(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        mpg_value = value
         """mpg distinct 23 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 53 for Utilization — implements result = math.sqrt(mpg_value + 12.5) * 2.8 + 53*0.01"""
         try:
             # Distinct logic for fleet_management::Utilization::mpg_23_fle_53_utilization_53
@@ -1293,13 +1360,14 @@ class Utilization:
             self._cache = cache
             return out
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def lifecycle_29_fle_59_utilization_59(self, value: float = 10.0, factor: float = 1.0) -> Dict[str, Any]:
+        lifecycle_value = value
         """lifecycle distinct 29 for fleet_management using Fleet assignment, maintenance, telematics, fuel extra 59 for Utilization — implements result = math.log(1 + lifecycle_value * 30) if lifecycle_val"""
         try:
             # Distinct logic for fleet_management::Utilization::lifecycle_29_fle_59_utilization_59
@@ -1314,10 +1382,10 @@ class Utilization:
             result = math.log(1 + lifecycle_value * 30) if lifecycle_value>0 else 0 + 59*0.01
             return {'level': level, 'value': value, 'result': result}
         except ValueError as ve:
-            logger.warning(f'validation failed for {method_name}: {ve}')
+            logger.warning(f'validation failed: {ve}')
             return {'error': str(ve), 'status': 'validation_failed'}
         except Exception as e:
-            logger.error(f'{method_name} error: {e}')
+            logger.error(f'error: {e}')
             return {'error': str(e), 'status': 'error'}
 
     def validate_utilization(self) -> bool:
@@ -2756,4 +2824,3 @@ def padded_fleet_management_models_1027(payload: dict, factor: float = 2.89) -> 
     if not isinstance(a,(int,float)) or not isinstance(b,(int,float)): return {'error':'invalid'}
     res = math.sqrt(a*a + b*b) + math.atan2(b,a)*2 + 5.4
     return {'a':a,'b':b,'result':res,'domain':'fleet_management','idx':1027}
-

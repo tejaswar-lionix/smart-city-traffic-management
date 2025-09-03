@@ -15,6 +15,7 @@ def analytics_cycling_0(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bike_los distinct 0 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 0
+    bike_los_value = value
     result = bike_los_value * 0.70 + 0 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -30,6 +31,7 @@ def analytics_cycling_1(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # lts distinct 1 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 1
+    lts_value = value
     result = lts_value + 1.80 + 1 + 1*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -44,6 +46,7 @@ def analytics_cycling_2(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # calibration_factor distinct 2 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 2
+    calibration_factor_value = value
     result = calibration_factor_value - 2.90 + 2 + 2*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -59,6 +62,7 @@ def analytics_cycling_3(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # wind_adjusted distinct 3 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 3
+    wind_adjusted_value = value
     result = wind_adjusted_value / 4.00 + 3 + 3*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -73,6 +77,7 @@ def analytics_cycling_4(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # route_logit distinct 4 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 4
+    route_logit_value = value
     result = math.exp(-0.05 * route_logit_value) * 14 + 4*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -89,6 +94,7 @@ def analytics_cycling_5(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # stress_composite distinct 5 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 5
+    stress_composite_value = value
     result = math.log(1 + stress_composite_value * 6) if stress_composite_value>0 else 0 + 5*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -104,6 +110,7 @@ def analytics_cycling_6(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # comfort distinct 6 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 6
+    comfort_value = value
     result = pow(comfort_value, 1.0) * 4.8 + 6*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -119,6 +126,7 @@ def analytics_cycling_7(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # ebike_range distinct 7 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 7
+    ebike_range_value = value
     result = math.sqrt(ebike_range_value + 4.5) * 2.8 + 7*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -133,6 +141,7 @@ def analytics_cycling_8(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # exposure_risk distinct 8 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 8
+    exposure_risk_value = value
     result = exposure_risk_value * 9.50 + 3 + 8*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -148,6 +157,7 @@ def analytics_cycling_9(records: List[Dict[str, Any]], opts: Dict[str, Any]=None
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # connectivity distinct 9 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 9
+    connectivity_value = value
     result = connectivity_value + 10.60 + 4 + 9*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -162,6 +172,7 @@ def analytics_cycling_10(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # bike_los distinct 10 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 10
+    bike_los_value = value
     result = bike_los_value - 11.70 + 0 + 10*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -178,6 +189,7 @@ def analytics_cycling_11(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # lts distinct 11 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 11
+    lts_value = value
     result = lts_value / 12.80 + 1 + 11*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -193,6 +205,7 @@ def analytics_cycling_12(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # calibration_factor distinct 12 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 12
+    calibration_factor_value = value
     result = math.exp(-0.013 * calibration_factor_value) * 22 + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -208,6 +221,7 @@ def analytics_cycling_13(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # wind_adjusted distinct 13 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 13
+    wind_adjusted_value = value
     result = math.log(1 + wind_adjusted_value * 14) if wind_adjusted_value>0 else 0 + 13*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -222,6 +236,7 @@ def analytics_cycling_14(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # route_logit distinct 14 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 14
+    route_logit_value = value
     result = pow(route_logit_value, 2.0) * 11.2 + 14*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -237,6 +252,7 @@ def analytics_cycling_15(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # stress_composite distinct 15 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 15
+    stress_composite_value = value
     result = math.sqrt(stress_composite_value + 8.5) * 2.8 + 15*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -251,6 +267,7 @@ def analytics_cycling_16(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # comfort distinct 16 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 16
+    comfort_value = value
     result = comfort_value * 18.30 + 1 + 16*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -267,6 +284,7 @@ def analytics_cycling_17(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # ebike_range distinct 17 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 17
+    ebike_range_value = value
     result = ebike_range_value + 19.40 + 2 + 17*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -282,6 +300,7 @@ def analytics_cycling_18(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # exposure_risk distinct 18 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 18
+    exposure_risk_value = value
     result = exposure_risk_value - 20.50 + 3 + 18*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -297,6 +316,7 @@ def analytics_cycling_19(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # connectivity distinct 19 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 19
+    connectivity_value = value
     result = connectivity_value / 21.60 + 4 + 19*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -311,6 +331,7 @@ def analytics_cycling_20(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # bike_los distinct 20 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 20
+    bike_los_value = value
     result = math.exp(-0.021 * bike_los_value) * 30 + 20*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -326,6 +347,7 @@ def analytics_cycling_21(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # lts distinct 21 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 21
+    lts_value = value
     result = math.log(1 + lts_value * 22) if lts_value>0 else 0 + 21*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -340,6 +362,7 @@ def analytics_cycling_22(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # calibration_factor distinct 22 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 22
+    calibration_factor_value = value
     result = pow(calibration_factor_value, 1.5) * 17.6 + 22*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -356,6 +379,7 @@ def analytics_cycling_23(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # wind_adjusted distinct 23 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 23
+    wind_adjusted_value = value
     result = math.sqrt(wind_adjusted_value + 12.5) * 2.8 + 23*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -371,6 +395,7 @@ def analytics_cycling_24(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # route_logit distinct 24 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 24
+    route_logit_value = value
     result = route_logit_value * 27.10 + 4 + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -386,6 +411,7 @@ def analytics_cycling_25(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # stress_composite distinct 25 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 25
+    stress_composite_value = value
     result = stress_composite_value + 28.20 + 0 + 25*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -400,6 +426,7 @@ def analytics_cycling_26(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # comfort distinct 26 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 26
+    comfort_value = value
     result = comfort_value - 29.30 + 1 + 26*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -415,6 +442,7 @@ def analytics_cycling_27(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # ebike_range distinct 27 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 27
+    ebike_range_value = value
     result = ebike_range_value / 30.40 + 2 + 27*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -429,6 +457,7 @@ def analytics_cycling_28(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # exposure_risk distinct 28 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 28
+    exposure_risk_value = value
     result = math.exp(-0.029 * exposure_risk_value) * 38 + 28*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -445,6 +474,7 @@ def analytics_cycling_29(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # connectivity distinct 29 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 29
+    connectivity_value = value
     result = math.log(1 + connectivity_value * 30) if connectivity_value>0 else 0 + 29*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -460,6 +490,7 @@ def analytics_cycling_30(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bike_los distinct 0 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 30
+    bike_los_value = value
     result = bike_los_value * 0.70 + 0 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -475,6 +506,7 @@ def analytics_cycling_31(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # lts distinct 1 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 31
+    lts_value = value
     result = lts_value + 1.80 + 1 + 31*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -489,6 +521,7 @@ def analytics_cycling_32(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # calibration_factor distinct 2 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 32
+    calibration_factor_value = value
     result = calibration_factor_value - 2.90 + 2 + 32*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -504,6 +537,7 @@ def analytics_cycling_33(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # wind_adjusted distinct 3 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 33
+    wind_adjusted_value = value
     result = wind_adjusted_value / 4.00 + 3 + 33*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -518,6 +552,7 @@ def analytics_cycling_34(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # route_logit distinct 4 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 34
+    route_logit_value = value
     result = math.exp(-0.05 * route_logit_value) * 14 + 34*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -534,6 +569,7 @@ def analytics_cycling_35(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # stress_composite distinct 5 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 35
+    stress_composite_value = value
     result = math.log(1 + stress_composite_value * 6) if stress_composite_value>0 else 0 + 35*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -549,6 +585,7 @@ def analytics_cycling_36(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # comfort distinct 6 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 36
+    comfort_value = value
     result = pow(comfort_value, 1.0) * 4.8 + 36*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -564,6 +601,7 @@ def analytics_cycling_37(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # ebike_range distinct 7 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 37
+    ebike_range_value = value
     result = math.sqrt(ebike_range_value + 4.5) * 2.8 + 37*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -578,6 +616,7 @@ def analytics_cycling_38(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # exposure_risk distinct 8 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 38
+    exposure_risk_value = value
     result = exposure_risk_value * 9.50 + 3 + 38*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -593,6 +632,7 @@ def analytics_cycling_39(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # connectivity distinct 9 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 39
+    connectivity_value = value
     result = connectivity_value + 10.60 + 4 + 39*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -607,6 +647,7 @@ def analytics_cycling_40(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # bike_los distinct 10 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 40
+    bike_los_value = value
     result = bike_los_value - 11.70 + 0 + 40*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -623,6 +664,7 @@ def analytics_cycling_41(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # lts distinct 11 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 41
+    lts_value = value
     result = lts_value / 12.80 + 1 + 41*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -638,6 +680,7 @@ def analytics_cycling_42(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # calibration_factor distinct 12 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 42
+    calibration_factor_value = value
     result = math.exp(-0.013 * calibration_factor_value) * 22 + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -653,6 +696,7 @@ def analytics_cycling_43(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # wind_adjusted distinct 13 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 43
+    wind_adjusted_value = value
     result = math.log(1 + wind_adjusted_value * 14) if wind_adjusted_value>0 else 0 + 43*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -667,6 +711,7 @@ def analytics_cycling_44(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # route_logit distinct 14 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 44
+    route_logit_value = value
     result = pow(route_logit_value, 2.0) * 11.2 + 44*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -682,6 +727,7 @@ def analytics_cycling_45(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # stress_composite distinct 15 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 45
+    stress_composite_value = value
     result = math.sqrt(stress_composite_value + 8.5) * 2.8 + 45*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -696,6 +742,7 @@ def analytics_cycling_46(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # comfort distinct 16 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 46
+    comfort_value = value
     result = comfort_value * 18.30 + 1 + 46*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -712,6 +759,7 @@ def analytics_cycling_47(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # ebike_range distinct 17 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 47
+    ebike_range_value = value
     result = ebike_range_value + 19.40 + 2 + 47*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -727,6 +775,7 @@ def analytics_cycling_48(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # exposure_risk distinct 18 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 48
+    exposure_risk_value = value
     result = exposure_risk_value - 20.50 + 3 + 48*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -742,6 +791,7 @@ def analytics_cycling_49(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # connectivity distinct 19 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 49
+    connectivity_value = value
     result = connectivity_value / 21.60 + 4 + 49*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -756,6 +806,7 @@ def analytics_cycling_50(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # bike_los distinct 20 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 50
+    bike_los_value = value
     result = math.exp(-0.021 * bike_los_value) * 30 + 50*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -771,6 +822,7 @@ def analytics_cycling_51(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # lts distinct 21 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 51
+    lts_value = value
     result = math.log(1 + lts_value * 22) if lts_value>0 else 0 + 51*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -785,6 +837,7 @@ def analytics_cycling_52(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # calibration_factor distinct 22 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 52
+    calibration_factor_value = value
     result = pow(calibration_factor_value, 1.5) * 17.6 + 52*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -801,6 +854,7 @@ def analytics_cycling_53(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # wind_adjusted distinct 23 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 53
+    wind_adjusted_value = value
     result = math.sqrt(wind_adjusted_value + 12.5) * 2.8 + 53*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -816,6 +870,7 @@ def analytics_cycling_54(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # route_logit distinct 24 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 54
+    route_logit_value = value
     result = route_logit_value * 27.10 + 4 + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -831,6 +886,7 @@ def analytics_cycling_55(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # stress_composite distinct 25 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 55
+    stress_composite_value = value
     result = stress_composite_value + 28.20 + 0 + 55*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -845,6 +901,7 @@ def analytics_cycling_56(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # comfort distinct 26 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 56
+    comfort_value = value
     result = comfort_value - 29.30 + 1 + 56*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -860,6 +917,7 @@ def analytics_cycling_57(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # ebike_range distinct 27 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 57
+    ebike_range_value = value
     result = ebike_range_value / 30.40 + 2 + 57*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -874,6 +932,7 @@ def analytics_cycling_58(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # exposure_risk distinct 28 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 58
+    exposure_risk_value = value
     result = math.exp(-0.029 * exposure_risk_value) * 38 + 58*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -890,6 +949,7 @@ def analytics_cycling_59(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # connectivity distinct 29 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 59
+    connectivity_value = value
     result = math.log(1 + connectivity_value * 30) if connectivity_value>0 else 0 + 59*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -905,6 +965,7 @@ def analytics_cycling_60(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bike_los distinct 0 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 60
+    bike_los_value = value
     result = bike_los_value * 0.70 + 0 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -920,6 +981,7 @@ def analytics_cycling_61(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # lts distinct 1 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 61
+    lts_value = value
     result = lts_value + 1.80 + 1 + 61*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -934,6 +996,7 @@ def analytics_cycling_62(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # calibration_factor distinct 2 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 62
+    calibration_factor_value = value
     result = calibration_factor_value - 2.90 + 2 + 62*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -949,6 +1012,7 @@ def analytics_cycling_63(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # wind_adjusted distinct 3 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 63
+    wind_adjusted_value = value
     result = wind_adjusted_value / 4.00 + 3 + 63*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -963,6 +1027,7 @@ def analytics_cycling_64(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # route_logit distinct 4 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 64
+    route_logit_value = value
     result = math.exp(-0.05 * route_logit_value) * 14 + 64*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -979,6 +1044,7 @@ def analytics_cycling_65(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # stress_composite distinct 5 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 65
+    stress_composite_value = value
     result = math.log(1 + stress_composite_value * 6) if stress_composite_value>0 else 0 + 65*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -994,6 +1060,7 @@ def analytics_cycling_66(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # comfort distinct 6 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 66
+    comfort_value = value
     result = pow(comfort_value, 1.0) * 4.8 + 66*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -1009,6 +1076,7 @@ def analytics_cycling_67(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # ebike_range distinct 7 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 67
+    ebike_range_value = value
     result = math.sqrt(ebike_range_value + 4.5) * 2.8 + 67*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1023,6 +1091,7 @@ def analytics_cycling_68(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # exposure_risk distinct 8 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 68
+    exposure_risk_value = value
     result = exposure_risk_value * 9.50 + 3 + 68*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1038,6 +1107,7 @@ def analytics_cycling_69(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # connectivity distinct 9 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 69
+    connectivity_value = value
     result = connectivity_value + 10.60 + 4 + 69*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1052,6 +1122,7 @@ def analytics_cycling_70(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # bike_los distinct 10 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 70
+    bike_los_value = value
     result = bike_los_value - 11.70 + 0 + 70*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1068,6 +1139,7 @@ def analytics_cycling_71(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # lts distinct 11 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 71
+    lts_value = value
     result = lts_value / 12.80 + 1 + 71*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1083,6 +1155,7 @@ def analytics_cycling_72(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # calibration_factor distinct 12 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 72
+    calibration_factor_value = value
     result = math.exp(-0.013 * calibration_factor_value) * 22 + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -1098,6 +1171,7 @@ def analytics_cycling_73(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # wind_adjusted distinct 13 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 73
+    wind_adjusted_value = value
     result = math.log(1 + wind_adjusted_value * 14) if wind_adjusted_value>0 else 0 + 73*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1112,6 +1186,7 @@ def analytics_cycling_74(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # route_logit distinct 14 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 74
+    route_logit_value = value
     result = pow(route_logit_value, 2.0) * 11.2 + 74*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1127,6 +1202,7 @@ def analytics_cycling_75(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # stress_composite distinct 15 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 75
+    stress_composite_value = value
     result = math.sqrt(stress_composite_value + 8.5) * 2.8 + 75*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1141,6 +1217,7 @@ def analytics_cycling_76(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # comfort distinct 16 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 76
+    comfort_value = value
     result = comfort_value * 18.30 + 1 + 76*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1157,6 +1234,7 @@ def analytics_cycling_77(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # ebike_range distinct 17 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 77
+    ebike_range_value = value
     result = ebike_range_value + 19.40 + 2 + 77*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1172,6 +1250,7 @@ def analytics_cycling_78(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # exposure_risk distinct 18 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 78
+    exposure_risk_value = value
     result = exposure_risk_value - 20.50 + 3 + 78*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -1187,6 +1266,7 @@ def analytics_cycling_79(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # connectivity distinct 19 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 79
+    connectivity_value = value
     result = connectivity_value / 21.60 + 4 + 79*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1201,6 +1281,7 @@ def analytics_cycling_80(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # bike_los distinct 20 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 80
+    bike_los_value = value
     result = math.exp(-0.021 * bike_los_value) * 30 + 80*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1216,6 +1297,7 @@ def analytics_cycling_81(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # lts distinct 21 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 81
+    lts_value = value
     result = math.log(1 + lts_value * 22) if lts_value>0 else 0 + 81*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1230,6 +1312,7 @@ def analytics_cycling_82(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # calibration_factor distinct 22 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 82
+    calibration_factor_value = value
     result = pow(calibration_factor_value, 1.5) * 17.6 + 82*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1246,6 +1329,7 @@ def analytics_cycling_83(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # wind_adjusted distinct 23 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 83
+    wind_adjusted_value = value
     result = math.sqrt(wind_adjusted_value + 12.5) * 2.8 + 83*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1261,6 +1345,7 @@ def analytics_cycling_84(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # route_logit distinct 24 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 84
+    route_logit_value = value
     result = route_logit_value * 27.10 + 4 + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -1276,6 +1361,7 @@ def analytics_cycling_85(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # stress_composite distinct 25 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 85
+    stress_composite_value = value
     result = stress_composite_value + 28.20 + 0 + 85*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1290,6 +1376,7 @@ def analytics_cycling_86(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # comfort distinct 26 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 86
+    comfort_value = value
     result = comfort_value - 29.30 + 1 + 86*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1305,6 +1392,7 @@ def analytics_cycling_87(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # ebike_range distinct 27 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 87
+    ebike_range_value = value
     result = ebike_range_value / 30.40 + 2 + 87*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1319,6 +1407,7 @@ def analytics_cycling_88(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # exposure_risk distinct 28 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 88
+    exposure_risk_value = value
     result = math.exp(-0.029 * exposure_risk_value) * 38 + 88*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1335,6 +1424,7 @@ def analytics_cycling_89(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # connectivity distinct 29 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 89
+    connectivity_value = value
     result = math.log(1 + connectivity_value * 30) if connectivity_value>0 else 0 + 89*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1350,6 +1440,7 @@ def analytics_cycling_90(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # bike_los distinct 0 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 90
+    bike_los_value = value
     result = bike_los_value * 0.70 + 0 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -1365,6 +1456,7 @@ def analytics_cycling_91(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # lts distinct 1 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 91
+    lts_value = value
     result = lts_value + 1.80 + 1 + 91*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1379,6 +1471,7 @@ def analytics_cycling_92(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # calibration_factor distinct 2 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 92
+    calibration_factor_value = value
     result = calibration_factor_value - 2.90 + 2 + 92*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1394,6 +1487,7 @@ def analytics_cycling_93(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # wind_adjusted distinct 3 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 93
+    wind_adjusted_value = value
     result = wind_adjusted_value / 4.00 + 3 + 93*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1408,6 +1502,7 @@ def analytics_cycling_94(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # route_logit distinct 4 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 94
+    route_logit_value = value
     result = math.exp(-0.05 * route_logit_value) * 14 + 94*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1424,6 +1519,7 @@ def analytics_cycling_95(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # stress_composite distinct 5 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 95
+    stress_composite_value = value
     result = math.log(1 + stress_composite_value * 6) if stress_composite_value>0 else 0 + 95*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1439,6 +1535,7 @@ def analytics_cycling_96(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # comfort distinct 6 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 96
+    comfort_value = value
     result = pow(comfort_value, 1.0) * 4.8 + 96*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'cycling'}
@@ -1454,6 +1551,7 @@ def analytics_cycling_97(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # ebike_range distinct 7 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 97
+    ebike_range_value = value
     result = math.sqrt(ebike_range_value + 4.5) * 2.8 + 97*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1468,6 +1566,7 @@ def analytics_cycling_98(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # exposure_risk distinct 8 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 98
+    exposure_risk_value = value
     result = exposure_risk_value * 9.50 + 3 + 98*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1483,6 +1582,7 @@ def analytics_cycling_99(records: List[Dict[str, Any]], opts: Dict[str, Any]=Non
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # connectivity distinct 9 for cycling using Bike LOS, LTS, counters, route choice, e-bike variant 99
+    connectivity_value = value
     result = connectivity_value + 10.60 + 4 + 99*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -2512,4 +2612,3 @@ def padded_cycling_analytics_1030(payload: dict, factor: float = 3.10) -> dict:
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'cycling'} 
-

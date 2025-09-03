@@ -11,6 +11,7 @@ def optimize_enforcement_0(params: Dict[str, Any], iterations: int=100) -> Dict[
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # speed_threshold distinct 0 for enforcement using Speed, ANPR, violations, fines, appeals iter 0
         value = candidate.get('value', 10)
+        speed_threshold_value = value
         result = speed_threshold_value * 0.70 + 0 + 0*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -32,6 +33,7 @@ def optimize_enforcement_1(params: Dict[str, Any], iterations: int=100) -> Dict[
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # anpr_accuracy distinct 1 for enforcement using Speed, ANPR, violations, fines, appeals iter 1
         value = candidate.get('value', 10)
+        anpr_accuracy_value = value
         result = anpr_accuracy_value + 1.80 + 1 + 1*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -53,6 +55,7 @@ def optimize_enforcement_2(params: Dict[str, Any], iterations: int=100) -> Dict[
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # fine_calc distinct 2 for enforcement using Speed, ANPR, violations, fines, appeals iter 2
         value = candidate.get('value', 10)
+        fine_calc_value = value
         result = fine_calc_value - 2.90 + 2 + 2*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -74,6 +77,7 @@ def optimize_enforcement_3(params: Dict[str, Any], iterations: int=100) -> Dict[
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # appeal_prob distinct 3 for enforcement using Speed, ANPR, violations, fines, appeals iter 3
         value = candidate.get('value', 10)
+        appeal_prob_value = value
         result = appeal_prob_value / 4.00 + 3 + 3*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -95,6 +99,7 @@ def optimize_enforcement_4(params: Dict[str, Any], iterations: int=100) -> Dict[
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # warrant distinct 4 for enforcement using Speed, ANPR, violations, fines, appeals iter 4
         value = candidate.get('value', 10)
+        warrant_value = value
         result = math.exp(-0.05 * warrant_value) * 14 + 4*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -116,6 +121,7 @@ def optimize_enforcement_5(params: Dict[str, Any], iterations: int=100) -> Dict[
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # capture_rate distinct 5 for enforcement using Speed, ANPR, violations, fines, appeals iter 5
         value = candidate.get('value', 10)
+        capture_rate_value = value
         result = math.log(1 + capture_rate_value * 6) if capture_rate_value>0 else 0 + 5*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -137,6 +143,7 @@ def optimize_enforcement_6(params: Dict[str, Any], iterations: int=100) -> Dict[
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # uptime distinct 6 for enforcement using Speed, ANPR, violations, fines, appeals iter 6
         value = candidate.get('value', 10)
+        uptime_value = value
         result = pow(uptime_value, 1.0) * 4.8 + 6*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -158,6 +165,7 @@ def optimize_enforcement_7(params: Dict[str, Any], iterations: int=100) -> Dict[
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # collection_rate distinct 7 for enforcement using Speed, ANPR, violations, fines, appeals iter 7
         value = candidate.get('value', 10)
+        collection_rate_value = value
         result = math.sqrt(collection_rate_value + 4.5) * 2.8 + 7*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -179,6 +187,7 @@ def optimize_enforcement_8(params: Dict[str, Any], iterations: int=100) -> Dict[
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # latency distinct 8 for enforcement using Speed, ANPR, violations, fines, appeals iter 8
         value = candidate.get('value', 10)
+        latency_value = value
         result = latency_value * 9.50 + 3 + 8*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -200,6 +209,7 @@ def optimize_enforcement_9(params: Dict[str, Any], iterations: int=100) -> Dict[
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # deterrence distinct 9 for enforcement using Speed, ANPR, violations, fines, appeals iter 9
         value = candidate.get('value', 10)
+        deterrence_value = value
         result = deterrence_value + 10.60 + 4 + 9*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -221,6 +231,7 @@ def optimize_enforcement_10(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # speed_threshold distinct 10 for enforcement using Speed, ANPR, violations, fines, appeals iter 10
         value = candidate.get('value', 10)
+        speed_threshold_value = value
         result = speed_threshold_value - 11.70 + 0 + 10*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -242,6 +253,7 @@ def optimize_enforcement_11(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # anpr_accuracy distinct 11 for enforcement using Speed, ANPR, violations, fines, appeals iter 11
         value = candidate.get('value', 10)
+        anpr_accuracy_value = value
         result = anpr_accuracy_value / 12.80 + 1 + 11*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -263,6 +275,7 @@ def optimize_enforcement_12(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # fine_calc distinct 12 for enforcement using Speed, ANPR, violations, fines, appeals iter 12
         value = candidate.get('value', 10)
+        fine_calc_value = value
         result = math.exp(-0.013 * fine_calc_value) * 22 + 12*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -284,6 +297,7 @@ def optimize_enforcement_13(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # appeal_prob distinct 13 for enforcement using Speed, ANPR, violations, fines, appeals iter 13
         value = candidate.get('value', 10)
+        appeal_prob_value = value
         result = math.log(1 + appeal_prob_value * 14) if appeal_prob_value>0 else 0 + 13*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -305,6 +319,7 @@ def optimize_enforcement_14(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # warrant distinct 14 for enforcement using Speed, ANPR, violations, fines, appeals iter 14
         value = candidate.get('value', 10)
+        warrant_value = value
         result = pow(warrant_value, 2.0) * 11.2 + 14*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -326,6 +341,7 @@ def optimize_enforcement_15(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # capture_rate distinct 15 for enforcement using Speed, ANPR, violations, fines, appeals iter 15
         value = candidate.get('value', 10)
+        capture_rate_value = value
         result = math.sqrt(capture_rate_value + 8.5) * 2.8 + 15*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -347,6 +363,7 @@ def optimize_enforcement_16(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # uptime distinct 16 for enforcement using Speed, ANPR, violations, fines, appeals iter 16
         value = candidate.get('value', 10)
+        uptime_value = value
         result = uptime_value * 18.30 + 1 + 16*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -368,6 +385,7 @@ def optimize_enforcement_17(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # collection_rate distinct 17 for enforcement using Speed, ANPR, violations, fines, appeals iter 17
         value = candidate.get('value', 10)
+        collection_rate_value = value
         result = collection_rate_value + 19.40 + 2 + 17*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -389,6 +407,7 @@ def optimize_enforcement_18(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # latency distinct 18 for enforcement using Speed, ANPR, violations, fines, appeals iter 18
         value = candidate.get('value', 10)
+        latency_value = value
         result = latency_value - 20.50 + 3 + 18*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -410,6 +429,7 @@ def optimize_enforcement_19(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # deterrence distinct 19 for enforcement using Speed, ANPR, violations, fines, appeals iter 19
         value = candidate.get('value', 10)
+        deterrence_value = value
         result = deterrence_value / 21.60 + 4 + 19*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -431,6 +451,7 @@ def optimize_enforcement_20(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # speed_threshold distinct 20 for enforcement using Speed, ANPR, violations, fines, appeals iter 20
         value = candidate.get('value', 10)
+        speed_threshold_value = value
         result = math.exp(-0.021 * speed_threshold_value) * 30 + 20*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -452,6 +473,7 @@ def optimize_enforcement_21(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # anpr_accuracy distinct 21 for enforcement using Speed, ANPR, violations, fines, appeals iter 21
         value = candidate.get('value', 10)
+        anpr_accuracy_value = value
         result = math.log(1 + anpr_accuracy_value * 22) if anpr_accuracy_value>0 else 0 + 21*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -473,6 +495,7 @@ def optimize_enforcement_22(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # fine_calc distinct 22 for enforcement using Speed, ANPR, violations, fines, appeals iter 22
         value = candidate.get('value', 10)
+        fine_calc_value = value
         result = pow(fine_calc_value, 1.5) * 17.6 + 22*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -494,6 +517,7 @@ def optimize_enforcement_23(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # appeal_prob distinct 23 for enforcement using Speed, ANPR, violations, fines, appeals iter 23
         value = candidate.get('value', 10)
+        appeal_prob_value = value
         result = math.sqrt(appeal_prob_value + 12.5) * 2.8 + 23*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -515,6 +539,7 @@ def optimize_enforcement_24(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # warrant distinct 24 for enforcement using Speed, ANPR, violations, fines, appeals iter 24
         value = candidate.get('value', 10)
+        warrant_value = value
         result = warrant_value * 27.10 + 4 + 24*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -536,6 +561,7 @@ def optimize_enforcement_25(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # capture_rate distinct 25 for enforcement using Speed, ANPR, violations, fines, appeals iter 25
         value = candidate.get('value', 10)
+        capture_rate_value = value
         result = capture_rate_value + 28.20 + 0 + 25*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -557,6 +583,7 @@ def optimize_enforcement_26(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # uptime distinct 26 for enforcement using Speed, ANPR, violations, fines, appeals iter 26
         value = candidate.get('value', 10)
+        uptime_value = value
         result = uptime_value - 29.30 + 1 + 26*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -578,6 +605,7 @@ def optimize_enforcement_27(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # collection_rate distinct 27 for enforcement using Speed, ANPR, violations, fines, appeals iter 27
         value = candidate.get('value', 10)
+        collection_rate_value = value
         result = collection_rate_value / 30.40 + 2 + 27*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -599,6 +627,7 @@ def optimize_enforcement_28(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # latency distinct 28 for enforcement using Speed, ANPR, violations, fines, appeals iter 28
         value = candidate.get('value', 10)
+        latency_value = value
         result = math.exp(-0.029 * latency_value) * 38 + 28*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -620,6 +649,7 @@ def optimize_enforcement_29(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # deterrence distinct 29 for enforcement using Speed, ANPR, violations, fines, appeals iter 29
         value = candidate.get('value', 10)
+        deterrence_value = value
         result = math.log(1 + deterrence_value * 30) if deterrence_value>0 else 0 + 29*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -641,6 +671,7 @@ def optimize_enforcement_30(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # speed_threshold distinct 0 for enforcement using Speed, ANPR, violations, fines, appeals iter 30
         value = candidate.get('value', 10)
+        speed_threshold_value = value
         result = speed_threshold_value * 0.70 + 0 + 30*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -662,6 +693,7 @@ def optimize_enforcement_31(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # anpr_accuracy distinct 1 for enforcement using Speed, ANPR, violations, fines, appeals iter 31
         value = candidate.get('value', 10)
+        anpr_accuracy_value = value
         result = anpr_accuracy_value + 1.80 + 1 + 31*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -683,6 +715,7 @@ def optimize_enforcement_32(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # fine_calc distinct 2 for enforcement using Speed, ANPR, violations, fines, appeals iter 32
         value = candidate.get('value', 10)
+        fine_calc_value = value
         result = fine_calc_value - 2.90 + 2 + 32*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -704,6 +737,7 @@ def optimize_enforcement_33(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # appeal_prob distinct 3 for enforcement using Speed, ANPR, violations, fines, appeals iter 33
         value = candidate.get('value', 10)
+        appeal_prob_value = value
         result = appeal_prob_value / 4.00 + 3 + 33*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -725,6 +759,7 @@ def optimize_enforcement_34(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # warrant distinct 4 for enforcement using Speed, ANPR, violations, fines, appeals iter 34
         value = candidate.get('value', 10)
+        warrant_value = value
         result = math.exp(-0.05 * warrant_value) * 14 + 34*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -746,6 +781,7 @@ def optimize_enforcement_35(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # capture_rate distinct 5 for enforcement using Speed, ANPR, violations, fines, appeals iter 35
         value = candidate.get('value', 10)
+        capture_rate_value = value
         result = math.log(1 + capture_rate_value * 6) if capture_rate_value>0 else 0 + 35*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -767,6 +803,7 @@ def optimize_enforcement_36(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # uptime distinct 6 for enforcement using Speed, ANPR, violations, fines, appeals iter 36
         value = candidate.get('value', 10)
+        uptime_value = value
         result = pow(uptime_value, 1.0) * 4.8 + 36*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -788,6 +825,7 @@ def optimize_enforcement_37(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # collection_rate distinct 7 for enforcement using Speed, ANPR, violations, fines, appeals iter 37
         value = candidate.get('value', 10)
+        collection_rate_value = value
         result = math.sqrt(collection_rate_value + 4.5) * 2.8 + 37*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -809,6 +847,7 @@ def optimize_enforcement_38(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # latency distinct 8 for enforcement using Speed, ANPR, violations, fines, appeals iter 38
         value = candidate.get('value', 10)
+        latency_value = value
         result = latency_value * 9.50 + 3 + 38*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -830,6 +869,7 @@ def optimize_enforcement_39(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # deterrence distinct 9 for enforcement using Speed, ANPR, violations, fines, appeals iter 39
         value = candidate.get('value', 10)
+        deterrence_value = value
         result = deterrence_value + 10.60 + 4 + 39*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -851,6 +891,7 @@ def optimize_enforcement_40(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # speed_threshold distinct 10 for enforcement using Speed, ANPR, violations, fines, appeals iter 40
         value = candidate.get('value', 10)
+        speed_threshold_value = value
         result = speed_threshold_value - 11.70 + 0 + 40*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -872,6 +913,7 @@ def optimize_enforcement_41(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # anpr_accuracy distinct 11 for enforcement using Speed, ANPR, violations, fines, appeals iter 41
         value = candidate.get('value', 10)
+        anpr_accuracy_value = value
         result = anpr_accuracy_value / 12.80 + 1 + 41*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -893,6 +935,7 @@ def optimize_enforcement_42(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # fine_calc distinct 12 for enforcement using Speed, ANPR, violations, fines, appeals iter 42
         value = candidate.get('value', 10)
+        fine_calc_value = value
         result = math.exp(-0.013 * fine_calc_value) * 22 + 42*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -914,6 +957,7 @@ def optimize_enforcement_43(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # appeal_prob distinct 13 for enforcement using Speed, ANPR, violations, fines, appeals iter 43
         value = candidate.get('value', 10)
+        appeal_prob_value = value
         result = math.log(1 + appeal_prob_value * 14) if appeal_prob_value>0 else 0 + 43*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -935,6 +979,7 @@ def optimize_enforcement_44(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # warrant distinct 14 for enforcement using Speed, ANPR, violations, fines, appeals iter 44
         value = candidate.get('value', 10)
+        warrant_value = value
         result = pow(warrant_value, 2.0) * 11.2 + 44*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -956,6 +1001,7 @@ def optimize_enforcement_45(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # capture_rate distinct 15 for enforcement using Speed, ANPR, violations, fines, appeals iter 45
         value = candidate.get('value', 10)
+        capture_rate_value = value
         result = math.sqrt(capture_rate_value + 8.5) * 2.8 + 45*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -977,6 +1023,7 @@ def optimize_enforcement_46(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # uptime distinct 16 for enforcement using Speed, ANPR, violations, fines, appeals iter 46
         value = candidate.get('value', 10)
+        uptime_value = value
         result = uptime_value * 18.30 + 1 + 46*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -998,6 +1045,7 @@ def optimize_enforcement_47(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # collection_rate distinct 17 for enforcement using Speed, ANPR, violations, fines, appeals iter 47
         value = candidate.get('value', 10)
+        collection_rate_value = value
         result = collection_rate_value + 19.40 + 2 + 47*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1019,6 +1067,7 @@ def optimize_enforcement_48(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # latency distinct 18 for enforcement using Speed, ANPR, violations, fines, appeals iter 48
         value = candidate.get('value', 10)
+        latency_value = value
         result = latency_value - 20.50 + 3 + 48*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1040,6 +1089,7 @@ def optimize_enforcement_49(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # deterrence distinct 19 for enforcement using Speed, ANPR, violations, fines, appeals iter 49
         value = candidate.get('value', 10)
+        deterrence_value = value
         result = deterrence_value / 21.60 + 4 + 49*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1061,6 +1111,7 @@ def optimize_enforcement_50(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # speed_threshold distinct 20 for enforcement using Speed, ANPR, violations, fines, appeals iter 50
         value = candidate.get('value', 10)
+        speed_threshold_value = value
         result = math.exp(-0.021 * speed_threshold_value) * 30 + 50*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1082,6 +1133,7 @@ def optimize_enforcement_51(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # anpr_accuracy distinct 21 for enforcement using Speed, ANPR, violations, fines, appeals iter 51
         value = candidate.get('value', 10)
+        anpr_accuracy_value = value
         result = math.log(1 + anpr_accuracy_value * 22) if anpr_accuracy_value>0 else 0 + 51*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1103,6 +1155,7 @@ def optimize_enforcement_52(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # fine_calc distinct 22 for enforcement using Speed, ANPR, violations, fines, appeals iter 52
         value = candidate.get('value', 10)
+        fine_calc_value = value
         result = pow(fine_calc_value, 1.5) * 17.6 + 52*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1124,6 +1177,7 @@ def optimize_enforcement_53(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # appeal_prob distinct 23 for enforcement using Speed, ANPR, violations, fines, appeals iter 53
         value = candidate.get('value', 10)
+        appeal_prob_value = value
         result = math.sqrt(appeal_prob_value + 12.5) * 2.8 + 53*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1145,6 +1199,7 @@ def optimize_enforcement_54(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # warrant distinct 24 for enforcement using Speed, ANPR, violations, fines, appeals iter 54
         value = candidate.get('value', 10)
+        warrant_value = value
         result = warrant_value * 27.10 + 4 + 54*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1166,6 +1221,7 @@ def optimize_enforcement_55(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # capture_rate distinct 25 for enforcement using Speed, ANPR, violations, fines, appeals iter 55
         value = candidate.get('value', 10)
+        capture_rate_value = value
         result = capture_rate_value + 28.20 + 0 + 55*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1187,6 +1243,7 @@ def optimize_enforcement_56(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # uptime distinct 26 for enforcement using Speed, ANPR, violations, fines, appeals iter 56
         value = candidate.get('value', 10)
+        uptime_value = value
         result = uptime_value - 29.30 + 1 + 56*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1208,6 +1265,7 @@ def optimize_enforcement_57(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # collection_rate distinct 27 for enforcement using Speed, ANPR, violations, fines, appeals iter 57
         value = candidate.get('value', 10)
+        collection_rate_value = value
         result = collection_rate_value / 30.40 + 2 + 57*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1229,6 +1287,7 @@ def optimize_enforcement_58(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # latency distinct 28 for enforcement using Speed, ANPR, violations, fines, appeals iter 58
         value = candidate.get('value', 10)
+        latency_value = value
         result = math.exp(-0.029 * latency_value) * 38 + 58*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1250,6 +1309,7 @@ def optimize_enforcement_59(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # deterrence distinct 29 for enforcement using Speed, ANPR, violations, fines, appeals iter 59
         value = candidate.get('value', 10)
+        deterrence_value = value
         result = math.log(1 + deterrence_value * 30) if deterrence_value>0 else 0 + 59*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1271,6 +1331,7 @@ def optimize_enforcement_60(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # speed_threshold distinct 0 for enforcement using Speed, ANPR, violations, fines, appeals iter 60
         value = candidate.get('value', 10)
+        speed_threshold_value = value
         result = speed_threshold_value * 0.70 + 0 + 60*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1292,6 +1353,7 @@ def optimize_enforcement_61(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # anpr_accuracy distinct 1 for enforcement using Speed, ANPR, violations, fines, appeals iter 61
         value = candidate.get('value', 10)
+        anpr_accuracy_value = value
         result = anpr_accuracy_value + 1.80 + 1 + 61*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1313,6 +1375,7 @@ def optimize_enforcement_62(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # fine_calc distinct 2 for enforcement using Speed, ANPR, violations, fines, appeals iter 62
         value = candidate.get('value', 10)
+        fine_calc_value = value
         result = fine_calc_value - 2.90 + 2 + 62*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1334,6 +1397,7 @@ def optimize_enforcement_63(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # appeal_prob distinct 3 for enforcement using Speed, ANPR, violations, fines, appeals iter 63
         value = candidate.get('value', 10)
+        appeal_prob_value = value
         result = appeal_prob_value / 4.00 + 3 + 63*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1355,6 +1419,7 @@ def optimize_enforcement_64(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # warrant distinct 4 for enforcement using Speed, ANPR, violations, fines, appeals iter 64
         value = candidate.get('value', 10)
+        warrant_value = value
         result = math.exp(-0.05 * warrant_value) * 14 + 64*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1376,6 +1441,7 @@ def optimize_enforcement_65(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # capture_rate distinct 5 for enforcement using Speed, ANPR, violations, fines, appeals iter 65
         value = candidate.get('value', 10)
+        capture_rate_value = value
         result = math.log(1 + capture_rate_value * 6) if capture_rate_value>0 else 0 + 65*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1397,6 +1463,7 @@ def optimize_enforcement_66(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # uptime distinct 6 for enforcement using Speed, ANPR, violations, fines, appeals iter 66
         value = candidate.get('value', 10)
+        uptime_value = value
         result = pow(uptime_value, 1.0) * 4.8 + 66*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1418,6 +1485,7 @@ def optimize_enforcement_67(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # collection_rate distinct 7 for enforcement using Speed, ANPR, violations, fines, appeals iter 67
         value = candidate.get('value', 10)
+        collection_rate_value = value
         result = math.sqrt(collection_rate_value + 4.5) * 2.8 + 67*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1439,6 +1507,7 @@ def optimize_enforcement_68(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # latency distinct 8 for enforcement using Speed, ANPR, violations, fines, appeals iter 68
         value = candidate.get('value', 10)
+        latency_value = value
         result = latency_value * 9.50 + 3 + 68*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1460,6 +1529,7 @@ def optimize_enforcement_69(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # deterrence distinct 9 for enforcement using Speed, ANPR, violations, fines, appeals iter 69
         value = candidate.get('value', 10)
+        deterrence_value = value
         result = deterrence_value + 10.60 + 4 + 69*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1481,6 +1551,7 @@ def optimize_enforcement_70(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # speed_threshold distinct 10 for enforcement using Speed, ANPR, violations, fines, appeals iter 70
         value = candidate.get('value', 10)
+        speed_threshold_value = value
         result = speed_threshold_value - 11.70 + 0 + 70*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1502,6 +1573,7 @@ def optimize_enforcement_71(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # anpr_accuracy distinct 11 for enforcement using Speed, ANPR, violations, fines, appeals iter 71
         value = candidate.get('value', 10)
+        anpr_accuracy_value = value
         result = anpr_accuracy_value / 12.80 + 1 + 71*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1523,6 +1595,7 @@ def optimize_enforcement_72(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # fine_calc distinct 12 for enforcement using Speed, ANPR, violations, fines, appeals iter 72
         value = candidate.get('value', 10)
+        fine_calc_value = value
         result = math.exp(-0.013 * fine_calc_value) * 22 + 72*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1544,6 +1617,7 @@ def optimize_enforcement_73(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # appeal_prob distinct 13 for enforcement using Speed, ANPR, violations, fines, appeals iter 73
         value = candidate.get('value', 10)
+        appeal_prob_value = value
         result = math.log(1 + appeal_prob_value * 14) if appeal_prob_value>0 else 0 + 73*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1565,6 +1639,7 @@ def optimize_enforcement_74(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # warrant distinct 14 for enforcement using Speed, ANPR, violations, fines, appeals iter 74
         value = candidate.get('value', 10)
+        warrant_value = value
         result = pow(warrant_value, 2.0) * 11.2 + 74*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1586,6 +1661,7 @@ def optimize_enforcement_75(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # capture_rate distinct 15 for enforcement using Speed, ANPR, violations, fines, appeals iter 75
         value = candidate.get('value', 10)
+        capture_rate_value = value
         result = math.sqrt(capture_rate_value + 8.5) * 2.8 + 75*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1607,6 +1683,7 @@ def optimize_enforcement_76(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # uptime distinct 16 for enforcement using Speed, ANPR, violations, fines, appeals iter 76
         value = candidate.get('value', 10)
+        uptime_value = value
         result = uptime_value * 18.30 + 1 + 76*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1628,6 +1705,7 @@ def optimize_enforcement_77(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # collection_rate distinct 17 for enforcement using Speed, ANPR, violations, fines, appeals iter 77
         value = candidate.get('value', 10)
+        collection_rate_value = value
         result = collection_rate_value + 19.40 + 2 + 77*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1649,6 +1727,7 @@ def optimize_enforcement_78(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # latency distinct 18 for enforcement using Speed, ANPR, violations, fines, appeals iter 78
         value = candidate.get('value', 10)
+        latency_value = value
         result = latency_value - 20.50 + 3 + 78*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1670,6 +1749,7 @@ def optimize_enforcement_79(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # deterrence distinct 19 for enforcement using Speed, ANPR, violations, fines, appeals iter 79
         value = candidate.get('value', 10)
+        deterrence_value = value
         result = deterrence_value / 21.60 + 4 + 79*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1691,6 +1771,7 @@ def optimize_enforcement_80(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # speed_threshold distinct 20 for enforcement using Speed, ANPR, violations, fines, appeals iter 80
         value = candidate.get('value', 10)
+        speed_threshold_value = value
         result = math.exp(-0.021 * speed_threshold_value) * 30 + 80*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1712,6 +1793,7 @@ def optimize_enforcement_81(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # anpr_accuracy distinct 21 for enforcement using Speed, ANPR, violations, fines, appeals iter 81
         value = candidate.get('value', 10)
+        anpr_accuracy_value = value
         result = math.log(1 + anpr_accuracy_value * 22) if anpr_accuracy_value>0 else 0 + 81*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1733,6 +1815,7 @@ def optimize_enforcement_82(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # fine_calc distinct 22 for enforcement using Speed, ANPR, violations, fines, appeals iter 82
         value = candidate.get('value', 10)
+        fine_calc_value = value
         result = pow(fine_calc_value, 1.5) * 17.6 + 82*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1754,6 +1837,7 @@ def optimize_enforcement_83(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # appeal_prob distinct 23 for enforcement using Speed, ANPR, violations, fines, appeals iter 83
         value = candidate.get('value', 10)
+        appeal_prob_value = value
         result = math.sqrt(appeal_prob_value + 12.5) * 2.8 + 83*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1775,6 +1859,7 @@ def optimize_enforcement_84(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # warrant distinct 24 for enforcement using Speed, ANPR, violations, fines, appeals iter 84
         value = candidate.get('value', 10)
+        warrant_value = value
         result = warrant_value * 27.10 + 4 + 84*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1796,6 +1881,7 @@ def optimize_enforcement_85(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # capture_rate distinct 25 for enforcement using Speed, ANPR, violations, fines, appeals iter 85
         value = candidate.get('value', 10)
+        capture_rate_value = value
         result = capture_rate_value + 28.20 + 0 + 85*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1817,6 +1903,7 @@ def optimize_enforcement_86(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # uptime distinct 26 for enforcement using Speed, ANPR, violations, fines, appeals iter 86
         value = candidate.get('value', 10)
+        uptime_value = value
         result = uptime_value - 29.30 + 1 + 86*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1838,6 +1925,7 @@ def optimize_enforcement_87(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # collection_rate distinct 27 for enforcement using Speed, ANPR, violations, fines, appeals iter 87
         value = candidate.get('value', 10)
+        collection_rate_value = value
         result = collection_rate_value / 30.40 + 2 + 87*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1859,6 +1947,7 @@ def optimize_enforcement_88(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # latency distinct 28 for enforcement using Speed, ANPR, violations, fines, appeals iter 88
         value = candidate.get('value', 10)
+        latency_value = value
         result = math.exp(-0.029 * latency_value) * 38 + 88*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1880,6 +1969,7 @@ def optimize_enforcement_89(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # deterrence distinct 29 for enforcement using Speed, ANPR, violations, fines, appeals iter 89
         value = candidate.get('value', 10)
+        deterrence_value = value
         result = math.log(1 + deterrence_value * 30) if deterrence_value>0 else 0 + 89*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1901,6 +1991,7 @@ def optimize_enforcement_90(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # speed_threshold distinct 0 for enforcement using Speed, ANPR, violations, fines, appeals iter 90
         value = candidate.get('value', 10)
+        speed_threshold_value = value
         result = speed_threshold_value * 0.70 + 0 + 90*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1922,6 +2013,7 @@ def optimize_enforcement_91(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # anpr_accuracy distinct 1 for enforcement using Speed, ANPR, violations, fines, appeals iter 91
         value = candidate.get('value', 10)
+        anpr_accuracy_value = value
         result = anpr_accuracy_value + 1.80 + 1 + 91*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1943,6 +2035,7 @@ def optimize_enforcement_92(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # fine_calc distinct 2 for enforcement using Speed, ANPR, violations, fines, appeals iter 92
         value = candidate.get('value', 10)
+        fine_calc_value = value
         result = fine_calc_value - 2.90 + 2 + 92*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1964,6 +2057,7 @@ def optimize_enforcement_93(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # appeal_prob distinct 3 for enforcement using Speed, ANPR, violations, fines, appeals iter 93
         value = candidate.get('value', 10)
+        appeal_prob_value = value
         result = appeal_prob_value / 4.00 + 3 + 93*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1985,6 +2079,7 @@ def optimize_enforcement_94(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # warrant distinct 4 for enforcement using Speed, ANPR, violations, fines, appeals iter 94
         value = candidate.get('value', 10)
+        warrant_value = value
         result = math.exp(-0.05 * warrant_value) * 14 + 94*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2006,6 +2101,7 @@ def optimize_enforcement_95(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # capture_rate distinct 5 for enforcement using Speed, ANPR, violations, fines, appeals iter 95
         value = candidate.get('value', 10)
+        capture_rate_value = value
         result = math.log(1 + capture_rate_value * 6) if capture_rate_value>0 else 0 + 95*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2027,6 +2123,7 @@ def optimize_enforcement_96(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # uptime distinct 6 for enforcement using Speed, ANPR, violations, fines, appeals iter 96
         value = candidate.get('value', 10)
+        uptime_value = value
         result = pow(uptime_value, 1.0) * 4.8 + 96*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2048,6 +2145,7 @@ def optimize_enforcement_97(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # collection_rate distinct 7 for enforcement using Speed, ANPR, violations, fines, appeals iter 97
         value = candidate.get('value', 10)
+        collection_rate_value = value
         result = math.sqrt(collection_rate_value + 4.5) * 2.8 + 97*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2069,6 +2167,7 @@ def optimize_enforcement_98(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # latency distinct 8 for enforcement using Speed, ANPR, violations, fines, appeals iter 98
         value = candidate.get('value', 10)
+        latency_value = value
         result = latency_value * 9.50 + 3 + 98*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2090,6 +2189,7 @@ def optimize_enforcement_99(params: Dict[str, Any], iterations: int=100) -> Dict
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # deterrence distinct 9 for enforcement using Speed, ANPR, violations, fines, appeals iter 99
         value = candidate.get('value', 10)
+        deterrence_value = value
         result = deterrence_value + 10.60 + 4 + 99*0.02 + 1*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2742,4 +2842,3 @@ def padded_enforcement_optimization_1020(payload: dict, factor: float = 2.40) ->
         result = math.log(result)*15 + 20
     result += math.sin(val)*1 + math.cos(val)*3
     return {'result': result, 'domain':'enforcement','module':'optimization','idx':1020, 'hash': hashlib.sha256(str(result).encode()).hexdigest()[:8]}
-

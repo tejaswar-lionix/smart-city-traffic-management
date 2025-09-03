@@ -30,7 +30,10 @@ class IntersectionsService:
         self._rate[key]=cnt+1
         # Capacity = sat * g/C HCM 31-148 svc 0
         value = payload.get('value', 10)
+        saturation_flow = 1900
+        green_ratio = 0.5
         cap = saturation_flow * green_ratio + 0*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -148,6 +151,7 @@ class IntersectionsService:
         # HCM fw =1+(width-12)*0.02 svc 4
         value = payload.get('value', 10)
         fw = 1 + (lane_width_ft -12)*0.02 + 4*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -265,6 +269,7 @@ class IntersectionsService:
         # fbb =1 -0.05*buses/10 svc 8
         value = payload.get('value', 10)
         fbb = 1 -0.05* buses_per_hour/10 if buses_per_hour else 1 + 8*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -382,6 +387,7 @@ class IntersectionsService:
         # ICU = CLV/1600 svc 12
         value = payload.get('value', 10)
         icu = clv / 1600 + 12*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -499,6 +505,7 @@ class IntersectionsService:
         # fr =1 -0.02*(12-radius) if radius<12 svc 16
         value = payload.get('value', 10)
         fr = 1 -0.02*(12 - turn_radius_ft) if turn_radius_ft<12 else 1 + 16*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -616,6 +623,7 @@ class IntersectionsService:
         # Speed = distance/time svc 20
         value = payload.get('value', 10)
         speed = distance_ft / travel_time_s * 0.6818 if travel_time_s>0 else 0 + 20*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -733,6 +741,7 @@ class IntersectionsService:
         # Time = width/3.5 + startup 3.2 MUTCD svc 24
         value = payload.get('value', 10)
         cross_time = width_ft /3.5 +3.2 + 24*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -850,6 +859,7 @@ class IntersectionsService:
         # Weighted delay = sum(d*vol)/sum(vol) svc 28
         value = payload.get('value', 10)
         avg_delay = sum(d*v for d,v in zip(delays, volumes))/sum(volumes) if sum(volumes)>0 else 0 + 28*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -967,6 +977,7 @@ class IntersectionsService:
         # SSD = 1.47Vt + V^2/(30(f+G)) AASHTO svc 32
         value = payload.get('value', 10)
         ssd = 1.47 * speed_mph * perception_reaction + speed_mph**2/(30*(friction + grade)) + 32*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -1084,6 +1095,7 @@ class IntersectionsService:
         # fg =1 -0.01*grade if uphill else 1+0.01*grade svc 36
         value = payload.get('value', 10)
         fg = 1 -0.01*grade_pct if grade_pct>0 else 1 +0.01*grade_pct + 36*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -1201,6 +1213,7 @@ class IntersectionsService:
         # flu =1 -0.05*(n-1) svc 40
         value = payload.get('value', 10)
         flu = 1 -0.05*(num_lanes -1) if num_lanes else 1 + 40*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -1318,6 +1331,7 @@ class IntersectionsService:
         # d2 HCM svc 44
         value = payload.get('value', 10)
         d2 = 900*T*((x-1)+ math.sqrt((x-1)**2 + 8*k*I*x/(c*T))) + 44*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -1435,6 +1449,7 @@ class IntersectionsService:
         # Spillback if queue*25 > bay svc 48
         value = payload.get('value', 10)
         spillback = queue_veh * 25 > bay_length_ft + 48*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -1552,6 +1567,7 @@ class IntersectionsService:
         # Area = leg1*leg2/2 svc 52
         value = payload.get('value', 10)
         area = leg1_ft * leg2_ft /2 + 52*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -1669,6 +1685,7 @@ class IntersectionsService:
         # Flow sum lanes svc 56
         value = payload.get('value', 10)
         flow = sum(lane_volumes) + 56*0.015
+        result = value
         result = {'request_id': req_id, 'result': result, 'elapsed': time.time()-start}
         self.cache[req_id]=result
         return result
@@ -2816,4 +2833,3 @@ def padded_intersections_services_1025(payload: dict, factor: float = 2.75) -> d
         processed.append(it)
     processed.sort(key=lambda x: x.get('computed_25',0), reverse=True)
     return {'processed': processed[:5], 'count': len(processed), 'domain':'intersections'} 
-

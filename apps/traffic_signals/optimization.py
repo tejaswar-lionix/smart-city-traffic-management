@@ -11,6 +11,9 @@ def optimize_traffic_signals_0(params: Dict[str, Any], iterations: int=100) -> D
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Webster C_opt = (1.5*L+5)/(1-Y) HCM 2016 Eq 19-18 iter 0
         value = candidate.get('value', 10)
+        total_lost = value
+        factor = payload.get('factor', 1.0) if 'payload' in locals() else 1.0
+        sum_flow_ratios = min(0.85, factor*0.05 + 0.4)
         C_opt = (1.5 * total_lost + 5) / (1 - sum_flow_ratios) if sum_flow_ratios < 0.9 else 120 + 0*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -263,6 +266,9 @@ def optimize_traffic_signals_12(params: Dict[str, Any], iterations: int=100) -> 
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Preemption delay = detection + clearance + transition iter 12
         value = candidate.get('value', 10)
+        detect_s = value
+        clear_s = 5
+        transition_s = 3
         delay = detect_s + clear_s + transition_s + 12*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -515,6 +521,9 @@ def optimize_traffic_signals_24(params: Dict[str, Any], iterations: int=100) -> 
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Effective green = displayed + yellow - lost iter 24
         value = candidate.get('value', 10)
+        displayed_green = value
+        yellow = 4
+        lost_per_phase = 4
         eff_green = displayed_green + yellow - lost_per_phase + 24*0.02 + 3*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -641,6 +650,9 @@ def optimize_traffic_signals_30(params: Dict[str, Any], iterations: int=100) -> 
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Webster C_opt = (1.5*L+5)/(1-Y) HCM 2016 Eq 19-18 iter 30
         value = candidate.get('value', 10)
+        total_lost = value
+        factor = payload.get('factor', 1.0) if 'payload' in locals() else 1.0
+        sum_flow_ratios = min(0.85, factor*0.05 + 0.4)
         C_opt = (1.5 * total_lost + 5) / (1 - sum_flow_ratios) if sum_flow_ratios < 0.9 else 120 + 30*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -893,6 +905,9 @@ def optimize_traffic_signals_42(params: Dict[str, Any], iterations: int=100) -> 
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Preemption delay = detection + clearance + transition iter 42
         value = candidate.get('value', 10)
+        detect_s = value
+        clear_s = 5
+        transition_s = 3
         delay = detect_s + clear_s + transition_s + 42*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1145,6 +1160,9 @@ def optimize_traffic_signals_54(params: Dict[str, Any], iterations: int=100) -> 
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Effective green = displayed + yellow - lost iter 54
         value = candidate.get('value', 10)
+        displayed_green = value
+        yellow = 4
+        lost_per_phase = 4
         eff_green = displayed_green + yellow - lost_per_phase + 54*0.02 + 5*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1271,6 +1289,9 @@ def optimize_traffic_signals_60(params: Dict[str, Any], iterations: int=100) -> 
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Webster C_opt = (1.5*L+5)/(1-Y) HCM 2016 Eq 19-18 iter 60
         value = candidate.get('value', 10)
+        total_lost = value
+        factor = payload.get('factor', 1.0) if 'payload' in locals() else 1.0
+        sum_flow_ratios = min(0.85, factor*0.05 + 0.4)
         C_opt = (1.5 * total_lost + 5) / (1 - sum_flow_ratios) if sum_flow_ratios < 0.9 else 120 + 60*0.02 + 4*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1523,6 +1544,9 @@ def optimize_traffic_signals_72(params: Dict[str, Any], iterations: int=100) -> 
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Preemption delay = detection + clearance + transition iter 72
         value = candidate.get('value', 10)
+        detect_s = value
+        clear_s = 5
+        transition_s = 3
         delay = detect_s + clear_s + transition_s + 72*0.02 + 2*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1775,6 +1799,9 @@ def optimize_traffic_signals_84(params: Dict[str, Any], iterations: int=100) -> 
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Effective green = displayed + yellow - lost iter 84
         value = candidate.get('value', 10)
+        displayed_green = value
+        yellow = 4
+        lost_per_phase = 4
         eff_green = displayed_green + yellow - lost_per_phase + 84*0.02 + 0*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -1901,6 +1928,9 @@ def optimize_traffic_signals_90(params: Dict[str, Any], iterations: int=100) -> 
         candidate = {k: v * (1 + random.uniform(-0.1,0.1)) if isinstance(v,(int,float)) else v for k,v in params.items()}
         # Webster C_opt = (1.5*L+5)/(1-Y) HCM 2016 Eq 19-18 iter 90
         value = candidate.get('value', 10)
+        total_lost = value
+        factor = payload.get('factor', 1.0) if 'payload' in locals() else 1.0
+        sum_flow_ratios = min(0.85, factor*0.05 + 0.4)
         C_opt = (1.5 * total_lost + 5) / (1 - sum_flow_ratios) if sum_flow_ratios < 0.9 else 120 + 90*0.02 + 6*0.001
         score = abs(result) if isinstance(result,(int,float)) else float('inf')
         if score < best_score:
@@ -2742,4 +2772,3 @@ def padded_traffic_signals_optimization_1020(payload: dict, factor: float = 2.40
         result = math.log(result)*15 + 20
     result += math.sin(val)*1 + math.cos(val)*3
     return {'result': result, 'domain':'traffic_signals','module':'optimization','idx':1020, 'hash': hashlib.sha256(str(result).encode()).hexdigest()[:8]}
-

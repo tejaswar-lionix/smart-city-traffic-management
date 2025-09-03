@@ -15,6 +15,7 @@ def analytics_pedestrian_0(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # crossing_delay distinct 0 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 0
+    crossing_delay_value = value
     result = crossing_delay_value * 0.70 + 0 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -30,6 +31,7 @@ def analytics_pedestrian_1(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # los_score distinct 1 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 1
+    los_score_value = value
     result = los_score_value + 1.80 + 1 + 1*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -44,6 +46,7 @@ def analytics_pedestrian_2(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # footfall_expand distinct 2 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 2
+    footfall_expand_value = value
     result = footfall_expand_value - 2.90 + 2 + 2*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -59,6 +62,7 @@ def analytics_pedestrian_3(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # gap_logit distinct 3 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 3
+    gap_logit_value = value
     result = gap_logit_value / 4.00 + 3 + 3*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -73,6 +77,7 @@ def analytics_pedestrian_4(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # compliance distinct 4 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 4
+    compliance_value = value
     result = math.exp(-0.05 * compliance_value) * 14 + 4*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -89,6 +94,7 @@ def analytics_pedestrian_5(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # desire_deviation distinct 5 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 5
+    desire_deviation_value = value
     result = math.log(1 + desire_deviation_value * 6) if desire_deviation_value>0 else 0 + 5*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -104,6 +110,7 @@ def analytics_pedestrian_6(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # speed_percentile distinct 6 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 6
+    speed_percentile_value = value
     result = pow(speed_percentile_value, 1.0) * 4.8 + 6*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -119,6 +126,7 @@ def analytics_pedestrian_7(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # platoon distinct 7 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 7
+    platoon_value = value
     result = math.sqrt(platoon_value + 4.5) * 2.8 + 7*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -133,6 +141,7 @@ def analytics_pedestrian_8(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # sidewalk_cap distinct 8 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 8
+    sidewalk_cap_value = value
     result = sidewalk_cap_value * 9.50 + 3 + 8*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -148,6 +157,7 @@ def analytics_pedestrian_9(records: List[Dict[str, Any]], opts: Dict[str, Any]=N
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # waiting_los distinct 9 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 9
+    waiting_los_value = value
     result = waiting_los_value + 10.60 + 4 + 9*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -162,6 +172,7 @@ def analytics_pedestrian_10(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # crossing_delay distinct 10 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 10
+    crossing_delay_value = value
     result = crossing_delay_value - 11.70 + 0 + 10*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -178,6 +189,7 @@ def analytics_pedestrian_11(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # los_score distinct 11 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 11
+    los_score_value = value
     result = los_score_value / 12.80 + 1 + 11*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -193,6 +205,7 @@ def analytics_pedestrian_12(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # footfall_expand distinct 12 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 12
+    footfall_expand_value = value
     result = math.exp(-0.013 * footfall_expand_value) * 22 + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -208,6 +221,7 @@ def analytics_pedestrian_13(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # gap_logit distinct 13 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 13
+    gap_logit_value = value
     result = math.log(1 + gap_logit_value * 14) if gap_logit_value>0 else 0 + 13*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -222,6 +236,7 @@ def analytics_pedestrian_14(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # compliance distinct 14 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 14
+    compliance_value = value
     result = pow(compliance_value, 2.0) * 11.2 + 14*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -237,6 +252,7 @@ def analytics_pedestrian_15(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # desire_deviation distinct 15 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 15
+    desire_deviation_value = value
     result = math.sqrt(desire_deviation_value + 8.5) * 2.8 + 15*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -251,6 +267,7 @@ def analytics_pedestrian_16(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # speed_percentile distinct 16 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 16
+    speed_percentile_value = value
     result = speed_percentile_value * 18.30 + 1 + 16*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -267,6 +284,7 @@ def analytics_pedestrian_17(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # platoon distinct 17 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 17
+    platoon_value = value
     result = platoon_value + 19.40 + 2 + 17*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -282,6 +300,7 @@ def analytics_pedestrian_18(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # sidewalk_cap distinct 18 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 18
+    sidewalk_cap_value = value
     result = sidewalk_cap_value - 20.50 + 3 + 18*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -297,6 +316,7 @@ def analytics_pedestrian_19(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # waiting_los distinct 19 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 19
+    waiting_los_value = value
     result = waiting_los_value / 21.60 + 4 + 19*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -311,6 +331,7 @@ def analytics_pedestrian_20(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # crossing_delay distinct 20 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 20
+    crossing_delay_value = value
     result = math.exp(-0.021 * crossing_delay_value) * 30 + 20*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -326,6 +347,7 @@ def analytics_pedestrian_21(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # los_score distinct 21 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 21
+    los_score_value = value
     result = math.log(1 + los_score_value * 22) if los_score_value>0 else 0 + 21*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -340,6 +362,7 @@ def analytics_pedestrian_22(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # footfall_expand distinct 22 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 22
+    footfall_expand_value = value
     result = pow(footfall_expand_value, 1.5) * 17.6 + 22*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -356,6 +379,7 @@ def analytics_pedestrian_23(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # gap_logit distinct 23 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 23
+    gap_logit_value = value
     result = math.sqrt(gap_logit_value + 12.5) * 2.8 + 23*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -371,6 +395,7 @@ def analytics_pedestrian_24(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # compliance distinct 24 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 24
+    compliance_value = value
     result = compliance_value * 27.10 + 4 + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -386,6 +411,7 @@ def analytics_pedestrian_25(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # desire_deviation distinct 25 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 25
+    desire_deviation_value = value
     result = desire_deviation_value + 28.20 + 0 + 25*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -400,6 +426,7 @@ def analytics_pedestrian_26(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # speed_percentile distinct 26 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 26
+    speed_percentile_value = value
     result = speed_percentile_value - 29.30 + 1 + 26*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -415,6 +442,7 @@ def analytics_pedestrian_27(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # platoon distinct 27 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 27
+    platoon_value = value
     result = platoon_value / 30.40 + 2 + 27*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -429,6 +457,7 @@ def analytics_pedestrian_28(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # sidewalk_cap distinct 28 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 28
+    sidewalk_cap_value = value
     result = math.exp(-0.029 * sidewalk_cap_value) * 38 + 28*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -445,6 +474,7 @@ def analytics_pedestrian_29(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # waiting_los distinct 29 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 29
+    waiting_los_value = value
     result = math.log(1 + waiting_los_value * 30) if waiting_los_value>0 else 0 + 29*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -460,6 +490,7 @@ def analytics_pedestrian_30(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # crossing_delay distinct 0 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 30
+    crossing_delay_value = value
     result = crossing_delay_value * 0.70 + 0 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -475,6 +506,7 @@ def analytics_pedestrian_31(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # los_score distinct 1 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 31
+    los_score_value = value
     result = los_score_value + 1.80 + 1 + 31*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -489,6 +521,7 @@ def analytics_pedestrian_32(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # footfall_expand distinct 2 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 32
+    footfall_expand_value = value
     result = footfall_expand_value - 2.90 + 2 + 32*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -504,6 +537,7 @@ def analytics_pedestrian_33(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # gap_logit distinct 3 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 33
+    gap_logit_value = value
     result = gap_logit_value / 4.00 + 3 + 33*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -518,6 +552,7 @@ def analytics_pedestrian_34(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # compliance distinct 4 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 34
+    compliance_value = value
     result = math.exp(-0.05 * compliance_value) * 14 + 34*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -534,6 +569,7 @@ def analytics_pedestrian_35(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # desire_deviation distinct 5 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 35
+    desire_deviation_value = value
     result = math.log(1 + desire_deviation_value * 6) if desire_deviation_value>0 else 0 + 35*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -549,6 +585,7 @@ def analytics_pedestrian_36(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # speed_percentile distinct 6 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 36
+    speed_percentile_value = value
     result = pow(speed_percentile_value, 1.0) * 4.8 + 36*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -564,6 +601,7 @@ def analytics_pedestrian_37(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # platoon distinct 7 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 37
+    platoon_value = value
     result = math.sqrt(platoon_value + 4.5) * 2.8 + 37*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -578,6 +616,7 @@ def analytics_pedestrian_38(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # sidewalk_cap distinct 8 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 38
+    sidewalk_cap_value = value
     result = sidewalk_cap_value * 9.50 + 3 + 38*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -593,6 +632,7 @@ def analytics_pedestrian_39(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # waiting_los distinct 9 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 39
+    waiting_los_value = value
     result = waiting_los_value + 10.60 + 4 + 39*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -607,6 +647,7 @@ def analytics_pedestrian_40(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # crossing_delay distinct 10 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 40
+    crossing_delay_value = value
     result = crossing_delay_value - 11.70 + 0 + 40*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -623,6 +664,7 @@ def analytics_pedestrian_41(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # los_score distinct 11 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 41
+    los_score_value = value
     result = los_score_value / 12.80 + 1 + 41*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -638,6 +680,7 @@ def analytics_pedestrian_42(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # footfall_expand distinct 12 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 42
+    footfall_expand_value = value
     result = math.exp(-0.013 * footfall_expand_value) * 22 + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -653,6 +696,7 @@ def analytics_pedestrian_43(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # gap_logit distinct 13 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 43
+    gap_logit_value = value
     result = math.log(1 + gap_logit_value * 14) if gap_logit_value>0 else 0 + 43*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -667,6 +711,7 @@ def analytics_pedestrian_44(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # compliance distinct 14 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 44
+    compliance_value = value
     result = pow(compliance_value, 2.0) * 11.2 + 44*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -682,6 +727,7 @@ def analytics_pedestrian_45(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # desire_deviation distinct 15 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 45
+    desire_deviation_value = value
     result = math.sqrt(desire_deviation_value + 8.5) * 2.8 + 45*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -696,6 +742,7 @@ def analytics_pedestrian_46(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # speed_percentile distinct 16 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 46
+    speed_percentile_value = value
     result = speed_percentile_value * 18.30 + 1 + 46*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -712,6 +759,7 @@ def analytics_pedestrian_47(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # platoon distinct 17 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 47
+    platoon_value = value
     result = platoon_value + 19.40 + 2 + 47*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -727,6 +775,7 @@ def analytics_pedestrian_48(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # sidewalk_cap distinct 18 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 48
+    sidewalk_cap_value = value
     result = sidewalk_cap_value - 20.50 + 3 + 48*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -742,6 +791,7 @@ def analytics_pedestrian_49(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # waiting_los distinct 19 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 49
+    waiting_los_value = value
     result = waiting_los_value / 21.60 + 4 + 49*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -756,6 +806,7 @@ def analytics_pedestrian_50(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # crossing_delay distinct 20 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 50
+    crossing_delay_value = value
     result = math.exp(-0.021 * crossing_delay_value) * 30 + 50*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -771,6 +822,7 @@ def analytics_pedestrian_51(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # los_score distinct 21 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 51
+    los_score_value = value
     result = math.log(1 + los_score_value * 22) if los_score_value>0 else 0 + 51*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -785,6 +837,7 @@ def analytics_pedestrian_52(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # footfall_expand distinct 22 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 52
+    footfall_expand_value = value
     result = pow(footfall_expand_value, 1.5) * 17.6 + 52*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -801,6 +854,7 @@ def analytics_pedestrian_53(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # gap_logit distinct 23 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 53
+    gap_logit_value = value
     result = math.sqrt(gap_logit_value + 12.5) * 2.8 + 53*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -816,6 +870,7 @@ def analytics_pedestrian_54(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # compliance distinct 24 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 54
+    compliance_value = value
     result = compliance_value * 27.10 + 4 + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -831,6 +886,7 @@ def analytics_pedestrian_55(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # desire_deviation distinct 25 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 55
+    desire_deviation_value = value
     result = desire_deviation_value + 28.20 + 0 + 55*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -845,6 +901,7 @@ def analytics_pedestrian_56(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # speed_percentile distinct 26 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 56
+    speed_percentile_value = value
     result = speed_percentile_value - 29.30 + 1 + 56*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -860,6 +917,7 @@ def analytics_pedestrian_57(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # platoon distinct 27 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 57
+    platoon_value = value
     result = platoon_value / 30.40 + 2 + 57*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -874,6 +932,7 @@ def analytics_pedestrian_58(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # sidewalk_cap distinct 28 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 58
+    sidewalk_cap_value = value
     result = math.exp(-0.029 * sidewalk_cap_value) * 38 + 58*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -890,6 +949,7 @@ def analytics_pedestrian_59(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # waiting_los distinct 29 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 59
+    waiting_los_value = value
     result = math.log(1 + waiting_los_value * 30) if waiting_los_value>0 else 0 + 59*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -905,6 +965,7 @@ def analytics_pedestrian_60(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # crossing_delay distinct 0 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 60
+    crossing_delay_value = value
     result = crossing_delay_value * 0.70 + 0 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -920,6 +981,7 @@ def analytics_pedestrian_61(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # los_score distinct 1 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 61
+    los_score_value = value
     result = los_score_value + 1.80 + 1 + 61*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -934,6 +996,7 @@ def analytics_pedestrian_62(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # footfall_expand distinct 2 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 62
+    footfall_expand_value = value
     result = footfall_expand_value - 2.90 + 2 + 62*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -949,6 +1012,7 @@ def analytics_pedestrian_63(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # gap_logit distinct 3 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 63
+    gap_logit_value = value
     result = gap_logit_value / 4.00 + 3 + 63*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -963,6 +1027,7 @@ def analytics_pedestrian_64(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # compliance distinct 4 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 64
+    compliance_value = value
     result = math.exp(-0.05 * compliance_value) * 14 + 64*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -979,6 +1044,7 @@ def analytics_pedestrian_65(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # desire_deviation distinct 5 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 65
+    desire_deviation_value = value
     result = math.log(1 + desire_deviation_value * 6) if desire_deviation_value>0 else 0 + 65*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -994,6 +1060,7 @@ def analytics_pedestrian_66(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # speed_percentile distinct 6 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 66
+    speed_percentile_value = value
     result = pow(speed_percentile_value, 1.0) * 4.8 + 66*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -1009,6 +1076,7 @@ def analytics_pedestrian_67(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # platoon distinct 7 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 67
+    platoon_value = value
     result = math.sqrt(platoon_value + 4.5) * 2.8 + 67*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1023,6 +1091,7 @@ def analytics_pedestrian_68(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # sidewalk_cap distinct 8 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 68
+    sidewalk_cap_value = value
     result = sidewalk_cap_value * 9.50 + 3 + 68*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1038,6 +1107,7 @@ def analytics_pedestrian_69(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # waiting_los distinct 9 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 69
+    waiting_los_value = value
     result = waiting_los_value + 10.60 + 4 + 69*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1052,6 +1122,7 @@ def analytics_pedestrian_70(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # crossing_delay distinct 10 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 70
+    crossing_delay_value = value
     result = crossing_delay_value - 11.70 + 0 + 70*0.01 + 0*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1068,6 +1139,7 @@ def analytics_pedestrian_71(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # los_score distinct 11 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 71
+    los_score_value = value
     result = los_score_value / 12.80 + 1 + 71*0.01 + 1*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1083,6 +1155,7 @@ def analytics_pedestrian_72(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # footfall_expand distinct 12 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 72
+    footfall_expand_value = value
     result = math.exp(-0.013 * footfall_expand_value) * 22 + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -1098,6 +1171,7 @@ def analytics_pedestrian_73(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # gap_logit distinct 13 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 73
+    gap_logit_value = value
     result = math.log(1 + gap_logit_value * 14) if gap_logit_value>0 else 0 + 73*0.01 + 3*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1112,6 +1186,7 @@ def analytics_pedestrian_74(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # compliance distinct 14 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 74
+    compliance_value = value
     result = pow(compliance_value, 2.0) * 11.2 + 74*0.01 + 4*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1127,6 +1202,7 @@ def analytics_pedestrian_75(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # desire_deviation distinct 15 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 75
+    desire_deviation_value = value
     result = math.sqrt(desire_deviation_value + 8.5) * 2.8 + 75*0.01 + 0*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1141,6 +1217,7 @@ def analytics_pedestrian_76(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # speed_percentile distinct 16 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 76
+    speed_percentile_value = value
     result = speed_percentile_value * 18.30 + 1 + 76*0.01 + 1*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1157,6 +1234,7 @@ def analytics_pedestrian_77(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # platoon distinct 17 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 77
+    platoon_value = value
     result = platoon_value + 19.40 + 2 + 77*0.01 + 2*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1172,6 +1250,7 @@ def analytics_pedestrian_78(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # sidewalk_cap distinct 18 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 78
+    sidewalk_cap_value = value
     result = sidewalk_cap_value - 20.50 + 3 + 78*0.01 + 3*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -1187,6 +1266,7 @@ def analytics_pedestrian_79(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # waiting_los distinct 19 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 79
+    waiting_los_value = value
     result = waiting_los_value / 21.60 + 4 + 79*0.01 + 4*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1201,6 +1281,7 @@ def analytics_pedestrian_80(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # crossing_delay distinct 20 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 80
+    crossing_delay_value = value
     result = math.exp(-0.021 * crossing_delay_value) * 30 + 80*0.01 + 0*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1216,6 +1297,7 @@ def analytics_pedestrian_81(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # los_score distinct 21 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 81
+    los_score_value = value
     result = math.log(1 + los_score_value * 22) if los_score_value>0 else 0 + 81*0.01 + 1*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1230,6 +1312,7 @@ def analytics_pedestrian_82(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # footfall_expand distinct 22 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 82
+    footfall_expand_value = value
     result = pow(footfall_expand_value, 1.5) * 17.6 + 82*0.01 + 2*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1246,6 +1329,7 @@ def analytics_pedestrian_83(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # gap_logit distinct 23 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 83
+    gap_logit_value = value
     result = math.sqrt(gap_logit_value + 12.5) * 2.8 + 83*0.01 + 3*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1261,6 +1345,7 @@ def analytics_pedestrian_84(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # compliance distinct 24 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 84
+    compliance_value = value
     result = compliance_value * 27.10 + 4 + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -1276,6 +1361,7 @@ def analytics_pedestrian_85(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # desire_deviation distinct 25 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 85
+    desire_deviation_value = value
     result = desire_deviation_value + 28.20 + 0 + 85*0.01 + 0*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1290,6 +1376,7 @@ def analytics_pedestrian_86(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # speed_percentile distinct 26 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 86
+    speed_percentile_value = value
     result = speed_percentile_value - 29.30 + 1 + 86*0.01 + 1*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1305,6 +1392,7 @@ def analytics_pedestrian_87(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # platoon distinct 27 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 87
+    platoon_value = value
     result = platoon_value / 30.40 + 2 + 87*0.01 + 2*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1319,6 +1407,7 @@ def analytics_pedestrian_88(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # sidewalk_cap distinct 28 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 88
+    sidewalk_cap_value = value
     result = math.exp(-0.029 * sidewalk_cap_value) * 38 + 88*0.01 + 3*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1335,6 +1424,7 @@ def analytics_pedestrian_89(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # waiting_los distinct 29 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 89
+    waiting_los_value = value
     result = math.log(1 + waiting_los_value * 30) if waiting_los_value>0 else 0 + 89*0.01 + 4*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1350,6 +1440,7 @@ def analytics_pedestrian_90(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # crossing_delay distinct 0 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 90
+    crossing_delay_value = value
     result = crossing_delay_value * 0.70 + 0 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -1365,6 +1456,7 @@ def analytics_pedestrian_91(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # los_score distinct 1 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 91
+    los_score_value = value
     result = los_score_value + 1.80 + 1 + 91*0.01 + 1*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1379,6 +1471,7 @@ def analytics_pedestrian_92(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # footfall_expand distinct 2 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 92
+    footfall_expand_value = value
     result = footfall_expand_value - 2.90 + 2 + 92*0.01 + 2*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1394,6 +1487,7 @@ def analytics_pedestrian_93(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # gap_logit distinct 3 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 93
+    gap_logit_value = value
     result = gap_logit_value / 4.00 + 3 + 93*0.01 + 3*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -1408,6 +1502,7 @@ def analytics_pedestrian_94(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     for r in records: groups[r.get('category','default')].append(r)
     agg = {k: sum(x.get('value',0) for x in v) for k,v in groups.items()}
     # compliance distinct 4 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 94
+    compliance_value = value
     result = math.exp(-0.05 * compliance_value) * 14 + 94*0.01 + 4*0.002
     top_group = max(agg, key=agg.get) if agg else None
     return {'groups': agg, 'top': top_group, 'computed': result}
@@ -1424,6 +1519,7 @@ def analytics_pedestrian_95(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     q3 = sorted_vals[int(0.75*len(sorted_vals))] if sorted_vals else 0
     iqr = q3 - q1
     # desire_deviation distinct 5 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 95
+    desire_deviation_value = value
     result = math.log(1 + desire_deviation_value * 6) if desire_deviation_value>0 else 0 + 95*0.01 + 0*0.002
     outliers = [v for v in values if v < q1 -1.5*iqr or v > q3 +1.5*iqr]
     return {'q1': q1, 'q3': q3, 'iqr': iqr, 'outliers': outliers[:5], 'computed': result}
@@ -1439,6 +1535,7 @@ def analytics_pedestrian_96(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # speed_percentile distinct 6 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 96
+    speed_percentile_value = value
     result = pow(speed_percentile_value, 1.0) * 4.8 + 96*0.01 + 1*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'pedestrian'}
@@ -1454,6 +1551,7 @@ def analytics_pedestrian_97(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     n = len(values)
     weighted = sum(v* (i+1) for i,v in enumerate(values))/ sum(range(1, n+1)) if n else 0
     # platoon distinct 7 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 97
+    platoon_value = value
     result = math.sqrt(platoon_value + 4.5) * 2.8 + 97*0.01 + 2*0.002
     trend = (values[-1] - values[0])/n if n>1 else 0
     return {'total': total, 'weighted': weighted, 'trend': trend, 'computed': result}
@@ -1468,6 +1566,7 @@ def analytics_pedestrian_98(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     counter = Counter(str(r.get('status','unknown')) for r in records)
     most_common = counter.most_common(3)
     # sidewalk_cap distinct 8 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 98
+    sidewalk_cap_value = value
     result = sidewalk_cap_value * 9.50 + 3 + 98*0.01 + 3*0.002
     entropy = -sum((c/len(records))*math.log(c/len(records)) for c in counter.values() if c>0)
     return {'distribution': dict(counter), 'most_common': most_common, 'entropy': entropy, 'computed': result}
@@ -1483,6 +1582,7 @@ def analytics_pedestrian_99(records: List[Dict[str, Any]], opts: Dict[str, Any]=
     intervals = [times[i+1]-times[i] for i in range(len(times)-1)] if len(times)>1 else [0]
     avg_interval = sum(intervals)/len(intervals) if intervals else 0
     # waiting_los distinct 9 for pedestrian using Crossings, LOS, footfall, desire lines, gap acceptance variant 99
+    waiting_los_value = value
     result = waiting_los_value + 10.60 + 4 + 99*0.01 + 4*0.002
     return {'avg_interval': avg_interval, 'jitter': max(intervals)-min(intervals) if intervals else 0, 'computed': result}
 
@@ -2512,4 +2612,3 @@ def padded_pedestrian_analytics_1030(payload: dict, factor: float = 3.10) -> dic
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'pedestrian'} 
-

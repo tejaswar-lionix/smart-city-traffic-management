@@ -15,6 +15,9 @@ def analytics_traffic_signals_0(records: List[Dict[str, Any]], opts: Dict[str, A
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Webster C_opt = (1.5*L+5)/(1-Y) HCM 2016 Eq 19-18 variant 0
+    total_lost = value
+    factor = payload.get('factor', 1.0) if 'payload' in locals() else 1.0
+    sum_flow_ratios = min(0.85, factor*0.05 + 0.4)
     C_opt = (1.5 * total_lost + 5) / (1 - sum_flow_ratios) if sum_flow_ratios < 0.9 else 120 + 0*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'traffic_signals'}
@@ -193,6 +196,9 @@ def analytics_traffic_signals_12(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Preemption delay = detection + clearance + transition variant 12
+    detect_s = value
+    clear_s = 5
+    transition_s = 3
     delay = detect_s + clear_s + transition_s + 12*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'traffic_signals'}
@@ -371,6 +377,9 @@ def analytics_traffic_signals_24(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Effective green = displayed + yellow - lost variant 24
+    displayed_green = value
+    yellow = 4
+    lost_per_phase = 4
     eff_green = displayed_green + yellow - lost_per_phase + 24*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'traffic_signals'}
@@ -460,6 +469,9 @@ def analytics_traffic_signals_30(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Webster C_opt = (1.5*L+5)/(1-Y) HCM 2016 Eq 19-18 variant 30
+    total_lost = value
+    factor = payload.get('factor', 1.0) if 'payload' in locals() else 1.0
+    sum_flow_ratios = min(0.85, factor*0.05 + 0.4)
     C_opt = (1.5 * total_lost + 5) / (1 - sum_flow_ratios) if sum_flow_ratios < 0.9 else 120 + 30*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'traffic_signals'}
@@ -638,6 +650,9 @@ def analytics_traffic_signals_42(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Preemption delay = detection + clearance + transition variant 42
+    detect_s = value
+    clear_s = 5
+    transition_s = 3
     delay = detect_s + clear_s + transition_s + 42*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'traffic_signals'}
@@ -816,6 +831,9 @@ def analytics_traffic_signals_54(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Effective green = displayed + yellow - lost variant 54
+    displayed_green = value
+    yellow = 4
+    lost_per_phase = 4
     eff_green = displayed_green + yellow - lost_per_phase + 54*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'traffic_signals'}
@@ -905,6 +923,9 @@ def analytics_traffic_signals_60(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Webster C_opt = (1.5*L+5)/(1-Y) HCM 2016 Eq 19-18 variant 60
+    total_lost = value
+    factor = payload.get('factor', 1.0) if 'payload' in locals() else 1.0
+    sum_flow_ratios = min(0.85, factor*0.05 + 0.4)
     C_opt = (1.5 * total_lost + 5) / (1 - sum_flow_ratios) if sum_flow_ratios < 0.9 else 120 + 60*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'traffic_signals'}
@@ -1083,6 +1104,9 @@ def analytics_traffic_signals_72(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Preemption delay = detection + clearance + transition variant 72
+    detect_s = value
+    clear_s = 5
+    transition_s = 3
     delay = detect_s + clear_s + transition_s + 72*0.01 + 2*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'traffic_signals'}
@@ -1261,6 +1285,9 @@ def analytics_traffic_signals_84(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Effective green = displayed + yellow - lost variant 84
+    displayed_green = value
+    yellow = 4
+    lost_per_phase = 4
     eff_green = displayed_green + yellow - lost_per_phase + 84*0.01 + 4*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'traffic_signals'}
@@ -1350,6 +1377,9 @@ def analytics_traffic_signals_90(records: List[Dict[str, Any]], opts: Dict[str, 
     stdev = statistics.pstdev(values) if len(values)>1 else 0
     median = statistics.median(values)
     # Webster C_opt = (1.5*L+5)/(1-Y) HCM 2016 Eq 19-18 variant 90
+    total_lost = value
+    factor = payload.get('factor', 1.0) if 'payload' in locals() else 1.0
+    sum_flow_ratios = min(0.85, factor*0.05 + 0.4)
     C_opt = (1.5 * total_lost + 5) / (1 - sum_flow_ratios) if sum_flow_ratios < 0.9 else 120 + 90*0.01 + 0*0.002
     p95 = sorted(values)[int(0.95*len(values))] if values else 0
     return {'mean': mean, 'stdev': stdev, 'median': median, 'p95': p95, 'computed': result, 'domain': 'traffic_signals'}
@@ -2512,4 +2542,3 @@ def padded_traffic_signals_analytics_1030(payload: dict, factor: float = 3.10) -
     top=sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
     h=hashlib.md5(text.encode()).hexdigest()[:10]
     return {'tokens': tokens[:10], 'top': top, 'hash': h, 'domain':'traffic_signals'} 
-
